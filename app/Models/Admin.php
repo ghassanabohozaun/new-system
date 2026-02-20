@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+use Spatie\Translatable\HasTranslations;
+
+class Admin extends Authenticatable
+{
+    use HasFactory, Notifiable, SoftDeletes, HasTranslations;
+    protected $table = 'admins';
+
+    // fillable
+    protected $fillable = ['name', 'email', 'password', 'role_id', 'status'];
+
+    public array $translatable = ['name'];
+
+    // hidden
+    protected $hidden = ['password', 'remember_token'];
+
+    // Get the attributes that should be cast.
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+    // relations
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class, 'admin_id');
+    }
+
+
+    public function getCreatedAtAttribute($value)
+    {
+        if (request()->wantsJson()) {
+            return $value;
+        }
+        return Carbon::parse($value)->format('d/m/Y h:i A');
+    }
+
+    // has ability permission
+    public function hasAbility($permissions)
+    {
+        $role = $this->role;
+        if (!$role) {
+            return false;
+        }
+        foreach ($role->permissions as $permission) {
+            if (is_array($permissions) && in_array($permission, $permissions)) {
+                return true;
+            } elseif (is_string($permissions) && strcmp($permissions, $permission) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Message Relationships
+    public function sentMessages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->morphMany(Message::class, 'receiver');
+    }
+
+    public function unreadMessagesCount()
+    {
+        return $this->receivedMessages()
+                    ->where('is_read', false)
+                    ->where('receiver_deleted', false)
+                    ->count();
+    }
+}
