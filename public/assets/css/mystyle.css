@@ -1,0 +1,73 @@
+/*
+ * Custom Dashboard Styles
+ * All new custom styles for the dashboard should be added to this file
+ * instead of being added inline to the layout file.
+ */
+
+.swal2-popup {
+    font-size: 0.9rem !important;
+}
+
+.swal2-title {
+    font-size: 1.15rem !important;
+}
+
+.swal2-html-container {
+    font-size: 0.85rem !important;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+    font-size: 0.85rem !important;
+    padding: 8px 20px !important;
+}
+
+.table th,
+.table td {
+    padding: 0.5rem 0.9375rem !important;
+}
+
+.breadcrumb {
+    font-size: 15px !important;
+}
+
+/* Todo List Styles */
+.todo-list-input {
+    flex-grow: 1;
+    margin-right: 1.125rem;
+}
+
+.list-wrapper {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.todo-list li .form-check {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.todo-list li.completed label {
+    text-decoration: line-through;
+    color: #9c9fa6;
+}
+
+/* Validation Error Styles */
+.text-danger.small {
+    font-size: 12px !important; /* increased by 1px */
+    margin-top: 3px !important;  /* increased for balance */
+    display: block;
+    line-height: 1.2;
+}
+
+.form-group {
+    margin-bottom: 0.9rem !important; /* increased from 0.7rem */
+}
+
+.form-group label {
+    margin-bottom: 0.45rem !important; /* increased from 0.3rem */
+}
+
+.form-control-sm {
+    padding: 0.35rem 0.5rem !important; /* slight increase in vertical padding */
+}

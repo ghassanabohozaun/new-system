@@ -31,7 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if (request()->is('*/dashboard/*')) {
                 return route('dashboard.get.login');
             } else {
-                return route('welcome');
+                return route('home');
             }
         });
 
@@ -40,7 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if (Auth::guard('admin')->check()) {
                 return route('dashboard.index');
             } else {
-                return route('welcome');
+                return route('home');
             }
         });
 

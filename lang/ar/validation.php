@@ -167,6 +167,13 @@ return [
             'required' => 'يرجى التأكد من أنك لست روبوتًا.',
             'captcha' => 'خطأ في الكابتشا! حاول مرة أخرى لاحقًا أو اتصل بمسؤول الموقع.',
         ],
+        'password' => [
+            'required_without' => 'كلمة المرور مطلوبة',
+        ],
+        'password_confirm' => [
+            'required_without' => 'تأكيد كلمة المرور مطلوب',
+            'same' => 'كلمتا المرور غير متطابقتين',
+        ],
     ],
 
     /*
@@ -322,12 +329,14 @@ return [
         'supervisor' => 'المشرف',
         'employee_status' => 'حالة الموظف',
         'employeeSalaryItem.*.amount' => 'الراتب  :index',
-
         'file' => 'الملف',
 
 
         // messages
         'recipient' => 'المتلقي',
         'body' => 'محتوي الرسالة',
+
+        // tasks
+        'newTaskTitle' => 'عنوان المهمة',
     ],
 ];

@@ -3,11 +3,7 @@
 use App\Http\Controllers\Dashboard\Auth\AuthController;
 use App\Http\Controllers\Dashboard\Auth\Password\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\Password\ResetPasswordController;
-use App\Http\Controllers\Dashboard\EmployeesExportController;
-use App\Http\Controllers\Dashboard\EmployeesReportsController;
-use App\Http\Controllers\Dashboard\MonthlyReportsController;
-use App\Http\Controllers\Dashboard\SalariesController;
-use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DailyReportsController, DashboardController, DepartmentsController, EmployeeSalaryController, EmployeesController, EmployeeStatusesController, GovernoratiesController, MessagesController, ProductsController, RolesController, SettingsController, SponsershipOrganizationsController, SponsershipStatusesController, SponsershipTypesController};
+use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, RolesController, SettingsController, TasksController};
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -40,9 +36,8 @@ Route::group(
 
         ########################################### protected routes  #####################################################################
         Route::group(['middleware' => 'auth:admin'], function () {
-            ########################################### welcome  ##########################################################################
-            Route::get('/welcome', [DashboardController::class, 'index'])->name('index');
-            Route::get('/monthly-reports/employees', [DashboardController::class, 'getmonthlyReportEmployees'])->name('get.monthly.reports.employees');
+            ########################################### home  ##########################################################################
+            Route::get('/home', [DashboardController::class, 'index'])->name('index');
 
             ########################################### roles routes ######################################################################
             Route::group(['middleware' => 'can:roles'], function () {
@@ -57,6 +52,10 @@ Route::group(
                 Route::post('/admins/status', [AdminsController::class, 'changeStatus'])->name('admins.change.status');
             });
 
+            ########################################### tasks routes ######################################################################
+            Route::group(['middleware' => 'can:tasks'], function () {
+                Route::get('/tasks', [TasksController::class, 'index'])->name('tasks.index');
+            });
             ########################################### world routes  ######################################################################
             Route::group(['middleware' => 'can:world'], function () {
                 // governorates routes
@@ -82,65 +81,11 @@ Route::group(
             Livewire::setUpdateRoute(function ($handle) {
                 return Route::post('/livewire/update', $handle);
             });
-            ########################################### employee statuses routes  ######################################################################
-            Route::group(['middleware' => 'can:employeeStatuses'], function () {
-                Route::resource('employeeStatuses', EmployeeStatusesController::class);
-                Route::post('/employeeStatuses/destroy', [EmployeeStatusesController::class, 'destroy'])->name('employee.statues.destroy');
-                Route::post('/employeeStatuses/status', [EmployeeStatusesController::class, 'changeStatus'])->name('employee.statues.change.status');
-            });
-
             ########################################### departments routes  ######################################################################
             Route::group(['middleware' => 'can:departments'], function () {
                 Route::resource('departments', DepartmentsController::class);
                 Route::post('/departments/destroy', [DepartmentsController::class, 'destroy'])->name('departments.destroy');
                 Route::post('/departments/status', [DepartmentsController::class, 'changeStatus'])->name('departments.change.status');
-            });
-
-            ########################################### employees routes  ######################################################################
-            Route::group(['middleware' => 'can:employees'], function () {
-                Route::resource('employees', EmployeesController::class);
-                Route::post('/employees/destroy', [EmployeesController::class, 'destroy'])->name('employees.destroy');
-                Route::post('/employees/status', [EmployeesController::class, 'changeStatus'])->name('employees.change.status');
-                Route::get('/employees/autocomplete/employee', [EmployeesController::class, 'autocompleteEmployee'])->name('employees.autocomplete.employee');
-            });
-
-            ########################################### employee reports routes  ######################################################################
-            Route::group(['middleware' => 'can:employees'], function () {
-                Route::get('/employees/reports/show', [EmployeesReportsController::class, 'showReport'])->name('employees.reports.show');
-                Route::post('/employees/reports/export/excel', [EmployeesReportsController::class, 'exportExcel'])->name('employees.reports.export.excel');
-            });
-
-            ########################################### daily reports routes  ######################################################################
-            Route::group(['middleware' => 'can:dailyReports'], function () {
-                Route::resource('dailyReports', DailyReportsController::class);
-                Route::post('/dailyReports/destroy', [DailyReportsController::class, 'destroy'])->name('daliy.reports.destroy');
-                Route::post('/dailyReports/status', [DailyReportsController::class, 'changeStatus'])->name('daliy.reports.change.status');
-            });
-
-            ########################################### monthly reports routes  ######################################################################
-            Route::group(['middleware' => 'can:monthlyReports'], function () {
-                Route::resource('monthlyReports', MonthlyReportsController::class);
-                Route::post('/monthlyReports/destroy', [MonthlyReportsController::class, 'destroy'])->name('monthly.reports.destroy');
-            });
-
-            ########################################### salaries routes  ######################################################################
-            Route::group(['middleware' => 'can:salaries'], function () {
-                Route::resource('salaries', SalariesController::class);
-                Route::post('/salaries/destroy', [SalariesController::class, 'destroy'])->name('salaries.destroy');
-                Route::post('/salaries/status', [SalariesController::class, 'changeStatus'])->name('salaries.change.status');
-            });
-
-            ########################################### employee salary routes  ######################################################################
-            Route::group(['middleware' => 'can:salaries'], function () {
-                // Route::resource('employeeSalary', SalariesController::class);
-                Route::get('/salaries/{id?}/employee', [EmployeeSalaryController::class, 'index'])->name('employee.salary.index');
-                Route::get('/salaries/print/{id?}', [EmployeeSalaryController::class, 'print'])->name('employee.salary.print');
-            });
-
-            ########################################### messages routes ######################################################################
-            Route::group(['middleware' => 'can:messages'], function () {
-                // Route::resource('employeeSalary', SalariesController::class);
-                Route::get('/messages', [MessagesController::class, 'index'])->name('messages.index');
             });
         });
     },

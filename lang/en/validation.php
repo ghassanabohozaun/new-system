@@ -178,6 +178,13 @@ return [
             'required' => 'Please verify that you are not a robot.',
             'captcha' => 'Captcha error! try again later or contact site admin.',
         ],
+        'password' => [
+            'required_without' => 'Password is required',
+        ],
+        'password_confirm' => [
+            'required_without' => 'Confirmation required',
+            'same' => 'Passwords must match',
+        ],
     ],
 
     /*
@@ -316,5 +323,8 @@ return [
         // messages
         'recipient' => 'Recipient',
         'body' => 'Message Body',
+
+           // tasks
+        'newTaskTitle' => 'Task Title',
     ],
 ];

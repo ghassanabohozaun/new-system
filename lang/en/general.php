@@ -17,6 +17,9 @@ return [
     'notifications' => 'Notifications',
     'loading' => 'Loading ...',
     'replay' => 'Replay',
+    'details'=> 'Details',
+
+
     'good_morning' => 'Good Morning',
     'good_afternoon' => 'Good Afternoon',
     'good_evening' => 'Good Evening',

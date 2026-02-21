@@ -43,13 +43,6 @@ if (!function_exists('web')) {
     }
 }
 
-//  get employee Helper Function
-if (!function_exists('employee')) {
-    function employee()
-    {
-        return auth()->guard('employee');
-    }
-}
 
 if (!function_exists('slug')) {
     function slug($string)
@@ -82,45 +75,6 @@ if (!function_exists('replaceHyphensWithSpaces')) {
         }
     }
 
-    //  get cities count Helper Function
-    if (!function_exists('citiesCount')) {
-        function citiesCount()
-        {
-            return City::count();
-        }
-    }
-
-    //  get employees count Helper Function
-    if (!function_exists('employeesCount')) {
-        function employeesCount()
-        {
-            return Employee::count();
-        }
-    }
-
-    //  get daily reports count Helper Function
-    if (!function_exists('dailyReportsCount')) {
-        function dailyReportsCount()
-        {
-            return DailyReport::count();
-        }
-    }
-
-    //  get monthly reports count Helper Function
-    if (!function_exists('monthlyReportsCount')) {
-        function monthlyReportsCount()
-        {
-            return MonthlyReport::count();
-        }
-    }
-
-    //  get salaries count Helper Function
-    if (!function_exists('salariesCount')) {
-        function salariesCount()
-        {
-            return Salary::count();
-        }
-    }
 
     // month name  in arabic
     if (!function_exists('monthNameArabic')) {

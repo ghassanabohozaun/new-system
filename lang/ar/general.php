@@ -17,6 +17,7 @@ return [
     'notifications' => 'الاشعارات',
     'loading' => 'تحميل ...',
     'replay' => 'الرد',
+    'details'=> 'تفاصيل',
 
     'good_morning' => 'صباح الخير',
     'good_afternoon' => 'طاب مساؤك',

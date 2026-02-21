@@ -7,12 +7,19 @@ return [
     'home' => 'الرئيسية',
     'access_restricted' => 'الوصول ممنوع',
     'access_denied' => 'الوصول مقيد / ممنوع',
+    'sorry' => 'نأسف!',
+    'page_not_found' => 'الصفحة التي تبحث عنها غير موجودة.',
     'back_to_home' => 'الرجوع الي الشاشة الرئيسية',
     'search' => 'بحث ...',
     'hello' => 'مرحبا ,',
     'employees_count' => 'عدد الموظفين',
     'daily_reports_count' => 'عدد التقارير اليومية',
     'salaries_count' => 'عدد الرواتب',
+
+    // tasks
+    'my_tasks'=> 'المهام الخاص بي',
+    'what_do_you_need_to_do_today'=>'ما الذي تحتاجه القيام به اليوم؟',
+
 
     // admin menu
     'roles' => 'الصلاحيات',

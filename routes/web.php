@@ -9,12 +9,12 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
-        ###################################### welcome  ##################################################################
-        Route::get('/welcome', function () {
-            return view('welcome');
+        ###################################### home  ##################################################################
+        Route::get('/home', function () {
+            return view('home');
         })
             ->where(['any' => '.*'])
-            ->name('welcome');
+            ->name('home');
 
         ###################################### routes  ##################################################################
     },

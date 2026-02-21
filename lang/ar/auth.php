@@ -58,5 +58,14 @@ return [
     'techenical_support' => 'الدعم الفني',
     'sign_in_to_continue'=>'قم بتسجيل الدخول للمواصلة',
     'hellow' => 'مرحبا ! لنبدأ الان ',
-
+    'enter_email_to_recover_password' => 'أدخل بريدك الإلكتروني لاستعادة كلمة المرور.',
+    'send_otp' => 'إرسال رمز التحقق',
+    'back_to_login' => 'العودة لتسجيل الدخول',
+    'enter_otp_code_sent_to_email' => 'أدخل رمز التحقق (OTP) المكون من 6 أرقام المرسل إلى بريدك الإلكتروني.',
+    'verify_otp' => 'التحقق من الرمز',
+    'verify' => 'تحقق',
+    'resend_otp' => 'إعادة إرسال الرمز',
+    'enter_new_password_below' => 'أدخل كلمة المرور الجديدة أدناه.',
+    'new_password' => 'كلمة المرور الجديدة',
+    'confirm_password' => 'تأكيد كلمة المرور',
 ];

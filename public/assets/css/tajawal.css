@@ -1,0 +1,31 @@
+/* tajawal-regular - arabic_latin */
+@font-face {
+font-display: swap;
+font-family: 'Tajawal';
+font-style: normal;
+font-weight: 400;
+src: url('../fonts/tajawal/tajawal-v12-arabic_latin-regular.woff2') format('woff2'),
+url('../fonts/tajawal/tajawal-v12-arabic_latin-regular.woff') format('woff');
+}
+
+/* tajawal-700 - arabic_latin */
+@font-face {
+font-display: swap;
+font-family: 'Tajawal';
+font-style: normal;
+font-weight: 700;
+src: url('../fonts/tajawal/tajawal-v12-arabic_latin-700.woff2') format('woff2'),
+url('../fonts/tajawal/tajawal-v12-arabic_latin-700.woff') format('woff');
+}
+
+body, h1, h2, h3, h4, h5, h6, .form-control, .btn, .nav-link, .breadcrumb-item, .welcome-text, .welcome-sub-text, .menu-title {
+font-family: 'Tajawal', sans-serif !important;
+}
+
+html {
+    font-size: 110% !important; /* Approximately 2px increase if base is 16px */
+}
+
+body {
+    font-size: 1rem !important;
+}
