@@ -2862,7 +2862,7 @@ span.flatpickr-day.today.selected:hover {
     padding: 12px 15px !important;
     border-bottom: 1px solid #f0f0f0;
   }
-  
+
   .noqat-nav-links .nav-link:last-child {
     border-bottom: none;
   }
@@ -2872,7 +2872,7 @@ span.flatpickr-day.today.selected:hover {
     width: 100%;
     gap: 20px !important;
   }
-  
+
   .noqat-lang-pill {
     margin: 0 auto;
   }
@@ -3031,6 +3031,7 @@ span.flatpickr-day.today.selected:hover {
   font-weight: 700;
   color: #1b3651;
   opacity: 0.5; /* Faded if inactive */
+  text-decoration: none;
   transition: all 0.4s ease;
 }
 
@@ -3063,6 +3064,7 @@ span.flatpickr-day.today.selected:hover {
   background: rgba(27, 54, 81, 0.04);
   border-radius: 50px;
   display: flex;
+  flex-direction: row-reverse !important; /* Force order: Arabic Right, English Left always */
   align-items: center;
   cursor: pointer;
   border: 1px solid rgba(27, 54, 81, 0.08);
@@ -3076,18 +3078,21 @@ span.flatpickr-day.today.selected:hover {
   position: absolute;
   top: 4px;
   right: 4px; /* Default is Right (Arabic) */
+  left: auto;
   width: calc(50% - 4px);
   height: calc(100% - 8px);
   background: linear-gradient(135deg, #dda53b 0%, #c48c26 100%);
   border-radius: 40px;
   box-shadow: 0 4px 12px rgba(221, 165, 59, 0.35);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 1;
 }
 
 /* --- Toggle Animation (When .is-english added) --- */
 .noqat-lang-pill.is-english .active-indicator {
-  transform: translateX(-100%); /* Moves left */
+  /* In RTL/LTR mixed layouts with row-reverse, it's safer to use left/right property swapping rather than translateX */
+  right: auto;
+  left: 4px;
 }
 
 /* --- Inner Elements Styling --- */
@@ -3103,6 +3108,7 @@ span.flatpickr-day.today.selected:hover {
   font-weight: 700;
   color: #1b3651; /* Royal Navy */
   opacity: 0.65;
+  text-decoration: none !important;
   transition: all 0.4s ease;
 }
 
@@ -3115,6 +3121,10 @@ span.flatpickr-day.today.selected:hover {
 .lang-item.active {
   opacity: 1;
   color: #ffffff !important; /* Pure White for Contrast */
+}
+
+.lang-item.active span {
+  color: #ffffff !important;
 }
 
 /* =========================================================
@@ -3743,7 +3753,7 @@ body.stop-scrolling {
 
 /* =========================================================
    MICRO-STELLAR SOCIALS - FOOTER OPTIMIZED
-  
+
    ========================================================= */
 
 /* 1. The Container (Compact for Footer) */
