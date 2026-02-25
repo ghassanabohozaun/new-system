@@ -130,7 +130,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
@@ -140,7 +140,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
@@ -150,7 +150,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">

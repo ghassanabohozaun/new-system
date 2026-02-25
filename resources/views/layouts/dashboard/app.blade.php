@@ -9,34 +9,35 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preload" href="{!! asset('assets/dashboard/vendors/simple-line-icons/fonts/Simple-Line-Icons.woff2?v=2.4.0') !!}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{!! asset('assets/dashboard/vendors/feather/fonts/feather-webfont.woff') !!}" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/css/mystyle.css">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}">
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/feather/feather.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/typicons/typicons.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/feather/feather.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/mdi/css/materialdesignicons.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/ti-icons/css/themify-icons.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/font-awesome/css/font-awesome.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/typicons/typicons.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/simple-line-icons/css/simple-line-icons.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/css/vendor.bundle.base.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') !!}">
     @if (Lang() == 'ar')
-        <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/bootstrap-rtl/bootstrap.rtl.min.css">
+        <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-rtl/bootstrap.rtl.min.css') !!}">
     @endif
-    <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{!! asset('assets') !!}/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets') !!}/js/select.dataTables.min.css">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/datatables.net-bs4/dataTables.bootstrap4.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/js/select.dataTables.min.css') !!}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="{!! asset('assets') !!}/css/style.css">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/style.css') !!}">
     @if (Lang() == 'ar')
-        <link rel="stylesheet" href="{!! asset('assets') !!}/css/rtl-overrides.css">
+        <link rel="stylesheet" href="{!! asset('assets/dashboard/css/rtl-overrides.css') !!}">
     @endif
-    <link rel="stylesheet" href="{!! asset('assets') !!}/css/tajawal.css">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/tajawal.css') !!}">
     <!-- endinject -->
     <link rel="stylesheet" href="{!! asset('vendor/flasher/flasher.min.css') !!}" rel="stylesheet">
-    <link rel="shortcut icon" href="{!! setting()->favicon ? asset('uploads/settings/' . setting()->favicon) : asset('assets/dashboard/images/logo-mini.svg') !!}" />
+    <link rel="shortcut icon" href="{!! setting()->favicon
+        ? asset('uploads/settings/' . setting()->favicon)
+        : asset('assets/dashboard/images/logo-mini.svg') !!}" />
     @stack('css')
 </head>
 
@@ -63,26 +64,26 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="{!! asset('assets') !!}/vendors/js/vendor.bundle.base.js"></script>
-    <script src="{!! asset('assets') !!}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="{!! asset('assets/dashboard/vendors/js/vendor.bundle.base.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') !!}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="{!! asset('assets') !!}/vendors/chart.js/chart.umd.js"></script>
-    <script src="{!! asset('assets') !!}/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="{!! asset('assets/dashboard/vendors/chart.js/chart.umd.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/vendors/progressbar.js/progressbar.min.js') !!}"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="{!! asset('assets') !!}/js/off-canvas.js"></script>
-    <script src="{!! asset('assets') !!}/js/template.js"></script>
-    <script src="{!! asset('assets') !!}/js/myscripts.js"></script>
-    <script src="{!! asset('assets') !!}/js/lock-screen.js"></script>
-    <script src="{!! asset('assets') !!}/js/hoverable-collapse.js"></script>
-    <script src="{!! asset('assets') !!}/js/todolist.js"></script>
+    <script src="{!! asset('assets/dashboard/js/off-canvas.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/template.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/lock-screen.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/hoverable-collapse.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/todolist.js') !!}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="{!! asset('assets') !!}/js/jquery.cookie.js" type="text/javascript"></script>
-    <script src="{!! asset('assets') !!}/js/dashboard.js"></script>
+    <script src="{!! asset('assets/dashboard/js/jquery.cookie.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard/js/dashboard.js') !!}"></script>
 
-    <script src="{!! asset('assets') !!}/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.all.min.js') !!}"></script>
     <script src="{!! asset('vendor/flasher/flasher.min.js') !!}" type="text/javascript"></script>
 
     <script>

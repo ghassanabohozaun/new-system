@@ -11,7 +11,7 @@ Route::group(
     function () {
         ###################################### home  ##################################################################
         Route::get('/home', function () {
-            return view('home');
+            return view('layouts.website.app');
         })
             ->where(['any' => '.*'])
             ->name('home');
