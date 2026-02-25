@@ -4,14 +4,14 @@
 <div class="modal fade" id="createCityModal" tabindex="-1" role="dialog" aria-labelledby="createCityModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="{!! route('dashboard.addresses.cities.store') !!}" method="POST" enctype="multipart/form-data"
             id='create_city_form'>
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createCityModalLabel">
-                        <i class="icon-plus me-2"></i>{!! __('addresses.create_new_city') !!}
+                        <i class="mdi mdi-plus-circle me-2"></i>{!! __('addresses.create_new_city') !!}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -56,8 +56,8 @@
                         <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
                             aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-light btn-sm btn-icon-text" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {{ __('general.cancel') }}
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
                     </button>
                 </div>
             </div>

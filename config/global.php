@@ -7,5 +7,6 @@ return [
         'addresses' => 'global.addresses',
         'departments' => 'global.departments',
         'tasks'=> 'global.tasks',
+        'sliders' => 'global.sliders',
     ],
 ];

@@ -24,6 +24,7 @@ return [
     'enter_flag_code' => 'ادخل كود العلم',
     'search_for_country' => 'بحث عن دولة...',
     'select_flag' => 'اختيار العلم',
+    'select_flag_code' => 'اختر كود العلم',
 
     'no_countries_found' => 'لا يوجد دول حالياً !',
     'country_restricted_deletion' => 'لا يمكن حذف الدولة لوجود مدن أو رحلات طيران مرتبطة بها.',

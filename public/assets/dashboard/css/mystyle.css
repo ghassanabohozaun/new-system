@@ -4,6 +4,80 @@
  * instead of being added inline to the layout file.
  */
 
+/*
+ * =============================================================================
+ * THE RADICAL BULLETPROOF MODAL SYSTEM (Ultra-Wide, Pro-Scaling)
+ * =============================================================================
+ */
+
+/* 1. Global Centering & Reset (Standard Bootstrap Logic) */
+.modal .modal-dialog {
+    margin: 1.75rem auto !important; /* Standard BS margin, forced */
+    display: block !important; /* Ensure it's not flex which can shrink it */
+}
+
+/* Ensure centered modals stay centered horizontally */
+.modal-dialog-centered {
+    display: flex !important;
+    align-items: center !important;
+    min-height: calc(100% - 3.5rem) !important;
+}
+
+/* 2. DEFINITIVE POWER SCALING (Bulletproof Widths) */
+
+/* [ULTRA-WIDE] - 1450px */
+.modal .modal-dialog.modal-uw {
+    width: 1450px !important;
+    min-width: 1450px !important;
+    max-width: 98% !important;
+    --bs-modal-width: 1450px !important;
+}
+
+/* [LARGE] - 1100px */
+.modal .modal-dialog.modal-lg,
+.modal .modal-dialog.custom-modal-lg {
+    width: 1100px !important;
+    min-width: 1100px !important;
+    max-width: 96% !important;
+    --bs-modal-width: 1100px !important;
+}
+
+/* [MEDIUM] - 850px */
+.modal .modal-dialog.modal-md,
+.modal .modal-dialog.custom-modal-md {
+    width: 850px !important;
+    min-width: 850px !important;
+    max-width: 94% !important;
+    --bs-modal-width: 850px !important;
+}
+
+/* [SMALL] - 450px */
+.modal .modal-dialog.modal-sm,
+.modal .modal-dialog.custom-modal-sm {
+    width: 450px !important;
+    min-width: 450px !important;
+    max-width: 92% !important;
+    --bs-modal-width: 450px !important;
+}
+
+/* 3. RESPONSIVE ADAPTABILITY (Force scale-down on smaller screens) */
+@media (max-width: 1500px) {
+    .modal .modal-dialog.modal-uw {
+        width: 96% !important;
+        min-width: auto !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .modal .modal-dialog.modal-lg,
+    .modal .modal-dialog.custom-modal-lg {
+        width: 92% !important;
+    }
+}
+
+/* 4. Support legacy class removal if found in scripts */
+.modal-ml, .modal-xl { width: auto !important; }
+
 .swal2-popup {
     font-size: 0.9rem !important;
 }
@@ -59,6 +133,12 @@
     border-color: #F64E60 !important;
 }
 
+/* Propagate invalid border to input-group components */
+.input-group:has(.is-invalid) .input-group-text,
+.input-group:has(.is-invalid) .form-control {
+    border-color: #F64E60 !important;
+}
+
 /* RTL Specific: Move icon to left and adjust padding */
 .rtl .is-invalid,
 .rtl .form-control.is-invalid {
@@ -97,6 +177,139 @@
     padding: 0.35rem 0.5rem !important; /* slight increase in vertical padding */
 }
 
+/* Fix: Textareas should respect 'rows' attribute and not have a fixed height */
+/* 6. PREMIUM IMAGE UPLOAD & PREVIEW UI */
+.premium-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.premium-file-input-group {
+    position: relative;
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    background: rgba(248, 249, 250, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.premium-file-input-group:hover {
+    border-color: #4b49ac;
+    background: rgba(75, 73, 172, 0.05);
+}
+
+.premium-file-input-group input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #718096;
+}
+
+.upload-placeholder i {
+    font-size: 2.5rem;
+    color: #4b49ac;
+}
+
+.premium-preview-container {
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 16 / 9;
+    background: #f1f5f9;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.premium-preview-container:hover {
+    transform: scale(1.02);
+}
+
+.premium-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.premium-preview-container .preview-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    padding: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.premium-preview-container:hover .preview-overlay {
+    opacity: 1;
+}
+
+/* Glassmorphism accent */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+textarea.form-control,
+textarea.form-control-sm {
+    height: auto !important;
+}
+
+/* 7. COMPACT SLIDER IMAGE UPLOAD CARD */
+.slider-upload-card {
+    transition: border-color 0.2s ease;
+    background-color: #fafafa !important; /* off-white, overrides bg-light */
+}
+
+.slider-upload-card:hover {
+    border-color: #4b49ac !important;
+}
+
+.slider-thumb-preview {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s ease;
+}
+
+.slider-thumb-preview:hover {
+    box-shadow: 0 4px 16px rgba(75, 73, 172, 0.2);
+}
+
+.slider-thumb-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 
  /* Style the entire scrollbar */
  ::-webkit-scrollbar {
@@ -125,6 +338,7 @@
 .profile-page-wrapper {
     font-size: calc(1rem - 2px);
 }
+
 
 .profile-page-wrapper p,
 .profile-page-wrapper span,

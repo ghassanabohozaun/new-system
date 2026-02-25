@@ -24,6 +24,7 @@ return [
     'enter_flag_code' => 'Enter Flag Code',
     'search_for_country' => 'Search for a country...',
     'select_flag' => 'Select Flag',
+    'select_flag_code' => 'Select Flag Code',
 
     'no_countries_found' => 'No Countries Found !',
     'country_restricted_deletion' => 'Cannot delete country because it has linked cities or flight records.',

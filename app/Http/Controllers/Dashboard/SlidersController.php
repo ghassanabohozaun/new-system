@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\SliderRequest;
+use App\Services\Dashboard\SliderService;
+use Illuminate\Http\Request;
+
+class SlidersController extends Controller
+{
+    protected $sliderService;
+    //__construct
+    public function __construct(SliderService $sliderService)
+    {
+        $this->sliderService = $sliderService;
+    }
+    // index
+    public function index()
+    {
+        $title = __('sliders.sliders');
+        $sliders = $this->sliderService->getSliders();
+        return view('dashboard.sliders.index', compact('title', 'sliders'));
+    }
+
+    // create
+    public function create()
+    {
+        $title = __('sliders.create_new_slider');
+        return view('dashboard.sliders.create', compact('title'));
+    }
+
+    // store
+    public function store(SliderRequest $request)
+    {
+        $data = $request->validated();
+        $slider = $this->sliderService->storeSlider($data);
+        if (!$slider) {
+            return response()->json(['status' => false], 500);
+        }
+        return response()->json(['status' => true, 'data' => $slider], 200);
+    }
+
+    // show
+    public function show(string $id)
+    {
+        //
+    }
+
+    // edit
+    public function edit(string $id)
+    {
+        $title = __('sliders.update_slider');
+        $slider = $this->sliderService->getSlider($id);
+        if (!$slider) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->route('dashboard.sliders.index');
+        }
+        return view('dashboard.sliders.edit', compact('title', 'slider'));
+    }
+
+    // update
+    public function update(SliderRequest $request, string $id)
+    {
+        $data = $request->validated();
+        $data['id'] = $id;
+        $slider = $this->sliderService->updateSlider($data);
+        if (!$slider) {
+            return response()->json(['status' => false], 500);
+        }
+        return response()->json(['status' => true, 'data' => $slider], 201);
+    }
+
+    // destroy
+    public function destroy(Request $request)
+    {
+        if ($request->ajax()) {
+            $slider = $this->sliderService->destroySlider($request->id);
+            if (!$slider) {
+                return response()->json(['status' => false], 500);
+            }
+            return response()->json(['status' => true], 201);
+        }
+    }
+
+    // changeStatus
+    public function changeStatus(Request $request)
+    {
+        $slider = $this->sliderService->changeStatusSlider($request->id, $request->statusSwitch);
+        if (!$slider) {
+            return response()->json(['status' => false], 500);
+        }
+        $slider = $this->sliderService->getSlider($request->id);
+        return response()->json(['status' => true, 'data' => $slider], 201);
+    }
+}

@@ -75,8 +75,6 @@
     <!-- inject:js -->
     <script src="{!! asset('assets/dashboard/js/off-canvas.js') !!}"></script>
     <script src="{!! asset('assets/dashboard/js/template.js') !!}"></script>
-    <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>
-    <script src="{!! asset('assets/dashboard/js/lock-screen.js') !!}"></script>
     <script src="{!! asset('assets/dashboard/js/hoverable-collapse.js') !!}"></script>
     <script src="{!! asset('assets/dashboard/js/todolist.js') !!}"></script>
     <!-- endinject -->
@@ -99,13 +97,17 @@
             labels: {
                 confirm: "{{ __('general.confirm') }}",
                 cancel: "{{ __('general.cancel') }}",
-                unlock: "{{ __('auth.unlock') }}"
+                unlock: "{{ __('auth.unlock') }}",
+                enabled: "{{ __('general.enable') }}",
+                disabled: "{{ __('general.disabled') }}"
             },
             messages: {
                 delete_confirmation: "{{ __('general.delete_confirmation') }}",
                 delete_warning: "{{ __('general.delete_warning') }}",
                 error: "{{ __('general.error') }}",
-                failed: "{{ __('auth.failed') }}"
+                failed: "{{ __('auth.failed') }}",
+                status_updated: "{{ __('general.change_status_success_message') }}",
+                status_failed: "{{ __('general.change_status_error_message') }}"
             },
             delete_warning_text: "{!! __('general.delete_warning_text') !!}",
             yes_delete_it: "{!! __('general.yes_delete_it') !!}",
@@ -113,7 +115,9 @@
             deleted: "{!! __('general.deleted') !!}",
             delete_success_message: "{!! __('general.delete_success_message') !!}",
             error: "{!! __('general.error') !!}",
-            delete_error_message: "{!! __('general.delete_error_message') !!}"
+            delete_error_message: "{!! __('general.delete_error_message') !!}",
+            choose_file: "{!! __('general.choose_file') !!}",
+            no_file_chosen: "{!! __('general.no_file_chosen') !!}"
         };
     </script>
     <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>

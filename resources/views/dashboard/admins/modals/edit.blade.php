@@ -1,13 +1,15 @@
 <div class="modal fade" id="updateAdminModal" tabindex="-1" role="dialog" aria-labelledby="updateAdminModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id="update_admin_form">
             @csrf
             @method('PUT')
             <input type="hidden" id="id_edit" name="id">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateAdminModalLabel">{!! __('admins.update_admin') !!}</h5>
+                    <h5 class="modal-title" id="updateAdminModalLabel">
+                        <i class="mdi mdi-pencil me-2"></i>{!! __('admins.update_admin') !!}
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -93,19 +95,36 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="photo">{!! __('admins.photo') !!}</label>
-                                <input type="file" id="photo_edit" name="photo"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('admins.enter_photo') !!}">
-                                <strong id="photo_error_edit" class="text-danger small"></strong>
+                                <label class="form-label text-dark fw-bold"><i
+                                        class="mdi mdi-account-circle me-1 text-primary"></i>{!! __('admins.photo') !!}</label>
+                                <div
+                                    class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3 bg-light">
+
+                                    <!-- Preview Thumbnail -->
+                                    <div id="photo_preview_edit"
+                                        class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
+                                        style="width:110px; height:110px;">
+                                        <div class="text-center text-muted">
+                                            <i class="mdi mdi-account-outline"
+                                                style="font-size:2.5rem; opacity:0.3;"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Upload Input -->
+                                    <div class="d-flex flex-column justify-content-center flex-grow-1">
+                                        <div class="mb-1 text-muted small"><i
+                                                class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
+                                        </div>
+                                        <input type="file" id="photo_edit" name="photo"
+                                            class="form-control form-control-sm" autocomplete="off" accept="image/*">
+                                        <strong id="photo_error_edit" class="text-danger small d-block mt-1"></strong>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 {{ Lang() == 'ar' ? 'text-right' : 'text-left' }}">
-                            <img id="photo_preview_edit" src="" alt="Photo Preview"
-                                class="img-thumbnail d-none" style="max-height: 100px;">
                         </div>
                     </div>
 
@@ -135,14 +154,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="update_admin_btn"
-                        class="btn btn-primary btn-icon-text btn-sm me-2 text-white">
+                    <button type="submit" class="btn btn-sm btn-primary text-white">
                         <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
                         &nbsp;
                         <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
                             aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-light btn-sm btn-icon-text" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
                         <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
                     </button>
                 </div>
@@ -174,10 +192,13 @@
             $('#email_edit').val(admin_email);
             $('#role_id_edit').val(admin_role_id);
             if (admin_photo && admin_photo !== "" && admin_photo !== "null") {
-                $('#photo_preview_edit').attr('src', "{{ asset('uploads/adminsPhotos') }}/" + admin_photo)
-                    .removeClass('d-none');
+                var photoBase = "{{ asset('uploads/adminsPhotos') }}";
+                $('#photo_preview_edit').html('<img src="' + photoBase + '/' + admin_photo +
+                    '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">');
             } else {
-                $('#photo_preview_edit').addClass('d-none').attr('src', '');
+                $('#photo_preview_edit').html(
+                    '<div class="text-center text-muted"><i class="mdi mdi-account-outline" style="font-size:2.5rem; opacity:0.3;"></i></div>'
+                );
             }
 
             if (admin_status == 1) {
@@ -194,11 +215,15 @@
             window.clearFormErrors('#update_admin_form');
 
             // reset password type
-            if (document.getElementById('password_edit')) document.getElementById('password_edit').type = 'password';
-            if (document.getElementById('password_confirm_edit')) document.getElementById('password_confirm_edit').type =
+            if (document.getElementById('password_edit')) document.getElementById('password_edit').type =
+                'password';
+            if (document.getElementById('password_confirm_edit')) document.getElementById('password_confirm_edit')
+                .type =
                 'password';
 
-            $('#photo_preview_edit').addClass('d-none').attr('src', '');
+            $('#photo_preview_edit').html(
+                '<div class="text-center text-muted"><i class="mdi mdi-account-outline" style="font-size:2.5rem; opacity:0.3;"></i></div>'
+            );
         }
 
         // hide
@@ -206,13 +231,14 @@
             resetEditForm();
         });
 
-        // Photo preview logic
+        // Photo preview on file change
         $('#photo_edit').on('change', function() {
             var file = this.files[0];
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#photo_preview_edit').attr('src', e.target.result).removeClass('d-none');
+                    $('#photo_preview_edit').html('<img src="' + e.target.result +
+                        '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">');
                 }
                 reader.readAsDataURL(file);
             }

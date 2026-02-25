@@ -1,12 +1,14 @@
 <div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog" aria-labelledby="createAdminModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="{!! route('dashboard.admins.store') !!}" method="POST" enctype="multipart/form-data"
             id="create_admin_form">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createAdminModalLabel">{!! __('admins.create_new_admin') !!}</h5>
+                    <h5 class="modal-title" id="createAdminModalLabel">
+                        <i class="mdi mdi-plus-circle me-2"></i>{!! __('admins.create_new_admin') !!}
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -91,20 +93,35 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="photo">{!! __('admins.photo') !!}</label>
-                                <input type="file" id="photo_create" name="photo"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('admins.enter_photo') !!}">
-                                <strong id="photo_error" class="text-danger small"></strong>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="{{ Lang() == 'ar' ? 'text-right' : 'text-left' }} mt-2">
-                                <img id="photo_preview_create" src="" alt="Photo Preview"
-                                    class="img-thumbnail d-none" style="max-height: 100px;">
+                                <label class="form-label text-dark fw-bold"><i
+                                        class="mdi mdi-account-circle me-1 text-primary"></i>{!! __('admins.photo') !!}</label>
+                                <div
+                                    class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3 bg-light">
+
+                                    <!-- Preview Thumbnail -->
+                                    <div id="photo_preview_create"
+                                        class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
+                                        style="width:110px; height:110px;">
+                                        <div class="text-center text-muted">
+                                            <i class="mdi mdi-account-outline"
+                                                style="font-size:2.5rem; opacity:0.3;"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Upload Input -->
+                                    <div class="d-flex flex-column justify-content-center flex-grow-1">
+                                        <div class="mb-1 text-muted small"><i
+                                                class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
+                                        </div>
+                                        <input type="file" id="photo_create" name="photo"
+                                            class="form-control form-control-sm" autocomplete="off" accept="image/*">
+                                        <strong id="photo_error" class="text-danger small d-block mt-1"></strong>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,14 +153,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="create_admin_btn"
-                        class="btn btn-primary btn-sm btn-icon-text me-2 text-white">
+                    <button type="submit" class="btn btn-sm btn-primary text-white">
                         <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
                         &nbsp;
                         <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
                             aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-light btn-sm btn-icon-text" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
                         <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
                     </button>
                 </div>
@@ -162,7 +178,10 @@
             if (document.getElementById('password')) document.getElementById('password').type = 'password';
             if (document.getElementById('password_confirm')) document.getElementById('password_confirm').type = 'password';
 
-            $('#photo_preview_create').addClass('d-none').attr('src', '');
+            // reset
+            $('#photo_preview_create').html(
+                '<div class="text-center text-muted"><i class="mdi mdi-account-outline" style="font-size:2.5rem; opacity:0.3;"></i></div>'
+                );
         }
 
         // hide
@@ -176,7 +195,9 @@
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#photo_preview_create').attr('src', e.target.result).removeClass('d-none');
+                    var container = $('#photo_preview_create');
+                    container.html('<img src="' + e.target.result +
+                        '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">');
                 }
                 reader.readAsDataURL(file);
             }

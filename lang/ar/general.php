@@ -198,4 +198,7 @@ return [
     'report_sent_waiting_admin' => 'تم إرسال التقرير (بانتظار المدير)',
     'report_status_updated' => 'تم تحديث حالة التقرير',
     'mark_all_as_read' => 'ضع علامة "مقروء" على الكل',
+
+    'choose_file'    => 'اختر ملف',
+    'no_file_chosen' => 'لم يتم اختيار ملف',
 ];

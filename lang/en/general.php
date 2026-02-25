@@ -201,4 +201,7 @@ return [
     'report_status_updated' => 'Report Status Updated',
 
     'mark_all_as_read' => 'Make All As Read',
+
+    'choose_file'    => 'Choose File',
+    'no_file_chosen' => 'No file chosen',
 ];

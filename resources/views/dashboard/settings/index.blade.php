@@ -168,35 +168,72 @@
                                             {{ __('settings.media_section') }}
                                         </p>
 
-                                        <div class="row">
+                                        <div class="row g-4">
                                             <!-- Logo Section -->
                                             <div class="col-md-6">
-                                                <div class="form-group mb-2">
-                                                    <label for="logo">{!! __('settings.logo') !!}</label>
-                                                    <input type="file" name="logo" id="logo_input"
-                                                        class="form-control form-control-sm" accept="image/*">
-                                                    <strong id="logo_error" class="text-danger small"></strong>
-                                                </div>
-                                                <div class="{{ Lang() == 'ar' ? 'text-right' : 'text-left' }} mb-3">
-                                                    <img id="logo_preview" src="{!! setting()->logo ? asset('uploads/settings/' . setting()->logo) : '' !!}"
-                                                        alt="Logo Preview" class="img-thumbnail {!! setting()->logo ? '' : 'd-none' !!}"
-                                                        style="max-height: 150px; width: auto; min-width: 100px;">
+                                                <div class="form-group">
+                                                    <label class="form-label text-dark fw-bold"><i
+                                                            class="mdi mdi-image-filter-hdr me-1 text-primary"></i>{!! __('settings.logo') !!}</label>
+                                                    <div
+                                                        class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3">
+                                                        <!-- Preview -->
+                                                        <div id="logo_preview"
+                                                            class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
+                                                            style="width:120px; height:80px;">
+                                                            @if (setting()->logo)
+                                                                <img src="{!! asset('uploads/settings/' . setting()->logo) !!}"
+                                                                    style="width:100%;height:100%;object-fit:contain;">
+                                                            @else
+                                                                <div class="text-center text-muted"><i
+                                                                        class="mdi mdi-image-outline"
+                                                                        style="font-size:2rem; opacity:0.3;"></i></div>
+                                                            @endif
+                                                        </div>
+                                                        <!-- Input -->
+                                                        <div class="d-flex flex-column justify-content-center flex-grow-1">
+                                                            <div class="mb-1 text-muted small"><i
+                                                                    class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
+                                                            </div>
+                                                            <input type="file" name="logo" id="logo_input"
+                                                                class="form-control form-control-sm" accept="image/*">
+                                                            <strong id="logo_error"
+                                                                class="text-danger small d-block mt-1"></strong>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <!-- Favicon Section -->
                                             <div class="col-md-6">
-                                                <div class="form-group mb-2">
-                                                    <label for="favicon">{!! __('settings.favicon') !!}</label>
-                                                    <input type="file" name="favicon" id="favicon_input"
-                                                        class="form-control form-control-sm" accept="image/*">
-                                                    <strong id="favicon_error" class="text-danger small"></strong>
-                                                </div>
-                                                <div class="{{ Lang() == 'ar' ? 'text-right' : 'text-left' }} mb-3">
-                                                    <img id="favicon_preview" src="{!! setting()->favicon ? asset('uploads/settings/' . setting()->favicon) : '' !!}"
-                                                        alt="Favicon Preview"
-                                                        class="img-thumbnail {!! setting()->favicon ? '' : 'd-none' !!}"
-                                                        style="max-height: 150px; width: auto; min-width: 100px;">
+                                                <div class="form-group">
+                                                    <label class="form-label text-dark fw-bold"><i
+                                                            class="mdi mdi-star-circle me-1 text-primary"></i>{!! __('settings.favicon') !!}</label>
+                                                    <div
+                                                        class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3">
+                                                        <!-- Preview -->
+                                                        <div id="favicon_preview"
+                                                            class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
+                                                            style="width:80px; height:80px;">
+                                                            @if (setting()->favicon)
+                                                                <img src="{!! asset('uploads/settings/' . setting()->favicon) !!}"
+                                                                    style="width:100%;height:100%;object-fit:contain;">
+                                                            @else
+                                                                <div class="text-center text-muted"><i
+                                                                        class="mdi mdi-star-outline"
+                                                                        style="font-size:2rem; opacity:0.3;"></i></div>
+                                                            @endif
+                                                        </div>
+                                                        <!-- Input -->
+                                                        <div class="d-flex flex-column justify-content-center flex-grow-1">
+                                                            <div class="mb-1 text-muted small"><i
+                                                                    class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
+                                                            </div>
+                                                            <input type="file" name="favicon" id="favicon_input"
+                                                                class="form-control form-control-sm" accept="image/*">
+                                                            <strong id="favicon_error"
+                                                                class="text-danger small d-block mt-1"></strong>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +262,8 @@
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#logo_preview').attr('src', e.target.result).removeClass('d-none');
+                    $('#logo_preview').html('<img src="' + e.target.result +
+                        '" style="width:100%;height:100%;object-fit:contain;">');
                 }
                 reader.readAsDataURL(file);
             }
@@ -237,7 +275,8 @@
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#favicon_preview').attr('src', e.target.result).removeClass('d-none');
+                    $('#favicon_preview').html('<img src="' + e.target.result +
+                        '" style="width:100%;height:100%;object-fit:contain;">');
                 }
                 reader.readAsDataURL(file);
             }

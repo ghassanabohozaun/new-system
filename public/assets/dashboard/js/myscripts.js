@@ -13,11 +13,12 @@
         },
     });
 
-    $(document).on("click", ".delete-confirm", function (e) {
+    // --- Generic Delete Handler ---
+    $(document).on("click", ".delete-confirm, .js-delete-btn", function (e) {
         e.preventDefault();
         const button = $(this);
         const id = button.data("id");
-        const route = button.data("route");
+        const route = button.data("url") || button.data("route");
 
         const title =
             button.data("title") ||
@@ -61,7 +62,22 @@
                                     : "",
                                 icon: "success",
                             }).then(() => {
-                                location.reload();
+                                const table = button.closest("table");
+                                if (
+                                    table.length &&
+                                    table.hasClass("js-sliders-table")
+                                ) {
+                                    $(table).load(
+                                        location.href +
+                                            " ." +
+                                            table
+                                                .attr("class")
+                                                .split(" ")
+                                                .join("."),
+                                    );
+                                } else {
+                                    location.reload();
+                                }
                             });
                         } else {
                             Swal.fire({
@@ -229,4 +245,169 @@
         );
         return $country;
     };
+
+    /**
+     * Global Status Change Handler
+     * Used on checkbox/switch elements with .js-status-change class
+     */
+    $(document).on("change", ".js-status-change", function () {
+        const checkbox = $(this);
+        const id = checkbox.data("id");
+        const url = checkbox.data("url");
+        const badgePrefix = checkbox.data("badge-prefix"); // e.g., 'admin_status_'
+        const statusSwitch = this.checked ? 1 : 0;
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                id: id,
+                statusSwitch: statusSwitch,
+            },
+            success: function (data) {
+                if (data.status === true) {
+                    if (badgePrefix) {
+                        const statusBadge = $("." + badgePrefix + id);
+                        statusBadge.empty();
+                        statusBadge.removeClass(
+                            "badge badge-pill-danger badge-pill-success",
+                        );
+
+                        if (data.data.status == 1) {
+                            statusBadge
+                                .addClass("badge badge-pill-success")
+                                .text(window.Translations.labels.enabled);
+                        } else {
+                            statusBadge
+                                .addClass("badge badge-pill-danger")
+                                .text(window.Translations.labels.disabled);
+                        }
+                    }
+
+                    if (typeof flasher !== "undefined") {
+                        flasher.success(
+                            window.Translations.messages.status_updated,
+                        );
+                    } else {
+                        Swal.fire({
+                            icon: "success",
+                            title: window.Translations.messages.status_updated,
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                        });
+                    }
+                } else {
+                    checkbox.prop("checked", !checkbox.is(":checked"));
+                    Swal.fire({
+                        icon: "error",
+                        title: window.Translations.messages.status_failed,
+                        customClass: { title: "fs-6" },
+                    });
+                }
+            },
+            error: function () {
+                checkbox.prop("checked", !checkbox.is(":checked"));
+                Swal.fire({
+                    icon: "error",
+                    title: window.Translations.messages.status_failed,
+                    customClass: { title: "fs-6" },
+                });
+            },
+        });
+    });
+    /**
+     * Image Preview Handler
+     */
+    $(document).on("change", ".js-image-preview", function () {
+        const input = this;
+        const previewSelector = $(this).data("preview");
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $(previewSelector).html(
+                    '<img src="' +
+                        e.target.result +
+                        '" style="width: 100%; height: 100%; object-fit: cover;">',
+                );
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    /**
+     * Initialize Sliders Form
+     */
+    window.handleFormSubmit(".js-form-submit", {
+        tableToLoad: ".js-sliders-table",
+        modalToHide: "#createSliderModal, #editSliderModal",
+    });
+
+    /*
+     * Custom File Input - Translate browser-native "No file chosen" / "Choose file"
+     * Wraps every <input type="file"> that has NOT been explicitly excluded,
+     * replacing the native UI with a styled version showing translated labels.
+     */
+    function initCustomFileInputs() {
+        var chooseLabel =
+            (window.Translations && window.Translations.choose_file) ||
+            "Choose File";
+        var noFileLabel =
+            (window.Translations && window.Translations.no_file_chosen) ||
+            "No file chosen";
+
+        $('input[type="file"]')
+            .not(".custom-file-initialized")
+            .each(function () {
+                var $input = $(this);
+                $input.addClass("custom-file-initialized");
+
+                // Hide the native input, keep it in DOM for form submission
+                $input.css({
+                    position: "absolute",
+                    opacity: 0,
+                    width: "0.1px",
+                    height: "0.1px",
+                    overflow: "hidden",
+                });
+
+                // Build the custom wrapper using label[for] for native click & perfect alignment
+                var inputId =
+                    $input.attr("id") ||
+                    "cfi-" + Math.random().toString(36).substr(2, 8);
+                $input.attr("id", inputId);
+
+                var $lbl = $(
+                    '<label for="' +
+                        inputId +
+                        '" class="btn btn-sm btn-outline-secondary flex-shrink-0 mb-0" style="font-size:0.78rem; cursor:pointer;"><i class="mdi mdi-folder-open-outline me-1"></i>' +
+                        chooseLabel +
+                        "</label>",
+                );
+                var $name = $(
+                    '<span class="custom-file-name text-muted text-truncate" style="flex:1; min-width:0; font-size:0.82rem; display:flex; align-items:center; margin-top:-2px;"></span>',
+                ).text(noFileLabel);
+                var $wrapper = $(
+                    '<div style="display:flex; gap:8px; width:100%;"></div>',
+                );
+                $wrapper.append($lbl).append($name);
+                $input.after($wrapper);
+
+                // Update displayed name on file selection
+                $input.on("change", function () {
+                    var n =
+                        this.files && this.files.length > 0
+                            ? this.files[0].name
+                            : noFileLabel;
+                    $name.text(n);
+                });
+            });
+    }
+
+    // Run on DOMReady and after modals are shown (for dynamic inputs)
+    initCustomFileInputs();
+    $(document).on("shown.bs.modal", function () {
+        initCustomFileInputs();
+    });
 })(jQuery);

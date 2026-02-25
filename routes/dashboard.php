@@ -4,7 +4,7 @@ use App\Http\Controllers\Dashboard\Auth\AuthController;
 use App\Http\Controllers\Dashboard\Auth\Password\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\Password\ResetPasswordController;
 use App\Http\Controllers\Dashboard\CountriesController;
-use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, ProfileController, RolesController, SettingsController, TasksController};
+use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, ProfileController, RolesController, SettingsController, SlidersController, TasksController};
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -82,7 +82,7 @@ Route::group(
                 Route::get('/country/{country_id?}/cities', [CountriesController::class, 'getAllCitiesByCountry'])->name('countries.get.cities.by.country.id');
                 Route::get('/countries/autocomplete/country', [CountriesController::class, 'autocompleteCountry'])->name('countries.autocomplete.country');
 
-        
+
                 // cities routes
                 Route::resource('cities', CitiesController::class)->except(['destroy']);
                 Route::post('/cities/destroy', [CitiesController::class, 'destroy'])->name('cities.destroy');
@@ -92,12 +92,13 @@ Route::group(
             Livewire::setUpdateRoute(function ($handle) {
                 return Route::post('/livewire/update', $handle);
             });
-            ########################################### departments routes  ######################################################################
-            Route::group(['middleware' => 'can:departments'], function () {
-                Route::resource('departments', DepartmentsController::class)->except(['destroy']);
-                Route::post('/departments/destroy', [DepartmentsController::class, 'destroy'])->name('departments.destroy');
-                Route::post('/departments/status', [DepartmentsController::class, 'changeStatus'])->name('departments.change.status');
+            ########################################### sliders routes  ######################################################################
+            Route::group(['middleware' => 'can:sliders'], function () {
+                Route::resource('sliders', SlidersController::class)->except(['destroy']);
+                Route::post('/sliders/destroy', [SlidersController::class, 'destroy'])->name('sliders.destroy');
+                Route::post('/sliders/status', [SlidersController::class, 'changeStatus'])->name('sliders.change.status');
             });
+
         });
     },
 );

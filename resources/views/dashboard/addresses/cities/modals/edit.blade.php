@@ -4,7 +4,7 @@
 <div class="modal fade" id="updateCityModal" tabindex="-1" role="dialog" aria-labelledby="updateCityModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id='update_city_form'>
             @csrf
             @method('PUT')
@@ -54,12 +54,13 @@
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary text-white btn-sm">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i>{{ __('general.save') }}
+                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
+                        &nbsp;
                         <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
                             aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-light btn-sm btn-icon-text" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {{ __('general.cancel') }}
+                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
                     </button>
                 </div>
             </div>

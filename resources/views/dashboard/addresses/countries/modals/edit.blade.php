@@ -1,7 +1,7 @@
 <div class="modal fade" id="updateCountryModal" tabindex="-1" role="dialog" aria-labelledby="updateCountryModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id='update_country_form'>
             @csrf
             @method('PUT')
@@ -51,13 +51,19 @@
                             <div class="form-group">
                                 <label for="flag_code_edit">{!! __('addresses.flag_code') !!}</label>
                                 <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <span id="flag_preview_edit"
+                                            class="flag-icon flag-icon-default shadow-sm rounded-1"
+                                            style="width: 20px; height: 15px;"></span>
+                                    </span>
                                     <input type="text" id="flag_code_edit" name="flag_code"
-                                        class="form-control form-control-sm" autocomplete="off"
-                                        placeholder="{!! __('addresses.enter_flag_code') !!}">
-                                    <button class="btn btn-outline-secondary open-flags-reference" type="button"
-                                        data-target-input="flag_code_edit">
-                                        <i class="ti-search"></i>
-                                    </button>
+                                        class="form-control form-control-sm border-start-0 border-end-0 bg-white open-flags-reference"
+                                        readonly autocomplete="off" placeholder="{!! __('addresses.select_flag_code') !!}"
+                                        style="cursor: pointer;" data-target-input="flag_code_edit">
+                                    <span class="input-group-text bg-white border-start-0 open-flags-reference"
+                                        style="cursor: pointer;" data-target-input="flag_code_edit">
+                                        <i class="ti-mouse-alt text-muted"></i>
+                                    </span>
                                 </div>
                                 <strong id="flag_code_error_edit" class="text-danger small"></strong>
                             </div>
@@ -127,7 +133,7 @@
             $('#name_ar_edit').val(country_name_ar);
             $('#name_en_edit').val(country_name_en);
             $('#phone_code_edit').val(country_phone_code);
-            $('#flag_code_edit').val(country_flag_code);
+            $('#flag_code_edit').val(country_flag_code).trigger('change');
 
             // Handle radio button status
             if (country_status == 1) {
@@ -141,6 +147,18 @@
 
         $('#updateCountryModal').on('hidden.bs.modal', function() {
             window.clearFormErrors('#update_country_form');
+            $('#flag_preview_edit').attr('class', 'flag-icon flag-icon-default shadow-sm rounded-1');
+        });
+
+        // Update flag preview on change
+        $('#flag_code_edit').on('change', function() {
+            const code = $(this).val();
+            if (code) {
+                $('#flag_preview_edit').attr('class',
+                    `flag-icon flag-icon-${code.toLowerCase()} shadow-sm rounded-1`);
+            } else {
+                $('#flag_preview_edit').attr('class', 'flag-icon flag-icon-default shadow-sm rounded-1');
+            }
         });
 
         window.handleFormSubmit('#update_country_form', {

@@ -63,11 +63,20 @@
 
 
         @can('settings')
-            <li class="nav-item nav-category">{!! __('dashboard.settings') !!}</li>
+            <li class="nav-item nav-category"><i class="mdi mdi-cog-outline me-1"></i>{!! __('dashboard.settings') !!}</li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard.settings.index') }}">
-                    <i class="menu-icon mdi mdi-settings"></i>
+                    <i class="menu-icon mdi mdi-tune-vertical"></i>
                     <span class="menu-title">{!! __('settings.settings') !!}</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('sliders')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.sliders.index') }}">
+                    <i class="menu-icon mdi mdi-image-multiple"></i>
+                    <span class="menu-title">{!! __('sliders.sliders') !!}</span>
                 </a>
             </li>
         @endcan

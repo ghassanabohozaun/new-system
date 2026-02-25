@@ -63,10 +63,14 @@ return [
             'report' => false,
         ],
 
-
-
-
-
+        'sliders' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/sliders'),
+            'url' => env('APP_URL') . '/uploads/sliders',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

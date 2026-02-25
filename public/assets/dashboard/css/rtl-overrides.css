@@ -440,3 +440,24 @@
     align-items: center !important;
   }
 }
+
+/* ============================================================
+   RTL Fix: Bootstrap form-switch direction
+   Bootstrap uses padding-left/margin-left for the toggle
+   which do not auto-flip in RTL, so we override them here.
+   ============================================================ */
+.rtl .form-switch {
+    padding-left: 0 !important;
+    padding-right: 2.5em !important;
+}
+
+.rtl .form-switch .form-check-input {
+    margin-left: 0 !important;
+    margin-right: -2.5em !important;
+    /* Flip the background-position: when unchecked it's at right, when checked at left */
+    background-position: right center !important;
+}
+
+.rtl .form-switch .form-check-input:checked {
+    background-position: left center !important;
+}

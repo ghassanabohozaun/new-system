@@ -1,14 +1,14 @@
 <div class="modal fade" id="createCountryModal" tabindex="-1" role="dialog" aria-labelledby="createCountryModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="{!! route('dashboard.addresses.countries.store') !!}" method="POST" enctype="multipart/form-data"
             id='create_country_form'>
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createCountryModalLabel">
-                        <i class="icon-plus me-2"></i>{!! __('addresses.create_new_country') !!}
+                        <i class="mdi mdi-plus-circle me-2"></i>{!! __('addresses.create_new_country') !!}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -49,13 +49,18 @@
                             <div class="form-group">
                                 <label for="flag_code">{!! __('addresses.flag_code') !!}</label>
                                 <div class="input-group">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <span id="flag_preview" class="flag-icon flag-icon-default shadow-sm rounded-1"
+                                            style="width: 20px; height: 15px;"></span>
+                                    </span>
                                     <input type="text" id="flag_code" name="flag_code"
-                                        class="form-control form-control-sm" autocomplete="off"
-                                        placeholder="{!! __('addresses.enter_flag_code') !!}">
-                                    <button class="btn btn-outline-secondary open-flags-reference" type="button"
-                                        data-target-input="flag_code">
-                                        <i class="ti-search"></i>
-                                    </button>
+                                        class="form-control form-control-sm border-start-0 border-end-0 bg-white open-flags-reference"
+                                        readonly autocomplete="off" placeholder="{!! __('addresses.select_flag_code') !!}"
+                                        style="cursor: pointer;" data-target-input="flag_code">
+                                    <span class="input-group-text bg-white border-start-0 open-flags-reference"
+                                        style="cursor: pointer;" data-target-input="flag_code">
+                                        <i class="ti-mouse-alt text-muted"></i>
+                                    </span>
                                 </div>
                                 <strong id="flag_code_error" class="text-danger small"></strong>
                             </div>
@@ -112,6 +117,17 @@
         $('#createCountryModal').on('hidden.bs.modal', function() {
             window.clearFormErrors('#create_country_form');
             $('#create_country_form')[0].reset();
+            $('#flag_preview').attr('class', 'flag-icon flag-icon-default shadow-sm rounded-1');
+        });
+
+        // Update flag preview on change
+        $('#flag_code').on('change', function() {
+            const code = $(this).val();
+            if (code) {
+                $('#flag_preview').attr('class', `flag-icon flag-icon-${code.toLowerCase()} shadow-sm rounded-1`);
+            } else {
+                $('#flag_preview').attr('class', 'flag-icon flag-icon-default shadow-sm rounded-1');
+            }
         });
 
         window.handleFormSubmit('#create_country_form', {

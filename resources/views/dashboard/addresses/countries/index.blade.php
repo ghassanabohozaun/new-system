@@ -120,7 +120,6 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
-
             // --- Table Details Modal Setup ---
             const table = document.getElementById('responsiveTable');
             const modalElement = document.getElementById('detailsModal');
@@ -159,70 +158,6 @@
                 });
             }
 
-            // change status
-            $(document).on('change', '.change_status', function(e) {
-                const checkbox = $(this);
-                const id = checkbox.data('id');
-                const statusSwitch = checkbox.is(':checked') ? 1 : 0;
-                const url = "{!! route('dashboard.addresses.countries.change.status') !!}";
-
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                        id: id,
-                        statusSwitch: statusSwitch
-                    },
-                    success: function(data) {
-                        if (data.status === true) {
-                            const statusBadge = $('.country_status_' + id);
-                            statusBadge.empty();
-                            statusBadge.removeClass('badge-pill-danger badge-pill-success');
-
-                            if (data.data.status == 1) {
-                                statusBadge.addClass('badge-pill-success').text(
-                                    "{!! __('general.enable') !!}");
-                            } else {
-                                statusBadge.addClass('badge-pill-danger').text(
-                                    "{!! __('general.disabled') !!}");
-                            }
-
-                            Swal.fire({
-                                icon: 'success',
-                                title: "{!! __('general.change_status_success_message') !!}",
-                                customClass: {
-                                    title: 'fs-6'
-                                },
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true
-                            });
-                        } else {
-                            checkbox.prop('checked', !checkbox.is(':checked'));
-                            Swal.fire({
-                                icon: 'error',
-                                title: "{!! __('general.change_status_error_message') !!}",
-                                customClass: {
-                                    title: 'fs-6'
-                                }
-                            });
-                        }
-                    },
-                    error: function() {
-                        checkbox.prop('checked', !checkbox.is(':checked'));
-                        Swal.fire({
-                            icon: 'error',
-                            title: "{!! __('general.change_status_error_message') !!}",
-                            customClass: {
-                                title: 'fs-6'
-                            }
-                        });
-                    }
-                });
-            });
         });
     </script>
 @endpush
