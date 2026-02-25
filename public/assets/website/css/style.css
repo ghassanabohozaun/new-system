@@ -3730,7 +3730,19 @@ body.stop-scrolling {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+html[dir="rtl"] .stats-text-box,
+html[dir="rtl"] .ticket-passenger-section,
+html[dir="rtl"] .ticket-time-wrapper {
   text-align: right;
+}
+
+html[dir="ltr"] .stats-text-box,
+html[dir="ltr"] .ticket-passenger-section,
+html[dir="ltr"] .ticket-time-wrapper,
+html[dir="ltr"] .booking-form-area {
+  text-align: left !important;
 }
 
 /* Numbers styling */

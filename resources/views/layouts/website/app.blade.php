@@ -465,7 +465,7 @@
                                 class="d-flex align-items-start align-items-md-center flex-column flex-md-row mb-5 reveal">
 
                                 <div
-                                    class="icon-circle-large shadow-sm rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 ms-md-4 mb-3 mx-3 mb-md-0">
+                                    class="icon-circle-large shadow-sm rounded-circle d-flex align-items-center justify-content-center flex-shrink-0 me-md-4 mb-3 mx-3 mb-md-0">
                                     <i class="bi bi-airplane-fill fs-1 plane-icon-header"></i>
                                 </div>
 
@@ -485,7 +485,7 @@
 
 
 
-                            <div class="row align-items-center mb-5 mt-5 text-start reveal active" dir="rtl">
+                            <div class="row align-items-center mb-5 mt-5 text-start reveal active">
 
                                 <div class="col-md-4 mb-4 mb-md-0 position-relative stat-divider-line">
                                     <div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
@@ -512,7 +512,7 @@
                                             <span class="fw-bolder m-0 p-0"
                                                 style="color: #d4a34d; font-size: 2.6rem; line-height: 1;">120</span>
                                             <span class="text-muted small m-0 p-0"
-                                                style="line-height: 1.3; text-align: right; white-space: nowrap;">دولة<br>ووجهة</span>
+                                                style="line-height: 1.3; white-space: nowrap;">دولة<br>ووجهة</span>
                                         </div>
                                     </div>
                                 </div>
@@ -540,7 +540,7 @@
                                                     style="color: #d4a34d; font-size: 1.2rem;">ألف</span>
                                             </div>
                                             <span class="text-muted small m-0 p-0"
-                                                style="line-height: 1.3; text-align: right; white-space: nowrap;">رحلة<br>مقدمة</span>
+                                                style="line-height: 1.3; white-space: nowrap;">رحلة<br>مقدمة</span>
                                         </div>
                                     </div>
                                 </div>
@@ -563,7 +563,7 @@
                                             <span class="fw-bolder m-0 p-0"
                                                 style="color: #d4a34d; font-size: 2.6rem; line-height: 1;">03</span>
                                             <span class="text-muted small m-0 p-0"
-                                                style="line-height: 1.3; text-align: right; white-space: nowrap;">درجات<br>سياحية</span>
+                                                style="line-height: 1.3; white-space: nowrap;">درجات<br>سياحية</span>
                                         </div>
                                     </div>
                                 </div>
@@ -576,7 +576,8 @@
                             <div class="booking-form-area mt-5 pt-4 border-top border-light reveal">
                                 <h6 class="fw-bold text-navy mb-4 text-start">الوجهة السياحية</h6>
 
-                                <div class="row g-3 align-items-end text-start">
+                                <div
+                                    class="row g-3 align-items-end text-start {{ app()->getLocale() == 'en' ? 'flex-row-reverse' : '' }}">
 
                                     <div class="col-lg-3 col-md-6">
                                         <label class="form-label text-navy fw-bold small mb-2">من وجهة</label>
@@ -620,7 +621,8 @@
                                 class="ticket-details-box mt-5 rounded-4 d-flex flex-column flex-lg-row position-relative overflow-hidden reveal">
 
                                 <div class="p-4 p-lg-5 flex-grow-1 w-100">
-                                    <div class="d-flex justify-content-between align-items-center h-100">
+                                    <div
+                                        class="d-flex justify-content-between align-items-center h-100 {{ app()->getLocale() == 'en' ? 'flex-row-reverse' : '' }}">
 
                                         <div class="text-start ticket-time-wrapper">
                                             <span class="text-muted small d-block mb-1">الخروج</span>
@@ -654,7 +656,8 @@
                                 <div class="ticket-divider d-none d-lg-block position-relative"></div>
 
                                 <div class="p-4 p-lg-5 w-100 ticket-passenger-section">
-                                    <div class="row g-3 h-100 align-items-center">
+                                    <div
+                                        class="row g-3 h-100 align-items-center {{ app()->getLocale() == 'en' ? 'flex-row-reverse' : '' }}">
 
                                         <div class="col-6 text-start">
                                             <div class="mb-4">
