@@ -3057,6 +3057,7 @@ span.flatpickr-day.today.selected:hover {
   background: rgba(27, 54, 81, 0.08);
 }
 /* --- Main Container --- */
+/* --- Main Container --- */
 .noqat-lang-pill {
   position: relative;
   width: 170px;
@@ -3064,13 +3065,17 @@ span.flatpickr-day.today.selected:hover {
   background: rgba(27, 54, 81, 0.04);
   border-radius: 50px;
   display: flex;
-  flex-direction: row-reverse !important; /* Force order: Arabic Right, English Left always */
   align-items: center;
   cursor: pointer;
   border: 1px solid rgba(27, 54, 81, 0.08);
   padding: 4px;
   user-select: none;
   transition: background 0.3s ease;
+}
+
+/* Force English to be on the Left and Arabic to be on the Right in LTR mode */
+html[dir="ltr"] .noqat-lang-pill {
+  flex-direction: row-reverse;
 }
 
 /* --- The Indicator (Golden Bubble) --- */
@@ -3084,15 +3089,25 @@ span.flatpickr-day.today.selected:hover {
   background: linear-gradient(135deg, #dda53b 0%, #c48c26 100%);
   border-radius: 40px;
   box-shadow: 0 4px 12px rgba(221, 165, 59, 0.35);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 1;
 }
 
-/* --- Toggle Animation (When .is-english added) --- */
-.noqat-lang-pill.is-english .active-indicator {
-  /* In RTL/LTR mixed layouts with row-reverse, it's safer to use left/right property swapping rather than translateX */
+/* In LTR mode, physical directions swap, so we need to compensate */
+html[dir="ltr"] .active-indicator {
   right: auto;
-  left: 4px;
+  left: 4px; /* Keep bubble physically on the right (Arabic side) when language is LTR */
+}
+
+/* --- Toggle Animation (When .is-english added) --- */
+/* RTL Mode - Arabic text is on right, English text is on left automatically */
+.noqat-lang-pill.is-english .active-indicator {
+  transform: translateX(-100%); /* Moves bubble left */
+}
+
+/* LTR Mode - We forced row-reverse so English text is still on left */
+html[dir="ltr"] .noqat-lang-pill.is-english .active-indicator {
+  transform: translateX(100%); /* Moves bubble right towards LTR's actual starting left side */
 }
 
 /* --- Inner Elements Styling --- */
