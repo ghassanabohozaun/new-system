@@ -57,19 +57,20 @@
 
                 <div class="d-flex flex-column flex-lg-row align-items-center gap-4 mt-4 mt-lg-0">
 
-                    <div class="noqat-lang-pill {{ Lang() == 'en' ? 'is-english' : '' }}" id="luxuryLangToggle">
+                    <div class="noqat-lang-pill {{ app()->getLocale() == 'en' ? 'is-english' : '' }}"
+                        id="luxuryLangToggle">
                         <div class="active-indicator"></div>
 
                         <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}"
-                            class="lang-item ar-item text-decoration-none {{ Lang() == 'ar' ? 'active' : '' }}">
+                            class="lang-item ar-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}">
                             <img src="{!! asset('assets/website/images/external/external_1.png') !!}">
-                            <span class="text-reset">العربية</span>
+                            <span>العربية</span>
                         </a>
 
                         <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"
-                            class="lang-item en-item text-decoration-none {{ Lang() == 'en' ? 'active' : '' }}">
+                            class="lang-item en-item {{ app()->getLocale() == 'en' ? 'active' : '' }}">
                             <img src="{!! asset('assets/website/images/external/external_2.png') !!}">
-                            <span class="text-reset">English</span>
+                            <span>English</span>
                         </a>
                     </div>
 

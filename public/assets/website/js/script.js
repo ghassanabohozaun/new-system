@@ -578,22 +578,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             e.preventDefault(); // Prevent immediate jump so animation can play
 
-            // 1. Toggle animation class on container
-            this.classList.toggle("is-english");
-
-            const arItem = this.querySelector(".ar-item");
-            const enItem = this.querySelector(".en-item");
-
-            // 2. Update active class based on the presence of is-english
-            if (this.classList.contains("is-english")) {
-                arItem.classList.remove("active");
-                enItem.classList.add("active");
+            // 1. Toggle animation class on container just for the visual effect
+            if (link.classList.contains("en-item")) {
+                this.classList.add("is-english");
             } else {
-                enItem.classList.remove("active");
-                arItem.classList.add("active");
+                this.classList.remove("is-english");
             }
 
-            // 3. Follow the href smoothly after a micro-delay to let the CSS toggle trigger
+            // 2. Follow the href smoothly after a micro-delay to let the CSS toggle trigger
             setTimeout(() => {
                 window.location.href = link.href;
             }, 150);
