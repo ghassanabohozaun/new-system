@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">{!! __('roles.update_role') !!}</h4>
-                            <form class="forms-sample" action="{!! route('dashboard.roles.update', $role->id) !!}" method="POST">
+                            <form class="forms-sample" id="role_form" action="{!! route('dashboard.roles.update', $role->id) !!}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="id" value="{{ $role->id }}">
@@ -37,9 +37,7 @@
                                             <input type="text" class="form-control form-control-sm" id="role_ar"
                                                 name="role[ar]" value="{!! old('role.ar', $role->getTranslation('role', 'ar')) !!}"
                                                 placeholder="{!! __('roles.enter_role_ar') !!}">
-                                            @error('role.ar')
-                                                <span class="text-danger small">{{ $message }}</span>
-                                            @enderror
+                                            <strong id="role_ar_error" class="text-danger small"></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -48,9 +46,7 @@
                                             <input type="text" class="form-control form-control-sm" id="role_en"
                                                 name="role[en]" value="{!! old('role.en', $role->getTranslation('role', 'en')) !!}"
                                                 placeholder="{!! __('roles.enter_role_en') !!}">
-                                            @error('role.en')
-                                                <span class="text-danger small">{{ $message }}</span>
-                                            @enderror
+                                            <strong id="role_en_error" class="text-danger small"></strong>
                                         </div>
                                     </div>
                                 </div>
@@ -72,15 +68,15 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                        @error('permissions')
-                                            <span class="text-danger small d-block mt-2">{{ $message }}</span>
-                                        @enderror
+                                        <strong id="permissions_error" class="text-danger small d-block mt-2"></strong>
                                     </div>
                                 </div>
 
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-primary btn-icon-text me-2 text-white">
                                         <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.update') !!}
+                                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
+                                            aria-hidden="true"></span>
                                     </button>
                                     <a href="{{ route('dashboard.roles.index') }}" class="btn btn-light btn-icon-text">
                                         <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
@@ -94,3 +90,51 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        function clearErrors() {
+            $('#role_form input').removeClass('is-invalid');
+            $('#role_form strong.text-danger').text('');
+        }
+
+        $('#role_form').on('submit', function(e) {
+            e.preventDefault();
+            const form = $(this);
+            const data = new FormData(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                data: data,
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    clearErrors();
+                    $('.spinner_loading').removeClass('d-none');
+                },
+                success: function(data) {
+                    if (data.status) {
+                        flasher.success("{!! __('general.update_success_message') !!}");
+                        setTimeout(() => {
+                            window.location.href = "{!! route('dashboard.roles.index') !!}";
+                        }, 1000);
+                    }
+                },
+                error: function(xhr) {
+                    const errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        const field = key.replace(/\./g, '_');
+                        $(`#${field}`).addClass('is-invalid');
+                        $(`#${field}_error`).text(value[0]);
+                    });
+                },
+                complete: function() {
+                    $('.spinner_loading').addClass('d-none');
+                }
+            });
+        });
+    </script>
+@endpush

@@ -25,7 +25,7 @@ return [
     'roles' => 'الصلاحيات',
     'admins' => 'المديرين',
     'users' => 'المستخدمين',
-    'world' => 'المناطق',
+    'addresses' => 'المناطق',
     'settings' => 'الإعدادات ',
     'employees_settings' => 'إعدادات الموظفين',
     'employees' => 'الموظفين',

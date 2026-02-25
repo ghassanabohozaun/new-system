@@ -20,18 +20,18 @@ class CitiesController extends Controller
     // index
     public function index()
     {
-        $title = __('world.cities');
+        $title = __('addresses.cities');
         $governorates = $this->governorateService->getAllGovernoratesWithoutRelations();
         $cities = $this->cityService->getCities();
-        return view('dashboard.world.cities.index', compact('title', 'cities', 'governorates'));
+        return view('dashboard.addresses.cities.index', compact('title', 'cities', 'governorates'));
     }
 
     // create
     public function create()
     {
-        $title = __('world.create_new_city');
+        $title = __('addresses.create_new_city');
         $governorates = $this->governorateService->getGovernoraties();
-        return view('dashboard.world.cities.create', compact('title', 'governorates'));
+        return view('dashboard.addresses.cities.create', compact('title', 'governorates'));
     }
 
     // store
@@ -53,14 +53,14 @@ class CitiesController extends Controller
     // edit
     public function edit(string $id)
     {
-        $title = __('world.update_city');
+        $title = __('addresses.update_city');
         $city = $this->cityService->getCity($id);
         if (!$city) {
             flash()->error(__('general.no_record_found'));
             return redirect()->back();
         }
         $governorates = $this->governorateService->getGovernoraties();
-        return view('dashboard.world.cities.edit', compact('title', 'city', 'governorates'));
+        return view('dashboard.addresses.cities.edit', compact('title', 'city', 'governorates'));
     }
 
     // update

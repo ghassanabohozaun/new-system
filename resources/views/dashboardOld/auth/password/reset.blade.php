@@ -16,7 +16,7 @@
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
                                         <h2 style="font-weight: bolder">{!! setting()->site_name !!}</h2>
-                                        {{-- <img src="{!! asset('assets/dashbaord') !!}/images/logo/logo-dark.png" alt="branding logo"> --}}
+                                        {{-- <img src="{!! asset('assets/dashboard') !!}/images/logo/logo-dark.png" alt="branding logo"> --}}
                                     </div>
                                     <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                                         <span>{!! __('auth.login_dashboard') !!}</span>

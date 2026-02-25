@@ -13,6 +13,7 @@ return [
     'password_confirm' => 'تاكيد كلمة مرور المدير',
     'role_id' => 'صلاحية المدير',
     'status' => 'الحالة',
+    'photo'=> 'الصورة',
     'created_at'=>'تاريخ الاضافة',
     'manage_status'=>'إدارة الحالة',
 

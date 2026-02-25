@@ -18,6 +18,7 @@ return [
     'monthly_reports_count' => 'Monthly Reports Count',
     'salaries_count' => 'Salaries Count',
 
+
     // tasks
     'my_tasks'=>'My Tasks',
     'what_do_you_need_to_do_today'=>'What do you need to do today?',
@@ -26,7 +27,7 @@ return [
     'roles' => 'Roles',
     'admins' => 'Admins',
     'users' => 'Users',
-    'world' => 'World',
+    'addresses' => 'Addresses',
     'settings' => 'Settings',
     'employees_settings' => 'Employees Settings',
     'employees' => 'Employees',

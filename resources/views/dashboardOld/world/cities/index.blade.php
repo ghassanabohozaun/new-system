@@ -89,7 +89,7 @@
                                                             <td class="col-lg-5">{!! $city->name !!}</td>
                                                             <td class="col-lg-5">{!! $city->governorate->name !!}</td>
                                                             <td class="col-lg-1">
-                                                                @include('dashboard.world.cities.parts.actions')
+                                                                @include('dashboard..addresses.cities.parts.actions')
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -117,8 +117,8 @@
         </div> <!-- end: content wrapper  -->
     </div><!-- end: content app  -->
 
-    @include('dashboard.world.cities.modals.create')
-    @include('dashboard.world.cities.modals.edit')
+    @include('dashboard..addresses.cities.modals.create')
+    @include('dashboard..addresses.cities.modals.edit')
 @endsection
 @push('scripts')
     <script type="text/javascript">

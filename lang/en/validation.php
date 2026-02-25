@@ -300,31 +300,8 @@ return [
         'currency' => 'Currency',
         'photo' => 'Photo',
 
-        'educationItems.*.educational_instituation_name' => 'Instituation Name :index',
-        'educationItems.*.education_level' => 'Level :index',
-        'educationItems.*.education_year' => 'Year :index',
-        'educationItems.*.education_aveage' => 'Average :index',
-        'educationItems.*.certification' => 'Certification :index',
-
-        'title' => 'Title',
-        'basic_salary' => 'Basic Salary',
-        'appointment_date' => 'Appointment Date',
-        'contact_expire_date' => 'Contact Expire Date',
-        'employment_type' => 'Employee Type',
-        'department_id' => 'Department',
-        'supervisor' => 'Supervisor',
-        'employee_status' => 'Employee Status',
-
-        'employeeSalaryItem.*.amount' => 'Salary ',
-        'file' => 'File',
-        'year' => 'Year',
-        'month' => 'Month',
-
-        // messages
-        'recipient' => 'Recipient',
-        'body' => 'Message Body',
-
-           // tasks
+        'permissions' => 'Permissions',
+        // tasks
         'newTaskTitle' => 'Task Title',
     ],
 ];

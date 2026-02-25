@@ -17,7 +17,7 @@ class Admin extends Authenticatable
     protected $table = 'admins';
 
     // fillable
-    protected $fillable = ['name', 'email', 'password', 'role_id', 'status'];
+    protected $fillable = ['name', 'email', 'password', 'role_id', 'status', 'photo'];
 
     public array $translatable = ['name'];
 
@@ -36,11 +36,6 @@ class Admin extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
-    }
-
-    public function salaries()
-    {
-        return $this->hasMany(Salary::class, 'admin_id');
     }
 
 
@@ -69,22 +64,4 @@ class Admin extends Authenticatable
         return false;
     }
 
-    // Message Relationships
-    public function sentMessages()
-    {
-        return $this->morphMany(Message::class, 'sender');
-    }
-
-    public function receivedMessages()
-    {
-        return $this->morphMany(Message::class, 'receiver');
-    }
-
-    public function unreadMessagesCount()
-    {
-        return $this->receivedMessages()
-                    ->where('is_read', false)
-                    ->where('receiver_deleted', false)
-                    ->count();
-    }
 }

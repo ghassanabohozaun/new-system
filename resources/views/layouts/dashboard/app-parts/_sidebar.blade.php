@@ -1,23 +1,54 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard.index') }}">
                 <i class="mdi mdi-grid-large menu-icon"></i>
                 <span class="menu-title">{{ __('dashboard.dashboard') }}</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard.admins.index') }}">
-                <i class="menu-icon ti-user"></i>
-                <span class="menu-title">{!! __('admins.admins') !!}</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard.roles.index') }}">
-                <i class="mdi mdi-shield-account menu-icon"></i>
-                <span class="menu-title">{{ __('roles.roles') }}</span>
-            </a>
-        </li>
+
+        @can('admins')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.admins.index') }}">
+                    <i class="menu-icon ti-user"></i>
+                    <span class="menu-title">{!! __('admins.admins') !!}</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('roles')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.roles.index') }}">
+                    <i class="mdi mdi-shield-account menu-icon"></i>
+                    <span class="menu-title">{{ __('roles.roles') }}</span>
+                </a>
+            </li>
+        @endcan
+
+
+        @can('addresses')
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#addresses-menu" aria-expanded="false"
+                    aria-controls="addresses-menu">
+                    <i class="menu-icon mdi mdi-earth"></i>
+                    <span class="menu-title">{!! __('dashboard.addresses') !!}</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="addresses-menu">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ route('dashboard.addresses.governorates.index') }}">{!! __('addresses.governorates') !!}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ route('dashboard.addresses.cities.index') }}">{!! __('addresses.cities') !!}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endcan
 
 
         @can('tasks')
@@ -28,6 +59,19 @@
                 </a>
             </li>
         @endcan
+
+
+        @can('settings')
+            <li class="nav-item nav-category">{!! __('dashboard.settings') !!}</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard.settings.index') }}">
+                    <i class="menu-icon mdi mdi-settings"></i>
+                    <span class="menu-title">{!! __('settings.settings') !!}</span>
+                </a>
+            </li>
+        @endcan
+
+
 
         <li class="nav-item nav-category">UI Elements</li>
         <li class="nav-item">
@@ -66,6 +110,6 @@
             </div>
         </li>
 
-        <li class="nav-item nav-category">Settings</li>
+
     </ul>
 </nav>

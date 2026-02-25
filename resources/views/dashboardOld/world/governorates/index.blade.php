@@ -90,16 +90,16 @@
                                                             <th class="col-lg-1">{!! $loop->iteration !!} </th>
                                                             <td class="col-lg-6">{!! $governorate->name !!}</td>
                                                             <td class="col-lg-1 text-center">
-                                                                @include('dashboard.world.governorates.parts.cites_count')
+                                                                @include('dashboard..addresses.governorates.parts.cites_count')
                                                             </td>
                                                             <td class="col-lg-1 text-center">
-                                                                @include('dashboard.world.governorates.parts.status')
+                                                                @include('dashboard..addresses.governorates.parts.status')
                                                             </td>
                                                             <td class="col-lg-1 text-center">
-                                                                @include('dashboard.world.governorates.parts.manage_status')
+                                                                @include('dashboard..addresses.governorates.parts.manage_status')
                                                             </td>
                                                             <td class="col-lg-1">
-                                                                @include('dashboard.world.governorates.parts.actions')
+                                                                @include('dashboard..addresses.governorates.parts.actions')
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -127,8 +127,8 @@
         </div> <!-- end: content wrapper  -->
     </div><!-- end: content app  -->
 
-    @include('dashboard.world.governorates.modals.create')
-    @include('dashboard.world.governorates.modals.edit')
+    @include('dashboard..addresses.governorates.modals.create')
+    @include('dashboard..addresses.governorates.modals.edit')
 @endsection
 @push('scripts')
     <script type="text/javascript">

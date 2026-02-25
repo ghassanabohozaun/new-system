@@ -24,50 +24,26 @@ class AdminReporitoy
     // get admins
     public function getAdmins()
     {
-        $admins = Admin::orderByDesc('created_at')->select('id', 'name', 'email', 'password', 'status', 'role_id', 'created_at')->paginate(5);
+        $admins = Admin::orderByDesc('created_at')->select('id', 'name', 'email', 'password', 'status', 'role_id', 'created_at', 'photo')->paginate(5);
         return $admins;
     }
 
     // store admin
 
-    public function storeAdmin($request)
+    public function storeAdmin($data)
     {
-        $admin = Admin::create([
-            'name' => [
-                'ar' => $request->name['ar'],
-                'en' => $request->name['en'],
-            ],
-            'email' => $request->email,
-            'password' => $request->password,
-            'role_id' => $request->role_id,
-            'status' => empty($request->input('status')) ? 0 : 1,
-        ]);
-
-        return $admin;
+        return Admin::create($data);
     }
 
     // update admin
-    public function updateAdmin($request, $admin)
+    public function updateAdmin($admin, $data)
     {
-        $admin = self::getAdmin($admin->id);
-        $admin->update([
-            'name' => [
-                'ar' => $request->name['ar'],
-                'en' => $request->name['en'],
-            ],
-            'email' => $request->email,
-            'password' => empty($request->input('password')) ? $admin->password : $request->password,
-            'role_id' => $request->role_id,
-            'status' => empty($request->input('status')) ? 0 : 1,
-        ]);
-
-        return $admin;
+        return $admin->update($data);
     }
 
     // destroy admin
     public function destroyAdmin($admin)
     {
-        //$admin = self::getAdmin($admin->id);
         return $admin->forceDelete();
     }
 
@@ -75,9 +51,8 @@ class AdminReporitoy
 
     public function changeStatusAdmin($admin, $status)
     {
-        $admin = $admin->update([
+        return $admin->update([
             'status' => $status,
         ]);
-        return $admin;
     }
 }

@@ -3,7 +3,7 @@
 use App\Http\Controllers\Dashboard\Auth\AuthController;
 use App\Http\Controllers\Dashboard\Auth\Password\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\Password\ResetPasswordController;
-use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, RolesController, SettingsController, TasksController};
+use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, ProfileController, RolesController, SettingsController, TasksController};
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -15,7 +15,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
-        ########################################### Auth  ##################################################################
+        ########################################### Auth (Guest) ###########################################################
         Route::get('login', [AuthController::class, 'getLogin'])->name('get.login');
         Route::post('login', [AuthController::class, 'postLogin'])->name('post.login');
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -35,19 +35,33 @@ Route::group(
         });
 
         ########################################### protected routes  #####################################################################
-        Route::group(['middleware' => 'auth:admin'], function () {
+        Route::group(['middleware' => ['auth:admin', \App\Http\Middleware\CheckLockScreen::class]], function () {
+            ########################################### Auth Protected #######################################################
+            Route::get('lock-screen', [AuthController::class, 'lockScreen'])->name('lock.screen');
+            Route::post('unlock-screen', [AuthController::class, 'unlock'])->name('unlock.screen');
+
             ########################################### home  ##########################################################################
             Route::get('/home', [DashboardController::class, 'index'])->name('index');
 
+            ########################################### profile  routes ##########################################################################
+            Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+            Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change.password');
+
+            ########################################### settings routes  ######################################################################
+            Route::group(['middleware' => 'can:settings'], function () {
+                Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+                Route::put('/settings/{id?}', [SettingsController::class, 'update'])->name('settings.update');
+            });
+
             ########################################### roles routes ######################################################################
             Route::group(['middleware' => 'can:roles'], function () {
-                Route::resource('roles', RolesController::class);
+                Route::resource('roles', RolesController::class)->except(['destroy']);
                 Route::post('/roles/destroy', [RolesController::class, 'destroy'])->name('roles.destroy');
             });
 
             ########################################### admins routes  #####################################################################
             Route::group(['middleware' => 'can:admins'], function () {
-                Route::resource('admins', AdminsController::class);
+                Route::resource('admins', AdminsController::class)->except(['destroy']);
                 Route::post('/admins/destroy', [AdminsController::class, 'destroy'])->name('admins.destroy');
                 Route::post('/admins/status', [AdminsController::class, 'changeStatus'])->name('admins.change.status');
             });
@@ -56,10 +70,10 @@ Route::group(
             Route::group(['middleware' => 'can:tasks'], function () {
                 Route::get('/tasks', [TasksController::class, 'index'])->name('tasks.index');
             });
-            ########################################### world routes  ######################################################################
-            Route::group(['middleware' => 'can:world'], function () {
+            ########################################### addresses routes  ######################################################################
+            Route::group(['as' => 'addresses.', 'middleware' => 'can:addresses'], function () {
                 // governorates routes
-                Route::resource('governorates', GovernoratiesController::class);
+                Route::resource('governorates', GovernoratiesController::class)->except(['destroy']);
                 Route::post('/governorates/destroy', [GovernoratiesController::class, 'destroy'])->name('governorates.destroy');
                 Route::get('/governorates/status/{id?}', [GovernoratiesController::class, 'changeStatus'])->name('governorates.change.status');
                 Route::get('/governorates/get/all/cities', [GovernoratiesController::class, 'getAllCitiesByGovernorate'])->name('governorates.get.all.cities');
@@ -67,14 +81,8 @@ Route::group(
                 Route::post('/govnerorates/update/price', [GovernoratiesController::class, 'updateShippingPrice'])->name('governorates.update.shipping.price');
 
                 // cities routes
-                Route::resource('cities', CitiesController::class);
+                Route::resource('cities', CitiesController::class)->except(['destroy']);
                 Route::post('/cities/destroy', [CitiesController::class, 'destroy'])->name('cities.destroy');
-            });
-
-            ########################################### settings routes  ######################################################################
-            Route::group(['middleware' => 'can:settings'], function () {
-                Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
-                Route::put('/settings/{id?}', [SettingsController::class, 'update'])->name('settings.update');
             });
 
             ########################################### employee routes  ######################################################################
@@ -83,7 +91,7 @@ Route::group(
             });
             ########################################### departments routes  ######################################################################
             Route::group(['middleware' => 'can:departments'], function () {
-                Route::resource('departments', DepartmentsController::class);
+                Route::resource('departments', DepartmentsController::class)->except(['destroy']);
                 Route::post('/departments/destroy', [DepartmentsController::class, 'destroy'])->name('departments.destroy');
                 Route::post('/departments/status', [DepartmentsController::class, 'changeStatus'])->name('departments.change.status');
             });

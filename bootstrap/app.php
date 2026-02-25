@@ -6,8 +6,6 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\Http\Middleware\CheckAbilities;
-use Laravel\Sanctum\Http\Middleware\CheckForAnyAbility;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -18,7 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
             // ->prefix('dashboard')
             // ->name('dashboard')
-
             // web
             Route::middleware('web')->group(base_path('routes/dashboard.php'));
 
@@ -31,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if (request()->is('*/dashboard/*')) {
                 return route('dashboard.get.login');
             } else {
-                return route('home');
+                return route('website.home');
             }
         });
 
@@ -40,7 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
             if (Auth::guard('admin')->check()) {
                 return route('dashboard.index');
             } else {
-                return route('home');
+                return route('website.home');
             }
         });
 
@@ -51,8 +48,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
             'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
-            'abilities' => CheckAbilities::class,
-            'ability' => CheckForAnyAbility::class,
             'PDF' => Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::class,
             'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 

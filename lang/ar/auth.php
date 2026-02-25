@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'failed' => 'هذه المؤهلات لا تتطابق مع سجلاتنا.',
+    'failed' => 'هذه البيانات لا تتطابق مع سجلاتنا.',
     'throttle' => 'محاولات تسجيل دخول كثيرة جدًا. يُرجى المحاولة مرة أخرى خلال ثوانٍ.',
     'remmber_me' => 'تذكرني',
     'forget_password' => '  هل نسيت كلمة المرور ؟',
@@ -25,6 +25,8 @@ return [
     'enter_you_password' => 'ادخل كلمة المرور',
     'confirm_passwod' => 'تأكيد كلمة المرور',
     'logout' => 'تسجيل الخروج',
+    'lock_screen' => 'قفل الشاشة',
+
     'name' => 'الإسم',
     'reset_password' => 'استعادة كلمة المرور',
     'confirm' => 'التحقق من كلمة المرور',
@@ -56,7 +58,7 @@ return [
     'enter_employee_pesonal_id' => 'ادخل رقم هوية الموظف',
     'enter_birthday' => 'ادخل تاريخ ميلاد الموظف',
     'techenical_support' => 'الدعم الفني',
-    'sign_in_to_continue'=>'قم بتسجيل الدخول للمواصلة',
+    'sign_in_to_continue' => 'قم بتسجيل الدخول للمواصلة',
     'hellow' => 'مرحبا ! لنبدأ الان ',
     'enter_email_to_recover_password' => 'أدخل بريدك الإلكتروني لاستعادة كلمة المرور.',
     'send_otp' => 'إرسال رمز التحقق',
@@ -68,4 +70,8 @@ return [
     'enter_new_password_below' => 'أدخل كلمة المرور الجديدة أدناه.',
     'new_password' => 'كلمة المرور الجديدة',
     'confirm_password' => 'تأكيد كلمة المرور',
+    'password_to_unlock' => 'كلمة المرور لإلغاء القفل',
+    'unlock' => 'إلغاء القفل',
+    'sign_in_different_account' => 'تسجيل الدخول بحساب مختلف',
+    'unlock_success' => 'تم التحقق بنجاح! جاري التحويل...',
 ];

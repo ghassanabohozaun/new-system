@@ -301,8 +301,8 @@ return [
         'class' => 'الفصل الدراسي',
         'governoate_id' => 'المحافظة',
         'address_details' => 'تفاصيل العنوان',
-            'address_details_en' => 'تفاصيل العنوان بالانجليزي',
-    'address_details_ar' => 'تفاصيل العنوان بالعربي',
+        'address_details_en' => 'تفاصيل العنوان بالانجليزي',
+        'address_details_ar' => 'تفاصيل العنوان بالعربي',
         'marital_status' => 'الحالة الاجتماعية',
         'employee_status_id' => 'حالة الموظف',
         'bank_name' => 'اسم البنك',
@@ -313,24 +313,7 @@ return [
         'mobile_no' => 'رقم الموبايل ',
         'alternative_mobile_no' => 'رقم موبايل بديل ',
 
-        'educationItems.*.educational_instituation_name' => 'اسم المؤسسة :index',
-        'educationItems.*.education_level' => 'المستوي التعليمي :index',
-        'educationItems.*.education_year' => 'سنة التخرج :index',
-        'educationItems.*.education_aveage' => 'المعدل الجامعي :index',
-        'educationItems.*.certification' => 'الشهادة :index',
-        'educationItems.*.employee_id' => 'الموظف :index',
-
-        'title' => 'المسمي الوظيفي',
-        'basic_salary' => 'الراتب الأساسي',
-        'appointment_date' => 'تاريخ التوظيف',
-        'contact_expire_date' => 'تاريخ انتهاء العقد',
-        'employment_type' => 'نوع التوظيف',
-        'department_id' => 'الإدارة',
-        'supervisor' => 'المشرف',
-        'employee_status' => 'حالة الموظف',
-        'employeeSalaryItem.*.amount' => 'الراتب  :index',
-        'file' => 'الملف',
-
+        'permissions' => 'الصلاحيات',
 
         // messages
         'recipient' => 'المتلقي',

@@ -22,7 +22,7 @@
                                 @if (setting()->logo)
                                     <img src="{{ asset('uploads/settings/' . setting()->logo) }}" alt="logo">
                                 @else
-                                    <img src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+                                    <img src="{{ asset('assets/dashboard/images/logo.svg') }}" alt="logo">
                                 @endif
                             </div>
                             <h4>{!! __('auth.recover_password') !!}</h4>

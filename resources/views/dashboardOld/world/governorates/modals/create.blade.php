@@ -118,6 +118,7 @@
             // paramters
             // var currentPage = $('#yajra-datatable').DataTable().page();
             var data = new FormData(this);
+
             var type = $(this).attr('method');
             var url = $(this).attr('action');
 

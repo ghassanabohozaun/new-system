@@ -37,41 +37,41 @@ class RolesController extends Controller
         $role = $this->roleService->storeRole($request);
 
         if (!$role) {
+            if ($request->ajax()) return response()->json(['status' => false], 500);
             flash()->error(__('general.add_error_message'));
             return redirect()->back();
         }
 
+        if ($request->ajax()) return response()->json(['status' => true, 'data' => $role], 200);
         flash()->success(__('general.add_success_message'));
         return redirect()->back();
-    }
-
-    // role store
-    public function show(string $id)
-    {
-        //
     }
 
     // role edit
     public function edit(string $id)
     {
-        $title = __('roles.update_role');
+        $title = __('roles.edit_role');
         $role = $this->roleService->getRole($id);
+
         if (!$role) {
             flash()->error(__('general.no_record_found'));
-            return redirect()->route('dashboard.roles.index');
+            return redirect()->back();
         }
 
-        return view('dashboard.roles.edit', compact('role', 'title'));
+        return view('dashboard.roles.edit', compact('title', 'role'));
     }
 
+    // role update
     public function update(RoleRequest $request, string $id)
     {
         $role = $this->roleService->updateRole($request, $id);
         if (!$role) {
+            if ($request->ajax()) return response()->json(['status' => false], 500);
             flash()->error(__('general.update_error_message'));
             return redirect()->back();
         }
 
+        if ($request->ajax()) return response()->json(['status' => true, 'data' => $role], 200);
         flash()->success(__('general.update_success_message'));
         return redirect()->back();
     }

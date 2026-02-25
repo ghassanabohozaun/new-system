@@ -25,6 +25,7 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('123456'),
                 'email' => 'admin@admin.com',
                 'role_id' => $first_role_id,
+                'photo'=> '',
             ],
         ];
 

@@ -13,8 +13,9 @@ return [
     'password_confirm' => 'Admin Password confirm',
     'role_id' => 'Admin Role',
     'status' => 'Status',
+    'photo'=> 'Photo',
     'created_at'=>'Created At',
-        'manage_status'=>'Manage Status',
+    'manage_status'=>'Manage Status',
 
 
     'enter_name_ar' => 'Enter Arabic Admin Name',

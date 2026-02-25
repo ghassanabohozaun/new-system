@@ -18,24 +18,24 @@ class GovernoratiesController extends Controller
     // index
     public function index()
     {
-        $title = __('world.governorates');
+        $title = __('addresses.governorates');
         $governorates = $this->governorateService->getGovernoraties();
-        return view('dashboard.world.governorates.index', compact('title', 'governorates'));
+        return view('dashboard.addresses.governorates.index', compact('title', 'governorates'));
     }
 
     // get cities by governorate id
     public function getCitesByGovernrateID($governorate_id)
     {
-        $title = __('world.cities');
+        $title = __('addresses.cities');
         $cities = $this->governorateService->getAllCitiesbyGovernorate($governorate_id);
-        return view('dashboard.world.cities.index', compact('title', 'cities'));
+        return view('dashboard.addresses.cities.index', compact('title', 'cities'));
     }
 
     //create
     public function create()
     {
-        $title = __('world.create_new_governorate');
-        return view('dashboard.world.governorates.create', compact('title'));
+        $title = __('addresses.create_new_governorate');
+        return view('dashboard.addresses.governorates.create', compact('title'));
     }
 
     // store
@@ -57,14 +57,14 @@ class GovernoratiesController extends Controller
     // edit
     public function edit(string $id)
     {
-        $title = __('world.update_governorate');
+        $title = __('addresses.update_governorate');
         $governorate = $this->governorateService->getGovernorate($id);
 
         if (!$governorate) {
             flash()->error(__('general.no_record_found'));
             return redirect()->back();
         }
-        return view('dashboard.world.governorates.edit', compact('title', 'governorate'));
+        return view('dashboard.addresses.governorates.edit', compact('title', 'governorate'));
     }
 
     // update

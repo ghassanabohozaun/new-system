@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     @php
-        $currentLocale = LaravelLocalization::getCurrentLocale();
+        $currentLocale = Lang();
         $targetLocale = $currentLocale == 'ar' ? 'en' : 'ar';
         $targetNative = LaravelLocalization::getSupportedLocales()[$targetLocale]['native'];
     @endphp
@@ -20,11 +20,10 @@
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                             <div class="brand-logo">
                                 @if (setting()->logo)
-                                    No LOGO
+                                    <img src="{!! asset('uploads/settings/' . setting()->logo) !!}" alt="logo">
                                 @else
-                                    <img src="../../assets/images/logo.svg" alt="logo">
+                                    <img src="../../assets/dashboard/images/logo.svg" alt="logo">
                                 @endif
-
                             </div>
                             <h6 class="fw-light">{!! __('auth.sign_in_to_continue') !!}</h6>
                             @if (session('success'))

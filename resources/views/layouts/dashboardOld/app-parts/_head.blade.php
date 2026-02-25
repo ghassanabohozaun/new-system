@@ -12,14 +12,14 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
     rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/fonts/line-awesome/css/line-awesome.min.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/fonts/line-awesome/css/line-awesome.min.css') !!}">
 
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/vendors/css/weather-icons/climacons.min.css') !!}">
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/fonts/meteocons/style.css') !!}">
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/vendors/css/charts/morris.css') !!}">
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/vendors/css/charts/chartist.css') !!}">
-<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/vendors/css/charts/chartist-plugin-tooltip.css') !!}">
-<link rel="stylesheet" type="text/css" href="{!! asset(path: 'assets/dashbaord/fonts/simple-line-icons/style.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/vendors/css/weather-icons/climacons.min.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/fonts/meteocons/style.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/vendors/css/charts/morris.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/vendors/css/charts/chartist.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/vendors/css/charts/chartist-plugin-tooltip.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset(path: 'assets/dashboard/fonts/simple-line-icons/style.css') !!}">
 <link rel="stylesheet" href="{!! asset('vendor/flasher/flasher.min.css') !!}" rel="stylesheet">
 <link href="{!! asset('vendor/summernote/summernote-bs4.css') !!}" rel="stylesheet">
 
@@ -31,26 +31,26 @@
 
 
 @if (Lang() == 'ar')
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/vendors.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/app.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/custom-rtl.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/core/menu/menu-types/vertical-menu-modern.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/core/colors/palette-gradient.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/core/colors/palette-gradient.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/pages/timeline.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/pages/dashboard-ecommerce.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/dashbaord/css-rtl/child-wizard.css') !!}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/vendors.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/app.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/custom-rtl.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/core/menu/menu-types/vertical-menu-modern.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/core/colors/palette-gradient.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/core/colors/palette-gradient.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/pages/timeline.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/pages/dashboard-ecommerce.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css-rtl/child-wizard.css') !!}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/my-style.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/my-style.css') !!}">
 @else
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/vendors.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/app.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/vendors.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/app.css') !!}">
     <link rel="stylesheet" type="text/css"
-        href="{!! asset('assets/dashbaord') !!}/css/core/menu/menu-types/vertical-menu-modern.css">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/core/colors/palette-gradient.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/core/colors/palette-gradient.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/pages/timeline.css') !!}">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/pages/dashboard-ecommerce.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/dashbaord/css/child-wizard.css') !!}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css/my-style.css') !!}">
+        href="{!! asset('assets/dashboard') !!}/css/core/menu/menu-types/vertical-menu-modern.css">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/core/colors/palette-gradient.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/core/colors/palette-gradient.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/pages/timeline.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/pages/dashboard-ecommerce.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/child-wizard.css') !!}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css/my-style.css') !!}">
 @endif

@@ -19,21 +19,21 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
         rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/fonts/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/fonts/line-awesome/css/line-awesome.min.css">
 
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/vendors/css/forms/icheck/icheck.css">
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/vendors/css/forms/icheck/custom.css">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/vendors/css/forms/icheck/custom.css">
     <link rel="stylesheet" type="text/css"
-        href="{!! asset('assets/dashbaord') !!}/css-rtl/core/menu/menu-types/vertical-menu-modern.css">
+        href="{!! asset('assets/dashboard') !!}/css-rtl/core/menu/menu-types/vertical-menu-modern.css">
 
 
     @if (Config::get('app.locale') == 'ar')
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css-rtl/vendors.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css-rtl/app.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css-rtl/custom-rtl.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css-rtl/core/colors/palette-gradient.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css-rtl/pages/login-register.css">
-        {{-- <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css/style-rtl.css"> --}}
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css-rtl/vendors.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css-rtl/app.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css-rtl/custom-rtl.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css-rtl/core/colors/palette-gradient.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css-rtl/pages/login-register.css">
+        {{-- <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css/style-rtl.css"> --}}
         <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet" />
         <style>
             body,
@@ -44,13 +44,13 @@
             }
         </style>
     @else
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css/vendors.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css/app.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css/core/colors/palette-gradient.css">
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord') !!}/css/pages/login-register.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css/vendors.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css/app.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css/core/colors/palette-gradient.css">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard') !!}/css/pages/login-register.css">
     @endif
 
-    <link rel="stylesheet" type="text/css" href="{!! asset(path: 'assets/dashbaord/css/my-style.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset(path: 'assets/dashboard/css/my-style.css') !!}">
 
 
 </head>
@@ -92,17 +92,17 @@
     </footer>
 
     <!-- BEGIN VENDOR JS-->
-    <script src="{!! asset('assets/dashbaord') !!}/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/vendors/js/vendors.min.js" type="text/javascript"></script>
     <!-- BEGIN PAGE VENDOR JS-->
-    <script src="{!! asset('assets/dashbaord') !!}/vendors/js/forms/validation/jqBootstrapValidation.js" type="text/javascript">
+    <script src="{!! asset('assets/dashboard') !!}/vendors/js/forms/validation/jqBootstrapValidation.js" type="text/javascript">
     </script>
-    <script src="{!! asset('assets/dashbaord') !!}/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
     <!-- BEGIN MODERN JS-->
-    <script src="{!! asset('assets/dashbaord') !!}/js/core/app-menu.js" type="text/javascript"></script>
-    <script src="{!! asset('assets/dashbaord') !!}/js/core/app.js" type="text/javascript"></script>
-    <script src="{!! asset('assets/dashbaord') !!}/js/scripts/customizer.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/js/core/app-menu.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/js/core/app.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/js/scripts/customizer.js" type="text/javascript"></script>
     <!-- BEGIN PAGE LEVEL JS-->
-    <script src="{!! asset('assets/dashbaord') !!}/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
     {!! NoCaptcha::renderJs() !!}

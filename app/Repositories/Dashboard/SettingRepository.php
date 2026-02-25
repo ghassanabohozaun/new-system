@@ -15,6 +15,7 @@ class SettingRepository
     // update settings
     public function updateSettings($setting, $data)
     {
-        return $setting->update($data);
+        $setting->update($data);
+        return $setting;
     }
 }

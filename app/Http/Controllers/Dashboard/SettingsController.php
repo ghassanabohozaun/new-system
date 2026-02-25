@@ -30,6 +30,6 @@ class SettingsController extends Controller
         if (!$settings) {
             return response()->json(['status' => false]);
         }
-        return response()->json(['status' => true]);
+        return response()->json(['status' => true, 'data' => $settings]);
     }
 }

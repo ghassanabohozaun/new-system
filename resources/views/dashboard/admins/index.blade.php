@@ -84,7 +84,9 @@
                                                     @include('dashboard.admins.parts.manage_status')
                                                 </td>
                                                 <td class="text-center">
-                                                    @include('dashboard.admins.parts.actions')
+                                                    @include('dashboard.admins.parts.actions', [
+                                                        'admin' => $admin,
+                                                    ])
                                                 </td>
                                             </tr>
                                         @empty

@@ -41,8 +41,8 @@ class SettingService
             $data['favicon'] = $this->imageManagerUtils->saveResizeImage($data['favicon'], 'settings', 500, 500);
         }
 
-        $setting = $this->settingRepository->updateSettings($setting, $data);
-        if (!$setting) {
+        $updated = $this->settingRepository->updateSettings($setting, $data);
+        if (!$updated) {
             return false;
         }
         return $setting;

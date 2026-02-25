@@ -3,6 +3,7 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\AdminReporitoy;
+use App\Utils\ImageManagerUtils;
 use Illuminate\Support\Facades\Cache;
 
 class AdminService
@@ -11,12 +12,13 @@ class AdminService
      * Create a new class instance.
      */
 
-    protected $adminReporitoy;
+    protected $adminReporitoy, $imageManagerUtils;
 
     // __construct
-    public function __construct(AdminReporitoy $adminReporitoy)
+    public function __construct(AdminReporitoy $adminReporitoy, ImageManagerUtils $imageManagerUtils)
     {
         $this->adminReporitoy = $adminReporitoy;
+        $this->imageManagerUtils = $imageManagerUtils;
     }
 
     // get Admin
@@ -37,42 +39,61 @@ class AdminService
     }
 
     // store admin
-    public function storeAdmin($request)
+    public function storeAdmin($data)
     {
-        $admin = $this->adminReporitoy->storeAdmin($request);
+        if (array_key_exists('photo', $data) && $data['photo'] != null) {
+            $data['photo'] = $this->imageManagerUtils->saveResizeImage($data['photo'], 'adminsPhotos', 100, 100);
+        }
+
+        $admin = $this->adminReporitoy->storeAdmin($data);
         if (!$admin) {
             return false;
         }
-        $this->adminCache();
         return $admin;
     }
 
     //update admin
-    public function updateAdmin($request, $id)
+    public function updateAdmin($data)
     {
-        $admin = $this->adminReporitoy->getAdmin($id);
+        $admin = $this->adminReporitoy->getAdmin($data['id']);
         if (!$admin) {
-            abort(404);
+            return false;
         }
-        $admin = $this->adminReporitoy->updateAdmin($request, $admin);
-        if (!$admin) {
+
+
+        $data['password'] = empty($data['password']) ? $admin->password : $data['password'];
+
+        if (array_key_exists('photo', $data) && $data['photo'] != null) {
+            $this->imageManagerUtils->removeImageFromLocal($admin->photo, 'adminsPhotos');
+            $data['photo'] = $this->imageManagerUtils->saveResizeImage($data['photo'], 'adminsPhotos', 100, 100);
+        } else {
+            if ($admin->photo != null) {
+                $data['photo'] = $admin->photo;
+            } else {
+                $data['photo'] = '';
+            }
+        }
+
+        $updated = $this->adminReporitoy->updateAdmin($admin, $data);
+        if (!$updated) {
             return false;
         }
         return $admin;
     }
-
-    // destroy admin
     public function destroyAdmin($id)
     {
         $admin = $this->adminReporitoy->getAdmin($id);
         if (!$admin) {
             return false;
         }
+        if (!empty($admin->photo)) {
+            $this->imageManagerUtils->removeImageFromLocal($admin->photo, 'adminsPhotos');
+        }
+
         $admin = $this->adminReporitoy->destroyAdmin($admin);
         if (!$admin) {
             return false;
         }
-        $this->adminCache();
         return $admin;
     }
 
@@ -89,11 +110,5 @@ class AdminService
             return false;
         }
         return $admin;
-    }
-
-    // admin cache
-    public function adminCache(){
-        Cache::forget('admins_count');
-
     }
 }

@@ -8,7 +8,7 @@
                 <i class="la la-arrows"></i>
             </a>
         @else
-            <img src='{!! asset('assets/dashbaord/images/images-empty.png') !!}' width="80" height="80" class="img-fluid">
+            <img src='{!! asset('assets/dashboard/images/images-empty.png') !!}' width="80" height="80" class="img-fluid">
         @endif
 
     </div>

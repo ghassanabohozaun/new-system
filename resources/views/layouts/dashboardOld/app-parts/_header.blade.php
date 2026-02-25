@@ -37,7 +37,7 @@
                                  <div id="mega-menu-carousel-example">
                                      <div>
                                          <img class="rounded img-fluid mb-1"
-                                             src="{!! asset('assets/dashbaord') !!}/images/slider/slider-2.png"
+                                             src="{!! asset('assets/dashboard') !!}/images/slider/slider-2.png"
                                              alt="First slide"><a class="news-title mb-0" href="javascript:void(0)">Poster
                                              Frame PSD</a>
                                          <p class="news-content">
@@ -221,7 +221,7 @@
                                  <span class="user-name text-bold-700">{!! admin()->user()->getTranslation('name', Lang()) !!}</span>
                              </span>
                              <span class="avatar avatar-online">
-                                 <img src="{!! asset('assets/dashbaord') !!}/images/portrait/small/avatar-s-19.png"
+                                 <img src="{!! asset('assets/dashboard') !!}/images/portrait/small/avatar-s-19.png"
                                      alt="avatar"><i></i></span>
                          </a>
                          <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
@@ -256,10 +256,10 @@
                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              @if (Config::get('app.locale') == 'ar')
                                  <img class="flag-icon"
-                                     src="{{ asset('assets/dashbaord/media/svg/flags/العربية.svg') }}" />
+                                     src="{{ asset('assets/dashboard/media/svg/flags/العربية.svg') }}" />
                              @else
                                  <img class="flag-icon"
-                                     src="{{ asset('assets/dashbaord/media/svg/flags/English.svg') }}" />
+                                     src="{{ asset('assets/dashboard/media/svg/flags/English.svg') }}" />
                              @endif
                          </a>
                          <div class="dropdown-menu" aria-labelledby="dropdown-flag">
@@ -268,7 +268,7 @@
                                  <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
                                      href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                      <i class="flag-icon">
-                                         <img src="{{ asset('assets/dashbaord/media/svg/flags/' . $properties['native'] . '.svg') }}"
+                                         <img src="{{ asset('assets/dashboard/media/svg/flags/' . $properties['native'] . '.svg') }}"
                                              alt="" />
                                      </i>
                                      <span style="padding: 10px">

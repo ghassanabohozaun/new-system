@@ -54,41 +54,19 @@ return [
             'report' => false,
         ],
 
-        'employeesPhotos' => [
+        'adminsPhotos' => [
             'driver' => 'local',
-            'root' => public_path('/uploads/employeesPhotos'),
-            'url' => env('APP_URL') . '/uploads/employeesPhotos',
+            'root' => public_path('/uploads/adminsPhotos'),
+            'url' => env('APP_URL') . '/uploads/adminsPhotos',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
 
-        'employeesCertifications' => [
-            'driver' => 'local',
-            'root' => public_path('/uploads/employeesCertifications'),
-            'url' => env('APP_URL') . '/uploads/employeesCertifications',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
 
-        'dailyReports' => [
-            'driver' => 'local',
-            'root' => public_path('/uploads/dailyReports'),
-            'url' => env('APP_URL') . '/uploads/dailyReports',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
 
-        'monthlyReports' => [
-            'driver' => 'local',
-            'root' => public_path('/uploads/monthlyReports'),
-            'url' => env('APP_URL') . '/uploads/monthlyReports',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
+
+
 
         's3' => [
             'driver' => 's3',

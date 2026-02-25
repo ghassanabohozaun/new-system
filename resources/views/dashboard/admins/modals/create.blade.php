@@ -1,6 +1,6 @@
 <div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog" aria-labelledby="createAdminModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form class="forms-sample" action="{!! route('dashboard.admins.store') !!}" method="POST" enctype="multipart/form-data"
             id="create_admin_form">
             @csrf
@@ -90,6 +90,26 @@
                         </div>
                     </div>
 
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="photo">{!! __('admins.photo') !!}</label>
+                                <input type="file" id="photo_create" name="photo"
+                                    class="form-control form-control-sm" autocomplete="off"
+                                    placeholder="{!! __('admins.enter_photo') !!}">
+                                <strong id="photo_error" class="text-danger small"></strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="{{ Lang() == 'ar' ? 'text-right' : 'text-left' }} mt-2">
+                                <img id="photo_preview_create" src="" alt="Photo Preview"
+                                    class="img-thumbnail d-none" style="max-height: 100px;">
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -135,91 +155,73 @@
     <script type="text/javascript">
         // reset
         function resetCreateForm() {
-            $('#name_ar').css('border-color', '');
-            $('#name_en').css('border-color', '');
-            $('#email').css('border-color', '');
-            $('#password').css('border-color', '');
-            $('#password_confirm').css('border-color', '');
-            $('#role_id').css('border-color', '');
-            $('#status').css('border-color', '');
-
-            $('#name_ar_error').text('');
-            $('#name_en_error').text('');
-            $('#email_error').text('');
-            $('#password_error').text('');
-            $('#password_confirm_error').text('');
-            $('#role_id_error').text('');
-            $('#status_error').text('');
+            $('#create_admin_form')[0].reset();
+            $('#create_admin_form input, #create_admin_form select').removeClass('is-invalid');
+            $('#create_admin_form strong.text-danger').text('');
 
             // default values
-            var password = document.getElementById('password');
-            password.type = 'password';
+            if (document.getElementById('password')) document.getElementById('password').type = 'password';
+            if (document.getElementById('password_confirm')) document.getElementById('password_confirm').type = 'password';
 
-            var password_confirm = document.getElementById('password_confirm');
-            password_confirm.type = 'password';
+            $('#photo_preview_create').addClass('d-none').attr('src', '');
         }
 
-        // // cancel
-        // $('body').on('click', '#cancel_admin_btn', function(e) {
-        //     $('#createAdminModal').modal('hide');
-        //     $('#create_admin_form')[0].reset();
-        //     resetCreateForm();
-        // });
+        function clearCreateErrors() {
+            $('#create_admin_form input, #create_admin_form select').removeClass('is-invalid');
+            $('#create_admin_form strong.text-danger').text('');
+        }
 
         // hide
         $('#createAdminModal').on('hidden.bs.modal', function(e) {
-            $('#createAdminModal').modal('hide');
-            $('#create_admin_form')[0].reset();
             resetCreateForm();
         });
 
+        // Photo preview logic for Create
+        $('#photo_create').on('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#photo_preview_create').attr('src', e.target.result).removeClass('d-none');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
 
-        // create
+
         $('#create_admin_form').on('submit', function(e) {
             e.preventDefault();
-            // reset
-            resetCreateForm();
-
-            // paramters
-            var data = new FormData(this);
-            var type = $(this).attr('method');
-            var url = $(this).attr('action');
+            const form = $(this);
+            const data = new FormData(this);
 
             $.ajax({
-                url: url,
+                url: form.attr('action'),
                 data: data,
-                type: type,
+                type: 'POST',
                 dataType: 'json',
                 cache: false,
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    $('.spinner_loading').removeClass('d-none');
+                    clearCreateErrors();
+                    $('.spinner_loading').removeClass('class', 'd-none');
                 },
                 success: function(data) {
-                    if (data.status == true) {
-                        console.log(data);
-                        $('#responsiveTable').load(location.href + (' #responsiveTable'));
-                        $('#create_admin_form')[0].reset();
+                    if (data.status) {
+                        $('#responsiveTable').load(location.href + ' #responsiveTable');
                         resetCreateForm();
                         $('#createAdminModal').modal('hide');
-                        flasher.success("{!! __('general.add_success_message') !!}", "{!! __('general.success') !!}");
-                    } else {
-                        flasher.error("{!! __('general.add_error_message') !!}", "{!! __('general.error') !!}");
+                        flasher.success("{!! __('general.add_success_message') !!}");
                     }
                 },
-                error: function(reject) {
-                    var response = $.parseJSON(reject.responseText);
-                    $.each(response.errors, function(key, value) {
-                        if (key == 'name.en') {
-                            key = 'name_en';
-                        } else if (key == 'name.ar') {
-                            key = 'name_ar';
-                        }
-                        $('#' + key + '_error').text(value[0]);
-                        $('#' + key).css('border-color', '#F64E60');
+                error: function(xhr) {
+                    const errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        const field = key.replace(/\./g, '_');
+                        $(`#${field}`).addClass('is-invalid');
+                        $(`#${field}_error`).text(value[0]);
                     });
-                }, //end error
+                },
                 complete: function() {
                     $('.spinner_loading').addClass('d-none');
                 }

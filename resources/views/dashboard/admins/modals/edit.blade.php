@@ -1,6 +1,6 @@
 <div class="modal fade" id="updateAdminModal" tabindex="-1" role="dialog" aria-labelledby="updateAdminModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id="update_admin_form">
             @csrf
             @method('PUT')
@@ -92,6 +92,23 @@
                         </div>
                     </div>
 
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="photo">{!! __('admins.photo') !!}</label>
+                                <input type="file" id="photo_edit" name="photo"
+                                    class="form-control form-control-sm" autocomplete="off"
+                                    placeholder="{!! __('admins.enter_photo') !!}">
+                                <strong id="photo_error_edit" class="text-danger small"></strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6 {{ Lang() == 'ar' ? 'text-right' : 'text-left' }}">
+                            <img id="photo_preview_edit" src="" alt="Photo Preview"
+                                class="img-thumbnail d-none" style="max-height: 100px;">
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -145,12 +162,19 @@
             var admin_email = $(this).attr('admin-email');
             var admin_role_id = $(this).attr('admin-role-id');
             var admin_status = $(this).attr('admin-status');
+            var admin_photo = $(this).attr('admin-photo');
 
             $('#id_edit').val(admin_id);
             $('#name_ar_edit').val(admin_name_ar);
             $('#name_en_edit').val(admin_name_en);
             $('#email_edit').val(admin_email);
             $('#role_id_edit').val(admin_role_id);
+            if (admin_photo && admin_photo !== "" && admin_photo !== "null") {
+                $('#photo_preview_edit').attr('src', "{{ asset('uploads/adminsPhotos') }}/" + admin_photo)
+                    .removeClass('d-none');
+            } else {
+                $('#photo_preview_edit').addClass('d-none').attr('src', '');
+            }
 
             if (admin_status == 1) {
                 $('#status_active_edit').prop('checked', true);
@@ -163,91 +187,91 @@
 
         // reset
         function resetEditForm() {
-            $('#name_ar_edit').css('border-color', '');
-            $('#name_en_edit').css('border-color', '');
-            $('#email_edit').css('border-color', '');
-            $('#password_confirm_edit').css('border-color', '');
-            $('#role_id_edit').css('border-color', '');
-
-            $('#name_ar_error_edit').text('');
-            $('#name_en_error_edit').text('');
-            $('#email_error_edit').text('');
-            $('#password_confirm_error_edit').text('');
-            $('#role_id_error_edit').text('');
+            $('#update_admin_form input, #update_admin_form select').removeClass('is-invalid');
+            $('#update_admin_form strong.text-danger').text('');
 
             // reset password type
-            var password_edit = document.getElementById('password_edit');
-            password_edit.type = 'password';
+            if (document.getElementById('password_edit')) document.getElementById('password_edit').type = 'password';
+            if (document.getElementById('password_confirm_edit')) document.getElementById('password_confirm_edit').type =
+                'password';
 
-            var password_confirm_edit = document.getElementById('password_confirm_edit');
-            password_confirm_edit.type = 'password';
-
+            $('#photo_preview_edit').addClass('d-none').attr('src', '');
         }
-
-        // cancel
-        $('body').on('click', '#cancel_admin_btn_edit', function(e) {
-            $('#updateAdminModal').modal('hide');
-            $('#update_admin_form')[0].reset();
-            resetEditForm();
-        });
 
         // hide
         $('#updateAdminModal').on('hidden.bs.modal', function(e) {
-            $('#updateAdminModal').modal('hide');
-            $('#update_admin_form')[0].reset();
             resetEditForm();
         });
 
+        // Photo preview logic
+        $('#photo_edit').on('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#photo_preview_edit').attr('src', e.target.result).removeClass('d-none');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
 
-        // update
+
         $('#update_admin_form').on('submit', function(e) {
             e.preventDefault();
-            // reset
-            resetEditForm();
-
-            // paramters
-            var admin_id = $('#id_edit').val();
-            var data = new FormData(this);
-            var type = $(this).attr('method');
-            var url = "{!! route('dashboard.admins.update', 'id') !!}".replace('id', admin_id);
+            const form = $(this);
+            const admin_id = $('#id_edit').val();
+            const data = new FormData(this);
+            const url = "{!! route('dashboard.admins.update', 'id') !!}".replace('id', admin_id);
 
             $.ajax({
                 url: url,
                 data: data,
-                type: type,
+                type: 'POST', // Handled as PUT by @method('PUT')
                 dataType: 'json',
                 cache: false,
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
+                    resetEditForm();
                     $('.spinner_loading').removeClass('d-none');
                 },
                 success: function(data) {
-                    if (data.status == true) {
-                        console.log(data);
-                        $('#responsiveTable').load(location.href + (' #responsiveTable'));
-                        $('#update_admin_form')[0].reset();
-                        resetEditForm();
+                    if (data.status) {
+                        $('#responsiveTable').load(location.href + ' #responsiveTable');
                         $('.admin_name_section').load(location.href + ' .admin_name_section');
+                        flasher.success("{!! __('general.update_success_message') !!}");
 
-                        flasher.success("{!! __('general.add_success_message') !!}", "{!! __('general.success') !!}");
+                        // Sync header if it's the current user
+                        if (admin_id == "{{ admin()->user()->id }}") {
+                            if (data.data.photo) {
+                                var photoUrl = "{{ asset('uploads/adminsPhotos') }}/" + data.data.photo;
+                                $('.header_admin_photo').attr('src', photoUrl);
+                            }
+
+                            var name = data.data.name;
+                            if (typeof name === 'object' && name !== null) {
+                                name = name["{!! app()->getLocale() !!}"];
+                            }
+
+                            $('.header_admin_name').text(name);
+                            $('.header_admin_email').text(data.data.email);
+                            $('.welcome-text span').text(name);
+                        }
+
                         $('#updateAdminModal').modal('hide');
-                    } else {
-                        flasher.error("{!! __('general.add_error_message') !!}", "{!! __('general.error') !!}");
                     }
                 },
-                error: function(reject) {
-                    var response = $.parseJSON(reject.responseText);
-                    $.each(response.errors, function(key, value) {
-                        if (key == 'name.en') {
-                            key = 'name_en';
-                        } else if (key == 'name.ar') {
-                            key = 'name_ar';
-                        }
-                        $('#' + key + '_error_edit').text(value[0]);
-                        $('#' + key + '_edit').css('border-color', '#F64E60');
+                error: function(xhr) {
+                    const errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        const field = key.replace(/\./g, '_');
+                        let inputId = `${field}_edit`;
+                        if (key === 'photo') inputId = 'photo_edit';
+
+                        $(`#${inputId}`).addClass('is-invalid');
+                        $(`#${field}_error_edit`).text(value[0]);
                     });
-                }, //end error
+                },
                 complete: function() {
                     $('.spinner_loading').addClass('d-none');
                 }

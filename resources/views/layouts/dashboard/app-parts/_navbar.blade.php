@@ -1,4 +1,5 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+    <!--  Logo   -->
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <div class="me-3">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
@@ -6,15 +7,21 @@
             </button>
         </div>
         <div>
-            <a class="navbar-brand brand-logo" href="{!! route('dashboard.index') !!}">
-                <img src="{!! asset('assets') !!}/images/logo.svg" alt="logo" />
+            <a class="navbar-brand brand-logo" href="{{ route('dashboard.index') }}">
+                <img id="navbar_brand_logo" src="{!! setting()->logo ? asset('uploads/settings/' . setting()->logo) : asset('assets/dashboard/images/logo.svg') !!}" alt="logo"
+                    style="height: 55px; width: auto;">
             </a>
-            <a class="navbar-brand brand-logo-mini" href="{!! route('dashboard.index') !!}">
-                <img src="{!! asset('assets') !!}/images/logo-mini.svg" class="brand-logo-mini" alt="logo" />
+            <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard.index') }}">
+                <img id="navbar_brand_logo_mini" src="{!! setting()->logo ? asset('uploads/settings/' . setting()->logo) : asset('assets/dashboard/images/logo-mini.svg') !!}" alt="logo"
+                    style="height: 45px; width: auto;">
             </a>
         </div>
     </div>
+    <!-- End Logo   -->
+
+    <!-- User Menu   -->
     <div class="navbar-menu-wrapper d-flex align-items-top">
+        <!-- User Welcome   -->
         <ul class="navbar-nav">
             <li class="nav-item fw-semibold d-none d-lg-block ms-0">
                 <h1 class="welcome-text">{!! greeting() !!},
@@ -24,8 +31,12 @@
                 <h3 class="welcome-sub-text">{{ __('navbar.performance_summary') }} </h3>
             </li>
         </ul>
+        <!-- End User Welcome   -->
+
+
         <ul class="navbar-nav ms-auto">
 
+            <!-- User Date picker   -->
             <li class="nav-item d-none d-lg-block">
                 <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
                     <span class="input-group-addon input-group-prepend border-right">
@@ -34,6 +45,9 @@
                     <input type="text" class="form-control">
                 </div>
             </li>
+            <!-- End User Date picker   -->
+
+            <!-- User language   -->
             <li class="nav-item">
                 <form class="search-form" action="#">
                     <i class="icon-search"></i>
@@ -42,7 +56,7 @@
                 </form>
             </li>
             @php
-                $currentLocale = LaravelLocalization::getCurrentLocale();
+                $currentLocale = Lang();
                 $targetLocale = $currentLocale == 'ar' ? 'en' : 'ar';
                 $targetNative = LaravelLocalization::getSupportedLocales()[$targetLocale]['native'];
             @endphp
@@ -52,6 +66,9 @@
                     {{ $targetNative }}
                 </a>
             </li>
+            <!-- End User language   -->
+
+            <!-- User notifications -->
             <li class="nav-item dropdown">
                 <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                     <i class="icon-bell"></i>
@@ -95,6 +112,9 @@
                     </a>
                 </div>
             </li>
+            <!-- End User notifications -->
+
+            <!-- User messages     -->
             <li class="nav-item dropdown">
                 <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -110,7 +130,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/face10.jpg" alt="image"
+                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
@@ -120,7 +140,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/face12.jpg" alt="image"
+                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
@@ -130,7 +150,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets') !!}/images/faces/face1.jpg" alt="image"
+                            <img src="{!! asset('assets') !!}/images/faces/avatar-male.jpg" alt="image"
                                 class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
@@ -140,36 +160,42 @@
                     </a>
                 </div>
             </li>
+            <!-- End User messages -->
+
+            <!-- User Dropdown -->
             <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    <img class="img-xs rounded-circle" src="{!! asset('assets') !!}/images/faces/face8.jpg"
+                    <img class="img-xs rounded-circle header_admin_photo" src="{!! admin()->user()->photo
+                        ? asset('uploads/adminsPhotos/' . admin()->user()->photo)
+                        : asset('assets/dashboard/images/faces/avatar-male.jpg') !!}"
                         alt="Profile image"> </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
-                        <img class="img-md rounded-circle" src="{!! asset('assets') !!}/images/faces/face8.jpg"
-                            alt="Profile image">
-                        <p class="mb-1 mt-3 fw-semibold">Allen Moreno</p>
-                        <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                        <img class="img-md rounded-circle header_admin_photo" src="{!! admin()->user()->photo
+                            ? asset('uploads/adminsPhotos/' . admin()->user()->photo)
+                            : asset('assets/dashboard/images/faces/avatar-male.jpg') !!}"
+                            alt="Profile image" height="80">
+                        <p class="mb-1 mt-3 fw-semibold header_admin_name">{!! admin()->user()->name !!}</p>
+                        <p class="fw-light text-muted mb-0 header_admin_email">{!! admin()->user()->email !!}</p>
                     </div>
-                    <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>
+                    <a class="dropdown-item" href="{{ route('dashboard.profile.index') }}">
+                        <i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>
                         {{ __('navbar.my_profile') }}
-                        <span class="badge badge-pill badge-danger">1</span></a>
-                    <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i>
-                        {{ __('navbar.messages') }}</a>
-                    <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i>
-                        {{ __('navbar.activity') }}</a>
-                    <a class="dropdown-item"><i
-                            class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>
-                        {{ __('navbar.faq') }}</a>
+                    </a>
+                    <a class="dropdown-item" href="{!! route('dashboard.lock.screen') !!}">
+                        <i class="dropdown-item-icon mdi mdi-lock-outline text-primary me-2"></i>
+                        {{ __('auth.lock_screen') }}
+                    </a>
                     <a class="dropdown-item" href="{!! route('dashboard.logout') !!}">
                         <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>
-                        {{ __('auth.logout') }}</a>
+                        {{ __('auth.logout') }}
+                    </a>
                 </div>
             </li>
+            <!-- End User Dropdown -->
+
+
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
             data-bs-toggle="offcanvas">

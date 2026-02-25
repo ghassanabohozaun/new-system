@@ -4,9 +4,9 @@
 @endsection
 
 @push('style')
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/vendors/css/forms/selects/select2.min.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/vendors/css/forms/selects/select2.min.css') !!}">
     @if (Lang() == 'ar')
-        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashbaord/css-rtl/my-select2-style.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/dashboard/css-rtl/my-select2-style.css') !!}">
     @endif
 @endpush
 @section('content')
@@ -176,8 +176,8 @@
     </div><!-- end: content app  -->
 @endsection
 @push('scripts')
-    <script src="{!! asset('assets/dashbaord') !!}/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
-    <script src="{!! asset('assets/dashbaord') !!}/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard') !!}/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         // select 2

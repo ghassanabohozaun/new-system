@@ -25,6 +25,7 @@ return [
     'enter_you_password' => 'Enter Your Password',
     'confirm_passwod' => 'Confirm Password',
     'logout' => 'Logout',
+    'lock_screen' => 'Lock Screen',
     'name' => 'Name',
     'reset_password' => 'Reset Password',
     'confirm' => 'Confirm Password',
@@ -68,4 +69,8 @@ return [
     'enter_new_password_below' => 'Enter your new password below.',
     'new_password' => 'New Password',
     'confirm_password' => 'Confirm Password',
+    'password_to_unlock' => 'Password to unlock',
+    'unlock' => 'UNLOCK',
+    'sign_in_different_account' => 'Sign in using a different account',
+    'unlock_success' => 'Verified successfully! Redirecting...',
 ];

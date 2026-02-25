@@ -38,8 +38,8 @@ class AdminsController extends Controller
     //  admin store
     public function store(AdminRequest $request)
     {
-        // $data = $request->only(['name', 'email', 'password', 'role_id']);
-        $admin = $this->adminService->storeAdmin($request);
+        $data = $request->except(['_token', '_method']);
+        $admin = $this->adminService->storeAdmin($data);
         if (!$admin) {
             return response()->json(['status' => false], 500);
         }
@@ -68,8 +68,8 @@ class AdminsController extends Controller
     //  admin update
     public function update(AdminRequest $request, string $id)
     {
-        // $data = $request->only(['name', 'email', 'password', 'role_id']);
-        $admin = $this->adminService->updateAdmin($request, $id);
+        $data = $request->except(['_token', '_method']);
+        $admin = $this->adminService->updateAdmin($data);
         if (!$admin) {
             return response()->json(['status' => false], 500);
         }
