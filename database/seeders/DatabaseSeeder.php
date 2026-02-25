@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             RoleSeeder::class,
             AdminSeeder::class,
-            GovernorateSeeder::class,
+            CountrySeeder::class,
             CitySeeder::class,
             DepartmentSeeder::class,
         ]);

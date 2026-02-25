@@ -39,8 +39,9 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{{ route('dashboard.addresses.governorates.index') }}">{!! __('addresses.governorates') !!}</a>
+                                href="{{ route('dashboard.addresses.countries.index') }}">{!! __('addresses.countries') !!}</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="{{ route('dashboard.addresses.cities.index') }}">{!! __('addresses.cities') !!}</a>

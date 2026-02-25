@@ -1,0 +1,160 @@
+/* - NEQAT "DASHBOARD CONSTELLATION" 403 */
+:root {
+    --nq-navy: #0a1128;
+    --nq-gold: #d4a34d;
+    --nq-white: #ffffff;
+    --nq-pearl: #f1f5f9;
+    --nq-gray: #64748b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    overflow: hidden;
+    background: var(--nq-white);
+    color: var(--nq-navy);
+}
+
+/* --- 1. THE DYNAMIC CONSTELLATION STAGE --- */
+.constellation-stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #ffffff 0%, var(--nq-pearl) 100%);
+}
+
+#constellationCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* --- 2. THE ADMINISTRATIVE VAULT (Center Card) --- */
+.admin-vault {
+    position: relative;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 40px;
+    padding: 70px 60px;
+    border: 2px solid var(--nq-navy);
+    box-shadow: 0 40px 100px rgba(10, 17, 40, 0.08);
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    transform-style: preserve-3d;
+    animation: vaultEntrance 1s cubic-bezier(0.17, 0.88, 0.32, 1.28);
+    transition: transform 0.1s ease-out;
+}
+
+/* High-Contrast Luxury 403 */
+.forbidden-code {
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    font-weight: 900;
+    line-height: 0.8;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, var(--nq-navy) 40%, var(--nq-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 15px 30px rgba(10, 17, 40, 0.2));
+    letter-spacing: -8px;
+    transform: translateZ(80px);
+}
+
+/* Administrative Badge */
+.admin-badge {
+    display: inline-block;
+    padding: 10px 35px;
+    background: var(--nq-navy);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 30px;
+    border: 1.5px solid var(--nq-gold);
+    transform: translateZ(50px);
+}
+
+/* Typography focused on Permissions */
+.title-pro {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: var(--nq-navy);
+    margin-bottom: 20px;
+    transform: translateZ(40px);
+}
+
+.desc-pro {
+    font-size: 1.15rem;
+    color: var(--nq-gray);
+    font-weight: 700;
+    line-height: 1.8;
+    margin-bottom: 45px;
+    transform: translateZ(30px);
+}
+
+/* The Dashboard Action Button */
+.btn-neqat-admin {
+    background: var(--nq-navy);
+    color: #fff;
+    border: none;
+    padding: 18px 50px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-bottom: 5px solid var(--nq-gold);
+    transform: translateZ(60px);
+}
+
+.btn-neqat-admin:hover {
+    background: var(--nq-gold);
+    color: var(--nq-navy);
+    transform: translateZ(100px) translateY(-5px);
+    box-shadow: 0 25px 50px rgba(212, 163, 77, 0.4);
+}
+
+/* --- 3. ANIMATIONS --- */
+@keyframes vaultEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .forbidden-code {
+        font-size: 7rem;
+    }
+
+    .admin-vault {
+        padding: 40px 20px;
+        width: 92%;
+    }
+
+    .title-pro {
+        font-size: 1.7rem;
+    }
+}

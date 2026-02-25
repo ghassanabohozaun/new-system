@@ -219,12 +219,6 @@
 
 @push('scripts')
     <script type="text/javascript">
-        // Reset errors
-        function clearErrors() {
-            $('#settings_form input').removeClass('is-invalid');
-            $('#settings_form strong.text-danger').text('');
-        }
-
         // Real-time preview for Logo
         $('#logo_input').on('change', function() {
             var file = this.files[0];
@@ -249,53 +243,24 @@
             }
         });
 
-        // Update settings via AJAX
-        $('#settings_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const settings_id = $("#id").val();
-            const data = new FormData(this);
-            const url = "{!! route('dashboard.settings.update', 'id') !!}".replace('id', settings_id);
-
-            $.ajax({
-                url: url,
-                data: data,
-                type: 'POST', // Will be handled as PUT by @method('PUT')
-                dataType: 'json',
-                contentType: false,
-                cache: false,
-                processData: false,
-                beforeSend: function() {
-                    clearErrors();
-                    $('.spinner_loading').removeClass('d-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        flasher.success("{!! __('general.update_success_message') !!}");
-
-                        // Sync Top Navbar Logos
-                        if (data.data.logo) {
-                            var logoUrl = "{{ asset('uploads/settings') }}/" + data.data.logo;
-                            $('#navbar_brand_logo').attr('src', logoUrl);
-                        }
-                        if (data.data.favicon) {
-                            var faviconUrl = "{{ asset('uploads/settings') }}/" + data.data.favicon;
-                            $('#navbar_brand_logo_mini').attr('src', faviconUrl);
-                        }
-                    }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        $(`#${field}`).addClass('is-invalid');
-                        $(`#${field}_error`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
+        window.handleFormSubmit('#settings_form', {
+            url: function(form) {
+                const settings_id = $("#id").val();
+                return "{!! route('dashboard.settings.update', 'id') !!}".replace('id', settings_id);
+            },
+            successMessage: "{!! __('general.update_success_message') !!}",
+            resetForm: false,
+            onSuccess: function(data) {
+                // Sync Top Navbar Logos
+                if (data.data.logo) {
+                    var logoUrl = "{{ asset('uploads/settings') }}/" + data.data.logo;
+                    $('#navbar_brand_logo').attr('src', logoUrl);
                 }
-            });
+                if (data.data.favicon) {
+                    var faviconUrl = "{{ asset('uploads/settings') }}/" + data.data.favicon;
+                    $('#navbar_brand_logo_mini').attr('src', faviconUrl);
+                }
+            }
         });
     </script>
 @endpush

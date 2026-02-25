@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\City;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CitySeeder extends Seeder
 {
@@ -13,55 +14,365 @@ class CitySeeder extends Seeder
      */
     public function run(): void
     {
+        // DB::table('cities')->truncate();
+
         $cities = [
+            // egypt
             [
                 'name' => [
-                    'ar' => 'النصر',
-                    'en' => 'El Nasser',
+                    'en' => 'Kafr el-Sheikh Governorate',
+                    'ar' => 'كفر الشيخ',
                 ],
-                'governorate_id' => '1',
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Cairo Governorate',
+                    'ar' => 'القاهرة',
+                ],
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'الصبرة',
-                    'en' => 'El Sabra',
+                    'en' => 'Damietta Governorate',
+                    'ar' => 'دمياط',
                 ],
-                'governorate_id' => '1',
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'تل الهواء',
-                    'en' => 'Tal El Hawa',
+                    'en' => 'Aswan Governorate',
+                    'ar' => 'أسوان',
                 ],
-                'governorate_id' => '1',
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'الشيخ رضوان',
-                    'en' => 'El Shekh Radawan',
+                    'en' => 'Sohag Governorate',
+                    'ar' => 'سوهاج',
                 ],
-                'governorate_id' => '1',
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'النصيرات',
-                    'en' => 'El Nusirate',
+                    'en' => 'North Sinai Governorate',
+                    'ar' => 'شمال سيناء',
                 ],
-                'governorate_id' => '2',
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'البريج',
-                    'en' => 'El Burij',
+                    'en' => 'Monufia Governorate',
+                    'ar' => 'المنوفيا',
                 ],
-                'governorate_id' => '2',
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Port Said Governorate',
+                    'ar' => 'بورسعيد',
+                ],
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Beni Suef Governorate',
+                    'ar' => 'بني سويف',
+                ],
+                'country_id' => 2,
             ],
             [
                 'name' => [
-                    'ar' => 'دير البلح',
-                    'en' => 'Dar El Balah',
+                    'en' => 'Matrouh Governorate',
+                    'ar' => 'مطروح',
                 ],
-                'governorate_id' => '2',
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Suez Governorate',
+                    'ar' => 'السويس',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Qalyubia Governorate',
+                    'ar' => 'القليوبية',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Gharbia Governorate',
+                    'ar' => 'الغربية',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Alexandria Governorate',
+                    'ar' => 'الاسكندرية',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Asyut Governorate',
+                    'ar' => 'أسيوط',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'South Sinai Governorate',
+                    'ar' => 'جنوب سيناء',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Faiyum Governorate',
+                    'ar' => 'الفيوم',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Giza Governorate',
+                    'ar' => 'الجيزة',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Red Sea Governorate',
+                    'ar' => 'البحر الأحمر',
+                ],
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Beheira Governorate',
+                    'ar' => 'البحيرة',
+                ],
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Luxor Governorate',
+                    'ar' => 'الأقصر',
+                ],
+                'country_id' => 2,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Minya Governorate',
+                    'ar' => 'المينيا',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Ismailia Governorate',
+                    'ar' => 'الاسماعيلية',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Dakahlia Governorate',
+                    'ar' => 'الدقهلية',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'New Valley Governorate',
+                    'ar' => 'الوداي الجديد',
+                ],
+                'country_id' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Qena Governorate',
+                    'ar' => 'قنا',
+                ],
+                'country_id' => 2,
+            ],
+
+            // sudia arabia
+            [
+                'name' => [
+                    'en' => 'Riyadh Region',
+                    'ar' => 'منطقة الرياض',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Makkah Region',
+                    'ar' => 'منطقة مكة',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Al Madinah Region',
+                    'ar' => 'منطقة المدينة',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Asir Region',
+                    'ar' => 'منطقة عسير',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Tabuk Region',
+                    'ar' => 'منطقة تبوك',
+                ],
+                'country_id' => 1,
+            ],
+            [
+                'name' => [
+                    'en' => 'Jizan Region',
+                    'ar' => 'منطقة جيزان',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Northern Borders Region',
+                    'ar' => 'منطقة الحدود الشمالية',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Al Jawf Region',
+                    'ar' => 'منطقة الجوف',
+                ],
+                'country_id' => 1,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Al Bahah Region',
+                    'ar' => 'منطقة الباحة',
+                ],
+                'country_id' => 1,
+            ],
+            [
+                'name' => [
+                    'en' => 'Najran Region',
+                    'ar' => 'منطقة نجران',
+                ],
+                'country_id' => 1,
+            ],
+            [
+                'name' => [
+                    'en' => 'Al-Qassim Region',
+                    'ar' => 'منطقة القسيم',
+                ],
+                'country_id' => 1,
+            ],
+
+            /// United Arabic Emirates
+            [
+                'name' => [
+                    'en' => 'Dubai',
+                    'ar' => 'دبي',
+                ],
+                'country_id' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Umm al-Quwain',
+                    'ar' => 'أم القيوين',
+                ],
+                'country_id' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Fujairah',
+                    'ar' => 'الفجيرة',
+                ],
+                'country_id' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Ras al-Khaimah',
+                    'ar' => 'رأس الخيمة',
+                ],
+                'country_id' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Ajman Emirate',
+                    'ar' => 'إمارة عجمان',
+                ],
+                'country_id' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Abu Dhabi Emirate',
+                    'ar' => 'إمارة ابو ظبي',
+                ],
+                'country_id' => 3,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Omman',
+                    'ar' => 'عمان',
+                ],
+                'country_id' => 4,
+            ],
+
+            [
+                'name' => [
+                    'en' => 'Irbid',
+                    'ar' => 'إربد',
+                ],
+                'country_id' => 4,
+            ],
+            [
+                'name' => [
+                    'en' => 'Zarqa',
+                    'ar' => 'الزرقاء',
+                ],
+                'country_id' => 4,
+            ],
+            [
+                'name' => [
+                    'en' => 'Karak',
+                    'ar' => 'الكرك',
+                ],
+                'country_id' => 4,
+            ],
+            [
+                'name' => [
+                    'en' => 'Jerash',
+                    'ar' => 'جرش',
+                ],
+                'country_id' => 4,
             ],
         ];
 

@@ -633,9 +633,6 @@ Section 6: Booking Panel Extracted Styles
 .booking-section {
   background-color: #f8f9fa;
 }
-.booking-panel {
-  direction: rtl;
-}
 
 /* Text Utilities */
 .text-navy {
@@ -3787,10 +3784,10 @@ html[dir="ltr"] .booking-form-area {
   .stat-divider-line::after {
     content: "";
     position: absolute;
-    left: 0;
+    inset-inline-end: 0;
     top: 15%;
     height: 70%;
-    border-left: 2px dashed #e9ecef;
+    border-inline-end: 2px dashed #e9ecef;
   }
 }
 

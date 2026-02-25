@@ -1,0 +1,264 @@
+/* - NEQAT ULTIMATE FLIGHT 404 */
+:root {
+    --brand-navy-deep: #020617;
+    --brand-navy-light: #1e293b;
+    --brand-gold: #d4a34d;
+    --brand-gold-bright: #ffd700;
+    --radar-color: rgba(212, 163, 77, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    overflow: hidden;
+    background: var(--brand-navy-deep);
+}
+
+/* --- MAIN STAGE & ATMOSPHERE --- */
+.flight-stage {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Subtle world map overlay */
+    background-image: radial-gradient(circle at center, var(--brand-navy-light) 0%, var(--brand-navy-deep) 80%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" opacity="0.05"><path fill="%23fff" d="M27.4,39.7c0,0-5.4-16.1,10.5-18.5c15.9-2.4,4.9,9.8,4.9,9.8s-12.7-2-13.6,2.4C28.3,37.9,27.4,39.7,27.4,39.7z M62.3,73.7c0,0-8.3-8.3-3.9-15.6c4.4-7.3,17.1-1,17.1-1S66.7,66.4,62.3,73.7z M113.6,45.3c0,0,3.9-12.7,16.1-7.8c12.2,4.9-1,14.6-1,14.6S118,49.2,113.6,45.3z M158.3,78.8c0,0,11.7-7.8,16.6,2.9c4.9,10.7-9.3,11.7-9.3,11.7S163.2,84.2,158.3,78.8z M135.3,127.8c0,0,12.2,2,13.6,13.6c1.5,11.7-11.7,6.8-11.7,6.8S134.3,139,135.3,127.8z M84.8,159.1c0,0,9.8,10.7,3.9,18.5c-5.9,7.8-16.1-1-16.1-1S82.9,167.9,84.8,159.1z M35.1,123.9c0,0-12.7,4.9-7.8,16.1c4.9,11.2,14.6-2,14.6-2S38,128.3,35.1,123.9z"/></svg>');
+}
+
+/* Radar Sweep Effect */
+.radar-sweep {
+    position: absolute;
+    width: 150vmax;
+    height: 150vmax;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, var(--radar-color) 60deg, transparent 65deg);
+    border-radius: 50%;
+    animation: radarSpin 10s linear infinite;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* --- THE ANIMATED PLANES (SVG & CSS Offset-Path) --- */
+.flight-paths-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    transition: transform 0.5s ease;
+}
+
+/* The flight paths lines */
+.path-line {
+    fill: none;
+    stroke: var(--brand-gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 10 15;
+    opacity: 0.3;
+}
+
+/* The Planes */
+.plane-icon {
+    fill: var(--brand-gold-bright);
+    filter: drop-shadow(0 0 10px var(--brand-gold));
+    offset-rotate: auto;
+    /* Ensure plane faces the direction of movement */
+}
+
+/* Plane 1 Animation (Main Loop) */
+.plane-1 {
+    /* Define the path the plane follows */
+    offset-path: path('M100,300 C100,100 400,100 400,300 C400,500 700,500 700,300 C700,100 1000,100 1000,300');
+    animation: flyPath 12s linear infinite;
+}
+
+/* Plane 2 Animation (Crossing) */
+.plane-2 {
+    offset-path: path('M-100,600 C200,400 600,800 1200,500');
+    animation: flyPath 15s linear infinite reverse;
+}
+
+/* --- CONTENT VAULT --- */
+.content-vault {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 40px;
+    background: rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(212, 163, 77, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+}
+
+/* --- NAVIGATIONAL 404 TEXT --- */
+.nav-404-container {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-404-text {
+    font-size: 10rem;
+    font-weight: 900;
+    line-height: 0.8;
+    background: linear-gradient(to bottom, #fff 0%, var(--brand-gold) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+/* Coordinates Overlay */
+.coordinates {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+    color: var(--brand-gold);
+    opacity: 0.5;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.nav-status {
+    color: #ef4444;
+    /* Red for alert */
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    display: block;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    animation: pulseAlert 2s infinite;
+}
+
+/* --- TYPOGRAPHY & BUTTONS --- */
+.error-heading {
+    color: #fff;
+    font-weight: 800;
+    margin: 25px 0 15px;
+    font-size: 2rem;
+}
+
+.error-message {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.btn-flight-action {
+    background: linear-gradient(135deg, var(--brand-gold) 0%, #b0863a 100%);
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px -5px rgba(212, 163, 77, 0.6);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-flight-action i {
+    transition: 0.4s;
+}
+
+.btn-flight-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -5px rgba(212, 163, 77, 0.8);
+    color: #000;
+}
+
+.btn-flight-action:hover i {
+    transform: rotate(-45deg) translateX(5px);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes radarSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes flyPath {
+    0% {
+        offset-distance: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        offset-distance: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes pulseAlert {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* --- RTL SPECIFIC MIRRORING --- */
+[dir="rtl"] .btn-flight-action i {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .btn-flight-action:hover i {
+    transform: rotate(45deg) translateX(-5px);
+}
+
+[dir="rtl"] .flight-paths-svg {
+    transform: scaleX(-1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-404-text {
+        font-size: 7rem;
+    }
+
+    .content-vault {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    /* Adjust SVG viewBox for smaller screens if needed, but usually scales okay */
+}

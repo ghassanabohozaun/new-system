@@ -5,33 +5,33 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\CityRequest;
 use App\Services\Dashboard\CityService;
-use App\Services\Dashboard\GovernorateService;
+use App\Services\Dashboard\CountryService;
 use Illuminate\Http\Request;
 
 class CitiesController extends Controller
 {
-    protected $cityService, $governorateService;
+    protected $cityService, $countryService;
 
-    public function __construct(CityService $cityService, GovernorateService $governorateService)
+    public function __construct(CityService $cityService, CountryService $countryService)
     {
         $this->cityService = $cityService;
-        $this->governorateService = $governorateService;
+        $this->countryService = $countryService;
     }
-    // index
+    // index    
     public function index()
     {
         $title = __('addresses.cities');
-        $governorates = $this->governorateService->getAllGovernoratesWithoutRelations();
+        $countries = $this->countryService->getAllCountriesWithoutRelations();
         $cities = $this->cityService->getCities();
-        return view('dashboard.addresses.cities.index', compact('title', 'cities', 'governorates'));
+        return view('dashboard.addresses.cities.index', compact('title', 'cities', 'countries'));
     }
 
     // create
     public function create()
     {
         $title = __('addresses.create_new_city');
-        $governorates = $this->governorateService->getGovernoraties();
-        return view('dashboard.addresses.cities.create', compact('title', 'governorates'));
+        $countries = $this->countryService->getCountries();
+        return view('dashboard.addresses.cities.create', compact('title', 'countries'));
     }
 
     // store
@@ -59,8 +59,8 @@ class CitiesController extends Controller
             flash()->error(__('general.no_record_found'));
             return redirect()->back();
         }
-        $governorates = $this->governorateService->getGovernoraties();
-        return view('dashboard.addresses.cities.edit', compact('title', 'city', 'governorates'));
+        $countries = $this->countryService->getCountries();
+        return view('dashboard.addresses.cities.edit', compact('title', 'city', 'countries'));
     }
 
     // update

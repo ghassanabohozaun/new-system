@@ -3,10 +3,12 @@
 use App\Http\Controllers\Dashboard\Auth\AuthController;
 use App\Http\Controllers\Dashboard\Auth\Password\ForgetPasswordController;
 use App\Http\Controllers\Dashboard\Auth\Password\ResetPasswordController;
+use App\Http\Controllers\Dashboard\CountriesController;
 use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, ProfileController, RolesController, SettingsController, TasksController};
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 Route::group(
     [
@@ -72,14 +74,15 @@ Route::group(
             });
             ########################################### addresses routes  ######################################################################
             Route::group(['as' => 'addresses.', 'middleware' => 'can:addresses'], function () {
-                // governorates routes
-                Route::resource('governorates', GovernoratiesController::class)->except(['destroy']);
-                Route::post('/governorates/destroy', [GovernoratiesController::class, 'destroy'])->name('governorates.destroy');
-                Route::get('/governorates/status/{id?}', [GovernoratiesController::class, 'changeStatus'])->name('governorates.change.status');
-                Route::get('/governorates/get/all/cities', [GovernoratiesController::class, 'getAllCitiesByGovernorate'])->name('governorates.get.all.cities');
-                Route::get('/governorate/{governorate_id?}/cities', [GovernoratiesController::class, 'getCitesByGovernrateID'])->name('governorates.get.cities.by.governorate.id');
-                Route::post('/govnerorates/update/price', [GovernoratiesController::class, 'updateShippingPrice'])->name('governorates.update.shipping.price');
 
+               // countries routes
+                Route::resource('countries', CountriesController::class)->except(['destroy']);
+                Route::post('/countries/destroy', [CountriesController::class, 'destroy'])->name('countries.destroy');
+                Route::post('/countries/status', [CountriesController::class, 'changeStatus'])->name('countries.change.status');
+                Route::get('/country/{country_id?}/cities', [CountriesController::class, 'getAllCitiesByCountry'])->name('countries.get.cities.by.country.id');
+                Route::get('/countries/autocomplete/country', [CountriesController::class, 'autocompleteCountry'])->name('countries.autocomplete.country');
+
+        
                 // cities routes
                 Route::resource('cities', CitiesController::class)->except(['destroy']);
                 Route::post('/cities/destroy', [CitiesController::class, 'destroy'])->name('cities.destroy');

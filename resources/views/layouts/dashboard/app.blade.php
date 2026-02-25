@@ -9,8 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preload" href="{!! asset('assets/dashboard/vendors/simple-line-icons/fonts/Simple-Line-Icons.woff2?v=2.4.0') !!}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{!! asset('assets/dashboard/vendors/feather/fonts/feather-webfont.woff') !!}" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.min.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}">
     <!-- plugins:css -->
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/feather/feather.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/mdi/css/materialdesignicons.min.css') !!}">
@@ -20,6 +18,7 @@
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/simple-line-icons/css/simple-line-icons.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/css/vendor.bundle.base.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/flag-icon-css/css/flag-icons.min.css') !!}">
     @if (Lang() == 'ar')
         <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-rtl/bootstrap.rtl.min.css') !!}">
     @endif
@@ -34,6 +33,8 @@
     @endif
     <link rel="stylesheet" href="{!! asset('assets/dashboard/css/tajawal.css') !!}">
     <!-- endinject -->
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}">
     <link rel="stylesheet" href="{!! asset('vendor/flasher/flasher.min.css') !!}" rel="stylesheet">
     <link rel="shortcut icon" href="{!! setting()->favicon
         ? asset('uploads/settings/' . setting()->favicon)

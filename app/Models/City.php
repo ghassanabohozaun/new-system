@@ -10,13 +10,13 @@ class City extends Model
 {
     use SoftDeletes, HasTranslations;
     protected $table = 'cities';
-    protected $fillable = ['name', 'governorate_id'];
+    protected $fillable = ['name', 'country_id'];
     public $timestamps = false;
     public array $translatable = ['name'];
 
     // relation
-    public function governorate()
+    public function country()
     {
-        return $this->belongsTo(Governorate::class, 'governorate_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }

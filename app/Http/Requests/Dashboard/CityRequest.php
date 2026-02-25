@@ -24,7 +24,7 @@ class CityRequest extends FormRequest
     {
         return [
             'name.*' => ['required', 'string', 'min:3', 'max:100', UniqueTranslationRule::for('cities')->ignore($this->id)],
-            'governorate_id' => ['required', 'exists:governorates,id'],
+            'country_id' => ['required', 'exists:countries,id'],
         ];
     }
 }

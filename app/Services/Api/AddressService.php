@@ -26,8 +26,8 @@ class AddressService
     }
 
     //get cities
-    public function getCities($governorate_id)
+    public function getCities($country_id)
     {
-        return $this->addressRepository->getCities($governorate_id);
+        return $this->addressRepository->getCities($country_id);
     }
 }

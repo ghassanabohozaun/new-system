@@ -16,13 +16,17 @@ return [
     'country_status' => 'Country Status',
     'phone_code' => 'Phone Code',
     'flag_code' => 'Flag Code',
+    'flag_codes_reference' => 'Flag Codes Reference',
 
     'enter_country_name_ar' => 'Enter Arabic Country Name',
     'enter_country_name_en' => 'Enter English Country Name',
     'enter_phone_code' => 'Enter Phone Code',
     'enter_flag_code' => 'Enter Flag Code',
+    'search_for_country' => 'Search for a country...',
+    'select_flag' => 'Select Flag',
 
     'no_countries_found' => 'No Countries Found !',
+    'country_restricted_deletion' => 'Cannot delete country because it has linked cities or flight records.',
 
     // governorates
     'create_new_governorate' => 'Create New Governorate',
@@ -46,7 +50,7 @@ return [
     'update_city' => 'Update City',
     'cities' => 'Cities',
     'show_all_cities' => 'Show All Cities',
-    'cites_count' => 'Cities Count',
+    'cities_count' => 'Cities Count',
 
     'city_name' => 'City Name',
     'city_name_ar' => 'Arabic City Name',

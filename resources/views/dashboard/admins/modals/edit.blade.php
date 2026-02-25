@@ -164,6 +164,10 @@
             var admin_status = $(this).attr('admin-status');
             var admin_photo = $(this).attr('admin-photo');
 
+            // Set dynamic action URL
+            const url = "{!! route('dashboard.admins.update', 'id') !!}".replace('id', admin_id);
+            $('#update_admin_form').attr('action', url);
+
             $('#id_edit').val(admin_id);
             $('#name_ar_edit').val(admin_name_ar);
             $('#name_en_edit').val(admin_name_en);
@@ -187,8 +191,7 @@
 
         // reset
         function resetEditForm() {
-            $('#update_admin_form input, #update_admin_form select').removeClass('is-invalid');
-            $('#update_admin_form strong.text-danger').text('');
+            window.clearFormErrors('#update_admin_form');
 
             // reset password type
             if (document.getElementById('password_edit')) document.getElementById('password_edit').type = 'password';
@@ -215,68 +218,32 @@
             }
         });
 
+        window.handleFormSubmit('#update_admin_form', {
+            modalToHide: '#updateAdminModal',
+            successMessage: "{!! __('general.update_success_message') !!}",
+            suffix: '_edit',
+            resetForm: false,
+            onSuccess: function(data) {
+                $('.admin_name_section').load(location.href + ' .admin_name_section');
 
-        $('#update_admin_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const admin_id = $('#id_edit').val();
-            const data = new FormData(this);
-            const url = "{!! route('dashboard.admins.update', 'id') !!}".replace('id', admin_id);
-
-            $.ajax({
-                url: url,
-                data: data,
-                type: 'POST', // Handled as PUT by @method('PUT')
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    resetEditForm();
-                    $('.spinner_loading').removeClass('d-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        $('#responsiveTable').load(location.href + ' #responsiveTable');
-                        $('.admin_name_section').load(location.href + ' .admin_name_section');
-                        flasher.success("{!! __('general.update_success_message') !!}");
-
-                        // Sync header if it's the current user
-                        if (admin_id == "{{ admin()->user()->id }}") {
-                            if (data.data.photo) {
-                                var photoUrl = "{{ asset('uploads/adminsPhotos') }}/" + data.data.photo;
-                                $('.header_admin_photo').attr('src', photoUrl);
-                            }
-
-                            var name = data.data.name;
-                            if (typeof name === 'object' && name !== null) {
-                                name = name["{!! app()->getLocale() !!}"];
-                            }
-
-                            $('.header_admin_name').text(name);
-                            $('.header_admin_email').text(data.data.email);
-                            $('.welcome-text span').text(name);
-                        }
-
-                        $('#updateAdminModal').modal('hide');
+                const admin_id = $('#id_edit').val();
+                // Sync header if it's the current user
+                if (admin_id == "{{ admin()->user()->id }}") {
+                    if (data.data.photo) {
+                        var photoUrl = "{{ asset('uploads/adminsPhotos') }}/" + data.data.photo;
+                        $('.header_admin_photo').attr('src', photoUrl);
                     }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        let inputId = `${field}_edit`;
-                        if (key === 'photo') inputId = 'photo_edit';
 
-                        $(`#${inputId}`).addClass('is-invalid');
-                        $(`#${field}_error_edit`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
+                    var name = data.data.name;
+                    if (typeof name === 'object' && name !== null) {
+                        name = name["{!! app()->getLocale() !!}"];
+                    }
+
+                    $('.header_admin_name').text(name);
+                    $('.header_admin_email').text(data.data.email);
+                    $('.welcome-text span').text(name);
                 }
-            });
-
+            }
         });
     </script>
 @endpush

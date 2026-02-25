@@ -156,19 +156,13 @@
         // reset
         function resetCreateForm() {
             $('#create_admin_form')[0].reset();
-            $('#create_admin_form input, #create_admin_form select').removeClass('is-invalid');
-            $('#create_admin_form strong.text-danger').text('');
+            window.clearFormErrors('#create_admin_form');
 
             // default values
             if (document.getElementById('password')) document.getElementById('password').type = 'password';
             if (document.getElementById('password_confirm')) document.getElementById('password_confirm').type = 'password';
 
             $('#photo_preview_create').addClass('d-none').attr('src', '');
-        }
-
-        function clearCreateErrors() {
-            $('#create_admin_form input, #create_admin_form select').removeClass('is-invalid');
-            $('#create_admin_form strong.text-danger').text('');
         }
 
         // hide
@@ -188,45 +182,12 @@
             }
         });
 
-
-        $('#create_admin_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const data = new FormData(this);
-
-            $.ajax({
-                url: form.attr('action'),
-                data: data,
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    clearCreateErrors();
-                    $('.spinner_loading').removeClass('class', 'd-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        $('#responsiveTable').load(location.href + ' #responsiveTable');
-                        resetCreateForm();
-                        $('#createAdminModal').modal('hide');
-                        flasher.success("{!! __('general.add_success_message') !!}");
-                    }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        $(`#${field}`).addClass('is-invalid');
-                        $(`#${field}_error`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
-                }
-            });
-
+        window.handleFormSubmit('#create_admin_form', {
+            modalToHide: '#createAdminModal',
+            successMessage: "{!! __('general.add_success_message') !!}",
+            onSuccess: function() {
+                resetCreateForm();
+            }
         });
     </script>
 @endpush

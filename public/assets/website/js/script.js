@@ -55,22 +55,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 3. Initialize International Destinations Slider
-    if (document.querySelector(".internationalSwiper")) {
-        const internationalSwiper = new Swiper(".internationalSwiper", {
-            slidesPerView: 5,
-            spaceBetween: 15,
-            slidesPerGroup: 1,
+    const internationalSwiperEl = document.querySelector(
+        ".internationalSwiper",
+    );
+    if (internationalSwiperEl) {
+        // Detect direction from HTML tag
+        const swiperDirection = document.documentElement.dir || "ltr";
+
+        // Apply direction to the element if not already present
+        internationalSwiperEl.setAttribute("dir", swiperDirection);
+
+        new Swiper(".internationalSwiper", {
+            direction: "horizontal",
+            slidesPerView: 1,
+            spaceBetween: 20,
             loop: true,
-            autoHeight: false, // Ensures all slides have the same height
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
             breakpoints: {
-                320: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 },
-                1400: { slidesPerView: 5 },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
             },
         });
     }

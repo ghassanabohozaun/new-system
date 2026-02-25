@@ -16,13 +16,17 @@ return [
     'country_status' => 'حالة الدولة ',
     'phone_code' => 'كود الدولة',
     'flag_code' => 'كود العلم',
+    'flag_codes_reference' => 'مرجع أكواد الأعلام',
 
     'enter_country_name_ar' => 'ادخل اسم الدولة بالعربي',
     'enter_country_name_en' => 'ادخل اسم الدولة بالانجليزي',
     'enter_phone_code' => 'ادخل كود الدولة',
     'enter_flag_code' => 'ادخل كود العلم',
+    'search_for_country' => 'بحث عن دولة...',
+    'select_flag' => 'اختيار العلم',
 
     'no_countries_found' => 'لا يوجد دول حالياً !',
+    'country_restricted_deletion' => 'لا يمكن حذف الدولة لوجود مدن أو رحلات طيران مرتبطة بها.',
 
     // governorate
     'create_new_governorate' => 'انشاء محافظة جديدة',
@@ -46,7 +50,7 @@ return [
     'update_city' => 'تعديل المدينة',
     'cities' => 'المدن',
     'show_all_cities' => 'عرض جميع المدن',
-    'cites_count' => 'عدد المدن',
+    'cities_count' => 'عدد المدن',
 
     'city_name' => 'اسم المدينة',
     'city_name_ar' => 'اسم المدينة بالعربي',

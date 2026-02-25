@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Services\Dashboard\CityService;
-use App\Services\Dashboard\GovernorateService;
+use App\Services\Dashboard\CountryService;
 
 class DashboardController extends Controller
-{
-    protected $governorateService, $cityService;
-    public function __construct(GovernorateService $governorateService, CityService $cityService)
+{   
+    protected $cityService, $countryService;
+    public function __construct(CityService $cityService, CountryService $countryService )
     {
-        $this->governorateService = $governorateService;
         $this->cityService = $cityService;
+        $this->countryService = $countryService;
     }
 
     public function index()
@@ -24,8 +24,8 @@ class DashboardController extends Controller
     // addresses
     public function addresses()
     {
-        $governorates = $this->governorateService->getAllGovernoratesWithoutRelations();
+        $counties = $this->countryService->getAllCountriesWithoutRelations();
         $cities = $this->cityService->getAllCitiesWithoutRelation();
-        return view('dashboard.address', compact('governorates', 'cities'));
+        return view('dashboard.address', compact('counties', 'cities'));
     }
 }

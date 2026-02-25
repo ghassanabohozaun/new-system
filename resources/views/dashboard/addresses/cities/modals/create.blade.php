@@ -1,3 +1,6 @@
+@push('css')
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/select2/select2.min.css') !!}">
+@endpush
 <div class="modal fade" id="createCityModal" tabindex="-1" role="dialog" aria-labelledby="createCityModalLabel"
     aria-hidden="true">
 
@@ -37,29 +40,24 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="governorate_id">{!! __('addresses.governorate_id') !!}</label>
-                                <select class="form-select form-select-sm" id='governorate_id' name="governorate_id">
-                                    <option value="" selected="">{!! __('general.select_from_list') !!}</option>
-                                    @foreach ($governorates as $governorate)
-                                        <option value="{!! $governorate->id !!}" {!! old('governorate_id') == $governorate->id ? 'selected' : '' !!}>
-                                            {!! $governorate->name !!}
-                                        </option>
-                                    @endforeach
+                                <label for="country_id">{!! __('addresses.country_id') !!}</label>
+                                <select class="country_select2_create" id='country_id' name="country_id">
+                                    <option value=""></option>
                                 </select>
-                                <strong id="governorate_id_error" class="text-danger small"></strong>
+                                <strong id="country_id_error" class="text-danger small"></strong>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary text-white">
-                        <i class="ti-save me-1"></i> {{ __('general.save') }}
+                    <button type="submit" class="btn btn-primary btn-sm text-white">
+                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i>{{ __('general.save') }}
                         <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
                             aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                        {{ __('general.cancel') }}
+                    <button type="button" class="btn btn-light btn-sm btn-icon-text" data-bs-dismiss="modal">
+                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {{ __('general.cancel') }}
                     </button>
                 </div>
             </div>
@@ -68,58 +66,66 @@
 </div>
 
 @push('scripts')
+    <script src="{!! asset('assets/dashboard/vendors/select2/select2.min.js') !!}"></script>
+
     <script type="text/javascript">
-        function resetCityCreateForm() {
-            $('#create_city_form')[0].reset();
-            clearErrors();
-        }
-
-        function clearErrors() {
-            $('#create_city_form input, #create_city_form select').removeClass('is-invalid');
-            $('#create_city_form strong.text-danger').text('');
-        }
-
-        $('#createCityModal').on('hidden.bs.modal', function() {
-            resetCityCreateForm();
+        $(".country_select2_create").select2({
+            dropdownParent: $('#createCityModal'),
+            width: '100%',
+            minimumInputLength: 1,
+            maximumInputLength: 20,
+            placeholder: '{!! __('general.select_from_list') !!}',
+            allowClear: true,
+            templateResult: formatSelect2Country,
+            templateSelection: formatSelect2Country,
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+            language: {
+                inputTooShort: function() {
+                    return "{!! __('general.inputTooShort') !!}";
+                },
+                inputTooLong: function() {
+                    return "{!! __('general.inputTooLong') !!}";
+                },
+                errorLoading: function() {
+                    return "{!! __('general.errorLoading') !!}";
+                },
+                noResults: function() {
+                    return "<span>{!! __('general.noResults2') !!}";
+                },
+                searching: function() {
+                    return " {!! __('general.searching') !!}";
+                }
+            },
+            ajax: {
+                url: "{{ route('dashboard.addresses.countries.autocomplete.country') }}",
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: ('{!! Lang() !!}' === 'en') ? item.country_en : item
+                                    .country_ar,
+                                id: item.id,
+                                flag_code: item.flag_code
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
         });
 
-        $('#create_city_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const data = new FormData(this);
+        $('#createCityModal').on('hidden.bs.modal', function() {
+            window.clearFormErrors('#create_city_form');
+            $('#create_city_form')[0].reset();
+        });
 
-            $.ajax({
-                url: form.attr('action'),
-                data: data,
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    clearErrors();
-                    $('.spinner_loading').removeClass('d-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        $('#responsiveTable').load(location.href + ' #responsiveTable');
-                        $('#createCityModal').modal('hide');
-                        resetCityCreateForm();
-                        flasher.success("{!! __('general.add_success_message') !!}");
-                    }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        $(`#${field}`).addClass('is-invalid');
-                        $(`#${field}_error`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
-                }
-            });
+        window.handleFormSubmit('#create_city_form', {
+            modalToHide: '#createCityModal',
+            successMessage: "{!! __('general.add_success_message') !!}"
         });
     </script>
 @endpush

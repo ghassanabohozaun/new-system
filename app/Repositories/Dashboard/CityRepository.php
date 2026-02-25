@@ -27,7 +27,7 @@ class CityRepository
             $query->where('name', 'like', '%' . request()->keyword . '%');
         })
             ->orderByDesc('id')
-            ->select('id', 'name', 'governorate_id')
+            ->select('id', 'name', 'country_id')
             ->paginate(10);
         return $cities;
     }
@@ -48,7 +48,7 @@ class CityRepository
                 'en' => $request->name['en'],
                 'ar' => $request->name['ar'],
             ],
-            'governorate_id' => $request->governorate_id,
+            'country_id' => $request->country_id,
         ]);
         return $city;
     }
@@ -62,7 +62,7 @@ class CityRepository
                 'en' => $request->name['en'],
                 'ar' => $request->name['ar'],
             ],
-            'governorate_id' => $request->governorate_id,
+            'country_id' => $request->country_id,
         ]);
 
         return $city;

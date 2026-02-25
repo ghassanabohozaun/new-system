@@ -1,0 +1,200 @@
+/* - NEQAT "SYSTEM REPAIR" 500 MASTERPIECE */
+:root {
+    --nq-navy: #0a1128;
+    --nq-gold: #d4a34d;
+    --nq-white: #ffffff;
+    --nq-pearl: #f8fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    overflow: hidden;
+    background: var(--nq-white);
+    color: var(--nq-navy);
+}
+
+/* --- 1. THE REPAIR STAGE --- */
+.repair-stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #ffffff 0%, var(--nq-pearl) 100%);
+}
+
+#repairCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* --- 2. THE SYSTEM CARD (Luxury Glass) --- */
+.system-card {
+    position: relative;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 40px;
+    padding: 70px 60px;
+    border: 2px solid var(--nq-navy);
+    box-shadow: 0 50px 120px rgba(10, 17, 40, 0.1);
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    transform-style: preserve-3d;
+    animation: cardFadeIn 1.2s cubic-bezier(0.17, 0.88, 0.32, 1.28);
+}
+
+/* High-Contrast 500 Code */
+.error-code-500 {
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    font-weight: 900;
+    line-height: 0.8;
+    margin-bottom: 25px;
+    background: linear-gradient(to bottom, var(--nq-navy) 40%, var(--nq-gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 15px 30px rgba(10, 17, 40, 0.2));
+    letter-spacing: -5px;
+    transform: translateZ(80px);
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 30px;
+    background: var(--nq-navy);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 35px;
+    border: 1.5px solid var(--nq-gold);
+    transform: translateZ(50px);
+}
+
+/* Blinking "Live" Dot */
+.blink-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff4d4d;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+/* Typography */
+.title-pro {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: var(--nq-navy);
+    margin-bottom: 20px;
+    transform: translateZ(40px);
+}
+
+.desc-pro {
+    font-size: 1.15rem;
+    color: #475569;
+    font-weight: 700;
+    line-height: 1.8;
+    margin-bottom: 45px;
+    transform: translateZ(30px);
+}
+
+/* Action Buttons */
+.btn-group-pro {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    transform: translateZ(60px);
+}
+
+.btn-refresh {
+    background: var(--nq-navy);
+    color: #fff;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.4s;
+    border-bottom: 5px solid var(--nq-gold);
+}
+
+.btn-refresh:hover {
+    background: var(--nq-gold);
+    color: var(--nq-navy);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(212, 163, 77, 0.4);
+}
+
+.btn-support {
+    background: transparent;
+    color: var(--nq-navy);
+    border: 2px solid var(--nq-navy);
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-support:hover {
+    background: rgba(10, 17, 40, 0.05);
+}
+
+/* Animations */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 768px) {
+    .error-code-500 {
+        font-size: 7rem;
+    }
+
+    .btn-group-pro {
+        flex-direction: column;
+    }
+
+    .system-card {
+        padding: 40px 20px;
+    }
+}

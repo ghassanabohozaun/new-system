@@ -27,7 +27,7 @@ class CountryRequest extends FormRequest
             'name.*' => ['required', 'string', 'min:5', 'max:100', UniqueTranslationRule::for('countries')->ignore($this->id)],
             'phone_code' => ['required', 'string', 'min:2', 'max:10', Rule::unique('countries', 'phone_code')->ignore($this->id)],
             'flag_code' => ['required', 'string', 'min:2'],
-            'status' => ['in:on,off'],
+            'status' => ['in:1,0'],
         ];
     }
 }

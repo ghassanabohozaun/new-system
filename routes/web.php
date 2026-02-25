@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -10,12 +11,13 @@ Route::group(
     ],
     function () {
         ###################################### home  ##################################################################
-        Route::get('/home', function () {
-            return view('layouts.website.app');
-        })
+        /// any
+        Route::get('', [HomeController::class, 'index'])
             ->where(['any' => '.*'])
-            ->name('home');
-
+            ->name('index');
+        Route::get('/index', [HomeController::class, 'index'])->name('index');
+        Route::get('/home', [HomeController::class, 'index'])->name('index');
         ###################################### routes  ##################################################################
     },
+    
 );

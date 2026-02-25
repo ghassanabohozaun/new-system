@@ -93,48 +93,14 @@
 
 @push('scripts')
     <script type="text/javascript">
-        function clearErrors() {
-            $('#role_form input').removeClass('is-invalid');
-            $('#role_form strong.text-danger').text('');
-        }
-
-        $('#role_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const data = new FormData(this);
-
-            $.ajax({
-                url: form.attr('action'),
-                data: data,
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    clearErrors();
-                    $('.spinner_loading').removeClass('d-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        flasher.success("{!! __('general.update_success_message') !!}");
-                        setTimeout(() => {
-                            window.location.href = "{!! route('dashboard.roles.index') !!}";
-                        }, 1000);
-                    }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        $(`#${field}`).addClass('is-invalid');
-                        $(`#${field}_error`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
-                }
-            });
+        window.handleFormSubmit('#role_form', {
+            successMessage: "{!! __('general.update_success_message') !!}",
+            resetForm: false,
+            onSuccess: function(data) {
+                setTimeout(() => {
+                    window.location.href = "{!! route('dashboard.roles.index') !!}";
+                }, 1000);
+            }
         });
     </script>
 @endpush

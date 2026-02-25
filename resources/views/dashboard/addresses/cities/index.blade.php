@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td>{!! $loop->iteration !!}</td>
                                                 <td>{!! $city->name !!}</td>
-                                                <td class="d-none d-md-table-cell">{!! $city->governorate->name !!}</td>
+                                                <td class="d-none d-md-table-cell">{!! $city->country->name !!}</td>
                                                 <td class="text-center">
                                                     @include('dashboard.addresses.cities.parts.actions')
                                                 </td>

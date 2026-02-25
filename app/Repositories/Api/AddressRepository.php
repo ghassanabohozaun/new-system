@@ -22,10 +22,10 @@ class AddressRepository
     }
 
     //get cities
-    public function getCities($governorate_id)
+    public function getCities($country_id)
     {
-        $governorate = Governorate::find($governorate_id);
-        $cities = $governorate->cities()->get();
+        $country = Country::find($country_id);
+        $cities = $country->cities()->get();
         return $cities;
     }
 }

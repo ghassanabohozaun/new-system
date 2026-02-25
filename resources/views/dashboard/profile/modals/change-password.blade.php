@@ -77,9 +77,9 @@
             if (document.getElementById('password_confirm')) document.getElementById('password_confirm').type = 'password';
         }
 
-        function clearChangePasswordErrors() {
-            $('#change_passowrd_form input, #change_passowrd_form select').removeClass('is-invalid');
-            $('#change_passowrd_form strong.text-danger').text('');
+        function resetChangePasswordForm() {
+            $('#change_passowrd_form')[0].reset();
+            window.clearFormErrors('#change_passowrd_form');
         }
 
         // hide
@@ -88,43 +88,12 @@
         });
 
 
-        $('#change_passowrd_form').on('submit', function(e) {
-            e.preventDefault();
-            const form = $(this);
-            const data = new FormData(this);
-
-            $.ajax({
-                url: form.attr('action'),
-                data: data,
-                type: 'POST',
-                dataType: 'json',
-                cache: false,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    clearChangePasswordErrors();
-                    $('.spinner_loading').removeClass('class', 'd-none');
-                },
-                success: function(data) {
-                    if (data.status) {
-                        resetChangePasswordForm();
-                        $('#changePasswordModal').modal('hide');
-                        flasher.success("{!! __('general.update_success_message') !!}");
-                    }
-                },
-                error: function(xhr) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, value) {
-                        const field = key.replace(/\./g, '_');
-                        $(`#${field}`).addClass('is-invalid');
-                        $(`#${field}_error`).text(value[0]);
-                    });
-                },
-                complete: function() {
-                    $('.spinner_loading').addClass('d-none');
-                }
-            });
-
+        window.handleFormSubmit('#change_passowrd_form', {
+            modalToHide: '#changePasswordModal',
+            successMessage: "{!! __('general.update_success_message') !!}",
+            onSuccess: function() {
+                resetChangePasswordForm();
+            }
         });
     </script>
 @endpush
