@@ -3107,7 +3107,10 @@ html[dir="ltr"] .active-indicator {
 
 /* LTR Mode - We forced row-reverse so English text is still on left */
 html[dir="ltr"] .noqat-lang-pill.is-english .active-indicator {
-  transform: translateX(100%); /* Moves bubble right towards LTR's actual starting left side */
+  /* Override the transform and move right via explicit property to overlay English correctly */
+  transform: none;
+  left: 4px !important;
+  right: auto !important;
 }
 
 /* --- Inner Elements Styling --- */
