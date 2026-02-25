@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title') </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{!! asset('assets/website/css/bootstrap.rtl.min.css') !!}">
+    @if (app()->getLocale() == 'ar')
+        <link rel="stylesheet" href="{!! asset('assets/website/css/bootstrap.rtl.min.css') !!}">
+    @else
+        <link rel="stylesheet" href="{!! asset('assets/website/css/bootstrap.min.css') !!}">
+    @endif
     <link rel="stylesheet" href="{!! asset('assets/website/css/fonts.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/website/css/bootstrap-icons.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/website/css/swiper-bundle.min.css') !!}">
@@ -799,6 +803,42 @@
     <script src="{!! asset('assets/website/js/bootstrap.bundle.min.js') !!}"></script>
     <script src="{!! asset('assets/website/js/swiper-bundle.min.js') !!}"></script>
     <script src="{!! asset('assets/website/js/script.js') !!}"></script>
+
+    <!-- Configure Swiper Layout Dynamically based on server locale -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var swiperDirection = "{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}";
+
+            var internationalSwiper = new Swiper(".internationalSwiper", {
+                direction: 'horizontal',
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30
+                    },
+                }
+            });
+
+            // Set direction property onto the swiper wrapper element natively for swiper to pick up CSS translations
+            document.querySelector(".internationalSwiper").setAttribute("dir", swiperDirection);
+        });
+    </script>
+
     @stack('js')
 </body>
 
