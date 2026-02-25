@@ -3415,7 +3415,7 @@ html[dir="ltr"] .noqat-lang-pill.is-english .active-indicator {
   background: transparent;
   font-weight: 600;
   color: #1b3651;
-  padding-right: 15px;
+  padding: 0 15px;
 }
 
 /* --- Luxury Subscribe Button --- */
@@ -3440,7 +3440,14 @@ html[dir="ltr"] .noqat-lang-pill.is-english .active-indicator {
 .fly-icon-parent {
   display: inline-block; /* Required to enable animation */
   transition: all 0.4s ease;
+}
+
+html[dir="rtl"] .fly-icon-parent {
   transform: scaleX(-1); /* Flip icon to the left in Arabic */
+}
+
+html[dir="ltr"] .fly-icon-parent {
+  transform: none; /* Keep icon facing right in English */
 }
 
 /* Slight icon vibration (Like an airplane engine) */
@@ -3449,9 +3456,14 @@ html[dir="ltr"] .noqat-lang-pill.is-english .active-indicator {
   animation: softEngine 3s infinite ease-in-out;
 }
 
-.news-submit-btn:hover .fly-icon-parent {
+html[dir="rtl"] .news-submit-btn:hover .fly-icon-parent {
   /* Jump forward (Left) & slightly up on Hover */
   transform: scaleX(-1) translate(10px, -5px) rotate(-15deg);
+}
+
+html[dir="ltr"] .news-submit-btn:hover .fly-icon-parent {
+  /* Jump forward (Right) & slightly up on Hover */
+  transform: translate(10px, -5px) rotate(15deg);
 }
 
 @keyframes softEngine {

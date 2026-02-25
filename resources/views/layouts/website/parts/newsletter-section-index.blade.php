@@ -12,8 +12,7 @@
              </div>
 
              <div class="col-lg-5">
-                 <div class="newsletter-premium-box d-flex align-items-center p-1 bg-white" id="newsletterWrapper"
-                     dir="rtl">
+                 <div class="newsletter-premium-box d-flex align-items-center p-1 bg-white" id="newsletterWrapper">
 
                      <input type="email" class="form-control border-0 shadow-none news-input-field text-start"
                          placeholder="أدخل بريدك الإلكتروني للاشتراك">

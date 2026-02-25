@@ -567,31 +567,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const langPill = document.getElementById("luxuryLangToggle");
-
-    if (langPill) {
-        langPill.addEventListener("click", function (e) {
-            // Find closest anchor tag inside the pill that was clicked
-            const link = e.target.closest("a");
-            if (!link) return;
-
-            e.preventDefault(); // Prevent immediate jump so animation can play
-
-            // 1. Toggle animation class on container just for the visual effect
-            if (link.classList.contains("en-item")) {
-                this.classList.add("is-english");
-            } else {
-                this.classList.remove("is-english");
-            }
-
-            // 2. Follow the href smoothly after a micro-delay to let the CSS toggle trigger
-            setTimeout(() => {
-                window.location.href = link.href;
-            }, 150);
-        });
-    }
-});
+// Language Pill toggle JS logic removed cleanly because it conflicted with Laravel's native anchor tag routing structure and produced visual bugs. The transition is now fully handled natively by Blade and CSS rules.
 
 document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".kinetic-card");
@@ -643,11 +619,13 @@ document.addEventListener("DOMContentLoaded", () => {
         subBtn.addEventListener("click", function (e) {
             e.preventDefault();
 
-            // 1. The icon "flies" to the left and disappears
+            const dirScale =
+                document.documentElement.dir === "rtl" ? "-1" : "1";
+
+            // 1. The icon "flies" directionally and disappears
             flyWrapper.style.transition =
                 "all 0.8s cubic-bezier(0.47, 0, 0.745, 0.715)";
-            flyWrapper.style.transform =
-                "scaleX(-1) translate(200px, -100px) scale(0)";
+            flyWrapper.style.transform = `scaleX(${dirScale}) translate(200px, -100px) scale(0)`;
             flyWrapper.style.opacity = "0";
 
             // 2. The text changes smoothly
@@ -663,14 +641,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // 3. Reset after 3 seconds
             setTimeout(() => {
                 flyWrapper.style.transition = "none";
-                flyWrapper.style.transform =
-                    "scaleX(-1) translate(-50px, 50px) scale(0)";
+                flyWrapper.style.transform = `scaleX(${dirScale}) translate(-50px, 50px) scale(0)`;
 
                 setTimeout(() => {
                     flyWrapper.style.transition =
                         "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-                    flyWrapper.style.transform =
-                        "scaleX(-1) translate(0, 0) scale(1)";
+                    flyWrapper.style.transform = `scaleX(${dirScale}) translate(0, 0) scale(1)`;
                     flyWrapper.style.opacity = "1";
                     btnSpan.innerText = "Subscribe";
                     subBtn.style.background = "";
