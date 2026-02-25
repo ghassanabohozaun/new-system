@@ -569,7 +569,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const langPill = document.getElementById("luxuryLangToggle");
-    // JS Disabled so the a href link can act normally via LaravelLocalization
+
+    if (langPill) {
+        langPill.addEventListener("click", function (e) {
+            // Find closest anchor tag inside the pill that was clicked
+            const link = e.target.closest("a");
+            if (!link) return;
+
+            e.preventDefault(); // Prevent immediate jump so animation can play
+
+            // 1. Toggle animation class on container
+            this.classList.toggle("is-english");
+
+            const arItem = this.querySelector(".ar-item");
+            const enItem = this.querySelector(".en-item");
+
+            // 2. Update active class based on the presence of is-english
+            if (this.classList.contains("is-english")) {
+                arItem.classList.remove("active");
+                enItem.classList.add("active");
+            } else {
+                enItem.classList.remove("active");
+                arItem.classList.add("active");
+            }
+
+            // 3. Follow the href smoothly after a micro-delay to let the CSS toggle trigger
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 150);
+        });
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
