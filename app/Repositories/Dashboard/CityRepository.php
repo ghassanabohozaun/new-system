@@ -3,9 +3,12 @@
 namespace App\Repositories\Dashboard;
 
 use App\Models\City;
+use App\Traits\QueryTrait;
 
 class CityRepository
 {
+    use QueryTrait;
+
     /**
      * Create a new class instance.
      */
@@ -23,15 +26,17 @@ class CityRepository
     // get cities
     public function getCities()
     {
-        $cities = City::when(!empty(request()->keyword), function ($query) {
-            $query->where('name', 'like', '%' . request()->keyword . '%');
-        })
-            ->orderByDesc('id')
+        $cities = City::orderByDesc('id')
             ->select('id', 'name', 'country_id')
             ->paginate(10);
         return $cities;
     }
 
+    // get active cities
+    public function getActiveCities()
+    {
+        return City::where('status', 1)->get();
+    }
 
     // get cities without Relations
     public function getAllCitiesWithoutRelation()
@@ -76,9 +81,29 @@ class CityRepository
     // change status
     public function changeStatus($city, $status)
     {
-        $city = $city->update([
+        $city->update([
             'status' => $status,
         ]);
         return $city;
+    }
+
+    // autocomplete city
+    public function autocompleteCity($searchValue, $countryId = null)
+    {
+        return $this->genericSearch(
+            City::class,
+            $searchValue,
+            ['name->en', 'name->ar'],
+            ['name->en as city_en', 'name->ar as city_ar', 'id'],
+            function ($query) use ($countryId, $searchValue) {
+                if ($countryId) {
+                    $query->where('country_id', $countryId);
+                } elseif (empty($searchValue)) {
+                    // If no country is selected and the user hasn't typed anything yet,
+                    // keep the list empty.
+                    $query->whereRaw('1 = 0');
+                }
+            }
+        );
     }
 }

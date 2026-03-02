@@ -11,6 +11,6 @@ return [
     'enter_role_ar' => 'Enter Arabic Role Name',
     'enter_role_en' => 'Enter English Role Name',
     'permissions' => 'Permissions',
-    'no_roles_found' => 'No Roles Found !',
+    'no_roles_found' => 'No Roles Found',
     'role_have_admins' => 'Sorry , can not be able to delete role because  have Admins',
 ];

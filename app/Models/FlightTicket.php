@@ -17,7 +17,7 @@ class FlightTicket extends Model
     public array $translatable = ['title', 'details'];
 
     // relations
-    public function formCountry()
+    public function fromCountry()
     {
         return $this->belongsTo(Country::class, 'from_country_id');
     }

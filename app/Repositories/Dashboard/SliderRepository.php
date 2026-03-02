@@ -36,11 +36,11 @@ class SliderRepository
         return $slider->forceDelete();
     }
 
-    // update change status slider
     public function changeStatus($slider, $status)
     {
-        return $slider->update([
+        $slider->update([
             'status' => $status,
         ]);
+        return $slider;
     }
 }

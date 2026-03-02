@@ -73,4 +73,6 @@ return [
     'unlock' => 'UNLOCK',
     'sign_in_different_account' => 'Sign in using a different account',
     'unlock_success' => 'Verified successfully! Redirecting...',
+    'enter_new_password' => 'Enter New Password',
+    'confirm_new_password' => 'Confirm New Password',
 ];

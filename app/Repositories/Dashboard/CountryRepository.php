@@ -18,10 +18,7 @@ class CountryRepository
     public function getCountries()
     {
         return Country::withCount(['cities'])
-            ->when(!empty(request()->keyword), function ($query) {
-                $query->where('name', 'like', '%' . request()->keyword . '%');
-            })
-            ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->paginate(10);
     }
 
@@ -65,7 +62,7 @@ class CountryRepository
         return $country;
     }
 
-   // change status
+    // change status
 
     public function changeStatusCountry($country, $status)
     {
@@ -74,16 +71,9 @@ class CountryRepository
         ]);
     }
 
-
     // autocomplete country
     public function autocompleteCountry($searchValue)
     {
-        return $this->genericSearch(
-            Country::class,
-            $searchValue,
-            ['name->en', 'name->ar'],
-            ['name->en as country_en', 'name->ar as country_ar', 'id', 'flag_code'],
-            fn($q) => $q->active()
-        );
+        return $this->genericSearch(Country::class, $searchValue, ['name->en', 'name->ar'], ['name->en as country_en', 'name->ar as country_ar', 'id', 'flag_code'], fn($q) => $q->active());
     }
 }

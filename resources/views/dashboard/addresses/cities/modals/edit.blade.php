@@ -21,31 +21,41 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_ar_edit">{!! __('addresses.city_name_ar') !!}</label>
-                                <input type="text" id="name_ar_edit" name="name[ar]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_city_name_ar') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_ar_edit" class="form-label-premium">{!! __('addresses.city_name_ar') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_ar_edit" name="name[ar]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_city_name_ar') !!}">
+                                </div>
                                 <strong id="name_ar_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_en_edit">{!! __('addresses.city_name_en') !!}</label>
-                                <input type="text" id="name_en_edit" name="name[en]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_city_name_en') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_en_edit" class="form-label-premium">{!! __('addresses.city_name_en') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_en_edit" name="name[en]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_city_name_en') !!}">
+                                </div>
                                 <strong id="name_en_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="country_id_edit">{!! __('addresses.country_id') !!}</label>
-                                <select class="country_select2_edit" id='country_id_edit' name="country_id">
-                                    <option value=""></option>
-                                </select>
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="country_id_edit" class="form-label-premium">{!! __('addresses.country_id') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-earth"></i></span>
+                                    <select class="country_select2_edit" id='country_id_edit' name="country_id">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
                                 <strong id="country_id_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
@@ -53,72 +63,26 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary text-white btn-sm">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                        &nbsp;
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
             </div>
         </form>
     </div>
 </div>
 
+<!-- Floating Command HUD -->
+<x-dashboard.command-hud formId="update_city_form" hudId="update_city_hud" countId="update_city_count"
+    discardId="update_city_discard" submitId="update_city_save" />
+
 @push('scripts')
     <script src="{!! asset('assets/dashboard/vendors/select2/select2.min.js') !!}"></script>
 
     <script type="text/javascript">
-        $(".country_select2_edit").select2({
-            dropdownParent: $('#updateCityModal'),
-            width: '100%',
-            minimumInputLength: 1,
-            maximumInputLength: 20,
-            placeholder: '{!! __('general.select_from_list') !!}',
-            allowClear: true,
-            templateResult: formatSelect2Country,
-            templateSelection: formatSelect2Country,
-            escapeMarkup: function(markup) {
-                return markup;
-            },
-            language: {
-                inputTooShort: function() {
-                    return "{!! __('general.inputTooShort') !!}";
-                },
-                inputTooLong: function() {
-                    return "{!! __('general.inputTooLong') !!}";
-                },
-                errorLoading: function() {
-                    return "{!! __('general.errorLoading') !!}";
-                },
-                noResults: function() {
-                    return "<span>{!! __('general.noResults2') !!}";
-                },
-                searching: function() {
-                    return " {!! __('general.searching') !!}";
-                }
-            },
-            ajax: {
-                url: "{{ route('dashboard.addresses.countries.autocomplete.country') }}",
-                dataType: 'json',
-                delay: 250,
-                processResults: function(data) {
-                    return {
-                        results: $.map(data, function(item) {
-                            return {
-                                text: ('{!! Lang() !!}' === 'en') ? item.country_en : item
-                                    .country_ar,
-                                id: item.id,
-                                flag_code: item.flag_code
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
+        window.initSelect2Autocomplete(".country_select2_edit", {
+            url: "{{ route('dashboard.addresses.countries.autocomplete.country') }}",
+            showFlag: true,
+            dropdownParent: $('#updateCityModal')
         });
 
         // show edit modal
@@ -152,10 +116,22 @@
             }
 
             $('#updateCityModal').modal('show');
+            if (window.activeHud) window.activeHud.changedFields.clear();
+            initHud('update_city_form', {
+                hudId: 'update_city_hud',
+                countId: 'update_city_count',
+                discardId: 'update_city_discard',
+                submitId: 'update_city_save'
+            });
         });
 
         $('#updateCityModal').on('hidden.bs.modal', function() {
             window.clearFormErrors('#update_city_form');
+        });
+
+        // Ensure HUD slides down smoothly when modal starts closing
+        $('#updateCityModal').on('hide.bs.modal', function() {
+            $('#update_city_hud').removeClass('visible');
         });
 
         window.handleFormSubmit('#update_city_form', {

@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use PHPUnit\Framework\Attributes\Ticket;
+use App\Traits\QueryTrait;
+use Astrotomic\Translatable\Translatable;
 
 class Reservation extends Model
 {
-    use HasFactory;
-
+    use HasFactory, QueryTrait;
     protected $table = 'reservations';
     protected $fillable = ['flight_id', 'service', 'client_name', 'client_mobile', 'client_email',
     'client_passport_number', 'number_of_adult', 'number_of_children', 'number_of_babies', 'nationality', 'depature_country_id',
@@ -60,14 +61,20 @@ class Reservation extends Model
     }
 
     //scopes
-    public function scopeActive($query)
+    public function scopeSearch($query, $search_word)
     {
-        return $query->where('status', 1);
+        return $query->where(function ($q) use ($search_word) {
+            $q->where('client_name', 'like', "%{$search_word}%")
+              ->orWhere('client_mobile', 'like', "%{$search_word}%")
+              ->orWhere('client_email', 'like', "%{$search_word}%")
+              ->orWhere('client_passport_number', 'like', "%{$search_word}%")
+              ->orWhere('nationality', 'like', "%{$search_word}%")
+              ->orWhereHas('flight', function($q) use ($search_word) {
+                  $q->where('name', 'like', "%{$search_word}%");
+              });
+        });
     }
-    public function scopeInactive($query)
-    {
-        return $query->where('status', 0);
-    }
+
     // accessories
     public function getCreatedAtAttribute($value)
     {

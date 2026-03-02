@@ -16,49 +16,59 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_ar">{!! __('addresses.country_name_ar') !!}</label>
-                                <input type="text" id="name_ar" name="name[ar]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_country_name_ar') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_ar" class="form-label-premium">{!! __('addresses.country_name_ar') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_ar" name="name[ar]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_country_name_ar') !!}">
+                                </div>
                                 <strong id="name_ar_error" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_en">{!! __('addresses.country_name_en') !!}</label>
-                                <input type="text" id="name_en" name="name[en]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_country_name_en') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_en" class="form-label-premium">{!! __('addresses.country_name_en') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_en" name="name[en]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_country_name_en') !!}">
+                                </div>
                                 <strong id="name_en_error" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="code">{!! __('addresses.phone_code') !!}</label>
-                                <input type="text" id="phone_code" name="phone_code"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_phone_code') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="phone_code" class="form-label-premium">{!! __('addresses.phone_code') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-phone"></i></span>
+                                    <input type="text" id="phone_code" name="phone_code" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_phone_code') !!}">
+                                </div>
                                 <strong id="phone_code_error" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="flag_code">{!! __('addresses.flag_code') !!}</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-white border-end-0">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="flag_code" class="form-label-premium">{!! __('addresses.flag_code') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text">
                                         <span id="flag_preview" class="flag-icon flag-icon-default shadow-sm rounded-1"
                                             style="width: 20px; height: 15px;"></span>
                                     </span>
                                     <input type="text" id="flag_code" name="flag_code"
-                                        class="form-control form-control-sm border-start-0 border-end-0 bg-white open-flags-reference"
-                                        readonly autocomplete="off" placeholder="{!! __('addresses.select_flag_code') !!}"
-                                        style="cursor: pointer;" data-target-input="flag_code">
-                                    <span class="input-group-text bg-white border-start-0 open-flags-reference"
-                                        style="cursor: pointer;" data-target-input="flag_code">
+                                        class="form-control open-flags-reference" readonly autocomplete="off"
+                                        placeholder="{!! __('addresses.select_flag_code') !!}" style="cursor: pointer;"
+                                        data-target-input="flag_code">
+                                    <span class="input-group-text open-flags-reference" style="cursor: pointer;"
+                                        data-target-input="flag_code">
                                         <i class="ti-mouse-alt text-muted"></i>
                                     </span>
                                 </div>
@@ -66,47 +76,35 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>{!! __('addresses.status') !!}</label>
-                                    <div class="d-flex gap-3 mt-2">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="status"
-                                                    id="status_active" value="1" checked>
-                                                {!! __('general.active') !!}
-                                                <i class="input-helper"></i></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="status"
-                                                    id="status_inactive" value="0">
-                                                {!! __('general.inactive') !!}
-                                                <i class="input-helper"></i></label>
+
+                        <div class="col-md-12">
+                            <div class="form-group mb-2 theme-success">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="status_active">{!! __('addresses.status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="status"
+                                                id="status_active" value="1" checked>
                                         </div>
                                     </div>
-                                    <strong id="status_error" class="text-danger small"></strong>
                                 </div>
+                                <strong id="status_error" class="text-danger small"></strong>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-primary text-white">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                        &nbsp;
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
+                <!-- Floating Command HUD -->
+                <x-dashboard.command-hud formId="create_country_form" hudId="create_country_hud"
+                    countId="create_country_count" discardId="create_country_discard"
+                    submitId="create_country_save" />
             </div>
         </form>
     </div>
@@ -132,7 +130,20 @@
 
         window.handleFormSubmit('#create_country_form', {
             modalToHide: '#createCountryModal',
-            successMessage: "{!! __('general.add_success_message') !!}"
+            successMessage: "{!! __('general.add_success_message') !!}",
+            onSuccess: function() {
+                if (window.activeHud) window.activeHud.changedFields.clear(); // Clear tracking on success
+            }
+        });
+
+        // Initialize HUD when modal opens
+        $('#createCountryModal').on('shown.bs.modal', function() {
+            initHud('create_country_form', {
+                hudId: 'create_country_hud',
+                countId: 'create_country_count',
+                discardId: 'create_country_discard',
+                submitId: 'create_country_save'
+            });
         });
     </script>
 @endpush

@@ -18,6 +18,12 @@ class PageRepository
         return Page::latest()->get();
     }
 
+    // get pages paginated
+    public function getPagesPaginated($perPage = 10)
+    {
+        return Page::latest()->paginate($perPage);
+    }
+
     // store page
     public function store($data)
     {
@@ -36,19 +42,13 @@ class PageRepository
         return $page->forceDelete();
     }
 
-    // change status
     public function changeStatus($page, $status)
     {
-        return $page->update([
+        $page->update([
             'status' => $status,
         ]);
+        return $page;
     }
 
-    // delete photo
-    public function deletePhoto($page)
-    {
-        return $page->update([
-            'photo' => '',
-        ]);
-    }
+
 }

@@ -21,13 +21,19 @@
                         </nav>
 
                     </div>
-                    <!--------------------  End Breadcrumb  ---------------------------->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4 d-flex align-items-center">
+                                <span class="card-icon-premium me-3">
+                                    <i class="mdi mdi-clipboard-text-outline"></i>
+                                </span>
+                                {!! __('dashboard.tasks') !!}
+                            </h4>
+                            @livewire('tasks.todo-list')
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-            @livewire('tasks.todo-list')
-
         </div>
     </div>
 @endsection

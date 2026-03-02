@@ -16,10 +16,15 @@ class SlidersController extends Controller
         $this->sliderService = $sliderService;
     }
     // index
-    public function index()
+    public function index(Request $request)
     {
         $title = __('sliders.sliders');
         $sliders = $this->sliderService->getSliders();
+
+        if ($request->ajax()) {
+            return view('dashboard.sliders.partials._table', compact('sliders'))->render();
+        }
+
         return view('dashboard.sliders.index', compact('title', 'sliders'));
     }
 
@@ -74,13 +79,11 @@ class SlidersController extends Controller
     // destroy
     public function destroy(Request $request)
     {
-        if ($request->ajax()) {
-            $slider = $this->sliderService->destroySlider($request->id);
-            if (!$slider) {
-                return response()->json(['status' => false], 500);
-            }
-            return response()->json(['status' => true], 201);
+        $slider = $this->sliderService->destroySlider($request->id);
+        if (!$slider) {
+            return response()->json(['status' => false], 500);
         }
+        return response()->json(['status' => true], 200);
     }
 
     // changeStatus
@@ -90,7 +93,6 @@ class SlidersController extends Controller
         if (!$slider) {
             return response()->json(['status' => false], 500);
         }
-        $slider = $this->sliderService->getSlider($request->id);
-        return response()->json(['status' => true, 'data' => $slider], 201);
+        return response()->json(['status' => true, 'data' => $slider], 200);
     }
 }

@@ -174,6 +174,17 @@ return [
             'required_without' => 'تأكيد كلمة المرور مطلوب',
             'same' => 'كلمتا المرور غير متطابقتين',
         ],
+        'servicesItems.*.service_name_ar' => ['required' => 'اسم الخدمة (عربي) في الصف رقم :position مطلوب'],
+        'servicesItems.*.service_name_en' => ['required' => 'اسم الخدمة (انجليزي) في الصف رقم :position مطلوب'],
+        'pricesItems.*.price_text_ar' => ['required' => 'نص السعر (عربي) في الصف رقم :position مطلوب'],
+        'pricesItems.*.price_text_en' => ['required' => 'نص السعر (انجليزي) في الصف رقم :position مطلوب'],
+        'pricesItems.*.price' => ['required' => 'السعر في الصف رقم :position مطلوب'],
+        'notesItems.*.note_text_ar' => ['required' => 'الملاحظة (عربي) في الصف رقم :position مطلوبة'],
+        'notesItems.*.note_text_en' => ['required' => 'الملاحظة (انجليزي) في الصف رقم :position مطلوبة'],
+        'offerIncludingItems.*.including_text_ar' => ['required' => 'ما يشمله العرض (عربي) في الصف رقم :position مطلوب'],
+        'offerIncludingItems.*.including_text_en' => ['required' => 'ما يشمله العرض (انجليزي) في الصف رقم :position مطلوب'],
+        'offerNotIncludingItems.*.not_including_text_ar' => ['required' => 'ما لا يشمله العرض (عربي) في الصف رقم :position مطلوب'],
+        'offerNotIncludingItems.*.not_including_text_en' => ['required' => 'ما لا يشمله العرض (انجليزي) في الصف رقم :position مطلوب'],
     ],
 
     /*
@@ -257,6 +268,8 @@ return [
         'details.en' => 'التفاصيل بالانجليزي',
         'url.ar' => 'الرابط بالعربي',
         'url.en' => 'الرابط بالانجليزي',
+        'tour_guide_name.ar' => 'اسم المرشد السياحي بالعربي',
+        'tour_guide_name.en' => 'اسم المرشد السياحي بالانجليزي',
         'subject' => 'العنوان',
         'message' => 'الرسالة',
 

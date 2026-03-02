@@ -19,10 +19,15 @@ class CountriesController extends Controller
     }
 
     // index
-    public function index()
+    public function index(Request $request)
     {
         $title = __('addresses.countries');
         $countries = $this->countryService->getCountries();
+
+        if ($request->ajax()) {
+            return view('dashboard.addresses.countries.partials._table', compact('countries'))->render();
+        }
+
         return view('dashboard.addresses.countries.index', compact('title', 'countries'));
     }
 
@@ -49,7 +54,7 @@ class CountriesController extends Controller
         if (!$country) {
             return response()->json(['status' => false], 500);
         }
-        return response()->json(['status' => true, 'data' => $country], 201);
+        return response()->json(['status' => true, 'data' => $country], 200);
     }
 
     //show
@@ -116,17 +121,14 @@ class CountriesController extends Controller
             return response()->json(['status' => false], 500);
         }
         $country = $this->countryService->getCountry($request->id);
-        return response()->json(['status' => true, 'data'=>$country], 201);
+        return response()->json(['status' => true, 'data' => $country], 200);
     }
 
 
     // autocomplete Country
     public function autocompleteCountry(Request $request)
     {
-        $data = [];
-        if ($request->filled('q')) {
-            $data = $this->countryService->autocompleteCountry($request->get('q'));
-        }
+        $data = $this->countryService->autocompleteCountry($request->get('q'));
         return response()->json($data);
     }
 }

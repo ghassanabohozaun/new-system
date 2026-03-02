@@ -2,7 +2,7 @@
 
 namespace App\Services\Dashboard;
 
-use App\Repositories\Dashboard\AdminReporitoy;
+use App\Repositories\Dashboard\AdminRepository;
 use App\Utils\ImageManagerUtils;
 use Illuminate\Support\Facades\Cache;
 
@@ -12,19 +12,19 @@ class AdminService
      * Create a new class instance.
      */
 
-    protected $adminReporitoy, $imageManagerUtils;
+    protected $adminRepository, $imageManagerUtils;
 
     // __construct
-    public function __construct(AdminReporitoy $adminReporitoy, ImageManagerUtils $imageManagerUtils)
+    public function __construct(AdminRepository $adminRepository, ImageManagerUtils $imageManagerUtils)
     {
-        $this->adminReporitoy = $adminReporitoy;
+        $this->adminRepository = $adminRepository;
         $this->imageManagerUtils = $imageManagerUtils;
     }
 
     // get Admin
     public function getAdmin($id)
     {
-        $admin = $this->adminReporitoy->getAdmin($id);
+        $admin = $this->adminRepository->getAdmin($id);
         if (!$admin) {
             return false;
             //abort(404);
@@ -33,9 +33,9 @@ class AdminService
     }
 
     // get admins
-    public function getAdmins()
+    public function getAdmins($filters = [])
     {
-        return $this->adminReporitoy->getAdmins();
+        return $this->adminRepository->getAdmins($filters);
     }
 
     // store admin
@@ -45,7 +45,7 @@ class AdminService
             $data['photo'] = $this->imageManagerUtils->saveResizeImage($data['photo'], 'adminsPhotos', 100, 100);
         }
 
-        $admin = $this->adminReporitoy->storeAdmin($data);
+        $admin = $this->adminRepository->storeAdmin($data);
         if (!$admin) {
             return false;
         }
@@ -55,11 +55,10 @@ class AdminService
     //update admin
     public function updateAdmin($data)
     {
-        $admin = $this->adminReporitoy->getAdmin($data['id']);
+        $admin = $this->adminRepository->getAdmin($data['id']);
         if (!$admin) {
             return false;
         }
-
 
         $data['password'] = empty($data['password']) ? $admin->password : $data['password'];
 
@@ -74,7 +73,7 @@ class AdminService
             }
         }
 
-        $updated = $this->adminReporitoy->updateAdmin($admin, $data);
+        $updated = $this->adminRepository->updateAdmin($admin, $data);
         if (!$updated) {
             return false;
         }
@@ -82,7 +81,7 @@ class AdminService
     }
     public function destroyAdmin($id)
     {
-        $admin = $this->adminReporitoy->getAdmin($id);
+        $admin = $this->adminRepository->getAdmin($id);
         if (!$admin) {
             return false;
         }
@@ -90,7 +89,7 @@ class AdminService
             $this->imageManagerUtils->removeImageFromLocal($admin->photo, 'adminsPhotos');
         }
 
-        $admin = $this->adminReporitoy->destroyAdmin($admin);
+        $admin = $this->adminRepository->destroyAdmin($admin);
         if (!$admin) {
             return false;
         }
@@ -100,15 +99,17 @@ class AdminService
     // change status admin
     public function changeStatusAdmin($id, $status)
     {
-        $admin = $this->adminReporitoy->getAdmin($id);
+        $admin = $this->adminRepository->getAdmin($id);
         if (!$admin) {
             return false;
         }
 
-        $admin = $this->adminReporitoy->changeStatusAdmin($admin, $status);
+        $admin = $this->adminRepository->changeStatusAdmin($admin, $status);
         if (!$admin) {
             return false;
         }
         return $admin;
     }
+
+
 }

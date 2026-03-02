@@ -19,31 +19,41 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_ar">{!! __('addresses.city_name_ar') !!}</label>
-                                <input type="text" id="name_ar" name="name[ar]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_city_name_ar') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_ar" class="form-label-premium">{!! __('addresses.city_name_ar') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_ar" name="name[ar]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_city_name_ar') !!}">
+                                </div>
                                 <strong id="name_ar_error" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_en">{!! __('addresses.city_name_en') !!}</label>
-                                <input type="text" id="name_en" name="name[en]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_city_name_en') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_en" class="form-label-premium">{!! __('addresses.city_name_en') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_en" name="name[en]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_city_name_en') !!}">
+                                </div>
                                 <strong id="name_en_error" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="country_id">{!! __('addresses.country_id') !!}</label>
-                                <select class="country_select2_create" id='country_id' name="country_id">
-                                    <option value=""></option>
-                                </select>
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="country_id" class="form-label-premium">{!! __('addresses.country_id') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-earth"></i></span>
+                                    <select class="country_select2_create" id='country_id' name="country_id">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
                                 <strong id="country_id_error" class="text-danger small"></strong>
                             </div>
                         </div>
@@ -51,81 +61,55 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm text-white">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i>{{ __('general.save') }}
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
             </div>
         </form>
     </div>
 </div>
 
+<!-- Floating Command HUD -->
+<x-dashboard.command-hud formId="create_city_form" hudId="create_city_hud" countId="create_city_count"
+    discardId="create_city_discard" submitId="create_city_save" />
+
 @push('scripts')
     <script src="{!! asset('assets/dashboard/vendors/select2/select2.min.js') !!}"></script>
 
     <script type="text/javascript">
-        $(".country_select2_create").select2({
-            dropdownParent: $('#createCityModal'),
-            width: '100%',
-            minimumInputLength: 1,
-            maximumInputLength: 20,
-            placeholder: '{!! __('general.select_from_list') !!}',
-            allowClear: true,
-            templateResult: formatSelect2Country,
-            templateSelection: formatSelect2Country,
-            escapeMarkup: function(markup) {
-                return markup;
-            },
-            language: {
-                inputTooShort: function() {
-                    return "{!! __('general.inputTooShort') !!}";
-                },
-                inputTooLong: function() {
-                    return "{!! __('general.inputTooLong') !!}";
-                },
-                errorLoading: function() {
-                    return "{!! __('general.errorLoading') !!}";
-                },
-                noResults: function() {
-                    return "<span>{!! __('general.noResults2') !!}";
-                },
-                searching: function() {
-                    return " {!! __('general.searching') !!}";
-                }
-            },
-            ajax: {
-                url: "{{ route('dashboard.addresses.countries.autocomplete.country') }}",
-                dataType: 'json',
-                delay: 250,
-                processResults: function(data) {
-                    return {
-                        results: $.map(data, function(item) {
-                            return {
-                                text: ('{!! Lang() !!}' === 'en') ? item.country_en : item
-                                    .country_ar,
-                                id: item.id,
-                                flag_code: item.flag_code
-                            }
-                        })
-                    };
-                },
-                cache: true
-            }
+        window.initSelect2Autocomplete(".country_select2_create", {
+            url: "{{ route('dashboard.addresses.countries.autocomplete.country') }}",
+            showFlag: true,
+            dropdownParent: $('#createCityModal')
         });
 
         $('#createCityModal').on('hidden.bs.modal', function() {
             window.clearFormErrors('#create_city_form');
             $('#create_city_form')[0].reset();
+            // Clear Select2 visually
+            if ($.fn.select2) {
+                $('#create_city_form').find("select").val(null).trigger("change");
+            }
         });
 
         window.handleFormSubmit('#create_city_form', {
             modalToHide: '#createCityModal',
             successMessage: "{!! __('general.add_success_message') !!}"
+        });
+
+        // Ensure HUD slides down smoothly when modal starts closing
+        $('#createCityModal').on('hide.bs.modal', function() {
+            $('#create_city_hud').removeClass('visible');
+        });
+
+        // Initialize HUD when modal is shown
+        $('#createCityModal').on('shown.bs.modal', function() {
+            initHud('create_city_form', {
+                hudId: 'create_city_hud',
+                countId: 'create_city_count',
+                discardId: 'create_city_discard',
+                submitId: 'create_city_save'
+            });
         });
     </script>
 @endpush

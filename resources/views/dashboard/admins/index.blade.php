@@ -51,54 +51,22 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{!! __('admins.show_all_admins') !!}</h4>
-                            <div class="table-responsive table-responsive-custom">
-                                <table class="table table-hover" id="responsiveTable">
-                                    <thead>
-                                        <tr>
-                                            <th class="details-col"></th>
-                                            <th>#</th>
-                                            <th>{!! __('admins.name') !!}</th>
-                                            <th class="d-none d-md-table-cell">{!! __('admins.email') !!}</th>
-                                            <th class="d-none d-lg-table-cell">{!! __('admins.role_id') !!}</th>
-                                            <th class="d-none d-xl-table-cell">{!! __('admins.created_at') !!}</th>
-                                            <th class="d-none d-xl-table-cell">{!! __('admins.status') !!}</th>
-                                            <th class="d-none d-xl-table-cell text-center">{!! __('admins.manage_status') !!}</th>
-                                            <th class="text-center">{!! __('general.actions') !!}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($admins as $admin)
-                                            <tr id="row{{ $admin->id }}">
-                                                <td class="details-col"><i class="mdi mdi-plus-circle details-control"></i>
-                                                </td>
-                                                <td>{!! $loop->iteration !!}</td>
-                                                <td>{!! $admin->name !!}</td>
-                                                <td class="d-none d-md-table-cell">{!! $admin->email !!}</td>
-                                                <td class="d-none d-lg-table-cell">{!! $admin->role->role ?? 'N/A' !!}</td>
-                                                <td class="d-none d-xl-table-cell">{!! $admin->created_at !!}</td>
-                                                <td class="d-none d-xl-table-cell">
-                                                    @include('dashboard.admins.parts.status')
-                                                </td>
-                                                <td class="d-none d-xl-table-cell">
-                                                    @include('dashboard.admins.parts.manage_status')
-                                                </td>
-                                                <td class="text-center">
-                                                    @include('dashboard.admins.parts.actions', [
-                                                        'admin' => $admin,
-                                                    ])
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="8" class="text-center">{!! __('admins.no_admins_found') !!}</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mt-4">
-                                {!! $admins->links() !!}
+                            <h4 class="card-title mb-4 d-flex align-items-center">
+                                <span class="card-icon-premium me-3">
+                                    <i class="mdi mdi-account-group-outline"></i>
+                                </span>
+                                {!! __('admins.show_all_admins') !!}
+                            </h4>
+                            @include('dashboard.admins.partials._search')
+                            <div class="table-loader-container" style="position: relative;">
+                                <div class="table-loader-overlay">
+                                    <span class="premium-loader"></span>
+                                </div>
+                                <div id="table_data">
+                                    @include('dashboard.admins.partials._table', [
+                                        'admins' => $admins,
+                                    ])
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,12 +77,21 @@
 
     @include('dashboard.admins.modals.create')
     @include('dashboard.admins.modals.edit')
-    @include('dashboard.admins.modals.tr-details')
+    @include('dashboard.general.tr-details')
 @endsection
 
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Initialize Generic Index Table Handler
+            window.initIndexTable({
+                container: '#table_data',
+                loader: '.table-loader-overlay',
+                detailsModal: '#detailsModal',
+                detailsModalLabel: '#detailsModalLabel',
+                detailsModalBody: '#modalBody'
+            });
+
             // Toggle password visibility
             $(document).on('click', '.toggle-password', function() {
                 const targetId = $(this).data('target');
@@ -132,46 +109,6 @@
             });
 
 
-            // --- Table Details Modal Setup ---
-            const table = document.getElementById('responsiveTable');
-            const modalElement = document.getElementById('detailsModal');
-            let detailsModal; // Initialize lazily
-            const modalBody = document.getElementById('modalBody');
-            const modalTitle = document.getElementById('detailsModalLabel');
-
-            if (table && modalElement) {
-                // --- Modal Trigger Logic ---
-                table.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('details-control')) {
-                        if (!detailsModal) {
-                            detailsModal = new bootstrap.Modal(modalElement);
-                        }
-                        const row = e.target.closest('tr');
-                        const headers = Array.from(table.querySelectorAll('thead th')).map(th => th
-                            .innerText);
-                        const cells = Array.from(row.querySelectorAll('td'));
-
-                        let html = '<ul class="list-group list-group-flush">';
-                        for (let i = 1; i < headers.length -
-                            1; i++) { // Skip the first (toggler) and last (actions) columns
-                            if (headers[i] && headers[i].trim() !== "") {
-                                const cellContent = cells[i].innerHTML;
-                                html += `
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <strong>${headers[i]}</strong>
-                                    <span>${cellContent}</span>
-                                </li>`;
-                            }
-                        }
-                        html += '</ul>';
-
-                        modalTitle.innerText = "{!! __('general.details') !!} - " + cells[2]
-                            .innerText; // Assuming name is col index 2
-                        modalBody.innerHTML = html;
-                        detailsModal.show();
-                    }
-                });
-            }
         });
     </script>
 @endpush

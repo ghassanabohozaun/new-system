@@ -45,7 +45,7 @@
                                     <img src="{!! $admin->photo
                                         ? asset('uploads/adminsPhotos/' . $admin->photo)
                                         : asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="profile" class="img-lg rounded-circle mb-3"
-                                        style="width: 100px; height: 100px; object-fit: cover;">
+                                        style="width: 100px; height: 100px; object-fit: contain; background-color: #f8f9fa;">
                                     <div class="mb-3">
                                         <h3>{{ $admin->name }}</h3>
                                         <div class="d-flex align-items-center justify-content-center">
@@ -126,7 +126,8 @@
                                                 <img src="{!! $admin->photo
                                                     ? asset('uploads/adminsPhotos/' . $admin->photo)
                                                     : asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="profile"
-                                                    class="img-sm rounded-circle">
+                                                    class="img-sm rounded-circle"
+                                                    style="object-fit: contain; background-color: #f8f9fa;">
                                                 <div class="ms-4">
                                                     <h6>
                                                         {{ $admin->name }}

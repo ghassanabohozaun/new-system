@@ -5,7 +5,8 @@ return [
     'basic_settings_section' => 'Basic Settings Section',
     'contact_section' => 'Contact Section',
     'media_section' => 'Media Section',
-    'socail_section' => 'socail Media Section',
+    'socail_section' => 'Social Media Section',
+    'social_media_section' => 'Social Media',
 
     //
     'site_name_ar' => 'Site Name | ar',
@@ -65,4 +66,6 @@ return [
     'enter_status' => 'Enter Site Status',
     'enter_language' => 'Enter Site Language',
     'enter_maintenance_message' => 'Enter Site Maintenance Message',
+    'changes_detected' => 'Changes Detected',
+    'unsaved_changes_hint' => 'Unsaved changes, please update',
 ];

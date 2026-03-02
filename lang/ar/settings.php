@@ -1,11 +1,12 @@
 <?php
 
 return [
-    'settings' => 'إعدادات العامة',
+    'settings' => 'الإعدادات العامة',
     'basic_settings_section' => 'قسم الإعدادات الأساسية',
     'contact_section' => 'قسم الإعدادات الاتصال ',
     'media_section' => 'قسم الميديا ',
     'socail_section' => 'قسم التواصل الاجتماعي ',
+    'social_media_section' => 'قسم التواصل الاجتماعي',
 
     /////////////////
     'site_name_ar' => 'اسم الموقع | عربي',
@@ -66,4 +67,6 @@ return [
     'enter_status' => 'ادخل حالة الموقع',
     'enter_language' => 'ادخل لغة الموقع',
     'enter_maintenance_message' => 'ادخل رسالة الصيانة للموقع',
+    'changes_detected' => 'تعديلات تم اكتشافها',
+    'unsaved_changes_hint' => 'تغييرات غير محفوظة، يرجى التحديث',
 ];

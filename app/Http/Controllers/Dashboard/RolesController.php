@@ -17,10 +17,15 @@ class RolesController extends Controller
         $this->roleService = $roleService;
     }
     // roles index
-    public function index()
+    public function index(Request $request)
     {
         $title = __('roles.roles');
         $roles = $this->roleService->getRoles();
+
+        if ($request->ajax()) {
+            return view('dashboard.roles.partials._table', compact('roles'))->render();
+        }
+
         return view('dashboard.roles.index', compact('title', 'roles'));
     }
 
@@ -81,6 +86,10 @@ class RolesController extends Controller
     {
         if ($request->ajax()) {
             $role = $this->roleService->destroyRole($request->id);
+
+            if ($role === 'has_admins') {
+                return response()->json(['status' => false, 'message' => __('roles.role_have_admins')], 500);
+            }
 
             if (!$role) {
                 return response()->json(['status' => false], 500);

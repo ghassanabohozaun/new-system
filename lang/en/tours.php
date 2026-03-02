@@ -1,0 +1,46 @@
+<?php
+
+return [
+    'create_new_tour' => 'Create New Sightseeing Tour',
+    'update_tour' => 'Update Sightseeing Tour',
+    'tours' => 'Sightseeing Tours',
+    'show_all_tours' => 'Show All Sightseeing Tours',
+    'show_tour_details'=>'Show Tour Details',
+
+    'name' => 'Sightseeing Tour Name',
+    'name_ar' => 'Arabic Sightseeing Tour Name',
+    'name_en' => 'English Sightseeing Tour Name',
+    'title' => 'Sightseeing Tour Title',
+    'title_ar' => 'Arabic Sightseeing Tour Title',
+    'title_en' => 'English Sightseeing Tour Title',
+    'details' => 'Sightseeing Tour Details',
+    'details_ar' => 'Arabic Sightseeing Tour Details',
+    'details_en' => 'English Sightseeing Tour Details',
+    'tour_guide_name' => 'Tour Guide Name',
+    'tour_guide_name_ar' => 'Arabic Tour Guide Name',
+    'tour_guide_name_en' => 'English Tour Guide Name',
+    'price' => 'Price',
+    'country_id' => 'Country',
+    'city_id' => 'City',
+    'location' => 'Location',
+    'status' => 'Sightseeing Tour Status ',
+    'status_short' => 'Status',
+    'photo' => 'Sightseeing Tour Photo ',
+    'manage_status' => 'manage Status',
+    'created_at' => 'Created At',
+
+    'enter_name_ar' => 'Enter Arabic Sightseeing Tour Name',
+    'enter_name_en' => 'Enter English Sightseeing Tour Name',
+    'enter_title_ar' => 'Enter Arabic Sightseeing Tour Title',
+    'enter_title_en' => 'Enter English Sightseeing Tour Title',
+    'enter_details_ar' => 'Enter Arabic Sightseeing Tour Details',
+    'enter_details_en' => 'Enter English Sightseeing Tour Details',
+    'enter_tour_guide_name_ar' => 'Enter Arabic Tour Guide Name',
+    'enter_tour_guide_name_en' => 'Enter English Tour Guide Name',
+    'enter_price' => 'Enter Price',
+    'enter_country_id' => 'Enter Country',
+    'enter_city_id' => 'Enter City',
+
+
+    'no_tours_found' => 'No Sightseeing Tours Found',
+];

@@ -34,32 +34,12 @@ class PageService
         return $this->pageRepository->getPages();
     }
 
-    // get all
-    public function getAll()
+    // get pages paginated
+    public function getPagesPaginated($perPage = 10)
     {
-        $pages = $this->pageRepository->getPages();
-        return DataTables::of($pages)
-            ->addIndexColumn()
-            ->addColumn('title', function ($page) {
-                return $page->getTranslation('title', Lang());
-            })
-            ->addColumn('details', function ($page) {
-                return view('dashboard.pages.parts.details', compact('page'));
-            })
-            ->addColumn('status', function ($page) {
-                 return view('dashboard.pages.parts.status', compact('page'));
-            })
-            ->addColumn('photo', function ($page) {
-                return view('dashboard.pages.parts.photo', compact('page'));
-            })
-            ->addColumn('manage_status', function ($page) {
-               return view('dashboard.pages.parts.manage-status', compact('page'));
-            })
-            ->addColumn('actions', function ($page) {
-                return view('dashboard.pages.parts.actions', compact('page'));
-            })
-            ->make(true);
+        return $this->pageRepository->getPagesPaginated($perPage);
     }
+
 
     // store page
     public function store($data)
@@ -126,26 +106,12 @@ class PageService
     public function changeStatus($id, $status)
     {
         $page = self::getPage($id);
-        $page = $this->pageRepository->changeStatus($page, $status);
-        if (!$page) {
+        $result = $this->pageRepository->changeStatus($page, $status);
+        if (!$result) {
             return false;
         }
-        return $page;
+        return $page->refresh();
     }
 
-    // delete photo
-    public function deletePhoto($id)
-    {
-        $page = self::getPage($id);
-        //remove old photo
-        if ($page->photo != null) {
-            $this->imageManagerUtils->removeImageFromLocal($page->photo, 'pages');
-        }
 
-        $page = $this->pageRepository->deletePhoto($page);
-        if (!$page) {
-            return false;
-        }
-        return $page;
-    }
 }

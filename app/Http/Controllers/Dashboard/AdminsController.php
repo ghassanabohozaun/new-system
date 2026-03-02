@@ -19,11 +19,17 @@ class AdminsController extends Controller
     }
 
     //  admin index
-    public function index()
+    public function index(Request $request)
     {
         $title = __('admins.admins');
-        $admins = $this->adminService->getAdmins();
+        $filters = $request->all();
+        $admins = $this->adminService->getAdmins($filters);
         $roles = $this->roleService->getRoles();
+
+        if ($request->ajax()) {
+            return view('dashboard.admins.partials._table', compact('admins'))->render();
+        }
+
         return view('dashboard.admins.index', compact('title', 'admins', 'roles'));
     }
 
@@ -79,14 +85,12 @@ class AdminsController extends Controller
     //  admin destroy
     public function destroy(Request $request)
     {
-        if ($request->ajax()) {
-            $admin = $this->adminService->destroyAdmin($request->id);
-            if (!$admin) {
-                return response()->json(['status' => false], 500);
-            }
-
-            return response()->json(['status' => true], 201);
+        $admin = $this->adminService->destroyAdmin($request->id);
+        if (!$admin) {
+            return response()->json(['status' => false], 500);
         }
+
+        return response()->json(['status' => true], 200);
     }
 
     // admin change status
@@ -97,8 +101,9 @@ class AdminsController extends Controller
         if (!$admin) {
             return response()->json(['status' => false], 500);
         }
-        $admin = $this->adminService->getAdmin($request->id);
-        return response()->json(['status' => true, 'data'=>$admin], 201);
+        return response()->json(['status' => true, 'data' => $admin], 200);
     }
+
+
 
 }

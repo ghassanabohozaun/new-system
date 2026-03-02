@@ -30,55 +30,43 @@
                     <!--------------------  Start Table  ---------------------------->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{!! __('roles.show_all_roles') !!}</h4>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>{!! __('roles.role_name') !!}</th>
-                                            <th>{!! __('roles.permissions') !!}</th>
-                                            <th class="text-center">{!! __('general.actions') !!}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($roles as $role)
-                                            <tr>
-                                                <td>{!! $loop->iteration !!}</td>
-                                                <td>{!! $role->role !!}</td>
-                                                <td style="white-space: normal; min-width: 350px;">
-                                                    <div class="d-flex flex-wrap gap-2">
-                                                        @foreach (config('global.permissions') as $name => $value)
-                                                            @if (in_array($name, $role->permissions))
-                                                                <span class="badge badge-pill-info mb-1">
-                                                                    {{ __(config('global.permissions.' . $name)) }}
-                                                                </span>
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    @include('dashboard.roles.parts.action')
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="4" class="text-center text-muted">
-                                                    {!! __('roles.no_roles_found') !!}
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                                <div class="mt-4">
-                                    {!! $roles->links() !!}
+                            <h4 class="card-title mb-4 d-flex align-items-center">
+                                <span class="card-icon-premium me-3">
+                                    <i class="mdi mdi-shield-key-outline"></i>
+                                </span>
+                                {!! __('roles.show_all_roles') !!}
+                            </h4>
+                            <div class="table-loader-container" style="position: relative;">
+                                <div class="table-loader-overlay">
+                                    <span class="premium-loader"></span>
+                                </div>
+                                <div id="table_data">
+                                    @include('dashboard.roles.partials._table', [
+                                        'roles' => $roles,
+                                    ])
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--------------------  End Table  ---------------------------->
+                    @include('dashboard.general.tr-details')
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Initialize Generic Index Table Handler
+            window.initIndexTable({
+                container: '#table_data',
+                loader: '.table-loader-overlay',
+                detailsModal: '#detailsModal',
+                detailsModalLabel: '#detailsModalLabel',
+                detailsModalBody: '#modalBody'
+            });
+        });
+    </script>
+@endpush

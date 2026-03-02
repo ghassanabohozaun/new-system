@@ -35,6 +35,12 @@ class CityService
         return $this->cityRepository->getCities();
     }
 
+    // get active cities
+    public function getActiveCities()
+    {
+        return $this->cityRepository->getActiveCities();
+    }
+
     // store city
     public function storeCity($request)
     {
@@ -73,5 +79,11 @@ class CityService
             return false;
         }
         return $city;
+    }
+
+    // autocomplete
+    public function autocompleteCity($searchValue, $countryId = null)
+    {
+        return $this->cityRepository->autocompleteCity($searchValue, $countryId);
     }
 }

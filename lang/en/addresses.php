@@ -26,7 +26,7 @@ return [
     'select_flag' => 'Select Flag',
     'select_flag_code' => 'Select Flag Code',
 
-    'no_countries_found' => 'No Countries Found !',
+    'no_countries_found' => 'No Countries Found',
     'country_restricted_deletion' => 'Cannot delete country because it has linked cities or flight records.',
 
     // governorates
@@ -60,7 +60,7 @@ return [
 
     'enter_city_name_ar' => 'Enter Arabic City Name',
     'enter_city_name_en' => 'Enter English City Name',
-    'no_cities_found' => 'No Cities Found !',
+    'no_cities_found' => 'No Cities Found',
 
     'show_all_users' => 'Show All Users',
 ];

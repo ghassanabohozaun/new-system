@@ -17,21 +17,24 @@ class CitiesController extends Controller
         $this->cityService = $cityService;
         $this->countryService = $countryService;
     }
-    // index    
-    public function index()
+    // index
+    public function index(Request $request)
     {
         $title = __('addresses.cities');
-        $countries = $this->countryService->getAllCountriesWithoutRelations();
         $cities = $this->cityService->getCities();
-        return view('dashboard.addresses.cities.index', compact('title', 'cities', 'countries'));
+
+        if ($request->ajax()) {
+            return view('dashboard.addresses.cities.partials._table', compact('cities'))->render();
+        }
+
+        return view('dashboard.addresses.cities.index', compact('title', 'cities'));
     }
 
     // create
     public function create()
     {
         $title = __('addresses.create_new_city');
-        $countries = $this->countryService->getCountries();
-        return view('dashboard.addresses.cities.create', compact('title', 'countries'));
+        return view('dashboard.addresses.cities.create', compact('title'));
     }
 
     // store
@@ -85,5 +88,12 @@ class CitiesController extends Controller
             }
             return response()->json(['status' => true], 201);
         }
+    }
+
+    // autocomplete City
+    public function autocompleteCity(Request $request)
+    {
+        $data = $this->cityService->autocompleteCity($request->get('q'), $request->get('country_id'));
+        return response()->json($data);
     }
 }

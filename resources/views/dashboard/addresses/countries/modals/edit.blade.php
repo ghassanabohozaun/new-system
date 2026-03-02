@@ -18,50 +18,60 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_ar_edit">{!! __('addresses.country_name_ar') !!}</label>
-                                <input type="text" id="name_ar_edit" name="name[ar]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_country_name_ar') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_ar_edit" class="form-label-premium">{!! __('addresses.country_name_ar') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_ar_edit" name="name[ar]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_country_name_ar') !!}">
+                                </div>
                                 <strong id="name_ar_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_en_edit">{!! __('addresses.country_name_en') !!}</label>
-                                <input type="text" id="name_en_edit" name="name[en]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_country_name_en') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_en_edit" class="form-label-premium">{!! __('addresses.country_name_en') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="name_en_edit" name="name[en]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_country_name_en') !!}">
+                                </div>
                                 <strong id="name_en_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="phone_code_edit">{!! __('addresses.phone_code') !!}</label>
-                                <input type="text" id="phone_code_edit" name="phone_code"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('addresses.enter_phone_code') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="phone_code_edit" class="form-label-premium">{!! __('addresses.phone_code') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-phone"></i></span>
+                                    <input type="text" id="phone_code_edit" name="phone_code" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('addresses.enter_phone_code') !!}">
+                                </div>
                                 <strong id="phone_code_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="flag_code_edit">{!! __('addresses.flag_code') !!}</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-white border-end-0">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="flag_code_edit" class="form-label-premium">{!! __('addresses.flag_code') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text">
                                         <span id="flag_preview_edit"
                                             class="flag-icon flag-icon-default shadow-sm rounded-1"
                                             style="width: 20px; height: 15px;"></span>
                                     </span>
                                     <input type="text" id="flag_code_edit" name="flag_code"
-                                        class="form-control form-control-sm border-start-0 border-end-0 bg-white open-flags-reference"
-                                        readonly autocomplete="off" placeholder="{!! __('addresses.select_flag_code') !!}"
-                                        style="cursor: pointer;" data-target-input="flag_code_edit">
-                                    <span class="input-group-text bg-white border-start-0 open-flags-reference"
-                                        style="cursor: pointer;" data-target-input="flag_code_edit">
+                                        class="form-control open-flags-reference" readonly autocomplete="off"
+                                        placeholder="{!! __('addresses.select_flag_code') !!}" style="cursor: pointer;"
+                                        data-target-input="flag_code_edit">
+                                    <span class="input-group-text open-flags-reference" style="cursor: pointer;"
+                                        data-target-input="flag_code_edit">
                                         <i class="ti-mouse-alt text-muted"></i>
                                     </span>
                                 </div>
@@ -69,45 +79,35 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>{!! __('addresses.status') !!}</label>
-                                    <div class="d-flex gap-3 mt-2">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="status"
-                                                    id="status_active" value="1" checked>
-                                                {!! __('general.active') !!}
-                                                <i class="input-helper"></i></label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="status"
-                                                    id="status_inactive" value="0">
-                                                {!! __('general.inactive') !!}
-                                                <i class="input-helper"></i></label>
+
+                        <div class="col-md-12">
+                            <div class="form-group mb-2 theme-success">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="status_active_edit">{!! __('addresses.status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="status"
+                                                id="status_active_edit" value="1">
                                         </div>
                                     </div>
-                                    <strong id="status_error" class="text-danger small"></strong>
                                 </div>
+                                <strong id="status_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-primary text-white">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                        &nbsp;
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
+                <!-- Floating Command HUD -->
+                <x-dashboard.command-hud formId="update_country_form" hudId="update_country_hud"
+                    countId="update_country_count" discardId="update_country_discard"
+                    submitId="update_country_save" />
             </div>
         </form>
     </div>
@@ -115,34 +115,26 @@
 
 @push('scripts')
     <script type="text/javascript">
-        // show edit modal
-        $('body').on('click', '.edit_country_button', function(e) {
-            e.preventDefault();
-            var country_id = $(this).attr('country-id');
-            var country_name_ar = $(this).attr('country-name-ar');
-            var country_name_en = $(this).attr('country-name-en');
-            var country_phone_code = $(this).attr('country-phone-code');
-            var country_flag_code = $(this).attr('country-flag-code');
-            var country_status = $(this).attr('country-status');
-
-            // Set dynamic action URL
-            const url = "{!! route('dashboard.addresses.countries.update', 'id') !!}".replace('id', country_id);
-            $('#update_country_form').attr('action', url);
-
-            $('#id_edit').val(country_id);
-            $('#name_ar_edit').val(country_name_ar);
-            $('#name_en_edit').val(country_name_en);
-            $('#phone_code_edit').val(country_phone_code);
-            $('#flag_code_edit').val(country_flag_code).trigger('change');
-
-            // Handle radio button status
-            if (country_status == 1) {
-                $('#update_country_form #status_active').prop('checked', true);
-            } else {
-                $('#update_country_form #status_inactive').prop('checked', true);
+        // --- Country Edit Populate Logic (Using Generic Helper) ---
+        window.populateModal('.edit_country_button', {
+            modal: '#updateCountryModal',
+            form: '#update_country_form',
+            actionUrl: "{!! route('dashboard.addresses.countries.update', ':id') !!}",
+            idKey: 'id',
+            suffix: '_edit',
+            onAfterPopulate: function(btn, data, form) {
+                if (data.flagCode) {
+                    $('#flag_preview_edit').attr('class',
+                        `flag-icon flag-icon-${data.flagCode.toLowerCase()} shadow-sm rounded-1`);
+                }
+                if (window.activeHud) window.activeHud.changedFields.clear();
+                initHud('update_country_form', {
+                    hudId: 'update_country_hud',
+                    countId: 'update_country_count',
+                    discardId: 'update_country_discard',
+                    submitId: 'update_country_save'
+                });
             }
-
-            $('#updateCountryModal').modal('show');
         });
 
         $('#updateCountryModal').on('hidden.bs.modal', function() {
@@ -165,7 +157,10 @@
             modalToHide: '#updateCountryModal',
             successMessage: "{!! __('general.update_success_message') !!}",
             suffix: '_edit',
-            resetForm: false
+            resetForm: false,
+            onSuccess: function() {
+                if (window.activeHud) window.activeHud.changedFields.clear(); // Clear tracking on success
+            }
         });
     </script>
 @endpush

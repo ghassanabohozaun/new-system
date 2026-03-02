@@ -65,9 +65,10 @@ class MonthlyReportRepository
     // change status
     public function changeStatus($MonthlyReport, $data)
     {
-        return $MonthlyReport->update([
+        $MonthlyReport->update([
             'status' => $data['status'],
             'refuse_reason' => $data['refuse_reason'] ?? '',
         ]);
+        return $MonthlyReport;
     }
 }

@@ -64,7 +64,11 @@ class RoleService
         $role = $this->roleRepositoy->getRole($id);
 
         // check if any admins has role
-        if ($role->admins->count() > 0 || !$role) {
+        if ($role && $role->admins->count() > 0) {
+            return 'has_admins';
+        }
+
+        if (!$role) {
             return false;
         }
 

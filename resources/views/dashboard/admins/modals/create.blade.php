@@ -2,7 +2,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
         <form class="forms-sample" action="{!! route('dashboard.admins.store') !!}" method="POST" enctype="multipart/form-data"
-            id="create_admin_form">
+            id="create_admin_form" novalidate>
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -14,20 +14,26 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name_ar">{!! __('admins.name_ar') !!}</label>
-                                <input type="text" id="name_ar" name="name[ar]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('admins.enter_name_ar') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_ar" class="form-label-premium">{!! __('admins.name_ar') !!}
+                                    <span class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-account-card-outline"></i></span>
+                                    <input type="text" id="name_ar" name="name[ar]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('admins.enter_name_ar') !!}">
+                                </div>
                                 <strong id="name_ar_error" class="text-danger small"></strong>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name_en">{!! __('admins.name_en') !!}</label>
-                                <input type="text" id="name_en" name="name[en]"
-                                    class="form-control form-control-sm" autocomplete="off"
-                                    placeholder="{!! __('admins.enter_name_en') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="name_en" class="form-label-premium">{!! __('admins.name_en') !!}
+                                    <span class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-account-card-outline"></i></span>
+                                    <input type="text" id="name_en" name="name[en]" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('admins.enter_name_en') !!}">
+                                </div>
                                 <strong id="name_en_error" class="text-danger small"></strong>
                             </div>
                         </div>
@@ -35,10 +41,14 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="email">{!! __('admins.email') !!}</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-sm"
-                                    autocomplete="off" placeholder="{!! __('admins.enter_email') !!}">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="email" class="form-label-premium">{!! __('admins.email') !!}
+                                    <span class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-email-outline"></i></span>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        autocomplete="off" placeholder="{!! __('admins.enter_email') !!}">
+                                </div>
                                 <strong id="email_error" class="text-danger small"></strong>
                             </div>
                         </div>
@@ -46,30 +56,31 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="password">{!! __('admins.password') !!}</label>
-                                <div class="input-group input-group-sm">
-                                    <input type="password" id="password" name="password"
-                                        class="form-control form-control-sm" autocomplete="new-password"
-                                        placeholder="{!! __('admins.enter_password') !!}">
-                                    <button class="btn btn-outline-secondary toggle-password" type="button"
-                                        data-target="password">
-                                        <i class="ti-eye"></i>
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="password" class="form-label-premium">{!! __('admins.password') !!} <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-lock-outline"></i></span>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        autocomplete="new-password" placeholder="{!! __('admins.enter_password') !!}">
+                                    <button type="button" class="password-toggle-btn js-password-toggle">
+                                        <i class="mdi mdi-eye-outline"></i>
                                     </button>
                                 </div>
                                 <strong id="password_error" class="text-danger small"></strong>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="password_confirm">{!! __('admins.password_confirm') !!}</label>
-                                <div class="input-group input-group-sm">
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="password_confirm" class="form-label-premium">{!! __('admins.password_confirm') !!}
+                                    <span class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-lock-check-outline"></i></span>
                                     <input type="password" id="password_confirm" name="password_confirm"
-                                        class="form-control form-control-sm" autocomplete="new-password"
+                                        class="form-control" autocomplete="new-password"
                                         placeholder="{!! __('admins.enter_password_confirm') !!}">
-                                    <button class="btn btn-outline-secondary toggle-password" type="button"
-                                        data-target="password_confirm">
-                                        <i class="ti-eye"></i>
+                                    <button type="button" class="password-toggle-btn js-password-toggle">
+                                        <i class="mdi mdi-eye-outline"></i>
                                     </button>
                                 </div>
                                 <strong id="password_confirm_error" class="text-danger small"></strong>
@@ -79,14 +90,19 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="role_id">{!! __('admins.role_id') !!}</label>
-                                <select class="form-select form-select-sm" id="role_id" name="role_id">
-                                    <option value="" selected>{!! __('general.select_from_list') !!}</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{!! $role->id !!}">{!! $role->role !!}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-group mb-3 theme-primary">
+                                <label for="role_id" class="form-label-premium">{!! __('admins.role_id') !!}
+                                    <span class="text-danger">*</span></label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-shield-account-outline"></i></span>
+                                    <select class="form-select" id="role_id" name="role_id">
+                                        <option value="" selected>{!! __('general.select_from_list') !!}</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{!! $role->id !!}">{!! $role->role !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <strong id="role_id_error" class="text-danger small"></strong>
                             </div>
                         </div>
@@ -95,56 +111,26 @@
 
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-label text-dark fw-bold"><i
-                                        class="mdi mdi-account-circle me-1 text-primary"></i>{!! __('admins.photo') !!}</label>
-                                <div
-                                    class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3 bg-light">
-
-                                    <!-- Preview Thumbnail -->
-                                    <div id="photo_preview_create"
-                                        class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
-                                        style="width:110px; height:110px;">
-                                        <div class="text-center text-muted">
-                                            <i class="mdi mdi-account-outline"
-                                                style="font-size:2.5rem; opacity:0.3;"></i>
-                                        </div>
-                                    </div>
-
-                                    <!-- Upload Input -->
-                                    <div class="d-flex flex-column justify-content-center flex-grow-1">
-                                        <div class="mb-1 text-muted small"><i
-                                                class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
-                                        </div>
-                                        <input type="file" id="photo_create" name="photo"
-                                            class="form-control form-control-sm" autocomplete="off" accept="image/*">
-                                        <strong id="photo_error" class="text-danger small d-block mt-1"></strong>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <x-dashboard.file-input name="photo" id="photo"
+                                label="{!! __('admins.photo') !!} <span class='text-danger'>*</span>"
+                                placeholderIcon="mdi-account-outline" errorId="photo_error" isRequired="false" />
                         </div>
                     </div>
 
-
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label>{!! __('admins.status') !!}</label>
-                                <div class="d-flex gap-3 mt-2">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="status"
+                            <div class="form-group mb-3 theme-primary">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="status_active">{!! __('admins.status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="status"
                                                 id="status_active" value="1" checked>
-                                            {!! __('general.active') !!}
-                                            <i class="input-helper"></i></label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="status"
-                                                id="status_inactive" value="0">
-                                            {!! __('general.inactive') !!}
-                                            <i class="input-helper"></i></label>
+                                        </div>
                                     </div>
                                 </div>
                                 <strong id="status_error" class="text-danger small"></strong>
@@ -153,16 +139,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-primary text-white">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                        &nbsp;
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
+                <!-- Floating Command HUD -->
+                <x-dashboard.command-hud formId="create_admin_form" hudId="create_admin_hud"
+                    countId="create_admin_count" discardId="create_admin_discard" submitId="create_admin_save" />
             </div>
         </form>
     </div>
@@ -178,10 +160,8 @@
             if (document.getElementById('password')) document.getElementById('password').type = 'password';
             if (document.getElementById('password_confirm')) document.getElementById('password_confirm').type = 'password';
 
-            // reset
-            $('#photo_preview_create').html(
-                '<div class="text-center text-muted"><i class="mdi mdi-account-outline" style="font-size:2.5rem; opacity:0.3;"></i></div>'
-                );
+            // reset photo using local reset button
+            $('#reset_photo_create_btn').click();
         }
 
         // hide
@@ -189,26 +169,23 @@
             resetCreateForm();
         });
 
-        // Photo preview logic for Create
-        $('#photo_create').on('change', function() {
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var container = $('#photo_preview_create');
-                    container.html('<img src="' + e.target.result +
-                        '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">');
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
         window.handleFormSubmit('#create_admin_form', {
             modalToHide: '#createAdminModal',
+            tableToRefresh: '#admins-table',
             successMessage: "{!! __('general.add_success_message') !!}",
             onSuccess: function() {
                 resetCreateForm();
             }
+        });
+
+        // Initialize HUD when modal is shown
+        $('#createAdminModal').on('shown.bs.modal', function() {
+            initHud('create_admin_form', {
+                hudId: 'create_admin_hud',
+                countId: 'create_admin_count',
+                discardId: 'create_admin_discard',
+                submitId: 'create_admin_save'
+            });
         });
     </script>
 @endpush

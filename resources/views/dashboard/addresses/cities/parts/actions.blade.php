@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="d-flex justify-content-end gap-2">
     <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon-text btn-sm edit_city_button me-2"
         title="{!! __('general.edit') !!}" city-id="{!! $city->id !!}" city-name-ar="{!! $city->getTranslation('name', 'ar') !!}"
         city-name-en="{!! $city->getTranslation('name', 'en') !!}" country-id="{!! $city->country_id !!}" country-flag="{!! $city->country->flag_code !!}">

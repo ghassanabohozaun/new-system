@@ -12,7 +12,9 @@
                     style="height: 55px; width: auto;">
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard.index') }}">
-                <img id="navbar_brand_logo_mini" src="{!! setting()->logo ? asset('uploads/settings/' . setting()->logo) : asset('assets/dashboard/images/logo-mini.svg') !!}" alt="logo"
+                <img id="navbar_brand_logo_mini" src="{!! setting()->logo
+                    ? asset('uploads/settings/' . setting()->logo)
+                    : asset('assets/dashboard/images/logo-mini.svg') !!}" alt="logo"
                     style="height: 45px; width: auto;">
             </a>
         </div>
@@ -48,7 +50,7 @@
             <!-- End User Date picker   -->
 
             <!-- User language   -->
-            <li class="nav-item">
+            <li class="nav-item d-none d-lg-block">
                 <form class="search-form" action="#">
                     <i class="icon-search"></i>
                     <input type="search" class="form-control" placeholder="{{ __('navbar.search_here') }}"
@@ -130,8 +132,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
-                                class="img-sm profile-pic">
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
                             <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
@@ -140,8 +141,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
-                                class="img-sm profile-pic">
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
                             <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
@@ -150,8 +150,7 @@
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image"
-                                class="img-sm profile-pic">
+                            <img src="{!! asset('assets/dashboard/images/faces/avatar-male.jpg') !!}" alt="image" class="img-sm profile-pic">
                         </div>
                         <div class="preview-item-content flex-grow py-2">
                             <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
@@ -163,7 +162,7 @@
             <!-- End User messages -->
 
             <!-- User Dropdown -->
-            <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+            <li class="nav-item dropdown user-dropdown">
                 <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <img class="img-xs rounded-circle header_admin_photo" src="{!! admin()->user()->photo

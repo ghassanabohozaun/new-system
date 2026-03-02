@@ -12,6 +12,7 @@ return [
     'password' => 'Admin Password',
     'password_confirm' => 'Admin Password confirm',
     'role_id' => 'Admin Role',
+    'role' => 'Role',
     'status' => 'Status',
     'photo'=> 'Photo',
     'created_at'=>'Created At',
@@ -26,5 +27,6 @@ return [
     'enter_role_id' => 'Enter Admin Role',
 
     'permissions' => 'Permissions',
-    'no_admins_found' => 'No Admins Found !',
+    'search_placeholder' => 'Search by name or email...',
+    'no_admins_found' => 'No Admins Found',
 ];

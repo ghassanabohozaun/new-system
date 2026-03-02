@@ -31,11 +31,7 @@ class SliderRequest extends FormRequest
             'order' => 'nullable|integer',
         ];
 
-        if ($this->isMethod('post')) {
-            $rules['photo'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        } else {
-            $rules['photo'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        }
+        $rules['photo'] = ($this->id || $this->route('slider')) ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
 
         return $rules;
     }

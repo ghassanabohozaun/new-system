@@ -42,4 +42,6 @@ return [
 
     // login
     'login' => 'تسجيل الدخول',
+    'lock_screen' => 'قفل الشاشة',
+    'active_session' => 'جلسة نشطة مؤمنة',
 ];

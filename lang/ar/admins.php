@@ -12,6 +12,7 @@ return [
     'password' => 'كلمة مرور المدير',
     'password_confirm' => 'تاكيد كلمة مرور المدير',
     'role_id' => 'صلاحية المدير',
+    'role' => 'الدور',
     'status' => 'الحالة',
     'photo'=> 'الصورة',
     'created_at'=>'تاريخ الاضافة',
@@ -26,5 +27,6 @@ return [
     'enter_role_id' => 'ادخل صلاحية المدير',
 
     'permissions' => 'الصلاحيات',
-    'no_admins_found' => 'لا يوجد صلاحيات حالياً !',
+    'search_placeholder' => 'البحث بالاسم أو الإيميل...',
+    'no_admins_found' => 'لا يوجد مديرين حالياً',
 ];

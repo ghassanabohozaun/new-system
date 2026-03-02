@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.auth')
 @section('title')
-    {!! __('dashboard.look_screen') !!}
+    {!! __('dashboard.lock_screen') !!}
 @endsection
 @section('content')
     @php
@@ -8,51 +8,63 @@
         $targetLocale = $currentLocale == 'ar' ? 'en' : 'ar';
         $targetNative = LaravelLocalization::getSupportedLocales()[$targetLocale]['native'];
     @endphp
-    <a href="{{ LaravelLocalization::getLocalizedURL($targetLocale, null, [], true) }}" class="btn btn-primary btn-sm"
+    <a href="{{ LaravelLocalization::getLocalizedURL($targetLocale, null, [], true) }}" class="enterprise-lang-toggle"
         id="login-rtl-toggle">
-        {{ $targetNative }}
+        <i class="mdi mdi-translate"></i>
+        <span>{{ $targetNative }}</span>
     </a>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth"
-                style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{!! asset('assets/dashboard/images/auth/lockscreen-bg.jpg') !!}'); background-size: cover; background-position: center;">
-                <div class="row w-100 flex-grow">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-transparent text-left p-5 text-center">
-                            @php
-                                $user = admin()->user();
-                                $userPhoto =
-                                    $user && $user->photo
-                                        ? asset('uploads/adminsPhotos/' . $user->photo)
-                                        : asset('assets/dashboard/images/faces/avatar-male.jpg');
-                            @endphp
-                            <img src="{{ $userPhoto }}" class="lock-profile-img mb-4 rounded-circle" alt="img"
-                                width="100">
-                            <form class="pt-5" id="lock-form" method="POST">
-                                @csrf
-                                <div class="form-group text-white">
-                                    <label for="lock-password">{!! __('auth.password_to_unlock') !!}</label>
-                                    <input type="password" class="form-control text-center text-white" id="lock-password"
-                                        placeholder="{!! __('auth.password') !!}" autocomplete="new-password" required>
-                                </div>
-                                <div class="mt-3 d-grid gap-2">
-                                    <button type="submit" class="btn btn-block btn-success btn-lg fw-medium auth-form-btn">
-                                        {!! __('auth.unlock') !!}
-                                    </button>
-                                </div>
-                                <div class="mt-3 text-center">
-                                    <a href="{{ route('dashboard.get.login') }}" class="auth-link text-white">
-                                        {!! __('auth.sign_in_different_account') !!}
-                                    </a>
-                                </div>
-                            </form>
-                        </div>
+    <div class="enterprise-lock-wrapper">
+        <div class="enterprise-bg-mesh"></div>
+
+        <div class="enterprise-card">
+            <div class="enterprise-identity">
+                @php
+                    $user = admin()->user();
+                    $userPhoto =
+                        $user && $user->photo
+                            ? asset('uploads/adminsPhotos/' . $user->photo)
+                            : asset('assets/dashboard/images/faces/avatar-male.jpg');
+                @endphp
+                <div class="enterprise-avatar-wrapper">
+                    <img src="{{ $userPhoto }}" class="enterprise-avatar" alt="User Avatar">
+                    <div class="security-verified-badge" title="Identity Verified">
+                        <i class="mdi mdi-check-decagram"></i>
                     </div>
                 </div>
+                <h2 class="enterprise-user-name">{{ $user ? $user->getTranslation('name', Lang()) : 'Admin' }}</h2>
             </div>
-            <!-- content-wrapper ends -->
+
+            <div class="enterprise-status-pill">
+                <div class="status-dot"></div>
+                <span>{{ __('dashboard.active_session') ?? 'Active Secured Session' }}</span>
+            </div>
+
+            <form id="lock-form" action="{{ route('dashboard.unlock.screen') }}" method="POST" novalidate
+                class="enterprise-form">
+                @csrf
+                <div class="input-group-premium" id="password-group">
+                    <span class="input-group-text"><i class="mdi mdi-shield-lock-outline"></i></span>
+                    <input type="password" name="password" class="form-control" id="lock-password"
+                        placeholder="{{ __('auth.password') }}" autocomplete="off">
+                    <button type="button" class="password-toggle-btn js-password-toggle">
+                        <i class="mdi mdi-eye-outline text-muted"></i>
+                    </button>
+                </div>
+                <div id="lock-error" class="text-danger small mt-1 d-none"></div>
+
+                <button type="submit" id="unlock-btn" class="enterprise-unlock-btn">
+                    <i class="mdi mdi-key btn-animated-icon"></i>
+                    {{ __('auth.unlock') }}
+                </button>
+
+                <div class="enterprise-footer-links">
+                    <a href="{{ route('dashboard.get.login') }}" class="enterprise-link">
+                        <i class="mdi mdi-account-switch-outline me-1"></i>
+                        {{ __('auth.sign_in_different_account') }}
+                    </a>
+                </div>
+            </form>
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
 @endsection
 
@@ -75,4 +87,17 @@
         };
     </script>
     <script src="{!! asset('assets/dashboard/js/lock-screen.js') !!}"></script>
+    <script>
+        // Custom handling for Lock Screen error visualization within the premium group
+        $(document).ready(function() {
+            const form = $('#lock-form');
+            form.on('submit', function() {
+                // Clear state
+                $('.input-group-premium').removeClass('is-invalid');
+            });
+
+            // Listen for failure from lock-screen.js logic if it uses DOM classes
+            // lock-screen.js typically handles the AJAX. We ensure it plays nice with our premium CSS.
+        });
+    </script>
 @endpush

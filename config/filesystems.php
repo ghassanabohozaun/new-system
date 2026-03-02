@@ -72,6 +72,47 @@ return [
             'report' => false,
         ],
 
+        'pages' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/pages'),
+            'url' => env('APP_URL') . '/uploads/pages',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+        'tickets' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/tickets'),
+            'url' => env('APP_URL') . '/uploads/tickets',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+        'tours' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/tours'),
+            'url' => env('APP_URL') . '/uploads/tours',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'flights' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/flights'),
+            'url' => env('APP_URL') . '/uploads/flights',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('/uploads/categories'),
+            'url' => env('APP_URL') . '/uploads/categories',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

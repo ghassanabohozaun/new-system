@@ -2,7 +2,7 @@
 /*------------------------------------------------------------------
 [Master Stylesheet]
 
-Project:	Star Admin2 
+Project:	Star Admin2
 Version:	1.2.1
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
@@ -22269,7 +22269,7 @@ color: #000000;
 font-weight: 500;
 font-size: 14px;
 line-height: 14px;
-margin-bottom: 12px;
+/* margin-bottom: 12px; */
 margin-right: 12px;
 align-items: center;
 }
@@ -22282,7 +22282,7 @@ padding: 8px 12px;
 font-size: 1rem;
 margin-right: 0.25rem;
 line-height: 1;
-vertical-align: bottom;
+/* vertical-align: bottom; */
 }
 .rtl .home-tab .btn i {
 margin-right: 0;
@@ -24549,7 +24549,6 @@ border-color: #e3e3e3;
 
 /* Breadcrumbs */
 .breadcrumb {
-border: 1px solid #dee2e6;
 }
 .breadcrumb .breadcrumb-item {
 font-size: 0.812rem;
@@ -29131,8 +29130,16 @@ vertical-align: middle;
 position: static;
 }
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown {
-left: 20px;
-right: 20px;
+left: 0 !important;
+right: 0 !important;
+margin: 0 auto !important;
+top: 97px;
+width: calc(100% - 40px);
+}
+.rtl .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown {
+left: 0 !important;
+right: 0 !important;
+margin: 0 auto !important;
 top: 97px;
 width: calc(100% - 40px);
 }
@@ -30441,7 +30448,7 @@ z-index: 1 !important;
 /* Fix Flasher container white line issue & Position */
 .fl-wrapper {
   position: fixed !important;
-  bottom: 0 !important; 
+  bottom: 0 !important;
   right: 0 !important;
   z-index: 999999 !important;
   height: 0 !important;
@@ -30509,4 +30516,9 @@ z-index: 1 !important;
 /* Reduce vertical spacing between fields */
 .form-group {
     margin-bottom: 0.5rem !important;
+}
+
+/* Increase UserDropdown width by 5px */
+#UserDropdown + .dropdown-menu {
+    min-width: 220px !important;
 }

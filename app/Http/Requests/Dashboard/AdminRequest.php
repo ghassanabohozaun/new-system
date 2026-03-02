@@ -30,7 +30,12 @@ class AdminRequest extends FormRequest
             'password' => ['required_without:id'],
             'password_confirm' => ['required_without:id', 'same:password'],
             'status' => ['required', 'in:1,0'],
-            'photo'=> ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024'],
+            'photo' => [
+                $this->id ? 'nullable' : 'required',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:1024'
+            ],
         ];
     }
 }

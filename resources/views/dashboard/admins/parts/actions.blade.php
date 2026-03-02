@@ -1,16 +1,16 @@
-<a href="javascript:void(0)" class="btn btn-outline-primary btn-icon-text btn-sm edit_admin_button"
-    title="{!! __('general.edit') !!}" admin-id="{!! $admin->id !!}" admin-name-ar="{!! $admin->getTranslation('name', 'ar') !!}"
-    admin-name-en="{!! $admin->getTranslation('name', 'en') !!}" admin-email="{!! $admin->email !!}" admin-role-id="{!! $admin->role_id !!}"
-    admin-status="{!! $admin->status !!}" admin-photo="{!! $admin->photo !!}">
-    <i class="ti-pencil btn-icon-prepend"></i>
-    {!! __('general.edit') !!}
-</a>
+<div class="d-flex justify-content-end gap-2">
+    <a href="javascript:void(0)" class="btn btn-outline-primary btn-icon-text btn-sm edit_admin_button"
+        title="{!! __('general.edit') !!}" data-id="{!! $admin->id !!}" data-name-ar="{!! $admin->getTranslation('name', 'ar') !!}"
+        data-name-en="{!! $admin->getTranslation('name', 'en') !!}" data-email="{!! $admin->email !!}" data-role-id="{!! $admin->role_id !!}"
+        data-status-active="{!! $admin->status !!}" data-photo="{!! $admin->photo !!}">
+        <i class="ti-pencil btn-icon-prepend"></i>
+        {!! __('general.edit') !!}
+    </a>
 
-<button type="button" class="btn btn-outline-danger btn-icon-text btn-sm {!! auth('admin')->id() != $admin->id ? 'delete-confirm' : '' !!}"
-    data-id="{!! $admin->id !!}" data-route="{!! route('dashboard.admins.destroy', $admin->id) !!}" data-title="{!! __('general.ask_delete_record') !!}"
-    data-text="{!! __('general.delete_warning_text') !!}" data-confirm-btn="{!! __('general.yes') !!}"
-    data-cancel-btn="{!! __('general.no') !!}" data-success-title="{!! __('general.deleted') !!}"
-    data-success-text="{!! __('general.delete_success_message') !!}" title="{!! auth('admin')->id() == $admin->id ? __('general.prevent_delete') : '' !!}" {!! auth('admin')->id() == $admin->id ? 'disabled' : '' !!}>
-    <i class="ti-trash btn-icon-prepend"></i>
-    {!! __('general.delete') !!}
-</button>
+    <button type="button" class="btn btn-outline-danger btn-icon-text btn-sm {!! auth('admin')->id() != $admin->id ? 'js-delete-btn' : '' !!}"
+        data-id="{!! $admin->id !!}" data-url="{!! route('dashboard.admins.destroy', $admin->id) !!}" title="{!! auth('admin')->id() == $admin->id ? __('general.prevent_delete') : __('general.delete') !!}"
+        {!! auth('admin')->id() == $admin->id ? 'disabled' : '' !!}>
+        <i class="ti-trash btn-icon-prepend"></i>
+        {!! __('general.delete') !!}
+    </button>
+</div>

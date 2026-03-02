@@ -74,4 +74,6 @@ return [
     'unlock' => 'إلغاء القفل',
     'sign_in_different_account' => 'تسجيل الدخول بحساب مختلف',
     'unlock_success' => 'تم التحقق بنجاح! جاري التحويل...',
+    'enter_new_password' => 'ادخل كلمة المرور الجديدة',
+    'confirm_new_password' => 'تأكيد كلمة المرور الجديدة',
 ];

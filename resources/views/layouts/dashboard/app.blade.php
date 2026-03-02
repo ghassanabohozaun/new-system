@@ -31,6 +31,12 @@
     @if (Lang() == 'ar')
         <link rel="stylesheet" href="{!! asset('assets/dashboard/css/rtl-overrides.css') !!}">
     @endif
+    @if (Lang() == 'ar')
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+            rel="stylesheet">
+    @endif
     <link rel="stylesheet" href="{!! asset('assets/dashboard/css/tajawal.css') !!}">
     <!-- endinject -->
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.min.css') !!}">
@@ -99,7 +105,9 @@
                 cancel: "{{ __('general.cancel') }}",
                 unlock: "{{ __('auth.unlock') }}",
                 enabled: "{{ __('general.enable') }}",
-                disabled: "{{ __('general.disabled') }}"
+                disabled: "{{ __('general.disabled') }}",
+                active: "{{ __('general.active') }}",
+                inactive: "{{ __('general.inactive') }}"
             },
             messages: {
                 delete_confirmation: "{{ __('general.delete_confirmation') }}",
@@ -117,10 +125,14 @@
             error: "{!! __('general.error') !!}",
             delete_error_message: "{!! __('general.delete_error_message') !!}",
             choose_file: "{!! __('general.choose_file') !!}",
-            no_file_chosen: "{!! __('general.no_file_chosen') !!}"
+            no_file_chosen: "{!! __('general.no_file_chosen') !!}",
+            details: "{!! __('general.details') !!}",
+            ok: "{!! __('general.ok_got_it') !!}"
         };
     </script>
     <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/fileinput.js?v=' . time()) !!}"></script>
+    <script src="{!! asset('assets/dashboard/js/hud-hub.js') !!}"></script>
     <script src="{!! asset('assets/dashboard/js/lock-screen.js') !!}"></script>
     @stack('scripts')
 </body>

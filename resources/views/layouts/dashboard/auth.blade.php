@@ -20,29 +20,22 @@
     <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/typicons/typicons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/css/vendor.bundle.base.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/inter.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard/css/tajawal.css') }}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}">
+
     <link rel="stylesheet" href="{!! asset('vendor/flasher/flasher.min.css') !!}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('assets/dashboard/images/favicon.png') }}" />
-    <style>
-        #login-rtl-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-
-        [dir="rtl"] #login-rtl-toggle {
-            right: auto;
-            left: 20px;
-        }
-    </style>
+    <link rel="shortcut icon" href="{!! setting()->favicon
+        ? asset('uploads/settings/' . setting()->favicon)
+        : asset('assets/dashboard/images/logo-mini.svg') !!}" />
 </head>
 
 <body class="{{ Lang() == 'ar' ? 'rtl' : '' }}">
@@ -66,6 +59,7 @@
     <!-- endinject -->
 
     <script src="{!! asset('vendor/flasher/flasher.min.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>
 
     @stack('scripts')
 </body>

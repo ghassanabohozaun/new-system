@@ -26,7 +26,7 @@ return [
     'select_flag' => 'اختيار العلم',
     'select_flag_code' => 'اختر كود العلم',
 
-    'no_countries_found' => 'لا يوجد دول حالياً !',
+    'no_countries_found' => 'لا يوجد دول حالياً',
     'country_restricted_deletion' => 'لا يمكن حذف الدولة لوجود مدن أو رحلات طيران مرتبطة بها.',
 
     // governorate
@@ -61,7 +61,7 @@ return [
     'enter_city_name_ar' => 'ادخل اسم المدينة بالعربي',
     'enter_city_name_en' => 'ادخل اسم المدينة بالانجليزي',
 
-    'no_cities_found' => 'لا يوجد مدن حالياً !',
+    'no_cities_found' => 'لا يوجد مدن حالياً',
 
     'show_all_users' => 'عرض جميع المستخدمين',
 ];

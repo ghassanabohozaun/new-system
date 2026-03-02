@@ -20,5 +20,5 @@ return [
     'enter_details_ar' => 'Enter Arabic Page Details',
     'enter_details_en' => 'Enter English Page Details',
 
-    'no_pages_found' => 'No Daynamic Pages Found !',
+    'no_pages_found' => 'No Daynamic Pages Found',
 ];

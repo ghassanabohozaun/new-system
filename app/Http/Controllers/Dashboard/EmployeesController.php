@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
+use App\Services\Dashboard\CityService;
+use App\Services\Dashboard\DepartmentService;
+use App\Services\Dashboard\EmployeeService;
+use App\Services\Dashboard\EmployeeStatusService;
+use App\Services\Dashboard\GovernorateService;
+use Illuminate\Http\Request;
+use Intervention\Image\Colors\Rgb\Channels\Red;
+
+class EmployeesController extends Controller
+{
+    protected $employeeService, $governorateService, $cityService, $employeeStatusService, $departmentService;
+    public function __construct(EmployeeService $employeeService, GovernorateService $governorateService, CityService $cityService, EmployeeStatusService $employeeStatusService, DepartmentService $departmentService)
+    {
+        $this->employeeService = $employeeService;
+        $this->governorateService = $governorateService;
+        $this->cityService = $cityService;
+        $this->employeeStatusService = $employeeStatusService;
+        $this->departmentService = $departmentService;
+    }
+
+    // index
+    public function index(Request $request)
+    {
+        $title = __('employees.employees');
+        $employees = $this->employeeService->getAll($request);
+        if ($request->ajax()) {
+            return view('dashboard.employees.employees.partials._table', compact('employees'))->render();
+        }
+
+        return view('dashboard.employees.employees.index', compact('title', 'employees'));
+    }
+
+    // create
+    public function create()
+    {
+        $title = __('employees.create_new_employee');
+        $governorates = $this->governorateService->getAllGovernoratesWithoutRelations();
+        $cities = $this->cityService->getAllCitiesWithoutRelation();
+        $employeeStatuses = $this->employeeStatusService->getActiveAll();
+        $departments = $this->departmentService->getActiveAll();
+
+        return view('dashboard.employees.employees.create', compact('title', 'governorates', 'cities', 'employeeStatuses', 'departments'));
+    }
+
+    // store
+    public function store(Request $request) {}
+
+    //  show
+    public function show(string $id)
+    {
+        if (!$id) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->route('dashboard.employees.index');
+        }
+
+        $title = __('employees.profile');
+        $employee = $this->employeeService->getOne($id);
+
+        if (!$employee) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->route('dashboard.employees.index');
+        }
+
+        if (!$employee) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->back();
+        }
+        return view('dashboard.employees.employees.profile', compact('title', 'employee'));
+    }
+
+    // edit
+    public function edit(string $id)
+    {
+        if (!$id) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->back();
+        }
+        $title = __('employees.update_employee');
+        $employee = $this->employeeService->getOne($id);
+
+        if (!$employee) {
+            flash()->error(__('general.no_record_found'));
+            return redirect()->route('dashboard.employees.index');
+        }
+
+        $governorates = $this->governorateService->getAllGovernoratesWithoutRelations();
+        $cities = $this->cityService->getAllCitiesWithoutRelation();
+        $employeeStatuses = $this->employeeStatusService->getActiveAll();
+        $departments = $this->departmentService->getActiveAll();
+        $employeeID = $id;
+
+        return view('dashboard.employees.employees.edit', compact('title', 'employee', 'employeeID', 'governorates', 'cities', 'employeeStatuses', 'departments'));
+    }
+
+    // update
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    // destroy
+    public function destroy(Request $request)
+    {
+        $employee = $this->employeeService->destroy($request->id);
+        if (!$employee) {
+            return response()->json(['status' => false], 500);
+        }
+        return response()->json(['status' => true, 'data' => $employee], 200);
+    }
+
+    // autocomplete employee
+    public function autocompleteEmployee(Request $request)
+    {
+        $data = [];
+        if ($request->filled('q')) {
+            $data = $this->employeeService->autocompleteEmployee($request->get('q'));
+        }
+        return response()->json($data);
+    }
+}

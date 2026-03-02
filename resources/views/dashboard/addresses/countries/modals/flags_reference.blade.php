@@ -1,6 +1,6 @@
 <div class="modal fade" id="flagsReferenceModal" tabindex="-1" role="dialog" aria-labelledby="flagsReferenceModalLabel"
     aria-hidden="true" style="z-index: 1600;">
-    <div class="modal-dialog modal-dialog-centered modal-ml" role="document" style="z-index: 1601;">
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document" style="z-index: 1601;">
         <div class="modal-content shadow-lg border-0">
             <div class="modal-header text-dark py-2 px-3 border-bottom-0">
                 <h6 class="modal-title d-flex align-items-center" id="flagsReferenceModalLabel">

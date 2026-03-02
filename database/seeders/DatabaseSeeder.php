@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             CitySeeder::class,
             DepartmentSeeder::class,
+            CategorySeeder::class,
+            FlightSeeder::class,
+            TicketSeeder::class,
+            ReservationSeeder::class,
+            TourSeeder::class,
         ]);
     }
 }

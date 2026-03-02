@@ -18,12 +18,47 @@ src: url('../fonts/tajawal/tajawal-v12-arabic_latin-700.woff2') format('woff2'),
 url('../fonts/tajawal/tajawal-v12-arabic_latin-700.woff') format('woff');
 }
 
-body, h1, h2, h3, h4, h5, h6, .form-control, .btn, .nav-link, .breadcrumb-item, .welcome-text, .welcome-sub-text, .menu-title {
-font-family: 'Tajawal', sans-serif !important;
+/* English (LTR): Tajawal font */
+body, h1, h2, h3, h4, h5, h6,
+.form-control, .btn, .nav-link,
+.breadcrumb-item, .welcome-text,
+.welcome-sub-text, .menu-title {
+    font-family: 'Tajawal', sans-serif !important;
+}
+
+/* Arabic (RTL): Cairo font via inheritance - safe approach that doesn't break icon fonts */
+html[lang="ar"],
+html[lang="ar"] body {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+/* Explicit overrides for elements that don't inherit easily */
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+html[lang="ar"] .form-control,
+html[lang="ar"] .form-select,
+html[lang="ar"] .btn,
+html[lang="ar"] .nav-link,
+html[lang="ar"] .menu-title,
+html[lang="ar"] label,
+html[lang="ar"] .form-label,
+html[lang="ar"] .modal-title,
+html[lang="ar"] .card-title,
+html[lang="ar"] .dropdown-item,
+html[lang="ar"] td,
+html[lang="ar"] th,
+html[lang="ar"] input,
+html[lang="ar"] select,
+html[lang="ar"] textarea {
+    font-family: 'Cairo', sans-serif !important;
 }
 
 html {
-    font-size: 110% !important; /* Approximately 2px increase if base is 16px */
+    font-size: 110% !important;
 }
 
 body {

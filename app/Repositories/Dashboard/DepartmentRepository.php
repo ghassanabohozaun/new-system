@@ -42,11 +42,11 @@ class DepartmentRepository
         return $department->forceDelete();
     }
 
-    // change status
     public function changeStatus($department, $status)
     {
-        return $department->update([
+        $department->update([
             'status' => $status,
         ]);
+        return $department;
     }
 }

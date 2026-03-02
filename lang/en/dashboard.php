@@ -41,4 +41,6 @@ return [
 
     // login
     'login' => 'Login',
+    'lock_screen' => 'Lock Screen',
+    'active_session' => 'Active Secured Session',
 ];

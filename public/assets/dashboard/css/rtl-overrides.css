@@ -1,31 +1,86 @@
 /* RTL Overrides for Star Admin 2 Free */
 
-/* Sidebar positioning */
+/* Sidebar positioning Mirroring */
 .rtl .sidebar {
-  border-right: none;
-  border-right: 1px solid #dee2e6;
+  border: none !important;
 }
 
-/* Sidebar Nav Item Rounding RTL */
+/* Mobile Off-canvas RTL - Right side for Arabic */
+@media screen and (max-width: 991px) {
+  .rtl .sidebar-offcanvas {
+    left: auto !important;
+    right: -220px !important;
+  }
+  .rtl .sidebar-offcanvas.active {
+    right: 0 !important;
+    left: auto !important;
+  }
+}
+
+/* Sidebar Nav Item Rounding RTL - Precise Mirror of style.css LTR logic */
 .rtl .sidebar .nav .nav-item .nav-link {
-  border-radius: 0px 0px 0px 0px !important;
+  border-radius: 20px 0px 0px 20px !important; /* Default mirrored radius */
+  transition: border-radius 0.25s ease-in-out, background 0.25s ease-in-out;
 }
 
-.rtl .sidebar .nav .nav-item.active > .nav-link[aria-expanded="true"],
+/* White background for active or expanded */
+.rtl .sidebar .nav .nav-item.active > .nav-link,
 .rtl .sidebar .nav .nav-item > .nav-link[aria-expanded="true"] {
-  border-radius: 20px 0px 0px 0px !important;
+  background: #fff !important;
 }
 
-/* Sub-menu RTL */
+/* ONLY flatten the bottom corner if the item actually has a sub-menu and IS OPEN */
+.rtl .sidebar .nav .nav-item > .nav-link[aria-expanded="true"]:not(.collapsed) {
+  border-radius: 20px 0px 0px 0px !important; /* Flatten bottom to connect with sub-menu */
+}
+
+/* Force rounding back whenever it is collapsed or expanded is false */
+.rtl .sidebar .nav .nav-item > .nav-link.collapsed,
+.rtl .sidebar .nav .nav-item > .nav-link[aria-expanded="false"],
+.rtl .sidebar .nav .nav-item.active > .nav-link.collapsed {
+  border-radius: 20px 0px 0px 20px !important;
+}
+
+/* Sub-menu RTL Symmetry */
 .rtl .sidebar .nav.sub-menu {
-  padding: 0.25rem 3.07rem 0 0;
-  border-radius: 0px 0px 0px 20px !important;
-  margin-top: 0;
+  padding: 0.25rem 3.07rem 0 0 !important;
+  border-radius: 0px 0px 0px 20px !important; /* Mirror of 0 0 20 0 */
+  margin-right: 0;
+  background: #fff;
 }
 
 .rtl .sidebar .nav.sub-menu .nav-item::before {
   right: 0 !important;
   left: auto !important;
+}
+
+/* Icons & Titles Symmetry */
+.rtl .sidebar .nav .nav-item .nav-link .menu-icon {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Sidebar Arrows Mirroring - Open (Up), Closed (Down) in RTL */
+.rtl .sidebar .nav .nav-item .menu-arrow {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    color: #bfccda !important; /* Visible gray on light background */
+}
+
+.rtl .sidebar .nav .nav-item.active .menu-arrow,
+.rtl .sidebar .nav .nav-item:hover .menu-arrow {
+    color: #1F3BB3 !important; /* Theme blue */
+}
+
+/* Match LTR Micro-Motion (on :before) */
+.rtl .sidebar .nav .nav-item .nav-link .menu-arrow:before {
+    display: inline-block;
+    transition: all 0.2s ease-in !important;
+}
+
+/* Expanded state: Point Up (180deg) via :before rotation (same as LTR) */
+.rtl .sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow:before {
+    transform: rotate(180deg) !important;
 }
 
 /*
@@ -460,4 +515,24 @@
 
 .rtl .form-switch .form-check-input:checked {
     background-position: left center !important;
+}
+
+/* Arabic (RTL): Buttons font size -1px */
+.rtl .btn {
+    font-size: calc(var(--dash-font-base) - 0.0625rem) !important; /* 13px → 12px */
+}
+.rtl .btn-sm {
+    font-size: calc(0.875rem - 0.0625rem) !important; /* ~13px → 12px */
+}
+
+/* Button icon alignment — all languages */
+.btn i,
+.btn [class^="mdi-"],
+.btn [class^="ti-"],
+.btn [class^="icon-"],
+.btn .fa {
+    vertical-align: middle !important;
+    line-height: 1 !important;
+    position: relative;
+    top: -1px;
 }

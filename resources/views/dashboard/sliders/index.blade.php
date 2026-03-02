@@ -53,65 +53,20 @@
                     <!--------------------  Start Table  ---------------------------->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{!! __('sliders.show_all_sliders') !!}</h4>
-                            <div class="table-responsive table-responsive-custom">
-                                <table class="table table-hover js-sliders-table" id="responsiveTable">
-                                    <thead>
-                                        <tr>
-                                            <th class="details-col"></th>
-                                            <th>#</th>
-                                            <th>{!! __('sliders.photo') !!}</th>
-                                            <th>{!! __('sliders.title') !!}</th>
-                                            <th class="d-none d-lg-table-cell">{!! __('sliders.details') !!}</th>
-                                            <th class="text-center d-none d-md-table-cell">{!! __('sliders.status') !!}</th>
-                                            <th class="text-center d-none d-xl-table-cell">{!! __('sliders.manage_status') !!}</th>
-                                            <th class="text-center">{!! __('general.actions') !!}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($sliders as $slider)
-                                            <tr id="slider-row-{{ $slider->id }}">
-                                                <td class="details-col">
-                                                    <i class="mdi mdi-plus-circle details-control"></i>
-                                                </td>
-                                                <td>{!! $loop->iteration !!}</td>
-                                                <td>
-                                                    @include('dashboard.sliders.parts.photo', [
-                                                        'slider' => $slider,
-                                                    ])
-                                                </td>
-                                                <td>{!! $slider->getTranslation('title', Lang()) !!}</td>
-                                                <td class="d-none d-lg-table-cell"
-                                                    style="white-space: normal; max-width: 300px;">
-                                                    {!! str($slider->getTranslation('details', Lang()))->limit(50) !!}
-                                                </td>
-                                                <td class="text-center d-none d-md-table-cell">
-                                                    @include('dashboard.sliders.parts.status', [
-                                                        'slider' => $slider,
-                                                    ])
-                                                </td>
-                                                <td class="text-center d-none d-xl-table-cell">
-                                                    @include('dashboard.sliders.parts.manage_status', [
-                                                        'slider' => $slider,
-                                                    ])
-                                                </td>
-                                                <td class="text-center">
-                                                    @include('dashboard.sliders.parts.actions', [
-                                                        'slider' => $slider,
-                                                    ])
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="8" class="text-center text-muted">
-                                                    {!! __('sliders.no_sliders_found') !!}
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                                <div class="mt-4">
-                                    {!! $sliders->links() !!}
+                            <h4 class="card-title mb-4 d-flex align-items-center">
+                                <span class="card-icon-premium me-3">
+                                    <i class="mdi mdi-view-carousel-outline"></i>
+                                </span>
+                                {!! __('sliders.show_all_sliders') !!}
+                            </h4>
+                            <div class="table-loader-container" style="position: relative;">
+                                <div class="table-loader-overlay">
+                                    <span class="premium-loader"></span>
+                                </div>
+                                <div id="table_data">
+                                    @include('dashboard.sliders.partials._table', [
+                                        'sliders' => $sliders,
+                                    ])
                                 </div>
                             </div>
                         </div>
@@ -124,24 +79,19 @@
 
     @include('dashboard.sliders.modals.create')
     @include('dashboard.sliders.modals.edit')
-    @include('dashboard.admins.modals.tr-details')
+    @include('dashboard.general.tr-details')
 @endsection
 
 @push('scripts')
-    <script src="{!! asset('assets/dashboard/js/modules/sliders.js') !!}"></script>
     <script>
         $(document).ready(function() {
-            SliderModule.init({
-                routes: {
-                    update: "{{ route('dashboard.sliders.update', ':id') }}"
-                },
-                labels: {
-                    details: "{!! __('general.details') !!}"
-                },
-                messages: {
-                    add_success: "{!! __('general.add_success_message') !!}",
-                    update_success: "{!! __('general.update_success_message') !!}"
-                }
+            // Initialize Generic Index Table Handler
+            window.initIndexTable({
+                container: '#table_data',
+                loader: '.table-loader-overlay',
+                detailsModal: '#detailsModal',
+                detailsModalLabel: '#detailsModalLabel',
+                detailsModalBody: '#modalBody'
             });
         });
     </script>

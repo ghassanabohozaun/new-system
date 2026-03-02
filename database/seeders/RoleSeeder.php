@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
 
         Role::create([
             'role' => [
-                'en' => 'Manger',
+                'en' => 'Manager',
                 'ar' => 'المدير',
             ],
             'permissions' => json_encode($permissions),

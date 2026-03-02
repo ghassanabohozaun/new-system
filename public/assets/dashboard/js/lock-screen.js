@@ -1,5 +1,5 @@
 let idleTime = 0;
-const idleLimit = 300; // 60 seconds (1 minute) as requested
+const idleLimit = 300; // 300 seconds (5 minutes)
 
 // Reset timer on any user activity
 function resetTimer() {
@@ -25,16 +25,35 @@ window.onkeypress = resetTimer;
 
 // Handle Unlock AJAX
 $(document).ready(function () {
-    $("#lock-form").on("submit", function (e) {
+    const lockForm = $("#lock-form");
+    const passwordInput = $("#lock-password");
+    const passwordGroup = $("#password-group");
+    const errorEl = $("#lock-error");
+    const submitBtn = $("#unlock-btn");
+
+    lockForm.on("submit", function (e) {
         e.preventDefault();
-        const password = $("#lock-password").val();
-        const submitBtn = $(this).find('button[type="submit"]');
-        const errorEl = $("#lock-error");
+
+        const password = passwordInput.val();
+
+        // Reset state
+        passwordGroup.removeClass("is-invalid");
+        errorEl.addClass("d-none").text("");
+
+        if (!password) {
+            passwordGroup.addClass("is-invalid");
+            errorEl
+                .removeClass("d-none")
+                .text(window.Translations.messages.failed);
+            return;
+        }
 
         submitBtn
             .prop("disabled", true)
-            .html('<i class="fa fa-spinner fa-spin"></i>');
-        errorEl.addClass("d-none").text("");
+            .html(
+                '<i class="mdi mdi-loading mdi-spin"></i> ' +
+                    window.Translations.labels.unlock,
+            );
 
         $.ajax({
             url: window.Translations.routes.unlock_screen,
@@ -44,27 +63,32 @@ $(document).ready(function () {
                 password: password,
             },
             success: function (response) {
-                console.log("Unlock response:", response);
                 if (response.status) {
                     if (typeof flasher !== "undefined") {
                         flasher.success(
                             window.Translations.messages.unlock_success,
                         );
                     }
-                    // Wait 5 seconds before redirecting
+
+                    // Small delay for UX transition
                     setTimeout(() => {
                         window.location.replace(
                             response.redirect ||
                                 window.Translations.routes.dashboard_index,
                         );
-                    }, 5000);
+                    }, 500);
                 } else {
                     submitBtn
                         .prop("disabled", false)
                         .text(window.Translations.labels.unlock);
+
+                    passwordGroup.addClass("is-invalid");
                     errorEl
                         .removeClass("d-none")
-                        .text(response.message || "Error");
+                        .text(
+                            response.message ||
+                                window.Translations.messages.failed,
+                        );
                 }
             },
             error: function (xhr) {
@@ -79,11 +103,19 @@ $(document).ready(function () {
                         window.Translations.messages.failed;
                 }
 
+                passwordGroup.addClass("is-invalid");
                 errorEl.removeClass("d-none").text(errorMsg);
+
                 if (typeof flasher !== "undefined") {
                     flasher.error(errorMsg);
                 }
             },
         });
+    });
+
+    // Clear error on input
+    passwordInput.on("input", function () {
+        passwordGroup.removeClass("is-invalid");
+        errorEl.addClass("d-none");
     });
 });

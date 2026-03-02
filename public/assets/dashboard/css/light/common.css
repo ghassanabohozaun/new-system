@@ -2,7 +2,7 @@
 /*------------------------------------------------------------------
  [Master Stylesheet]
 
-  Project:	Star Admin2 
+  Project:	Star Admin2
   Version:	1.2.1
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
@@ -22282,7 +22282,7 @@ code {
   font-size: 1rem;
   margin-right: 0.25rem;
   line-height: 1;
-  vertical-align: bottom;
+  /* vertical-align: bottom; */
 }
 .rtl .home-tab .btn i {
   margin-right: 0;

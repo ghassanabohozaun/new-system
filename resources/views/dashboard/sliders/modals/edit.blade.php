@@ -4,157 +4,157 @@
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id="edit_slider_form">
             @csrf
             @method('PUT')
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSliderModalLabel">
-                        <i class="mdi mdi-pencil me-2"></i>{!! __('sliders.update_slider') !!}
+                    <h5 class="modal-title fw-bold" id="editSliderModalLabel">
+                        <i class="mdi mdi-pencil text-primary me-2"></i>{!! __('sliders.update_slider') !!}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <input type="hidden" id="slider_id_edit" name="id">
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="title_ar_edit">{!! __('sliders.title_ar') !!} <span
+                    <div class="row g-4">
+                        <!-- Arabic Title -->
+                        <div class="col-md-6 theme-primary">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="title_ar_edit">{!! __('sliders.title_ar') !!} <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="title_ar_edit" name="title[ar]"
-                                    class="form-control form-control-sm" placeholder="{!! __('sliders.enter_title_ar') !!}"
-                                    autocomplete="off">
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="title_ar_edit" name="title[ar]" class="form-control"
+                                        placeholder="{!! __('sliders.enter_title_ar') !!}" autocomplete="off">
+                                </div>
                                 <strong id="title_ar_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="title_en_edit">{!! __('sliders.title_en') !!} <span
+                        <!-- English Title -->
+                        <div class="col-md-6 theme-info">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="title_en_edit">{!! __('sliders.title_en') !!} <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="title_en_edit" name="title[en]"
-                                    class="form-control form-control-sm" placeholder="{!! __('sliders.enter_title_en') !!}"
-                                    autocomplete="off">
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <input type="text" id="title_en_edit" name="title[en]" class="form-control"
+                                        placeholder="{!! __('sliders.enter_title_en') !!}" autocomplete="off">
+                                </div>
                                 <strong id="title_en_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="details_ar_edit">{!! __('sliders.details_ar') !!} <span
+                        <!-- Arabic Details -->
+                        <div class="col-md-6 theme-primary">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="details_ar_edit">{!! __('sliders.details_ar') !!} <span
                                         class="text-danger">*</span></label>
-                                <textarea id="details_ar_edit" name="details[ar]" class="form-control form-control-sm" rows="5"
-                                    placeholder="{!! __('sliders.enter_details_ar') !!}"></textarea>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
+                                    <textarea id="details_ar_edit" name="details[ar]" class="form-control" rows="4"
+                                        placeholder="{!! __('sliders.enter_details_ar') !!}"></textarea>
+                                </div>
                                 <strong id="details_ar_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="details_en_edit">{!! __('sliders.details_en') !!} <span
+                        <!-- English Details -->
+                        <div class="col-md-6 theme-info">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="details_en_edit">{!! __('sliders.details_en') !!} <span
                                         class="text-danger">*</span></label>
-                                <textarea id="details_en_edit" name="details[en]" class="form-control form-control-sm" rows="5"
-                                    placeholder="{!! __('sliders.enter_details_en') !!}"></textarea>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
+                                    <textarea id="details_en_edit" name="details[en]" class="form-control" rows="4"
+                                        placeholder="{!! __('sliders.enter_details_en') !!}"></textarea>
+                                </div>
                                 <strong id="details_en_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="url_ar_edit">{!! __('sliders.url_ar') !!}</label>
-                                <input type="text" id="url_ar_edit" name="url[ar]"
-                                    class="form-control form-control-sm" placeholder="{!! __('sliders.enter_url_ar') !!}">
+                        <!-- Arabic URL -->
+                        <div class="col-md-6 theme-primary">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="url_ar_edit">{!! __('sliders.url_ar') !!}</label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <input type="text" id="url_ar_edit" name="url[ar]" class="form-control"
+                                        placeholder="{!! __('sliders.enter_url_ar') !!}">
+                                </div>
                                 <strong id="url_ar_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="url_en_edit">{!! __('sliders.url_en') !!}</label>
-                                <input type="text" id="url_en_edit" name="url[en]"
-                                    class="form-control form-control-sm" placeholder="{!! __('sliders.enter_url_en') !!}">
+                        <!-- English URL -->
+                        <div class="col-md-6 theme-info">
+                            <div class="form-group mb-0">
+                                <label class="form-label-premium" for="url_en_edit">{!! __('sliders.url_en') !!}</label>
+                                <div class="input-group-premium">
+                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <input type="text" id="url_en_edit" name="url[en]" class="form-control"
+                                        placeholder="{!! __('sliders.enter_url_en') !!}">
+                                </div>
                                 <strong id="url_en_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mb-3">
+                        <!-- Photo Upload -->
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-label text-dark fw-bold"><i
-                                        class="mdi mdi-image me-1 text-primary"></i>{!! __('sliders.photo') !!}</label>
-                                <div
-                                    class="slider-upload-card d-flex align-items-stretch gap-3 border rounded-3 p-3 bg-light">
-
-                                    <!-- Preview Thumbnail -->
-                                    <div id="edit_slider_preview"
-                                        class="slider-thumb-preview rounded-3 overflow-hidden border flex-shrink-0 bg-white d-flex align-items-center justify-content-center"
-                                        style="width:240px; height:135px;">
-                                        <div class="text-center text-muted">
-                                            <i class="mdi mdi-image-outline"
-                                                style="font-size:2rem; opacity:0.35;"></i>
-                                            <div style="font-size:0.7rem; margin-top:4px;">Current Image</div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Upload Input -->
-                                    <div class="d-flex flex-column justify-content-center flex-grow-1">
-                                        <div class="mb-1 text-muted small"><i
-                                                class="mdi mdi-cloud-upload-outline me-1"></i>{!! __('sliders.click_to_upload') !!}
-                                        </div>
-                                        <input type="file" id="photo_edit" name="photo"
-                                            class="form-control form-control-sm js-image-preview"
-                                            data-preview="#edit_slider_preview" accept="image/*">
-                                        <small class="text-muted mt-1"><i
-                                                class="mdi mdi-information-outline me-1"></i>{!! __('sliders.slider_size') !!}</small>
-                                        <strong id="photo_error_edit" class="text-danger small d-block mt-1"></strong>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <x-dashboard.file-input name="photo" id="photo_edit" label="{!! __('sliders.photo') !!}"
+                                placeholderIcon="mdi-image-outline" placeholderText="1920 × 742"
+                                currentImageUrl="javascript:void(0)" isRequired="false" errorId="photo_error_edit" />
+                            <small class="text-muted mt-1 d-block text-center w-100">
+                                <i class="mdi mdi-information-outline me-1"></i>{!! __('sliders.slider_size') !!} (1920 × 742)
+                            </small>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group mb-2">
-                                <div
-                                    class="d-flex align-items-center justify-content-between border rounded p-2 bg-light">
-                                    <label class="mb-0 text-dark fw-bold" for="status_active_edit"><i
-                                            class="mdi mdi-power me-2 text-primary"></i>{!! __('sliders.status') !!}</label>
-                                    <div class="form-check form-switch mb-0">
-                                        <input type="hidden" name="status" value="0">
-                                        <input type="checkbox" class="form-check-input" name="status"
-                                            id="status_active_edit" value="1">
+                        <!-- Toggles -->
+                        <div class="col-md-4 theme-success">
+                            <div class="form-group mb-0">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="status_active_edit">{!! __('sliders.status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="status"
+                                                id="status_active_edit" value="1">
+                                        </div>
                                     </div>
                                 </div>
                                 <strong id="status_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-2">
-                                <div
-                                    class="d-flex align-items-center justify-content-between border rounded p-2 bg-light">
-                                    <label class="mb-0 text-dark fw-bold" for="details_status_active_edit"><i
-                                            class="mdi mdi-format-list-bulleted-type me-2 text-primary"></i>{!! __('sliders.details_status') !!}</label>
-                                    <div class="form-check form-switch mb-0">
-                                        <input type="hidden" name="details_status" value="0">
-                                        <input type="checkbox" class="form-check-input" name="details_status"
-                                            id="details_status_active_edit" value="1">
+                        <div class="col-md-4 theme-warning">
+                            <div class="form-group mb-0">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-format-list-bulleted-type"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="details_status_active_edit">{!! __('sliders.details_status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="details_status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="details_status"
+                                                id="details_status_active_edit" value="1">
+                                        </div>
                                     </div>
                                 </div>
                                 <strong id="details_status_error_edit" class="text-danger small"></strong>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group mb-2">
-                                <div
-                                    class="d-flex align-items-center justify-content-between border rounded p-2 bg-light">
-                                    <label class="mb-0 text-dark fw-bold" for="button_status_active_edit"><i
-                                            class="mdi mdi-gesture-tap-button me-2 text-primary"></i>{!! __('sliders.button_status') !!}</label>
-                                    <div class="form-check form-switch mb-0">
-                                        <input type="hidden" name="button_status" value="0">
-                                        <input type="checkbox" class="form-check-input" name="button_status"
-                                            id="button_status_active_edit" value="1">
+                        <div class="col-md-4 theme-info">
+                            <div class="form-group mb-0">
+                                <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
+                                    <span class="input-group-text"><i class="mdi mdi-gesture-tap-button"></i></span>
+                                    <div class="d-flex align-items-center justify-content-between flex-grow-1">
+                                        <label class="mb-0 form-label-premium"
+                                            for="button_status_active_edit">{!! __('sliders.button_status') !!} <span
+                                                class="text-danger">*</span></label>
+                                        <div class="form-check form-switch mb-0">
+                                            <input type="hidden" name="button_status" value="0">
+                                            <input type="checkbox" class="form-check-input" name="button_status"
+                                                id="button_status_active_edit" value="1">
+                                        </div>
                                     </div>
                                 </div>
                                 <strong id="button_status_error_edit" class="text-danger small"></strong>
@@ -162,17 +162,84 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-sm btn-primary text-white">
-                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                            aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                    </button>
+                <div class="modal-footer bg-light border-0">
+                    <!-- Buttons removed in favor of Floating Command HUD -->
                 </div>
+
+                <!-- Floating Command HUD -->
+                <x-dashboard.command-hud formId="edit_slider_form" hudId="edit_slider_hud"
+                    countId="edit_slider_count" discardId="edit_slider_discard" submitId="edit_slider_save" />
             </div>
         </form>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // --- Slider Edit Populate Logic (Using Generic Helper) ---
+            window.populateModal('.js-edit-slider', {
+                modal: '#editSliderModal',
+                form: '#edit_slider_form',
+                actionUrl: "{{ route('dashboard.sliders.update', ':id') }}",
+                idKey: 'sliderId', // Matches data-slider-id
+                suffix: '_edit',
+                onAfterPopulate: function(btn, data, form) {
+                    var $previewContainer = $('#photo_edit_preview');
+                    var $img = $previewContainer.find('.fileinput-current-img');
+                    var $placeholder = $previewContainer.find('.fileinput-placeholder');
+                    var $resetBtn = $('#reset_photo_edit_btn');
+
+                    // Standard pattern for populating file input in edit modal
+                    if (data.photo && data.photo !== "" && data.photo !== "null") {
+                        var photoUrl = data.photo;
+
+                        // Set original state for HUD discard
+                        $previewContainer.attr('data-original-html',
+                            `<img src="${photoUrl}" class="fileinput-current-img" style="width:100%; height:100%; object-fit:contain; background-color: #f8f9fa;">`
+                        );
+
+                        $('#photo_edit').val(''); // Clear any previous selection
+                        $placeholder.addClass('d-none');
+                        $img.attr('src', photoUrl).removeClass('d-none');
+                        $previewContainer.closest('.fileinput-component').find('.slider-upload-card')
+                            .removeClass('d-none');
+                    } else {
+                        $previewContainer.attr('data-original-html', '');
+                        $img.addClass('d-none').attr('src', '');
+                        $placeholder.removeClass('d-none');
+                        $resetBtn.addClass('d-none');
+                    }
+
+                    // Initialize HUD after population
+                    if (window.activeHud) window.activeHud.changedFields.clear();
+                    initHud('edit_slider_form', {
+                        hudId: 'edit_slider_hud',
+                        countId: 'edit_slider_count',
+                        discardId: 'edit_slider_discard',
+                        submitId: 'edit_slider_save'
+                    });
+                }
+            });
+
+            // --- Slider Edit Form Handler ---
+            window.handleFormSubmit('#edit_slider_form', {
+                modalToHide: '#editSliderModal',
+                tableToLoad: '.js-sliders-table',
+                successMessage: "{!! __('general.update_success_message') !!}",
+                suffix: "_edit",
+                resetForm: false,
+                onSuccess: function() {
+                    if (window.activeHud) window.activeHud.changedFields.clear();
+                }
+            });
+
+            // --- Reset on Close ---
+            $('#editSliderModal').on('hidden.bs.modal', function() {
+                window.clearFormErrors('#edit_slider_form');
+                // Trigger local reset to clear preview image correctly
+                $('#reset_photo_edit_btn').click();
+            });
+        });
+    </script>
+@endpush

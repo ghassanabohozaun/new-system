@@ -30,18 +30,26 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="role_ar">{!! __('roles.role_ar') !!}</label>
-                                            <input type="text" class="form-control" id="role_ar" name="role[ar]"
-                                                placeholder="{!! __('roles.enter_role_ar') !!}">
+                                        <div class="form-group mb-3 theme-primary">
+                                            <label for="role_ar" class="form-label-premium">{!! __('roles.role_ar') !!} <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group-premium">
+                                                <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                                <input type="text" class="form-control" id="role_ar" name="role[ar]"
+                                                    placeholder="{!! __('roles.enter_role_ar') !!}">
+                                            </div>
                                             <strong id="role_ar_error" class="text-danger small"></strong>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="role_en">{!! __('roles.role_en') !!}</label>
-                                            <input type="text" class="form-control" id="role_en" name="role[en]"
-                                                placeholder="{!! __('roles.enter_role_en') !!}">
+                                        <div class="form-group mb-3 theme-primary">
+                                            <label for="role_en" class="form-label-premium">{!! __('roles.role_en') !!} <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group-premium">
+                                                <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                                <input type="text" class="form-control" id="role_en" name="role[en]"
+                                                    placeholder="{!! __('roles.enter_role_en') !!}">
+                                            </div>
                                             <strong id="role_en_error" class="text-danger small"></strong>
                                         </div>
                                     </div>
@@ -49,7 +57,9 @@
 
                                 <div class="row mt-4">
                                     <div class="col-12">
-                                        <label class="mb-3">{!! __('roles.permissions') !!}</label>
+                                        <label class="mb-3 form-label-premium"><i
+                                                class="mdi mdi-shield-check-outline me-1 text-primary"></i>{!! __('roles.permissions') !!}
+                                            <span class="text-danger">*</span></label>
                                         <div class="row">
                                             @foreach (config('global.permissions') as $key => $value)
                                                 <div class="col-md-3 mb-2">
@@ -67,16 +77,8 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary btn-icon-text me-2 text-white">
-                                        <i class="ti-save me-1" style="font-size: 0.85rem;"></i> {!! __('general.save') !!}
-                                        <span class="spinner-border spinner-border-sm d-none spinner_loading" role="status"
-                                            aria-hidden="true"></span>
-                                    </button>
-                                    <a href="{{ route('dashboard.roles.index') }}" class="btn btn-light btn-icon-text">
-                                        <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.cancel') !!}
-                                    </a>
-                                </div>
+                                <!-- Floating Command HUD -->
+                                <x-dashboard.command-hud formId="role_form" />
                             </form>
                         </div>
                     </div>
@@ -88,14 +90,21 @@
 
 @push('scripts')
     <script type="text/javascript">
-        window.handleFormSubmit('#role_form', {
-            successMessage: "{!! __('general.add_success_message') !!}",
-            resetForm: false,
-            onSuccess: function(data) {
-                setTimeout(() => {
-                    window.location.href = "{!! route('dashboard.roles.index') !!}";
-                }, 1000);
-            }
+        $(document).ready(function() {
+            // --- Initialize HUD ---
+            initHud('role_form');
+
+            window.handleFormSubmit('#role_form', {
+                successMessage: "{!! __('general.add_success_message') !!}",
+                resetForm: false,
+                onSuccess: function(data) {
+                    if (window.activeHud) window.activeHud.changedFields
+                        .clear(); // Clear tracking on success
+                    setTimeout(() => {
+                        window.location.href = "{!! route('dashboard.roles.index') !!}";
+                    }, 1000);
+                }
+            });
         });
     </script>
 @endpush
