@@ -92,6 +92,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $sliders->links() !!}
+        {!! $sliders->withQueryString()->links() !!}
     </div>
 </div>

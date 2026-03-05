@@ -58,5 +58,5 @@
     </table>
 </div>
 <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-    {!! $cities->links() !!}
+    {!! $cities->withQueryString()->links() !!}
 </div>

@@ -30,9 +30,9 @@ class CityService
     }
 
     // get cities
-    public function getCities()
+    public function getCities($filters = [])
     {
-        return $this->cityRepository->getCities();
+        return $this->cityRepository->getCities($filters);
     }
 
     // get active cities
@@ -57,14 +57,20 @@ class CityService
         $city = self::getCity($id);
 
         if (!$city) {
-            return false;
+            return 'not_found';
         }
 
-        $city = $this->cityRepository->destroyCity($city);
-        if (!$city) {
-            return false;
+        if (
+            $city->flights()->exists() ||
+            $city->tours()->exists() ||
+            $city->fromFlightTicket()->exists() ||
+            $city->toFlightTicket()->exists()
+        ) {
+            return 'restricted';
         }
-        return $city;
+
+        $result = $this->cityRepository->destroyCity($city);
+        return $result ? 'success' : 'failed';
     }
 
     // update city

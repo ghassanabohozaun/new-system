@@ -4,7 +4,7 @@
             <tr>
                 <th class="details-col"></th>
                 <th class="text-start">#</th>
-                <th class="text-start d-none d-lg-table-cell">{!! __('tickets.photo') !!}</th>
+                <th class="text-start  d-none d-xl-table-cell">{!! __('tickets.photo') !!}</th>
                 <th class="text-start">{!! __('tickets.title') !!}</th>
                 <th class="text-start d-none d-lg-table-cell">{!! __('tickets.price') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('tickets.from_country_id') !!}</th>
@@ -21,7 +21,7 @@
                         <i class="mdi mdi-plus-circle details-control" data-title="{!! $ticket->getTranslation('title', Lang()) !!}"></i>
                     </td>
                     <td class="text-start">{!! $loop->iteration !!}</td>
-                    <td class="text-start d-none d-lg-table-cell">
+                    <td class="text-start d-none d-xl-table-cell">
                         @include('dashboard.tickets.parts.photo', ['ticket' => $ticket])
                     </td>
                     <td class="text-start">{!! $ticket->getTranslation('title', Lang()) !!}</td>
@@ -119,6 +119,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $tickets->links() !!}
+        {!! $tickets->withQueryString()->links() !!}
     </div>
 </div>

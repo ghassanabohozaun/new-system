@@ -1076,4 +1076,41 @@
             icon.removeClass("mdi-eye-off-outline").addClass("mdi-eye-outline");
         }
     });
+
+    // --- Flatpickr Global Initialization ---
+    if (typeof flatpickr !== "undefined") {
+        const lang = $("html").attr("lang") || "en";
+        const config = {
+            dateFormat: "Y-m-d",
+            locale: lang === "ar" ? "ar" : "en",
+            disableMobile: "true",
+            allowInput: true,
+        };
+
+        // Initialize standard date inputs
+        $('input[type="date"]').each(function () {
+            const input = $(this);
+            if (!input.attr("placeholder")) {
+                input.attr(
+                    "placeholder",
+                    lang === "ar" ? "اختر التاريخ" : "Select Date",
+                );
+            }
+            flatpickr(this, config);
+        });
+
+        // Helper to initialize new elements (e.g., in modals)
+        window.initFlatpickr = function (selector) {
+            $(selector || 'input[type="date"]').each(function () {
+                const input = $(this);
+                if (!input.attr("placeholder")) {
+                    input.attr(
+                        "placeholder",
+                        lang === "ar" ? "اختر التاريخ" : "Select Date",
+                    );
+                }
+                flatpickr(this, config);
+            });
+        };
+    }
 })(jQuery);

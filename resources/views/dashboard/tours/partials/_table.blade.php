@@ -4,7 +4,7 @@
             <tr>
                 <th class="details-col"></th>
                 <th class="text-start">#</th>
-                <th class="text-start">{!! __('tours.title') !!}</th>
+                <th class="text-start" style="min-width: 200px;">{!! __('tours.title') !!}</th>
                 <th class="text-start d-none d-lg-table-cell">{!! __('tours.price') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('tours.country_id') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('tours.city_id') !!}</th>
@@ -20,7 +20,9 @@
                         <i class="mdi mdi-plus-circle details-control" data-title="{!! $tour->getTranslation('title', Lang()) !!}"></i>
                     </td>
                     <td class="text-start">{!! $loop->iteration !!}</td>
-                    <td class="text-start">{!! $tour->getTranslation('title', Lang()) !!}</td>
+                    <td class="text-start"
+                        style="min-width: 200px; max-width: 350px; white-space: normal; word-break: break-word;">
+                        {!! $tour->getTranslation('title', Lang()) !!}</td>
                     <td class="text-start d-none d-lg-table-cell">{!! $tour->price !!}</td>
                     <td class="text-start d-none d-xl-table-cell">{!! $tour->country->getTranslation('name', Lang()) !!}</td>
                     <td class="text-start d-none d-xl-table-cell">{!! $tour->city->getTranslation('name', Lang()) !!}</td>
@@ -94,6 +96,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $tours->appends(request()->input())->links() !!}
+        {!! $tours->withQueryString()->links() !!}
     </div>
 </div>

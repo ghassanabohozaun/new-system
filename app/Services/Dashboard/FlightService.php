@@ -37,7 +37,6 @@ class FlightService
         return $this->flightRepository->getFlights();
     }
 
-
     // get flights paginated
     public function getFlightsPaginated($perPage = 3, $filters = [])
     {
@@ -54,58 +53,10 @@ class FlightService
         return $flight;
     }
 
-
-
     // get active flights
     public function getActiveFlights()
     {
         return $this->flightRepository->getActiveFlights();
-    }
-
-    // get All
-    public function getAll($request)
-    {
-        $flights = $this->flightRepository->getAll($request);
-
-        return DataTables::of($flights)
-            ->addIndexColumn()
-            ->addColumn('images', function ($flight) {
-                return view('dashboard.flights.parts.images', compact('flight'));
-            })
-            ->addColumn('name', function ($flight) {
-                return $flight->getTranslation('name', Lang());
-            })
-            ->addColumn('country_id', function ($flight) {
-                return $flight->country->name;
-            })
-            ->addColumn('city_id', function ($flight) {
-                return $flight->city->name;
-            })
-            ->addColumn('category_id', function ($flight) {
-                return $flight->category->name;
-            })
-            ->addColumn('reservations_count_total', function ($flight) {
-                return $flight->reservations()->count();
-            })
-            ->addColumn('Last_reservation_date', function ($flight) {
-                return $flight->reservations()->latest()->first()->created_at;
-            })
-            // ->addColumn('new_reservations_count', function ($flight) {
-            //     return '3';
-            // })
-            ->addColumn('status', function ($flight) {
-                return view('dashboard.flights.parts.status', compact('flight'));
-            })
-
-            ->addColumn('manage_status', function ($flight) {
-                return view('dashboard.flights.parts.manage-status', compact('flight'));
-            })
-
-            ->addColumn('actions', function ($flight) {
-                return view('dashboard.flights.parts.actions', compact('flight'));
-            })
-
-            ->make(true);
     }
 
     // create flight
@@ -170,7 +121,7 @@ class FlightService
             }
 
             DB::commit();
-            return true;
+            return $flight;
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
@@ -265,16 +216,20 @@ class FlightService
     public function destroyFlight($id)
     {
         $flight = self::getFlight($id);
+        if (!$flight) {
+            return 'not_found';
+        }
+
+        if ($flight->reservations()->exists()) {
+            return 'restricted';
+        }
 
         foreach ($flight->images as $index => $image) {
             $this->imageManagerUtils->removeImageFromLocal($image->file_name, 'flights');
         }
 
-        $flight = $this->flightRepository->destroyFlight($flight);
-        if (!$flight) {
-            return false;
-        }
-        return $flight;
+        $result = $this->flightRepository->destroyFlight($flight);
+        return $result ? 'success' : 'failed';
     }
 
     // change status

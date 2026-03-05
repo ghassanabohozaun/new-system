@@ -24,10 +24,20 @@ class CityRepository
     }
 
     // get cities
-    public function getCities()
+    public function getCities($filters = [])
     {
-        $cities = City::orderByDesc('id')
-            ->select('id', 'name', 'country_id')
+        $cities = City::with('country')
+            ->when(!empty($filters['search_term']), function ($query) use ($filters) {
+                $searchTerm = mb_strtolower($filters['search_term'], 'UTF-8');
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->whereRaw('LOWER(name->"$.en") like ?', ['"%' . $searchTerm . '%"'])
+                        ->orWhereRaw('LOWER(name->"$.ar") like ?', ['"%' . $searchTerm . '%"']);
+                });
+            })
+            ->when(!empty($filters['country_id']), function ($query) use ($filters) {
+                $query->where('country_id', $filters['country_id']);
+            })
+            ->orderByDesc('id')
             ->paginate(10);
         return $cities;
     }

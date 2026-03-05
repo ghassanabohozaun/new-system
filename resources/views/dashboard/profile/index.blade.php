@@ -176,6 +176,9 @@
         </div>
 
 
-        @include('dashboard.profile.modals.change-password')
     </div>
 @endsection
+
+@push('modals')
+    @include('dashboard.profile.modals.change-password')
+@endpush

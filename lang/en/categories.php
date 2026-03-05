@@ -28,4 +28,8 @@ return [
     'search_placeholder' => 'Search by name or slug...',
     'flights' => 'Flights',
     'no_flights_msg' => 'We couldn\'t find any flights for this category yet.',
+    'flights_count' => 'Flights Count',
+    'more_flights' => 'More Flights',
+    'category_restricted_deletion' => 'Cannot delete this category because it has linked flights or child categories.',
 ];
+

@@ -1,7 +1,7 @@
 <div class="modal fade" id="createCountryModal" tabindex="-1" role="dialog" aria-labelledby="createCountryModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="{!! route('dashboard.addresses.countries.store') !!}" method="POST" enctype="multipart/form-data"
             id='create_country_form'>
             @csrf

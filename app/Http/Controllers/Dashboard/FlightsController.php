@@ -15,7 +15,7 @@ class FlightsController extends Controller
     protected $flightService, $countryService, $cityService, $sponsershipOrganizationService, $sponsershipStatusService, $sponsershipTypeService, $categorySevice;
     // __construct
 
-    public function __construct(FlightService $flightService, CountryService $countryService, CityService $cityService  ,CategorySevice $categorySevice)
+    public function __construct(FlightService $flightService, CountryService $countryService, CityService $cityService, CategorySevice $categorySevice)
     {
         $this->flightService = $flightService;
         $this->countryService = $countryService;
@@ -37,12 +37,6 @@ class FlightsController extends Controller
         $cities = $this->cityService->getAllCitiesWithoutRelation();
         $categories = $this->categorySevice->getAllCategories();
         return view('dashboard.flights.index', compact('title', 'flights', 'countries', 'cities', 'categories'));
-    }
-
-    // get All
-    public function getAll(Request $request)
-    {
-        return $this->flightService->getAll($request);
     }
 
     // create
@@ -90,7 +84,7 @@ class FlightsController extends Controller
         $cities = $this->cityService->getAllCitiesWithoutRelation();
         $categories = $this->categorySevice->getAllCategories();
         $FlightID = $id;
-        return view('dashboard.flights.edit', compact('title', 'FlightID', 'flight','countries','cities','categories'));
+        return view('dashboard.flights.edit', compact('title', 'FlightID', 'flight', 'countries', 'cities', 'categories'));
     }
 
     // update
@@ -102,12 +96,23 @@ class FlightsController extends Controller
     // destroy
     public function destroy(Request $request)
     {
-        $id = $request->id;
-        $flight = $this->flightService->destroyFlight($id);
-        if (!$flight) {
-            return response()->json(['status' => false], 500);
+        if ($request->ajax()) {
+            try {
+                $status = $this->flightService->destroyFlight($request->id);
+
+                if ($status === 'success') {
+                    return response()->json(['status' => true], 200);
+                } elseif ($status === 'restricted') {
+                    return response()->json(['status' => false, 'message' => __('flights.restricted_deletion')], 422);
+                } elseif ($status === 'not_found') {
+                    return response()->json(['status' => false, 'message' => __('general.no_record_found')], 404);
+                }
+
+                return response()->json(['status' => false, 'message' => __('messages.error')], 500);
+            } catch (\Exception $e) {
+                return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+            }
         }
-        return response()->json(['status' => true], 200);
     }
 
     // changeStatus

@@ -49,12 +49,15 @@
                         </div>
                     </div>
                     <!--------------------  End Table  ---------------------------->
-                    @include('dashboard.general.tr-details')
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('modals')
+    @include('dashboard.general.tr-details')
+@endpush
 
 @push('scripts')
     <script>

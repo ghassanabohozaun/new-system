@@ -23,6 +23,7 @@ return [
     'enter_phone_code' => 'ادخل كود الدولة',
     'enter_flag_code' => 'ادخل كود العلم',
     'search_for_country' => 'بحث عن دولة...',
+    'search_placeholder' => 'ابحث باسم الدولة...',
     'select_flag' => 'اختيار العلم',
     'select_flag_code' => 'اختر كود العلم',
 
@@ -62,6 +63,7 @@ return [
     'enter_city_name_en' => 'ادخل اسم المدينة بالانجليزي',
 
     'no_cities_found' => 'لا يوجد مدن حالياً',
+    'city_restricted_deletion' => 'لا يمكن حذف المدينة لوجود رحلات، جولات سياحية أو تذاكر طيران مرتبطة بها.',
 
     'show_all_users' => 'عرض جميع المستخدمين',
 ];

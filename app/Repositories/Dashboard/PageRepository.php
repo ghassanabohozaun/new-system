@@ -19,9 +19,18 @@ class PageRepository
     }
 
     // get pages paginated
-    public function getPagesPaginated($perPage = 10)
+    public function getPagesPaginated($filters = [], $perPage = 10)
     {
-        return Page::latest()->paginate($perPage);
+        return Page::query()
+            ->when(!empty($filters['search_term']), function ($q) use ($filters) {
+                $q->where('title->ar', 'like', '%' . $filters['search_term'] . '%')
+                  ->orWhere('title->en', 'like', '%' . $filters['search_term'] . '%');
+            })
+            ->when(isset($filters['status']) && $filters['status'] !== '', function ($q) use ($filters) {
+                $q->where('status', $filters['status']);
+            })
+            ->latest()
+            ->paginate($perPage);
     }
 
     // store page

@@ -4,29 +4,6 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
-
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        /* Hide the toggle column on extra large screens where all columns are visible */
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
-
 @section('content')
     <div class="content-wrapper">
         <div class="row">
@@ -49,22 +26,28 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title mb-4 d-flex align-items-center">
-                                <span class="card-icon-premium me-3">
-                                    <i class="mdi mdi-earth"></i>
-                                </span>
-                                {!! __('addresses.show_all_countries') !!}
-                            </h4>
-                            <div class="table-loader-container" style="position: relative;">
-                                <div class="table-loader-overlay">
-                                    <span class="premium-loader"></span>
-                                </div>
-                                <div id="table_data">
-                                    @include('dashboard.addresses.countries.partials._table', [
-                                        'countries' => $countries,
-                                    ])
+                    <div class="row">
+                        <div class="col-md-12">
+                            @include('dashboard.addresses.countries.partials._search')
+
+                            <div class="card card-rounded mt-1">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4 d-flex align-items-center">
+                                        <span class="card-icon-premium me-3">
+                                            <i class="mdi mdi-earth"></i>
+                                        </span>
+                                        {!! __('addresses.show_all_countries') !!}
+                                    </h4>
+                                    <div class="table-loader-container" style="position: relative;">
+                                        <div class="table-loader-overlay">
+                                            <span class="premium-loader"></span>
+                                        </div>
+                                        <div id="table_data">
+                                            @include('dashboard.addresses.countries.partials._table', [
+                                                'countries' => $countries,
+                                            ])
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,26 +55,27 @@
                 </div>
             </div>
         </div>
-    </div>
+    @endsection
 
-    @include('dashboard.addresses.countries.modals.create')
-    @include('dashboard.addresses.countries.modals.edit')
-    @include('dashboard.addresses.countries.parts.countries_data')
-    @include('dashboard.addresses.countries.modals.flags_reference')
-    @include('dashboard.general.tr-details')
-@endsection
+    @push('modals')
+        @include('dashboard.addresses.countries.modals.create')
+        @include('dashboard.addresses.countries.modals.edit')
+        @include('dashboard.addresses.countries.parts.countries_data')
+        @include('dashboard.addresses.countries.modals.flags_reference')
+        @include('dashboard.general.tr-details')
+    @endpush
 
-@push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // Initialize Generic Index Table Handler
-            window.initIndexTable({
-                container: '#table_data',
-                loader: '.table-loader-overlay',
-                detailsModal: '#detailsModal',
-                detailsModalLabel: '#detailsModalLabel',
-                detailsModalBody: '#modalBody'
+    @push('scripts')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Initialize Generic Index Table Handler
+                window.initIndexTable({
+                    container: '#table_data',
+                    loader: '.table-loader-overlay',
+                    detailsModal: '#detailsModal',
+                    detailsModalLabel: '#detailsModalLabel',
+                    detailsModalBody: '#modalBody'
+                });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endpush

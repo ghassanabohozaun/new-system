@@ -4,27 +4,6 @@
     {{ __('categories.categories') }}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
-
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -48,23 +27,28 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title mb-4 d-flex align-items-center">
-                                <span class="card-icon-premium me-3">
-                                    <i class="mdi mdi-shape-outline"></i>
-                                </span>
-                                {!! __('categories.show_all_categories') !!}
-                            </h4>
+                    <div class="row">
+                        <div class="col-md-12">
                             @include('dashboard.categories.partials._search')
-                            <div class="table-loader-container" style="position: relative;">
-                                <div class="table-loader-overlay">
-                                    <span class="premium-loader"></span>
-                                </div>
-                                <div id="table_data">
-                                    @include('dashboard.categories.partials._table', [
-                                        'categories' => $categories,
-                                    ])
+
+                            <div class="card card-rounded mt-1">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4 d-flex align-items-center">
+                                        <span class="card-icon-premium me-3">
+                                            <i class="mdi mdi-shape-outline"></i>
+                                        </span>
+                                        {!! __('categories.show_all_categories') !!}
+                                    </h4>
+                                    <div class="table-loader-container" style="position: relative;">
+                                        <div class="table-loader-overlay">
+                                            <span class="premium-loader"></span>
+                                        </div>
+                                        <div id="table_data">
+                                            @include('dashboard.categories.partials._table', [
+                                                'categories' => $categories,
+                                            ])
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,11 +57,13 @@
             </div>
         </div>
     </div>
+@endsection
 
+@push('modals')
     @include('dashboard.categories.modals.create')
     @include('dashboard.categories.modals.edit')
     @include('dashboard.general.tr-details')
-@endsection
+@endpush
 
 @push('scripts')
     <script>

@@ -46,16 +46,15 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="{{ asset('assets/dashboard/vendors/js/vendor.bundle.base.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    {{-- Removed bootstrap-datepicker as it's not needed for auth --}}
     <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{ asset('assets/dashboard/js/off-canvas.js') }}"></script>
     <script src="{{ asset('assets/dashboard/js/template.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/js/settings.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets/dashboard/js/todolist.js') }}"></script>
+    {{-- Removed unused JS files for auth screens to optimize memory --}}
+    {{-- <script src="{{ asset('assets/dashboard/js/settings.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/dashboard/js/hoverable-collapse.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/dashboard/js/todolist.js') }}"></script> --}}
     <!-- endinject -->
 
     <script src="{!! asset('vendor/flasher/flasher.min.js') !!}" type="text/javascript"></script>

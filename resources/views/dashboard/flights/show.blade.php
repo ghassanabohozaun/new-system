@@ -5,32 +5,39 @@
 @section('content')
     <div class="content-wrapper deluxe-show-wrapper">
         <!-- Floating Luxury Header -->
-        <div class="hero-header-glass mb-5 p-4 rounded-4 shadow-lg border-shimmer">
+        <div class="hero-header-glass mb-4 p-4 rounded-4 shadow-sm">
             <div class="row align-items-center">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb deluxe-breadcrumb mb-2">
+                        <ol class="breadcrumb deluxe-breadcrumb mb-3">
+                            <li class="breadcrumb-item"><a
+                                    href="{{ route('dashboard.index') }}">{{ __('dashboard.dashboard') }}</a></li>
                             <li class="breadcrumb-item"><a
                                     href="{{ route('dashboard.flights.index') }}">{{ __('flights.flights') }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                {{ $flight->getTranslation('name', 'ar') }} | {{ $flight->getTranslation('name', 'en') }}
+                                {{ $flight->name }}
                             </li>
                         </ol>
                     </nav>
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-4">
                         <div class="header-orb bg-primary-gradient">
-                            <i class="mdi mdi-airplane-takeoff text-white fs-3"></i>
+                            <i class="mdi mdi-airplane-takeoff text-white fs-2"></i>
                         </div>
-                        <div>
-                            <h1 class="h2 fw-bold text-dark mb-0 tracking-tight d-flex flex-wrap align-items-center gap-2">
-                                <span class="ar-font">{{ $flight->getTranslation('name', 'ar') }}</span>
-                                <span class="text-muted fs-4">/</span>
-                                <span class="en-font">{{ $flight->getTranslation('name', 'en') }}</span>
-                            </h1>
-                            <div class="d-flex align-items-center gap-2 mt-2">
-                                <span
-                                    class="badge badge-soft-primary px-3 py-2 rounded-pill d-flex align-items-center gap-1">
-                                    <i class="mdi mdi-tag-outline"></i> {{ $flight->category->name }}
+                        <div class="header-title-container">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <h1 class="ar-title">{{ $flight->getTranslation('name', 'ar') }}</h1>
+                                <span class="badge-status-header {{ $flight->status == 1 ? 'active' : 'disabled' }}">
+                                    <i class="mdi {{ $flight->status == 1 ? 'mdi-check-circle' : 'mdi-border-color' }}"></i>
+                                    {{ $flight->status == 1 ? __('general.enable') : __('general.disabled') }}
+                                </span>
+                            </div>
+                            <h2 class="en-subtitle">{{ $flight->getTranslation('name', 'en') }}</h2>
+
+                            <div class="d-flex flex-wrap align-items-center gap-3 mt-3">
+                                <span class="text-muted fs-7 d-flex align-items-center gap-2">
+                                    <i class="mdi mdi-tag-outline text-primary"></i>
+                                    <span
+                                        class="fw-bold ">{{ $flight->category?->getTranslation('name', app()->getLocale()) ?? __('flights.no_category') }}</span>
                                 </span>
                                 <span class="text-muted fs-7 d-flex align-items-center gap-2">
                                     <i class="mdi mdi-map-marker text-danger"></i>
@@ -40,12 +47,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-                    <div class="action-group-glass d-inline-flex gap-2 p-2 rounded-4">
-                        <a href="{{ route('dashboard.flights.edit', $flight->id) }}" class="btn btn-premium-gradient px-4">
+                <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
+                    <div class="action-group-glass d-inline-flex gap-2 p-3 rounded-4">
+                        <a href="{{ route('dashboard.flights.edit', $flight->id) }}"
+                            class="btn btn-premium-gradient px-4 py-2 fw-bold shadow-sm">
                             <i class="mdi mdi-pencil-outline me-2"></i> {{ __('flights.update_flight') }}
                         </a>
-                        <a href="{{ route('dashboard.flights.index') }}" class="btn btn-glass-secondary px-4">
+                        <a href="{{ route('dashboard.flights.index') }}"
+                            class="btn btn-light px-4 py-2 fw-bold border shadow-sm">
                             <i class="mdi mdi-arrow-left me-2"></i> {{ __('general.back') }}
                         </a>
                     </div>
@@ -117,42 +126,42 @@
                 <!-- Ultimate Tabbed Card -->
                 <div class="card deluxe-card-glass border-0 mb-4 overflow-hidden">
                     <div class="card-header border-0 bg-transparent p-0">
-                        <ul class="nav nav-tabs deluxe-tabs d-flex flex-wrap border-0" id="flightTabs" role="tablist">
-                            <li class="nav-item flex-sm-fill text-center" role="presentation">
-                                <button class="nav-link active font-cairo w-100" id="pricing-tab" data-bs-toggle="tab"
+                        <ul class="nav nav-tabs custom-view-tabs-soft mb-0 border-0" id="flightTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active font-cairo" id="pricing-tab" data-bs-toggle="tab"
                                     data-bs-target="#pricing-pane" type="button" role="tab"
                                     aria-controls="pricing-pane" aria-selected="true">
-                                    <i class="mdi mdi-cash-multiple me-2"></i> {{ __('flights.pricing') }}
+                                    <i class="mdi mdi-cash-multiple"></i> {{ __('flights.pricing') }}
                                 </button>
                             </li>
-                            <li class="nav-item flex-sm-fill text-center" role="presentation">
-                                <button class="nav-link font-cairo w-100" id="services-tab" data-bs-toggle="tab"
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link font-cairo" id="services-tab" data-bs-toggle="tab"
                                     data-bs-target="#services-pane" type="button" role="tab"
                                     aria-controls="services-pane" aria-selected="false">
-                                    <i class="mdi mdi-server me-2"></i> {{ __('flights.services') }}
+                                    <i class="mdi mdi-room-service-outline"></i> {{ __('flights.services') }}
                                 </button>
                             </li>
-                            <li class="nav-item flex-sm-fill text-center" role="presentation">
-                                <button class="nav-link font-cairo w-100" id="including-tab" data-bs-toggle="tab"
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link font-cairo" id="including-tab" data-bs-toggle="tab"
                                     data-bs-target="#including-pane" type="button" role="tab"
                                     aria-controls="including-pane" aria-selected="false">
-                                    <i class="mdi mdi-check-circle me-2 text-success"></i>
+                                    <i class="mdi mdi-check-circle"></i>
                                     {{ __('flights.tab_including') }}
                                 </button>
                             </li>
-                            <li class="nav-item flex-sm-fill text-center" role="presentation">
-                                <button class="nav-link font-cairo w-100" id="not-including-tab" data-bs-toggle="tab"
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link font-cairo" id="not-including-tab" data-bs-toggle="tab"
                                     data-bs-target="#not-including-pane" type="button" role="tab"
                                     aria-controls="not-including-pane" aria-selected="false">
-                                    <i class="mdi mdi-close-circle me-2 text-danger"></i>
+                                    <i class="mdi mdi-close-circle"></i>
                                     {{ __('flights.tab_not_including') }}
                                 </button>
                             </li>
-                            <li class="nav-item flex-sm-fill text-center" role="presentation">
-                                <button class="nav-link font-cairo w-100" id="notes-tab" data-bs-toggle="tab"
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link font-cairo" id="notes-tab" data-bs-toggle="tab"
                                     data-bs-target="#notes-pane" type="button" role="tab"
                                     aria-controls="notes-pane" aria-selected="false">
-                                    <i class="mdi mdi-note-edit-outline me-2 text-warning"></i>
+                                    <i class="mdi mdi-note-edit-outline"></i>
                                     {{ __('flights.tab_notes') }}
                                 </button>
                             </li>
@@ -195,8 +204,8 @@
                                             </div>
                                         @empty
                                             <div class="col-12">
-                                                <div class="alert alert-soft-secondary">
-                                                    {{ __('flights.no_prices_found') }}</div>
+                                                <p class="text-muted small w-100 text-center py-4">
+                                                    {{ __('flights.no_prices_found') }}</p>
                                             </div>
                                         @endforelse
                                     </div>
@@ -349,7 +358,7 @@
                                     @foreach ($flight->images as $index => $img)
                                         <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                             <img src="{{ asset('uploads/flights/' . $img->file_name) }}"
-                                                class="d-block w-100 showcase-img" alt="Flight Image">
+                                                class="d-block w-100 showcase-img" alt="Flight Image" loading="lazy">
                                         </div>
                                     @endforeach
                                 </div>
@@ -399,446 +408,4 @@
         </div>
     </div>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
-
-        :root {
-            --lux-primary: #436be6;
-            --lux-glass: rgba(255, 255, 255, 0.85);
-        }
-
-        .deluxe-show-wrapper {
-            font-family: 'Inter', sans-serif;
-            color: #1a1e26;
-            background: #f8faff;
-            overflow-x: hidden !important;
-        }
-
-        .ar-font {
-            font-family: 'Cairo', sans-serif;
-        }
-
-        .en-font {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Tabs Styling */
-        .deluxe-tabs {
-            border-bottom: 2px solid #f1f5f9 !important;
-            background: #fafbfc;
-            display: flex !important;
-            flex-wrap: wrap !important;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-
-        .deluxe-tabs .nav-item {
-            flex: 1 0 auto;
-            min-width: 150px;
-        }
-
-        @media (max-width: 768px) {
-            .deluxe-tabs .nav-item {
-                min-width: 50%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .deluxe-tabs .nav-item {
-                min-width: 100%;
-            }
-        }
-
-        .deluxe-tabs .nav-link {
-            border: none;
-            color: #64748b;
-            padding: 1.25rem 1rem;
-            font-weight: 600;
-            transition: 0.3s;
-            position: relative;
-            border-radius: 0;
-            white-space: normal !important;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-        }
-
-        .deluxe-tab-body {
-            min-height: 450px;
-        }
-
-        @media (max-width: 575px) {
-            .deluxe-tabs .nav-link {
-                padding: 0.75rem;
-                font-size: 0.85rem;
-            }
-
-            .deluxe-tab-body {
-                min-height: auto;
-            }
-        }
-
-        .deluxe-tabs .nav-link:hover {
-            color: var(--lux-primary);
-            background: rgba(67, 107, 230, 0.05);
-        }
-
-        .deluxe-tabs .nav-link.active {
-            color: var(--lux-primary);
-            background: #fff;
-        }
-
-        .deluxe-tabs .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--lux-primary);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .tab-pane {
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Scrollbars */
-        .price-scroll-container,
-        .scroll-area-deluxe,
-        .scroll-area-notes,
-        .mini-grid-scroll {
-            overflow-y: auto;
-            overflow-x: hidden !important;
-            scrollbar-width: thin;
-            scrollbar-color: #ddd transparent;
-        }
-
-        .price-scroll-container,
-        .scroll-area-deluxe,
-        .scroll-area-notes {
-            max-height: 400px;
-        }
-
-        .mini-grid-scroll {
-            max-height: 200px;
-        }
-
-        /* Header & Glassmorphism */
-        .hero-header-glass {
-            background: var(--lux-glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .deluxe-card-glass {
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
-            transition: 0.3s;
-        }
-
-        .deluxe-card-glass:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
-        }
-
-        /* Stats box */
-        .lux-details-box {
-            background: #fcfdfe;
-            padding: 1.25rem;
-            border-radius: 12px;
-            border: 1px solid #edf2f7;
-            line-height: 1.8;
-        }
-
-        .stat-glass-card {
-            background: #f8fafc;
-            border: 1px solid #edf2f7;
-            transition: 0.3s;
-        }
-
-        .stat-glass-card:hover {
-            background: #fff;
-            border-color: var(--lux-primary);
-        }
-
-        /* Pricing */
-        .price-card-glass {
-            background: #fff;
-            border: 1px solid #edf2f7;
-        }
-
-        .featured-price {
-            border: 2px solid var(--lux-primary);
-        }
-
-        .price-badge-small {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f4ff;
-            color: var(--lux-primary);
-        }
-
-        /* Bilingual Text Stylings */
-        .fs-xs {
-            font-size: 0.75rem;
-        }
-
-        .policy-item-bilingual,
-        .lux-note-item-bilingual {
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .policy-item-bilingual:hover,
-        .lux-note-item-bilingual:hover {
-            background: #f8fbff;
-            border-color: #e0eaff;
-        }
-
-        /* Tags */
-        .badge-deluxe-tag {
-            background: #f1f5f9;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            width: fit-content;
-            min-width: 120px;
-        }
-
-        .bg-success-light {
-            background: #f0fff4;
-        }
-
-        .border-success-subtle {
-            border-color: #c6f6d5 !important;
-        }
-
-        .bg-danger-light {
-            background: #fff5f5;
-        }
-
-        .border-danger-subtle {
-            border-color: #fed7d7 !important;
-        }
-
-        .bg-success-soft {
-            background: rgba(40, 167, 69, 0.1);
-        }
-
-        .bg-danger-soft {
-            background: rgba(220, 53, 69, 0.1);
-        }
-
-        .bg-warning-soft {
-            background: rgba(255, 193, 7, 0.1);
-        }
-
-        .bg-info-soft {
-            background: rgba(23, 162, 184, 0.1);
-        }
-
-        .border-warning-subtle {
-            border-color: #ffeeba !important;
-        }
-
-        /* Animations & Hover Effects */
-        .lux-item-animated {
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: default;
-        }
-
-        .lux-item-animated:hover {
-            transform: scale(1.02) translateX(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            background: #fff !important;
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-bounce-slow {
-            animation: bounce 3s ease-in-out infinite;
-        }
-
-        .animate-pulse-soft {
-            animation: pulse-soft 2s ease-in-out infinite;
-        }
-
-        .animate-shake-soft {
-            animation: shake-soft 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes pulse-soft {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.7;
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes shake-soft {
-
-            0%,
-            100% {
-                transform: rotate(0);
-            }
-
-            25% {
-                transform: rotate(2deg);
-            }
-
-            75% {
-                transform: rotate(-2deg);
-            }
-        }
-
-        .text-success-light {
-            color: #d1fae5;
-        }
-
-        .text-danger-light {
-            color: #fee2e2;
-        }
-
-        .opacity-30 {
-            opacity: 0.3;
-        }
-
-        /* Gallery */
-        .showcase-img {
-            height: 320px;
-            object-fit: cover;
-        }
-
-        .carousel-icon-box {
-            width: 40px;
-            height: 40px;
-            background: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-        }
-
-        .mini-thumb-glass {
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .mini-thumb-glass:hover {
-            border-color: var(--lux-primary);
-        }
-
-        /* Status Summary */
-        .shadow-premium {
-            box-shadow: 0 8px 24px rgba(67, 107, 230, 0.25);
-        }
-
-        .status-orb-small {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bg-primary-gradient {
-            background: linear-gradient(135deg, #436be6, #7c9bff);
-        }
-
-        .btn-premium-gradient {
-            background: linear-gradient(135deg, #436be6, #6288ff);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .btn-glass-secondary {
-            background: #f1f5f9;
-            color: #475569;
-            border-radius: 10px;
-        }
-
-        .lux-hr {
-            height: 1px;
-            background: #edf2f7;
-        }
-
-        .border-end-md {
-            border-right: 1px solid #edf2f7;
-        }
-
-        @media (max-width: 767px) {
-            .border-end-md {
-                border-right: none;
-                border-bottom: 1px solid #edf2f7;
-                padding-bottom: 1rem;
-                margin-bottom: 1rem;
-            }
-        }
-    </style>
 @endsection

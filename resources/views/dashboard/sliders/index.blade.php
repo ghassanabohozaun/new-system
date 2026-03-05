@@ -4,27 +4,7 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
 
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -42,20 +22,25 @@
                             </ol>
                         </nav>
                         <div class="btn-wrapper mt-3 mt-sm-0">
-                            <button type="button" class="btn btn-primary text-white me-0" data-bs-toggle="modal"
-                                data-bs-target="#createSliderModal">
+                            <a href="{!! route('dashboard.sliders.create') !!}" class="btn btn-primary text-white me-0">
                                 <i class="icon-plus"></i> {!! __('sliders.create_new_slider') !!}
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <!--------------------  End Breadcrumb  ---------------------------->
 
                     <!--------------------  Start Table  ---------------------------->
-                    <div class="card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @include('dashboard.sliders.partials._search')
+                        </div>
+                    </div>
+
+                    <div class="card card-rounded shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title mb-4 d-flex align-items-center">
                                 <span class="card-icon-premium me-3">
-                                    <i class="mdi mdi-view-carousel-outline"></i>
+                                    <i class="mdi mdi-view-carousel-outline text-primary"></i>
                                 </span>
                                 {!! __('sliders.show_all_sliders') !!}
                             </h4>
@@ -76,11 +61,11 @@
             </div>
         </div>
     </div>
-
-    @include('dashboard.sliders.modals.create')
-    @include('dashboard.sliders.modals.edit')
-    @include('dashboard.general.tr-details')
 @endsection
+
+@push('modals')
+    @include('dashboard.general.tr-details')
+@endpush
 
 @push('scripts')
     <script>

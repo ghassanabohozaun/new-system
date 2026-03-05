@@ -31,8 +31,7 @@ class SettingService
         $setting = self::getSetting($id);
 
         if (array_key_exists('logo', $data) && $data['logo'] != null) {
-            // $this->imageManagerUtils->removeImageFromLocal($setting->logo, 'settings');
-            //  $data['logo'] = $this->imageManagerUtils->uploadSingleImage('/', $data['logo'], 'settings');
+            $this->imageManagerUtils->removeImageFromLocal($setting->logo, 'settings');
             $data['logo'] = $this->imageManagerUtils->saveResizeImage($data['logo'], 'settings', 500, 500);
         }
 

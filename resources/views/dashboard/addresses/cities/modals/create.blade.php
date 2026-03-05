@@ -4,7 +4,7 @@
 <div class="modal fade" id="createCityModal" tabindex="-1" role="dialog" aria-labelledby="createCityModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="{!! route('dashboard.addresses.cities.store') !!}" method="POST" enctype="multipart/form-data"
             id='create_city_form'>
             @csrf

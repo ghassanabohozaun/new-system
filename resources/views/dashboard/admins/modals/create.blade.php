@@ -1,6 +1,6 @@
 <div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog" aria-labelledby="createAdminModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="{!! route('dashboard.admins.store') !!}" method="POST" enctype="multipart/form-data"
             id="create_admin_form" novalidate>
             @csrf
@@ -171,7 +171,7 @@
 
         window.handleFormSubmit('#create_admin_form', {
             modalToHide: '#createAdminModal',
-            tableToRefresh: '#admins-table',
+            tableToLoad: '#responsiveTable',
             successMessage: "{!! __('general.add_success_message') !!}",
             onSuccess: function() {
                 resetCreateForm();

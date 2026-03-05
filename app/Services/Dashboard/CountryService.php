@@ -24,9 +24,9 @@ class CountryService
     }
 
     // get countries
-    public function getCountries()
+    public function getCountries($filters = [])
     {
-        return $this->countryRepository->getCountries();
+        return $this->countryRepository->getCountries($filters);
     }
 
     // get active countries
@@ -81,13 +81,18 @@ class CountryService
             return 'not_found';
         }
 
-        if ($country->cities->count() > 0) {
+        if (
+            $country->cities()->exists() ||
+            $country->fromFlightTicket()->exists() ||
+            $country->toFlightTicket()->exists() ||
+            $country->tours()->exists() ||
+            $country->flights()->exists() ||
+            $country->departureReservations()->exists() ||
+            $country->fromReservations()->exists() ||
+            $country->toReservations()->exists()
+        ) {
             return 'restricted';
         }
-
-        //  if ($country->cities->count() > 0 || $country->fromFlightTicket->count() > 0 || $country->toFlightTicket->count() > 0 || $country->tours->count() > 0 || $country->flights->count() > 0) {
-        //     return 'restricted';
-        // }
 
         $result = $this->countryRepository->destroyCountry($country);
         return $result ? 'success' : 'failed';

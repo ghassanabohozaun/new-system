@@ -14,7 +14,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-translate"></i></span>
-                        <input type="text" wire:model.live="name_ar" class="form-control" autocomplete="off"
+                        <input type="text" wire:model.blur="name_ar" class="form-control" autocomplete="off"
                             placeholder="{!! __('flights.enter_name_ar') !!}"
                             @error('name_ar') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -35,7 +35,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-alpha-n-box-outline"></i></span>
-                        <input type="text" wire:model.live="name_en" class="form-control" autocomplete="off"
+                        <input type="text" wire:model.blur="name_en" class="form-control" autocomplete="off"
                             placeholder="{!! __('flights.enter_name_en') !!}"
                             @error('name_en') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -61,7 +61,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-calendar-today"></i></span>
-                        <input type="number" wire:model.live="days_num" class="form-control" autocomplete="off"
+                        <input type="number" wire:model.blur="days_num" class="form-control" autocomplete="off"
                             placeholder="{!! __('flights.enter_days_num') !!}"
                             @error('days_num') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -82,7 +82,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-weather-night"></i></span>
-                        <input type="number" wire:model.live="nights_num" class="form-control" autocomplete="off"
+                        <input type="number" wire:model.blur="nights_num" class="form-control" autocomplete="off"
                             placeholder="{!! __('flights.enter_nights_num') !!}"
                             @error('nights_num') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -102,7 +102,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-calendar-range"></i></span>
-                        <input type="date" wire:model.live="offer_duration_from" class="form-control"
+                        <input type="date" wire:model.blur="offer_duration_from" class="form-control"
                             autocomplete="off" placeholder="{!! __('flights.enter_offer_duration_from') !!}"
                             @error('offer_duration_from') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -122,7 +122,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
                         <span class="input-group-text"><i class="mdi mdi-calendar-range"></i></span>
-                        <input type="date" wire:model.live="offer_duration_to" class="form-control"
+                        <input type="date" wire:model.blur="offer_duration_to" class="form-control"
                             autocomplete="off" placeholder="{!! __('flights.enter_offer_duration_to') !!}"
                             @error('offer_duration_to') style="border-color: rgb(246, 78, 96)" @enderror>
                     </div>
@@ -144,19 +144,20 @@
 
             <!-- begin: input -->
             <div class="col-md-3">
-                <div class="form-group theme-warning">
-                    <label class="form-label-premium" for="country_id">{!! __('flights.country_id') !!} <span
+                <div class="form-group theme-warning" wire:ignore>
+                    <label class="form-label-premium" for="country_id_select">{!! __('flights.country_id') !!} <span
                             class="text-danger">*</span></label>
-                    <div class="input-group-premium">
+                    <div class="input-group-premium select2-premium">
                         <span class="input-group-text"><i class="mdi mdi-earth"></i></span>
-                        <select type="text" wire:model="country_id"
-                            wire:change="changeCountry($event.target.value)" id="country_id" name="country_id"
-                            class="form-control">
-                            <option value="" selected='selected'>
+                        <select id="country_id_select" name="country_id" class="form-control">
+                            <option value="">
                                 {!! __('flights.select') !!} {!! __('flights.country_id') !!}
                             </option>
                             @foreach ($countries as $key => $country)
-                                <option value="{!! $country->id !!}">{!! $country->name !!}</option>
+                                <option value="{!! $country->id !!}"
+                                    {{ $country->flag_code ? 'data-flag-code=' . $country->flag_code : '' }}>
+                                    {!! $country->name !!}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -171,15 +172,13 @@
 
             <!-- begin: input -->
             <div class="col-md-3">
-                <div class="form-group theme-warning">
-                    <label class="form-label-premium" for="city_id">{!! __('flights.city_id') !!} <span
+                <div class="form-group theme-warning" wire:ignore>
+                    <label class="form-label-premium" for="city_id_select">{!! __('flights.city_id') !!} <span
                             class="text-danger">*</span></label>
-                    <div class="input-group-premium">
+                    <div class="input-group-premium select2-premium">
                         <span class="input-group-text"><i class="mdi mdi-city"></i></span>
-                        <select type="text" wire:model="city_id" id="city_id" name="city_id"
-                            {!! $disabledGovernorate == 1 ? 'disabled' : '' !!} class="form-control"
-                            @error('city_id') style="border-color: rgb(246, 78, 96)" @enderror>
-                            <option value="" selected='selected'>
+                        <select id="city_id_select" name="city_id" class="form-control" {!! $disabledGovernorate == 1 ? 'disabled' : '' !!}>
+                            <option value="">
                                 {!! __('flights.select') !!} {!! __('flights.city_id') !!}
                             </option>
                             @foreach ($cities as $key => $city)
@@ -227,6 +226,7 @@
         <!-- end: country_id , city_id , category_id -->
 
 
+
         <!-- begin: details-->
         <div class="row mt-1">
             <!-- begin: input -->
@@ -235,7 +235,7 @@
                     <label class="form-label-premium" for="details_ar">{!! __('flights.details_ar') !!} <span
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
-                        <textarea wire:model.live="details_ar" class="form-control h-auto" autocomplete="off" rows="5"
+                        <textarea wire:model.blur="details_ar" class="form-control h-auto" autocomplete="off" rows="5"
                             placeholder="{!! __('flights.enter_details_ar') !!}" @error('details_ar') style="border-color: rgb(246, 78, 96)" @enderror></textarea>
                     </div>
                     @error('details_ar')
@@ -254,7 +254,7 @@
                     <label class="form-label-premium" for="details_en">{!! __('flights.details_en') !!} <span
                             class="text-danger">*</span></label>
                     <div class="input-group-premium">
-                        <textarea wire:model.live="details_en" class="form-control h-auto" autocomplete="off" rows="5"
+                        <textarea wire:model.blur="details_en" class="form-control h-auto" autocomplete="off" rows="5"
                             placeholder="{!! __('flights.enter_details_en') !!}" @error('details_en') style="border-color: rgb(246, 78, 96)" @enderror></textarea>
                     </div>
                     @error('details_en')
@@ -270,3 +270,55 @@
         <!-- end: details -->
     </div>
 </div>
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            const initSelects = () => {
+                const $countrySelect = $('#country_id_select');
+                const $citySelect = $('#city_id_select');
+
+                // Initialize Country Select2
+                $countrySelect.select2({
+                    placeholder: "{!! __('flights.select') !!} {!! __('flights.country_id') !!}",
+                    allowClear: true,
+                    templateResult: window.formatSelect2Country,
+                    templateSelection: window.formatSelect2Country
+                }).on('change', function(e) {
+                    const val = $(this).val();
+                    @this.set('country_id', val);
+                    @this.call('changeCountry', val);
+                });
+
+                // Initialize City Select2
+                $citySelect.select2({
+                    placeholder: "{!! __('flights.select') !!} {!! __('flights.city_id') !!}",
+                    allowClear: true
+                }).on('change', function(e) {
+                    @this.set('city_id', $(this).val());
+                });
+            };
+
+            initSelects();
+
+            // Re-initialize after Livewire updates
+            document.addEventListener('livewire:load', function() {
+                initSelects();
+                // Update City options when Livewire updates them
+                Livewire.on('citiesUpdated', function(event) {
+                    const cities = event.cities || event;
+                    const $citySelect = $('#city_id_select');
+                    $citySelect.empty().append(
+                        '<option value="">{!! __('flights.select') !!} {!! __('flights.city_id') !!}</option>'
+                        );
+                    $.each(cities, function(id, name) {
+                        $citySelect.append(new Option(name, id));
+                    });
+                    $citySelect.prop('disabled', false).trigger('change');
+                });
+            });
+
+        });
+    </script>
+@endpush

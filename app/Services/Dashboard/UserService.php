@@ -30,27 +30,6 @@ class UserService
         return $this->userRepository->getUsers();
     }
 
-    // get all
-    public function getAll()
-    {
-        $users = $this->userRepository->getUsers();
-
-        return DataTables::of($users)
-            ->addIndexColumn()
-            ->addColumn('name', function ($user) {
-                return $user->getTranslation('name', Lang());
-            })
-            ->addColumn('status', function ($user) {
-                return $user->status == 1 ? __('general.active') : __('general.inactive');
-            })
-            ->addColumn('manage_status', function ($user) {
-                return view('dashboard.users.parts.status-manage', compact('user'));
-            })
-            ->addColumn('actions', function ($user) {
-                return view('dashboard.users.parts.actions', compact('user'));
-            })
-            ->make(true);
-    }
 
     // store user
     public function storeUser($data)

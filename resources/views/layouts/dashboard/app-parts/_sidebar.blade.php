@@ -8,6 +8,44 @@
             </a>
         </li>
 
+
+        @canany(['settings', 'sliders', 'pages'])
+            <li
+                class="nav-item {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'active' : '' }}">
+                <a class="nav-link" data-bs-toggle="collapse" href="#settings-menu"
+                    aria-expanded="{{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'true' : 'false' }}"
+                    aria-controls="settings-menu">
+                    <i class="menu-icon mdi mdi-tune-vertical"></i>
+                    <span class="menu-title">{!! __('dashboard.settings') !!}</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'show' : '' }}"
+                    id="settings-menu">
+                    <ul class="nav flex-column sub-menu">
+                        @can('settings')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard.settings.index') ? 'active' : '' }}"
+                                    href="{{ route('dashboard.settings.index') }}">{!! __('settings.settings') !!}</a>
+                            </li>
+                        @endcan
+                        @can('sliders')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard.sliders.*') ? 'active' : '' }}"
+                                    href="{{ route('dashboard.sliders.index') }}">{!! __('sliders.sliders') !!}</a>
+                            </li>
+                        @endcan
+                        @can('pages')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard.pages.*') ? 'active' : '' }}"
+                                    href="{{ route('dashboard.pages.index') }}">{!! __('pages.pages') !!}</a>
+                            </li>
+                        @endcan
+
+                    </ul>
+                </div>
+            </li>
+        @endcanany
+
         @can('admins')
             <li class="nav-item {{ request()->routeIs('dashboard.admins.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('dashboard.admins.index') }}">
@@ -71,6 +109,16 @@
             </li>
         @endcan
 
+
+        @can('categories')
+            <li class="nav-item {{ request()->routeIs('dashboard.categories.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.categories.index') }}">
+                    <i class="mdi mdi-shape-outline menu-icon"></i>
+                    <span class="menu-title">{!! __('categories.categories') !!}</span>
+                </a>
+            </li>
+        @endcan
+
         @can('flights')
             <li class="nav-item {{ request()->routeIs('dashboard.flights.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('dashboard.flights.index') }}">
@@ -82,23 +130,29 @@
 
         @can('reservations')
             <li class="nav-item {{ request()->routeIs('dashboard.reservations.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard.reservations.index') }}">
+                <a class="nav-link" data-bs-toggle="collapse" href="#reservations-menu"
+                    aria-expanded="{{ request()->routeIs('dashboard.reservations.*') ? 'true' : 'false' }}"
+                    aria-controls="reservations-menu">
                     <i class="mdi mdi-calendar-check menu-icon"></i>
                     <span class="menu-title">{!! __('reservations.reservations') !!}</span>
+                    <i class="menu-arrow"></i>
                 </a>
+                <div class="collapse {{ request()->routeIs('dashboard.reservations.*') ? 'show' : '' }}"
+                    id="reservations-menu">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('dashboard.reservations.index') ? 'active' : '' }}"
+                                href="{{ route('dashboard.reservations.index') }}">{!! __('reservations.reservations') !!}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('dashboard.reservations.show.report') ? 'active' : '' }}"
+                                href="{{ route('dashboard.reservations.show.report') }}">{!! __('reservations.reports') !!}</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         @endcan
-
-
-        @can('categories')
-            <li class="nav-item {{ request()->routeIs('dashboard.categories.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard.categories.index') }}">
-                    <i class="mdi mdi-shape-outline menu-icon"></i>
-                    <span class="menu-title">{!! __('categories.categories') !!}</span>
-                </a>
-            </li>
-        @endcan
-
 
 
 
@@ -130,42 +184,6 @@
         @endcan
 
 
-        @canany(['settings', 'sliders', 'pages'])
-            <li
-                class="nav-item {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'active' : '' }}">
-                <a class="nav-link" data-bs-toggle="collapse" href="#settings-menu"
-                    aria-expanded="{{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'true' : 'false' }}"
-                    aria-controls="settings-menu">
-                    <i class="menu-icon mdi mdi-tune-vertical"></i>
-                    <span class="menu-title">{!! __('dashboard.settings') !!}</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'show' : '' }}"
-                    id="settings-menu">
-                    <ul class="nav flex-column sub-menu">
-                        @can('settings')
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard.settings.index') ? 'active' : '' }}"
-                                    href="{{ route('dashboard.settings.index') }}">{!! __('settings.settings') !!}</a>
-                            </li>
-                        @endcan
-                        @can('sliders')
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard.sliders.*') ? 'active' : '' }}"
-                                    href="{{ route('dashboard.sliders.index') }}">{!! __('sliders.sliders') !!}</a>
-                            </li>
-                        @endcan
-                        @can('pages')
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('dashboard.pages.*') ? 'active' : '' }}"
-                                    href="{{ route('dashboard.pages.index') }}">{!! __('pages.pages') !!}</a>
-                            </li>
-                        @endcan
-
-                    </ul>
-                </div>
-            </li>
-        @endcanany
 
 
 

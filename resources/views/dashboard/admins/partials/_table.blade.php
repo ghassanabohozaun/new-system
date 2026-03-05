@@ -43,12 +43,7 @@
                                 <div class="me-3 flex-shrink-0">
                                     <div class="rounded-circle bg-white d-flex align-items-center justify-content-center border shadow-sm"
                                         style="width: 48px; height: 48px; overflow: hidden;">
-                                        @if ($admin->photo)
-                                            <img src="{{ asset('uploads/adminsPhotos/' . $admin->photo) }}"
-                                                class="w-100 h-100" style="object-fit: cover;">
-                                        @else
-                                            <i class="mdi mdi-account-circle text-primary fs-3"></i>
-                                        @endif
+                                        @include('dashboard.admins.parts.photo', ['admin' => $admin])
                                     </div>
                                 </div>
                                 <div>
@@ -120,5 +115,5 @@
     </table>
 </div>
 <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-    {!! $admins->links() !!}
+    {!! $admins->withQueryString()->links() !!}
 </div>

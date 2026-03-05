@@ -13,9 +13,19 @@ class SliderRepository
     }
 
     // get sliders
-    public function getSliders()
+    public function getSliders($params = [])
     {
-        return Slider::latest()->paginate(10);
+        $query = Slider::query()->latest();
+
+        if (isset($params['search_term']) && !empty($params['search_term'])) {
+            $searchTerm = $params['search_term'];
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title->ar', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('title->en', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        return $query->paginate(10);
     }
 
     // create slider

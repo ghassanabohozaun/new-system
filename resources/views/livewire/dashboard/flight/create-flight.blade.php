@@ -11,52 +11,48 @@
         <div class="card shadow-sm border-0 mb-4">
             <div class="card-body p-0">
                 <!-- Navigation Tabs -->
-                <ul class="nav nav-tabs nav-tabs-bordered custom-form-tabs mb-0" id="flightCreateTabs" role="tablist">
+                <ul class="nav nav-tabs nav-tabs-bordered custom-form-tabs-capsule mb-0" id="flightCreateTabs"
+                    role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link @if ($activeTab == 'general') active @endif py-3 px-4 border-bottom-0 position-relative"
+                        <button class="nav-link @if ($activeTab == 'general') active @endif position-relative"
                             wire:click="setTab('general')" type="button" role="tab">
-                            <i class="mdi mdi-information-outline me-2 text-primary"></i>{!! __('flights.basic_info') !!}
+                            <i class="mdi mdi-information-outline me-2"></i>{!! __('flights.basic_info') !!}
                             @if ($this->hasErrorInTab('general'))
                                 <span class="tab-error-dot"></span>
                             @endif
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link @if ($activeTab == 'services') active @endif py-3 px-4 border-bottom-0 position-relative"
+                        <button class="nav-link @if ($activeTab == 'services') active @endif position-relative"
                             wire:click="setTab('services')" type="button" role="tab">
-                            <i class="mdi mdi-room-service-outline me-2 text-info"></i>{!! __('flights.services') !!}
+                            <i class="mdi mdi-room-service-outline me-2"></i>{!! __('flights.services') !!}
                             @if ($this->hasErrorInTab('services'))
                                 <span class="tab-error-dot"></span>
                             @endif
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link @if ($activeTab == 'pricing') active @endif py-3 px-4 border-bottom-0 position-relative"
+                        <button class="nav-link @if ($activeTab == 'pricing') active @endif position-relative"
                             wire:click="setTab('pricing')" type="button" role="tab">
-                            <i class="mdi mdi-currency-usd me-2 text-success"></i>{!! __('flights.pricing') !!}
+                            <i class="mdi mdi-currency-usd me-2"></i>{!! __('flights.pricing') !!}
                             @if ($this->hasErrorInTab('pricing'))
                                 <span class="tab-error-dot"></span>
                             @endif
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link @if ($activeTab == 'policies') active @endif py-3 px-4 border-bottom-0 position-relative"
+                        <button class="nav-link @if ($activeTab == 'policies') active @endif position-relative"
                             wire:click="setTab('policies')" type="button" role="tab">
-                            <i class="mdi mdi-layers-outline me-2 text-warning"></i>{!! __('flights.additional_info') !!}
+                            <i class="mdi mdi-layers-outline me-2"></i>{!! __('flights.additional_info') !!}
                             @if ($this->hasErrorInTab('policies'))
                                 <span class="tab-error-dot"></span>
                             @endif
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link @if ($activeTab == 'media') active @endif py-3 px-4 border-bottom-0 position-relative"
+                        <button class="nav-link @if ($activeTab == 'media') active @endif position-relative"
                             wire:click="setTab('media')" type="button" role="tab">
-                            <i class="mdi mdi-image-multiple-outline me-2 text-secondary"></i>{!! __('flights.media_gallery') !!}
+                            <i class="mdi mdi-image-multiple-outline me-2"></i>{!! __('flights.media_gallery') !!}
                             @if ($this->hasErrorInTab('media'))
                                 <span class="tab-error-dot"></span>
                             @endif

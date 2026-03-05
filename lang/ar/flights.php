@@ -143,4 +143,7 @@ return [
     'starting_from' => 'تبدأ من',
     'usd' => 'دولار',
     'total_flights' => 'إجمالي الرحلات',
+    'error_min_chars' => 'يجب أن يكون حقل :attribute على الأقل :min حروف.',
+    'error_string' => 'يجب أن يكون حقل :attribute نصاً.',
+    'restricted_deletion' => 'لا يمكن حذف الرحلة لوجود حجوزات مرتبطة بها.',
 ];

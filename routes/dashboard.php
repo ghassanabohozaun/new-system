@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale() . '/dashboard',
@@ -132,6 +131,8 @@ Route::group(
             Route::group(['middleware' => 'can:reservations'], function () {
                 Route::resource('reservations', ReservationsController::class)->except(['destroy']);
                 Route::post('/reservations/destroy', [ReservationsController::class, 'destroy'])->name('reservations.destroy');
+                Route::get('/reservations/show/report', [ReservationsController::class, 'showReport'])->name('reservations.show.report');
+                Route::post('/reservations/export/excel', [ReservationsController::class, 'exportExcel'])->name('reservations.export.excel');
             });
 
             ########################################### flights  ######################################################################

@@ -1,6 +1,6 @@
 <div class="modal fade" id="createCategoryModal" tabindex="-1" role="dialog" aria-labelledby="createCategoryModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="{!! route('dashboard.categories.store') !!}" method="POST" enctype="multipart/form-data"
             id="create_category_form">
             @csrf
@@ -149,7 +149,7 @@
 
         window.handleFormSubmit('#create_category_form', {
             modalToHide: '#createCategoryModal',
-            tableToLoad: '#table_data',
+            tableToLoad: '#responsiveTable',
             successMessage: "{!! __('general.add_success_message') !!}",
             onSuccess: function() {
                 resetCreateForm();

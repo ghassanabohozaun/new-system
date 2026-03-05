@@ -1,9 +1,9 @@
 <?php
 return [
-    'create_new_page' => 'Create New Daynamic Page',
-    'update_page' => 'Update Daynamic Page',
-    'pages' => 'Daynamic Pages',
-    'show_all_pages' => 'Show All Daynamic Pages',
+    'create_new_page' => 'Create New Dynamic Page',
+    'update_page' => 'Update Dynamic Page',
+    'pages' => 'Static Pages',
+    'show_all_pages' => 'Show All Dynamic Pages',
 
     'title' => 'Page Title',
     'title_ar' => 'Arabic Page Title',
@@ -20,5 +20,6 @@ return [
     'enter_details_ar' => 'Enter Arabic Page Details',
     'enter_details_en' => 'Enter English Page Details',
 
-    'no_pages_found' => 'No Daynamic Pages Found',
+    'no_pages_found' => 'No Dynamic Pages Found',
+    'search_placeholder' => 'Search by title...',
 ];

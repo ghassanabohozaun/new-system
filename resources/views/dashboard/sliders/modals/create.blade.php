@@ -19,7 +19,8 @@
                                 <label class="form-label-premium" for="title_ar">{!! __('sliders.title_ar') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-format-title text-primary"></i></span>
                                     <input type="text" id="title_ar" name="title[ar]" class="form-control"
                                         placeholder="{!! __('sliders.enter_title_ar') !!}" autocomplete="off">
                                 </div>
@@ -32,7 +33,8 @@
                                 <label class="form-label-premium" for="title_en">{!! __('sliders.title_en') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-format-title text-primary"></i></span>
                                     <input type="text" id="title_en" name="title[en]" class="form-control"
                                         placeholder="{!! __('sliders.enter_title_en') !!}" autocomplete="off">
                                 </div>
@@ -46,8 +48,7 @@
                                 <label class="form-label-premium" for="details_ar">{!! __('sliders.details_ar') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
-                                    <textarea id="details_ar" name="details[ar]" class="form-control" rows="4" placeholder="{!! __('sliders.enter_details_ar') !!}"></textarea>
+                                    <textarea id="details_ar" name="details[ar]" class="form-control" rows="3" placeholder="{!! __('sliders.enter_details_ar') !!}"></textarea>
                                 </div>
                                 <strong id="details_ar_error" class="text-danger small"></strong>
                             </div>
@@ -58,8 +59,7 @@
                                 <label class="form-label-premium" for="details_en">{!! __('sliders.details_en') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
-                                    <textarea id="details_en" name="details[en]" class="form-control" rows="4" placeholder="{!! __('sliders.enter_details_en') !!}"></textarea>
+                                    <textarea id="details_en" name="details[en]" class="form-control" rows="3" placeholder="{!! __('sliders.enter_details_en') !!}"></textarea>
                                 </div>
                                 <strong id="details_en_error" class="text-danger small"></strong>
                             </div>
@@ -70,7 +70,8 @@
                             <div class="form-group mb-0">
                                 <label class="form-label-premium" for="url_ar">{!! __('sliders.url_ar') !!}</label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-link-variant text-primary"></i></span>
                                     <input type="text" id="url_ar" name="url[ar]" class="form-control"
                                         placeholder="{!! __('sliders.enter_url_ar') !!}">
                                 </div>
@@ -82,7 +83,8 @@
                             <div class="form-group mb-0">
                                 <label class="form-label-premium" for="url_en">{!! __('sliders.url_en') !!}</label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-link-variant text-primary"></i></span>
                                     <input type="text" id="url_en" name="url[en]" class="form-control"
                                         placeholder="{!! __('sliders.enter_url_en') !!}">
                                 </div>
@@ -93,9 +95,8 @@
                         <!-- Photo Upload -->
                         <div class="col-md-12">
                             <x-dashboard.file-input name="photo" id="create_slider_photo_input"
-                                label="{!! __('sliders.photo') !!} <span class='text-danger'>*</span>"
-                                placeholderIcon="mdi-image-outline" placeholderText="1920 × 742" isRequired="false"
-                                errorId="photo_error" />
+                                label="{!! __('sliders.photo') !!}" placeholderIcon="mdi-image-outline"
+                                placeholderText="1920 × 742" isRequired="false" errorId="photo_error" />
                             <small class="text-muted mt-1 d-block text-center w-100">
                                 <i class="mdi mdi-information-outline me-1"></i>{!! __('sliders.slider_size') !!} (1920 × 742)
                             </small>
@@ -105,7 +106,7 @@
                         <div class="col-md-4 theme-success">
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
-                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-power text-success"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="status_active">{!! __('sliders.status') !!} <span
@@ -124,7 +125,7 @@
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
                                     <span class="input-group-text"><i
-                                            class="mdi mdi-format-list-bulleted-type"></i></span>
+                                            class="mdi mdi-format-list-bulleted-type text-warning"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="details_status_active">{!! __('sliders.details_status') !!} <span
@@ -142,7 +143,8 @@
                         <div class="col-md-4 theme-info">
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
-                                    <span class="input-group-text"><i class="mdi mdi-gesture-tap-button"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-gesture-tap-button text-info"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="button_status_active">{!! __('sliders.button_status') !!} <span
@@ -159,9 +161,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer bg-light border-0">
-                    <!-- Buttons removed in favor of Floating Command HUD -->
-                </div>
+
 
                 <!-- Floating Command HUD -->
                 <x-dashboard.command-hud formId="create_slider_form" hudId="create_slider_hud"

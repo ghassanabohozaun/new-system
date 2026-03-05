@@ -22,7 +22,8 @@
 
                         <!-- Iteration (#) -->
                         <td class="text-start">
-                            {{ $reservations->firstItem() + $index }}
+                            {{-- {{ $reservations->firstItem() + $index }} --}}
+                            {!! $loop->iteration !!}
                         </td>
 
                         <!-- Client Info -->
@@ -162,7 +163,7 @@
             {!! __('general.of') !!} <span class="fw-bold">{{ $reservations->total() }}</span> {!! __('general.entries') !!}
         </div>
         <div>
-            {{ $reservations->appends(request()->query())->links() }}
+            {{ $reservations->withQueryString()->links() }}
         </div>
     </div>
 @else

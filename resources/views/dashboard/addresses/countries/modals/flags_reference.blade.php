@@ -1,53 +1,47 @@
 <div class="modal fade" id="flagsReferenceModal" tabindex="-1" role="dialog" aria-labelledby="flagsReferenceModalLabel"
     aria-hidden="true" style="z-index: 1600;">
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document" style="z-index: 1601;">
-        <div class="modal-content shadow-lg border-0">
-            <div class="modal-header text-dark py-2 px-3 border-bottom-0">
-                <h6 class="modal-title d-flex align-items-center" id="flagsReferenceModalLabel">
-                    <i class="ti-flag-alt me-2 text-primary"></i>
+    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+        <div class="modal-content shadow-premium border-0">
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title d-flex align-items-center" id="flagsReferenceModalLabel">
+                    <span class="card-icon-premium me-2">
+                        <i class="mdi mdi-flag-variant-outline"></i>
+                    </span>
                     <span class="fw-bold">{!! __('addresses.flag_codes_reference') !!}</span>
-                </h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    style="font-size: 0.7rem;"></button>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="px-3 py-2 bg-light bg-opacity-10 border-bottom">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-white border-end-0">
-                            <i class="ti-search text-muted"></i>
-                        </span>
-                        <input type="text" id="flagSearchInput"
-                            class="form-control ps-1 form-control-sm border-start-0 shadow-none"
+
+            <div class="modal-body pt-3">
+                <!-- Search Box -->
+                <div class="form-group mb-4 theme-primary px-1">
+                    <div class="input-group-premium shadow-sm">
+                        <span class="input-group-text"><i class="mdi mdi-magnify"></i></span>
+                        <input type="text" id="flagSearchInput" class="form-control"
                             placeholder="{!! __('addresses.search_for_country') !!}">
                     </div>
                 </div>
-                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+
+                <div class="table-responsive table-responsive-custom" style="max-height: 400px;">
                     <table class="table table-hover align-middle mb-0" id="flagsRefTable">
-                        <thead class="bg-light sticky-top" style="top: 0; z-index: 1;">
+                        <thead>
                             <tr>
-                                <th class="border-top-0 ps-3 text-muted xsmall fw-bold text-uppercase"
-                                    style="width: 50px;">
-                                    {!! __('general.flag') !!}</th>
-                                <th class="border-top-0 text-muted xsmall fw-bold text-uppercase">
-                                    {!! __('addresses.country_name') !!}
-                                </th>
-                                <th class="border-top-0 text-muted xsmall fw-bold text-uppercase" style="width: 80px;">
-                                    {!! __('addresses.flag_code') !!}
-                                </th>
-                                <th class="border-top-0 text-center text-muted xsmall fw-bold text-uppercase"
-                                    style="width: 60px;">
-                                    {!! __('general.actions') !!}</th>
+                                <th class="text-start" style="width: 50px;">#</th>
+                                <th class="text-start" style="width: 60px;">{!! __('general.flag') !!}</th>
+                                <th class="text-start">{!! __('addresses.country_name') !!}</th>
+                                <th class="text-center" style="width: 100px;">{!! __('addresses.flag_code') !!}</th>
                             </tr>
                         </thead>
-                        <tbody class="border-top-0">
+                        <tbody>
                             <!-- Table rows will be populated by JS -->
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">
-                    <i class="ti-close me-1" style="font-size: 0.85rem;"></i> {!! __('general.close') !!}
+
+            <div class="modal-footer border-top-0 pt-0">
+                <button type="button" class="btn btn-sm btn-light text-muted fw-bold px-3" data-bs-dismiss="modal">
+                    {!! __('general.close') !!}
                 </button>
             </div>
         </div>
@@ -72,30 +66,31 @@
 
                 if (filtered.length === 0) {
                     tbody.append(
-                        `<tr><td colspan="4" class="text-center py-4 text-muted small">{!! __('general.no_record_found') !!}</td></tr>`
+                        `<tr><td colspan="4" class="text-center py-5 text-muted small">
+                            <i class="mdi mdi-alert-circle-outline d-block mb-2 font-24"></i>
+                            {!! __('general.no_record_found') !!}
+                        </td></tr>`
                     );
                     return;
                 }
 
-                filtered.forEach(item => {
+                filtered.forEach((item, index) => {
                     const countryName = currentLocale === 'ar' ? item.name_ar : item.name_en;
+                    const subName = currentLocale === 'ar' ? item.name_en : item.name_ar;
                     const row = `
-                <tr>
-                    <td class="ps-3 py-2">
-                        <span class="flag-icon flag-icon-${item.code.toLowerCase()} shadow-sm rounded-1" style="width: 22px; height: 16px;"></span>
+                <tr class="select-flag-row" data-code="${item.code}" style="cursor: pointer;">
+                    <td class="text-start py-3">${index + 1}</td>
+                    <td class="text-start py-3">
+                        <span class="flag-icon flag-icon-${item.code.toLowerCase()} shadow-sm rounded-1" style="width: 24px; height: 16px;"></span>
                     </td>
-                    <td class="py-2">
+                    <td class="text-start py-3">
                         <div class="d-flex flex-column">
-                            <span class="text-dark fw-bold small" style="font-size: 0.8rem;">${countryName}</span>
-                            <span class="text-muted" style="font-size: 0.7rem;">${currentLocale === 'ar' ? item.name_en : item.name_ar}</span>
+                            <span class="text-dark fw-bold mb-0" style="font-size: 0.95rem;">${countryName}</span>
+                            <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 0.2px;">${subName}</span>
                         </div>
                     </td>
-                    <td class="py-2"><code class="bg-light px-1 py-0 rounded text-primary border" style="font-size: 0.75rem;">${item.code}</code></td>
-                    <td class="text-center py-2">
-                        <button type="button" class="btn btn-sm btn-inverse-primary p-1 select-flag-code"
-                                data-code="${item.code}" title="{!! __('general.select') !!}">
-                            <i class="ti-check" style="font-size: 0.8rem;"></i>
-                        </button>
+                    <td class="text-center py-3">
+                        <span class="badge badge-light-premium px-3 py-2 text-primary font-monospace" style="font-size: 0.8rem; border: 1px dashed #dee2e6;">${item.code}</span>
                     </td>
                 </tr>
             `;
@@ -107,7 +102,7 @@
             renderFlagsTable();
 
             // Search event
-            searchInput.on('keyup', function() {
+            searchInput.on('input', function() {
                 renderFlagsTable($(this).val());
             });
 
@@ -125,7 +120,7 @@
             });
 
             // Handle Selection
-            $(document).on('click', '.select-flag-code', function() {
+            $(document).on('click', '.select-flag-row', function() {
                 const code = $(this).data('code');
                 $(`#${targetInputId}`).val(code.toLowerCase()).trigger('change');
                 $('#flagsReferenceModal').modal('hide');

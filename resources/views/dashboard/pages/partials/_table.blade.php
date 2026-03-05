@@ -90,6 +90,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $pages->links() !!}
+        {!! $pages->withQueryString()->links() !!}
     </div>
 </div>

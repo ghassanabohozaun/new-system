@@ -26,19 +26,9 @@ body, h1, h2, h3, h4, h5, h6,
     font-family: 'Tajawal', sans-serif !important;
 }
 
-/* Arabic (RTL): Cairo font via inheritance - safe approach that doesn't break icon fonts */
+/* Arabic (RTL): Cairo font for EVERYTHING - ensures no element escapes the theme */
 html[lang="ar"],
-html[lang="ar"] body {
-    font-family: 'Cairo', sans-serif !important;
-}
-
-/* Explicit overrides for elements that don't inherit easily */
-html[lang="ar"] h1,
-html[lang="ar"] h2,
-html[lang="ar"] h3,
-html[lang="ar"] h4,
-html[lang="ar"] h5,
-html[lang="ar"] h6,
+html[lang="ar"] body,
 html[lang="ar"] .form-control,
 html[lang="ar"] .form-select,
 html[lang="ar"] .btn,
@@ -53,7 +43,18 @@ html[lang="ar"] td,
 html[lang="ar"] th,
 html[lang="ar"] input,
 html[lang="ar"] select,
-html[lang="ar"] textarea {
+html[lang="ar"] textarea,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6 {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+/* Radical approach: Apply to all children except known icon classes */
+html[lang="ar"] *:not([class^="mdi-"]):not([class^="ti-"]):not([class^="icon-"]):not([class^="fa-"]):not(.mdi):not(.ti):not(.fa):not(.feather):not([class*="icon"]) {
     font-family: 'Cairo', sans-serif !important;
 }
 

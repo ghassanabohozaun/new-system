@@ -4,7 +4,7 @@
 <div class="modal fade" id="updateCityModal" tabindex="-1" role="dialog" aria-labelledby="updateCityModalLabel"
     aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id='update_city_form'>
             @csrf
             @method('PUT')

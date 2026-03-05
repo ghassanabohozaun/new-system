@@ -4,28 +4,7 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
 
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        /* Hide the toggle column on extra large screens where all columns are visible */
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -49,23 +28,28 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title mb-4 d-flex align-items-center">
-                                <span class="card-icon-premium me-3">
-                                    <i class="mdi mdi-account-group-outline"></i>
-                                </span>
-                                {!! __('admins.show_all_admins') !!}
-                            </h4>
+                    <div class="row">
+                        <div class="col-md-12">
                             @include('dashboard.admins.partials._search')
-                            <div class="table-loader-container" style="position: relative;">
-                                <div class="table-loader-overlay">
-                                    <span class="premium-loader"></span>
-                                </div>
-                                <div id="table_data">
-                                    @include('dashboard.admins.partials._table', [
-                                        'admins' => $admins,
-                                    ])
+
+                            <div class="card card-rounded mt-1">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4 d-flex align-items-center">
+                                        <span class="card-icon-premium me-3">
+                                            <i class="mdi mdi-account-group-outline"></i>
+                                        </span>
+                                        {!! __('admins.show_all_admins') !!}
+                                    </h4>
+                                    <div class="table-loader-container" style="position: relative;">
+                                        <div class="table-loader-overlay">
+                                            <span class="premium-loader"></span>
+                                        </div>
+                                        <div id="table_data">
+                                            @include('dashboard.admins.partials._table', [
+                                                'admins' => $admins,
+                                            ])
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,42 +57,43 @@
                 </div>
             </div>
         </div>
-    </div>
+    @endsection
 
-    @include('dashboard.admins.modals.create')
-    @include('dashboard.admins.modals.edit')
-    @include('dashboard.general.tr-details')
-@endsection
+    @push('modals')
+        @include('dashboard.admins.modals.create')
+        @include('dashboard.admins.modals.edit')
+        @include('dashboard.general.tr-details')
+    @endpush
 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            // Initialize Generic Index Table Handler
-            window.initIndexTable({
-                container: '#table_data',
-                loader: '.table-loader-overlay',
-                detailsModal: '#detailsModal',
-                detailsModalLabel: '#detailsModalLabel',
-                detailsModalBody: '#modalBody'
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                // Initialize Generic Index Table Handler
+                window.initIndexTable({
+                    container: '#table_data',
+                    loader: '.table-loader-overlay',
+                    detailsModal: '#detailsModal',
+                    detailsModalLabel: '#detailsModalLabel',
+                    detailsModalBody: '#modalBody'
+                });
+
+                // Toggle password visibility
+                $(document).on('click', '.toggle-password', function() {
+                    const targetId = $(this).data('target');
+                    const input = $('#' + targetId);
+                    const icon = $(this).find('i');
+                    if (input.attr('type') === 'password') {
+                        input.attr('type', 'text');
+                        icon.css('opacity', '0.5'); // Visually indicate "eye off"
+                        icon.parent().css('background-color', '#ebebeb');
+                    } else {
+                        input.attr('type', 'password');
+                        icon.css('opacity', '1');
+                        icon.parent().css('background-color', 'transparent');
+                    }
+                });
+
+
             });
-
-            // Toggle password visibility
-            $(document).on('click', '.toggle-password', function() {
-                const targetId = $(this).data('target');
-                const input = $('#' + targetId);
-                const icon = $(this).find('i');
-                if (input.attr('type') === 'password') {
-                    input.attr('type', 'text');
-                    icon.css('opacity', '0.5'); // Visually indicate "eye off"
-                    icon.parent().css('background-color', '#ebebeb');
-                } else {
-                    input.attr('type', 'password');
-                    icon.css('opacity', '1');
-                    icon.parent().css('background-color', 'transparent');
-                }
-            });
-
-
-        });
-    </script>
-@endpush
+        </script>
+    @endpush

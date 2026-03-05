@@ -106,6 +106,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $roles->links() !!}
+        {!! $roles->withQueryString()->links() !!}
     </div>
 </div>

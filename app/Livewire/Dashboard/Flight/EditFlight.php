@@ -163,15 +163,32 @@ class EditFlight extends Component
     {
         return [
             'offer_duration_to.after' => __('flights.error_duration_after'),
+            '*.min' => __('flights.error_min_chars', ['min' => ':min']),
+            '*.string' => __('flights.error_string'),
         ];
     }
 
     public function validationAttributes()
     {
         return [
+            'name_ar' => __('flights.name_ar'),
+            'name_en' => __('flights.name_en'),
+            'details_ar' => __('flights.details_ar'),
+            'details_en' => __('flights.details_en'),
             'offer_duration_to' => __('flights.offer_duration_to'),
             'offer_duration_from' => __('flights.offer_duration_from'),
             'images' => __('flights.tab_media'),
+            'servicesItems.*.service_name_ar' => __('flights.service_name_ar'),
+            'servicesItems.*.service_name_en' => __('flights.service_name_en'),
+            'pricesItems.*.price_text_ar' => __('flights.price_text_ar'),
+            'pricesItems.*.price_text_en' => __('flights.price_text_en'),
+            'pricesItems.*.price' => __('flights.price'),
+            'notesItems.*.note_text_ar' => __('flights.note_text_ar'),
+            'notesItems.*.note_text_en' => __('flights.note_text_en'),
+            'offerIncludingItems.*.including_text_ar' => __('flights.offer_including_text_ar'),
+            'offerIncludingItems.*.including_text_en' => __('flights.offer_including_text_en'),
+            'offerNotIncludingItems.*.not_including_text_ar' => __('flights.offer_not_including_text_ar'),
+            'offerNotIncludingItems.*.not_including_text_en' => __('flights.offer_not_including_text_en'),
         ];
     }
 
@@ -298,15 +315,20 @@ class EditFlight extends Component
     {
         if ($id != '') {
             $this->cities = [];
-            $this->cities = [];
             $this->city_id = '';
             $this->cities = $this->countryService->getAllCitiesByCountry($id);
             $this->disabledGovernorate = 0;
+
+            // Dispatch event for Select2 to update its options
+            $this->dispatch('citiesUpdated', cities: $this->cities->mapWithKeys(function ($city) {
+                return [$city->id => $city->getTranslation('name', app()->getLocale())];
+            })->toArray());
         } else {
-            $this->cities = [];
             $this->cities = [];
             $this->city_id = '';
             $this->disabledGovernorate = 1;
+
+            $this->dispatch('citiesUpdated', cities: []);
         }
     }
 

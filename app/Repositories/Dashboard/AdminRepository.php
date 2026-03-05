@@ -6,13 +6,6 @@ use App\Models\Admin;
 
 class AdminRepository
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
 
     // get admin
     public function getAdmin($id)

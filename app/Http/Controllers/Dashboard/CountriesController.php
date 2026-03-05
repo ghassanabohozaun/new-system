@@ -22,7 +22,8 @@ class CountriesController extends Controller
     public function index(Request $request)
     {
         $title = __('addresses.countries');
-        $countries = $this->countryService->getCountries();
+        $filters = $request->all();
+        $countries = $this->countryService->getCountries($filters);
 
         if ($request->ajax()) {
             return view('dashboard.addresses.countries.partials._table', compact('countries'))->render();

@@ -147,4 +147,5 @@ return [
     'starting_from' => 'Starting from',
     'usd' => 'USD',
     'total_flights' => 'Total Flights',
+    'restricted_deletion' => 'Flight cannot be deleted because it has existing reservations.',
 ];

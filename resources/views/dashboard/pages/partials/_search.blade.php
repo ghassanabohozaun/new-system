@@ -30,29 +30,6 @@
                 </div>
             </div>
 
-            <!-- Language Filter Chip -->
-            <div class="filter-chip js-filter-chip" data-target="lang_popover">
-                <i class="mdi mdi-translate"></i>
-                <span class="chip-text">{!! __('pages.language') !!}</span>
-                <div class="filter-popover" id="lang_popover">
-                    <div class="mb-3 theme-info">
-                        <label class="form-label d-block fw-bold mb-1">{!! __('pages.language') !!}</label>
-                        <div class="input-group-premium">
-                            <span class="input-group-text"><i class="mdi mdi-web"></i></span>
-                            <select class="form-control" name="locale">
-                                <option value="">{!! __('general.all') !!}</option>
-                                <option value="ar">{!! __('general.arabic') !!}</option>
-                                <option value="en">{!! __('general.english') !!}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="popover-actions">
-                        <button type="button"
-                            class="btn btn-primary btn-sm text-white js-apply-filter">{!! __('general.apply') !!}</button>
-                    </div>
-                </div>
-            </div>
-
             <!-- Status Chip -->
             <div class="filter-chip js-filter-chip" data-target="status_popover">
                 <i class="mdi mdi-toggle-switch-outline"></i>

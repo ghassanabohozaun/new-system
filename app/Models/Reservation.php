@@ -60,6 +60,30 @@ class Reservation extends Model
         return $this->belongsTo(Country::class, 'depature_country_id');
     }
 
+    // to country
+    public function toCountry()
+    {
+        return $this->belongsTo(Country::class, 'to_country_id');
+    }
+
+    // from country
+    public function fromCountry()
+    {
+        return $this->belongsTo(Country::class, 'from_country_id');
+    }
+
+    // to city
+    public function toCity()
+    {
+        return $this->belongsTo(City::class, 'to_city_id');
+    }
+
+    // from city
+    public function fromCity()
+    {
+        return $this->belongsTo(City::class, 'from_city_id');
+    }
+
     //scopes
     public function scopeSearch($query, $search_word)
     {

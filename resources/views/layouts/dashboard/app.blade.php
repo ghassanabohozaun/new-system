@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/simple-line-icons/css/simple-line-icons.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/css/vendor.bundle.base.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/flatpickr/flatpickr.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/flag-icon-css/css/flag-icons.min.css') !!}">
     @if (Lang() == 'ar')
         <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/bootstrap-rtl/bootstrap.rtl.min.css') !!}">
@@ -40,7 +41,7 @@
     <link rel="stylesheet" href="{!! asset('assets/dashboard/css/tajawal.css') !!}">
     <!-- endinject -->
     <link rel="stylesheet" href="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.min.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/dashboard/css/mystyle.css') !!}?v={{ time() }}">
     <link rel="stylesheet" href="{!! asset('vendor/flasher/flasher.min.css') !!}" rel="stylesheet">
     <link rel="shortcut icon" href="{!! setting()->favicon
         ? asset('uploads/settings/' . setting()->favicon)
@@ -89,6 +90,8 @@
     <script src="{!! asset('assets/dashboard/js/dashboard.js') !!}"></script>
 
     <script src="{!! asset('assets/dashboard/vendors/sweetalert2/sweetalert2.all.min.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/vendors/flatpickr/flatpickr.js') !!}"></script>
+    <script src="{!! asset('assets/dashboard/vendors/flatpickr/flatpickr-ar.js') !!}"></script>
     <script src="{!! asset('vendor/flasher/flasher.min.js') !!}" type="text/javascript"></script>
 
     <script>
@@ -130,10 +133,12 @@
             ok: "{!! __('general.ok_got_it') !!}"
         };
     </script>
+
     <script src="{!! asset('assets/dashboard/js/myscripts.js') !!}"></script>
-    <script src="{!! asset('assets/dashboard/js/fileinput.js?v=' . time()) !!}"></script>
+    <script src="{{ asset('assets/dashboard/js/fileinput.js?v=1.0.1') }}"></script>
     <script src="{!! asset('assets/dashboard/js/hud-hub.js') !!}"></script>
     <script src="{!! asset('assets/dashboard/js/lock-screen.js') !!}"></script>
+    @stack('modals')
     @stack('scripts')
 </body>
 

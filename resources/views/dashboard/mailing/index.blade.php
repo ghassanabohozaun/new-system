@@ -4,28 +4,7 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
 
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        /* Hide the toggle column on extra large screens where all columns are visible */
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -73,10 +52,12 @@
             </div>
         </div>
     </div>
+@endsection
 
+@push('modals')
     @include('dashboard.mailing.modals.create')
     @include('dashboard.general.tr-details')
-@endsection
+@endpush
 
 @push('scripts')
     <script type="text/javascript">

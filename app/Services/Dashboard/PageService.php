@@ -35,9 +35,9 @@ class PageService
     }
 
     // get pages paginated
-    public function getPagesPaginated($perPage = 10)
+    public function getPagesPaginated($filters = [], $perPage = 10)
     {
-        return $this->pageRepository->getPagesPaginated($perPage);
+        return $this->pageRepository->getPagesPaginated($filters, $perPage);
     }
 
 

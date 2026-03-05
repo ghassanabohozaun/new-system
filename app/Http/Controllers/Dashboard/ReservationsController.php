@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\ReservationsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\ReservationRequest;
 use App\Models\Reservation;
@@ -11,8 +12,8 @@ use App\Services\Dashboard\FlightTicketService;
 use App\Services\Dashboard\ReservationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReservationsController extends Controller
 {
@@ -109,8 +110,6 @@ class ReservationsController extends Controller
     }
     // changeStatus
 
-
-
     // show report
     public function showReport()
     {
@@ -118,7 +117,7 @@ class ReservationsController extends Controller
 
         // fliter columns
         $tableName = 'reservations'; // Replace with your table name
-        $excludedColumns = ['id', 'deleted_at', 'updated_at','from_country_id', 'from_city_id', 'to_country_id', 'to_city_id',]; // Columns to exclude
+        $excludedColumns = ['id', 'deleted_at', 'updated_at', 'from_country_id', 'from_city_id', 'to_country_id', 'to_city_id']; // Columns to exclude
         $allColumnNames = DB::getSchemaBuilder()->getColumnListing($tableName);
         $filteredColumnNames = collect($allColumnNames)
             ->filter(function ($column) use ($excludedColumns) {
@@ -133,4 +132,17 @@ class ReservationsController extends Controller
         return view('dashboard.reservations.report', compact('title', 'filteredColumnNames', 'flights', 'tickets'));
     }
 
+    // export excel
+    public function exportExcel(Request $request)
+    {
+        $filters = $request->except(['_token']);
+
+        if (empty($filters['columns'])) {
+            $selectedColumns = ['flight_id', 'ticket_id', 'client_name', 'service'];
+        } else {
+            $selectedColumns = $request->input('columns', $filters);
+        }
+        $fileName = 'reservations_' . now() . '.xlsx';
+        return Excel::download(new ReservationsExport(Reservation::get(), $selectedColumns, $filters), $fileName);
+    }
 }

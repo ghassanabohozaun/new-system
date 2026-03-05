@@ -81,6 +81,14 @@ class HudHub {
                             window.Translations?.yes_discard || "Yes, discard",
                         cancelButtonText:
                             window.Translations?.no_cancel || "No",
+                        showClass: {
+                            popup: "swal2-noanimation",
+                            backdrop: "swal2-noanimation",
+                        },
+                        hideClass: {
+                            popup: "",
+                            backdrop: "",
+                        },
                     }).then((result) => {
                         if (result.isConfirmed) {
                             this.discard();

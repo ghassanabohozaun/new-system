@@ -6,9 +6,6 @@ use App\Repositories\Dashboard\RoleRepositoy;
 
 class RoleService
 {
-    /**
-     * Create a new class instance.
-     */
     protected $roleRepositoy;
     // __construct
     public function __construct(RoleRepositoy $roleRepositoy)

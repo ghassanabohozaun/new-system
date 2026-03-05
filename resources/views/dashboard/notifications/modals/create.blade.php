@@ -1,6 +1,6 @@
 <div class="modal fade" id="createNotificationModal" tabindex="-1" aria-labelledby="createNotificationModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createNotificationModalLabel">
@@ -30,7 +30,6 @@
                                 <label for="details" class="form-label-premium">{!! __('notifications.details') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
                                     <textarea id="details" name="details" class="form-control" rows="3" placeholder="{!! __('notifications.enter_details') !!}"></textarea>
                                 </div>
                                 <strong id="details_error" class="text-danger small"></strong>

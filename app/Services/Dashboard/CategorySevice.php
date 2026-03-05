@@ -40,18 +40,7 @@ class CategorySevice
     }
 
 
-    //  get parent categories
-    public function getParentCategories()
-    {
-        return $this->categoryRepository->getParentCategories();
-    }
-    // get categories without childern
 
-    public function getCategoreisWithoutChildren($id)
-    {
-        $category = $this->categoryRepository->getCategoreisWithoutChildren($id);
-        return $category;
-    }
     // store category
     public function storeCategory($data)
     {

@@ -41,10 +41,26 @@ class Country extends Model
         return $this->hasMany(Tour::class, 'country_id');
     }
 
-    // fights
+    // flights
     public function flights()
     {
         return $this->hasMany(Flight::class, 'country_id');
+    }
+
+    // reservations
+    public function departureReservations()
+    {
+        return $this->hasMany(Reservation::class, 'depature_country_id');
+    }
+
+    public function fromReservations()
+    {
+        return $this->hasMany(Reservation::class, 'from_country_id');
+    }
+
+    public function toReservations()
+    {
+        return $this->hasMany(Reservation::class, 'to_country_id');
     }
 
     //scopes

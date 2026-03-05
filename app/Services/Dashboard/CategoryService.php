@@ -53,14 +53,13 @@ class CategoryService
         }
 
         if (array_key_exists('icon', $data) && $data['icon'] != null) {
-            $this->imageManagerUtils->removeImageFromLocal($category->icon, 'categories');
+            if ($category->icon != null) {
+                $this->imageManagerUtils->removeImageFromLocal($category->icon, 'categories');
+            }
             $data['icon'] = $this->imageManagerUtils->saveResizeImage($data['icon'], 'categories', 500, 500);
         } else {
-            if ($category->icon != null) {
-                $data['icon'] = $category->icon;
-            } else {
-                $data['icon'] = '';
-            }
+            // Keep the old icon if no new one is uploaded
+            $data['icon'] = $category->icon;
         }
 
         $this->categoryRepository->updateCategory($category, $data);
@@ -70,15 +69,26 @@ class CategoryService
     public function destroy($id)
     {
         $category = $this->getCategory($id);
+
         if (!$category) {
-            return false;
+            return 'not_found';
         }
 
+        // Block deletion if category has flights or child categories
+        if (
+            $category->flights()->exists() ||
+            $category->children()->exists()
+        ) {
+            return 'restricted';
+        }
+
+        // Delete icon if exists
         if (!empty($category->icon)) {
             $this->imageManagerUtils->removeImageFromLocal($category->icon, 'categories');
         }
 
-        return $this->categoryRepository->destroyCategory($category);
+        $result = $this->categoryRepository->destroyCategory($category);
+        return $result ? 'success' : 'failed';
     }
 
     public function changeStatus($id, $status)

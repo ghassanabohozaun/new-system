@@ -21,13 +21,15 @@ class CitiesController extends Controller
     public function index(Request $request)
     {
         $title = __('addresses.cities');
-        $cities = $this->cityService->getCities();
+        $filters = $request->all();
+        $cities = $this->cityService->getCities($filters);
+        $countries = $this->countryService->getAllCountriesWithoutRelations();
 
         if ($request->ajax()) {
             return view('dashboard.addresses.cities.partials._table', compact('cities'))->render();
         }
 
-        return view('dashboard.addresses.cities.index', compact('title', 'cities'));
+        return view('dashboard.addresses.cities.index', compact('title', 'cities', 'countries'));
     }
 
     // create
@@ -81,12 +83,20 @@ class CitiesController extends Controller
     // destroy
     public function destroy(Request $request)
     {
-        if ($request->json()) {
-            $city = $this->cityService->destroyCity($request->id);
-            if (!$city) {
-                return response()->json(['status' => false], 500);
+        if ($request->ajax()) {
+            try {
+                $status = $this->cityService->destroyCity($request->id);
+                if ($status === 'success') {
+                    return response()->json(['status' => true], 200);
+                } elseif ($status === 'restricted') {
+                    return response()->json(['status' => false, 'message' => __('addresses.city_restricted_deletion')], 422);
+                } elseif ($status === 'not_found') {
+                    return response()->json(['status' => false, 'message' => __('general.no_record_found')], 404);
+                }
+                return response()->json(['status' => false, 'message' => __('general.error')], 500);
+            } catch (\Exception $e) {
+                return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
             }
-            return response()->json(['status' => true], 201);
         }
     }
 

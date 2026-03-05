@@ -34,7 +34,7 @@ $(document).ready(function () {
                     // Show original image
                     $placeholder.addClass("d-none");
                     $currentImg.removeClass("d-none");
-                    $localResetBtn.removeClass("d-none"); // User can click Undo to delete the original image!
+                    $localResetBtn.addClass("d-none"); // Hide by default until a NEW file is selected (or if user specifically wants to delete)
                 }
             } else {
                 // Create Mode - Empty State

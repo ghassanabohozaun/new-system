@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\SliderRequest;
+use App\Models\Slider;
 use App\Services\Dashboard\SliderService;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class SlidersController extends Controller
     public function index(Request $request)
     {
         $title = __('sliders.sliders');
-        $sliders = $this->sliderService->getSliders();
+        $sliders = $this->sliderService->getSliders($request->all());
 
         if ($request->ajax()) {
             return view('dashboard.sliders.partials._table', compact('sliders'))->render();
@@ -41,39 +42,41 @@ class SlidersController extends Controller
         $data = $request->validated();
         $slider = $this->sliderService->storeSlider($data);
         if (!$slider) {
-            return response()->json(['status' => false], 500);
+            return response()->json(['status' => false, 'message' => __('general.error_message')], 500);
         }
-        return response()->json(['status' => true, 'data' => $slider], 200);
+
+        return response()->json(['status' => true, 'message' => __('general.add_success_message')]);
     }
 
     // show
-    public function show(string $id)
+    public function show(Slider $slider)
     {
         //
     }
 
     // edit
-    public function edit(string $id)
+    public function edit($id)
     {
-        $title = __('sliders.update_slider');
         $slider = $this->sliderService->getSlider($id);
         if (!$slider) {
             flash()->error(__('general.no_record_found'));
             return redirect()->route('dashboard.sliders.index');
         }
-        return view('dashboard.sliders.edit', compact('title', 'slider'));
+        $title = __('sliders.update_slider');
+        return view('dashboard.sliders.edit', compact('slider', 'title'));
     }
 
     // update
-    public function update(SliderRequest $request, string $id)
+    public function update(SliderRequest $request, $id)
     {
         $data = $request->validated();
         $data['id'] = $id;
         $slider = $this->sliderService->updateSlider($data);
         if (!$slider) {
-            return response()->json(['status' => false], 500);
+            return response()->json(['status' => false, 'message' => __('general.error_message')], 500);
         }
-        return response()->json(['status' => true, 'data' => $slider], 201);
+
+        return response()->json(['status' => true, 'message' => __('general.update_success_message')]);
     }
 
     // destroy

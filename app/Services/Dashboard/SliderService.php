@@ -27,9 +27,9 @@ class SliderService
     }
 
     // get sliders
-    public function getSliders()
+    public function getSliders($params = [])
     {
-        return $this->sliderRepository->getSliders();
+        return $this->sliderRepository->getSliders($params);
     }
 
     // create slider

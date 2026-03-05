@@ -15,9 +15,16 @@ class CountryRepository
     }
 
     // get countries
-    public function getCountries()
+    public function getCountries($filters = [])
     {
         return Country::withCount(['cities'])
+            ->when(!empty($filters['search_term']), function ($query) use ($filters) {
+                $searchTerm = mb_strtolower($filters['search_term'], 'UTF-8');
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->whereRaw('LOWER(name->"$.en") like ?', ['"%' . $searchTerm . '%"'])
+                        ->orWhereRaw('LOWER(name->"$.ar") like ?', ['"%' . $searchTerm . '%"']);
+                });
+            })
             ->orderByDesc('id')
             ->paginate(10);
     }

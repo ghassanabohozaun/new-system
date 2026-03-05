@@ -41,17 +41,27 @@
   border-radius: 20px 0px 0px 20px !important;
 }
 
-/* Sub-menu RTL Symmetry */
+/* Sub-menu RTL Symmetry & Indentation Fix */
 .rtl .sidebar .nav.sub-menu {
-  padding: 0.25rem 3.07rem 0 0 !important;
-  border-radius: 0px 0px 0px 20px !important; /* Mirror of 0 0 20 0 */
+  padding: 0.25rem 2.25rem 0.5rem 0 !important;
+  border-radius: 0px 0px 20px 20px !important;
   margin-right: 0;
   background: #fff;
 }
 
 .rtl .sidebar .nav.sub-menu .nav-item::before {
-  right: 0 !important;
+  right: 1.25rem !important; /* Move dot closer to the right within its container */
   left: auto !important;
+  z-index: 10; /* Keep on top */
+  transition: transform 0.3s ease;
+}
+
+.rtl .sidebar .nav.sub-menu .nav-item:hover::before {
+  transform: translateX(-5px); /* Move with the mirrored link */
+}
+
+.rtl .sidebar .nav.sub-menu .nav-item .nav-link {
+  padding: 0.7rem 2.5rem 0.7rem 1rem !important; /* padding-right pushes text after the dot */
 }
 
 /* Icons & Titles Symmetry */
@@ -82,6 +92,7 @@
 .rtl .sidebar .nav .nav-item .nav-link[aria-expanded="true"] .menu-arrow:before {
     transform: rotate(180deg) !important;
 }
+
 
 /*
    Content layout fixes
@@ -535,4 +546,18 @@
     line-height: 1 !important;
     position: relative;
     top: -1px;
+}
+
+
+/* RTL Mirror for Sidebar Hover Animation */
+.rtl .sidebar .nav .nav-item:hover .nav-link {
+    transform: translateX(-5px) !important;
+}
+
+/* RTL Active Indicator - Targeted */
+.rtl .sidebar .nav .nav-item.active > .nav-link::before,
+.rtl .sidebar .nav .nav-item .nav-link.active::before {
+    left: auto !important;
+    right: 0 !important;
+    border-radius: 4px 0 0 4px !important;
 }

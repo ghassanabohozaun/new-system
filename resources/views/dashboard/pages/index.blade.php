@@ -4,27 +4,7 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
 
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -51,25 +31,26 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card card-rounded">
-                                <div class="card-body">
-                                    <h4 class="card-title mb-4 d-flex align-items-center">
-                                        <span class="card-icon-premium me-3">
-                                            <i class="mdi mdi-file-document-multiple-outline"></i>
-                                        </span>
-                                        {!! __('pages.show_all_pages') !!}
-                                    </h4>
-                                    @include('dashboard.pages.partials._search')
-                                    <div class="table-loader-container" style="position: relative;">
-                                        <div class="table-loader-overlay">
-                                            <span class="premium-loader"></span>
-                                        </div>
-                                        <div id="table_data">
-                                            @include('dashboard.pages.partials._table', [
-                                                'pages' => $pages,
-                                            ])
-                                        </div>
-                                    </div>
+                            @include('dashboard.pages.partials._search')
+                        </div>
+                    </div>
+
+                    <div class="card card-rounded shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4 d-flex align-items-center">
+                                <span class="card-icon-premium me-3">
+                                    <i class="mdi mdi-file-document-multiple-outline text-primary"></i>
+                                </span>
+                                {!! __('pages.show_all_pages') !!}
+                            </h4>
+                            <div class="table-loader-container" style="position: relative;">
+                                <div class="table-loader-overlay">
+                                    <span class="premium-loader"></span>
+                                </div>
+                                <div id="table_data">
+                                    @include('dashboard.pages.partials._table', [
+                                        'pages' => $pages,
+                                    ])
                                 </div>
                             </div>
                         </div>
@@ -78,8 +59,11 @@
             </div>
         </div>
     </div>
-    @include('dashboard.general.tr-details')
 @endsection
+
+@push('modals')
+    @include('dashboard.general.tr-details')
+@endpush
 
 @push('scripts')
     <script>

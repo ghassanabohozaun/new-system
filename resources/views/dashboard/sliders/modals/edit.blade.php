@@ -21,7 +21,8 @@
                                 <label class="form-label-premium" for="title_ar_edit">{!! __('sliders.title_ar') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-format-title text-primary"></i></span>
                                     <input type="text" id="title_ar_edit" name="title[ar]" class="form-control"
                                         placeholder="{!! __('sliders.enter_title_ar') !!}" autocomplete="off">
                                 </div>
@@ -34,7 +35,8 @@
                                 <label class="form-label-premium" for="title_en_edit">{!! __('sliders.title_en') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-format-title"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-format-title text-primary"></i></span>
                                     <input type="text" id="title_en_edit" name="title[en]" class="form-control"
                                         placeholder="{!! __('sliders.enter_title_en') !!}" autocomplete="off">
                                 </div>
@@ -48,8 +50,7 @@
                                 <label class="form-label-premium" for="details_ar_edit">{!! __('sliders.details_ar') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
-                                    <textarea id="details_ar_edit" name="details[ar]" class="form-control" rows="4"
+                                    <textarea id="details_ar_edit" name="details[ar]" class="form-control" rows="3"
                                         placeholder="{!! __('sliders.enter_details_ar') !!}"></textarea>
                                 </div>
                                 <strong id="details_ar_error_edit" class="text-danger small"></strong>
@@ -61,8 +62,7 @@
                                 <label class="form-label-premium" for="details_en_edit">{!! __('sliders.details_en') !!} <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-text-subject"></i></span>
-                                    <textarea id="details_en_edit" name="details[en]" class="form-control" rows="4"
+                                    <textarea id="details_en_edit" name="details[en]" class="form-control" rows="3"
                                         placeholder="{!! __('sliders.enter_details_en') !!}"></textarea>
                                 </div>
                                 <strong id="details_en_error_edit" class="text-danger small"></strong>
@@ -74,7 +74,8 @@
                             <div class="form-group mb-0">
                                 <label class="form-label-premium" for="url_ar_edit">{!! __('sliders.url_ar') !!}</label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-link-variant text-primary"></i></span>
                                     <input type="text" id="url_ar_edit" name="url[ar]" class="form-control"
                                         placeholder="{!! __('sliders.enter_url_ar') !!}">
                                 </div>
@@ -86,7 +87,8 @@
                             <div class="form-group mb-0">
                                 <label class="form-label-premium" for="url_en_edit">{!! __('sliders.url_en') !!}</label>
                                 <div class="input-group-premium">
-                                    <span class="input-group-text"><i class="mdi mdi-link-variant"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-link-variant text-primary"></i></span>
                                     <input type="text" id="url_en_edit" name="url[en]" class="form-control"
                                         placeholder="{!! __('sliders.enter_url_en') !!}">
                                 </div>
@@ -108,7 +110,7 @@
                         <div class="col-md-4 theme-success">
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
-                                    <span class="input-group-text"><i class="mdi mdi-power"></i></span>
+                                    <span class="input-group-text"><i class="mdi mdi-power text-success"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="status_active_edit">{!! __('sliders.status') !!} <span
@@ -127,7 +129,7 @@
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
                                     <span class="input-group-text"><i
-                                            class="mdi mdi-format-list-bulleted-type"></i></span>
+                                            class="mdi mdi-format-list-bulleted-type text-warning"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="details_status_active_edit">{!! __('sliders.details_status') !!} <span
@@ -145,7 +147,8 @@
                         <div class="col-md-4 theme-info">
                             <div class="form-group mb-0">
                                 <div class="input-group-premium p-1 pe-3" style="background-color: #fafafafa;">
-                                    <span class="input-group-text"><i class="mdi mdi-gesture-tap-button"></i></span>
+                                    <span class="input-group-text"><i
+                                            class="mdi mdi-gesture-tap-button text-info"></i></span>
                                     <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                         <label class="mb-0 form-label-premium"
                                             for="button_status_active_edit">{!! __('sliders.button_status') !!} <span
@@ -162,9 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer bg-light border-0">
-                    <!-- Buttons removed in favor of Floating Command HUD -->
-                </div>
+
 
                 <!-- Floating Command HUD -->
                 <x-dashboard.command-hud formId="edit_slider_form" hudId="edit_slider_hud"
@@ -195,7 +196,7 @@
                         var photoUrl = data.photo;
 
                         // Set original state for HUD discard
-                        $previewContainer.attr('data-original-html',
+                        $previewContainer.data('original-html',
                             `<img src="${photoUrl}" class="fileinput-current-img" style="width:100%; height:100%; object-fit:contain; background-color: #f8f9fa;">`
                         );
 
@@ -205,7 +206,7 @@
                         $previewContainer.closest('.fileinput-component').find('.slider-upload-card')
                             .removeClass('d-none');
                     } else {
-                        $previewContainer.attr('data-original-html', '');
+                        $previewContainer.data('original-html', '');
                         $img.addClass('d-none').attr('src', '');
                         $placeholder.removeClass('d-none');
                         $resetBtn.addClass('d-none');

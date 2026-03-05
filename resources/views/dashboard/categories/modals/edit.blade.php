@@ -1,6 +1,6 @@
 <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered custom-modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered premium-modal-xl" role="document">
         <form class="forms-sample" action="" method="POST" enctype="multipart/form-data" id="edit_category_form">
             @csrf
             @method('PUT')
@@ -162,10 +162,17 @@
 
                 if (data.photo && data.photo !== "" && data.photo !== "null") {
                     var iconBase = "{{ asset('uploads/categories') }}";
-                    currentImg.attr('src', iconBase + '/' + data.photo).removeClass('d-none');
+                    var photoUrl = iconBase + '/' + data.photo;
+
+                    previewContainer.data('original-html',
+                        `<img src="${photoUrl}" class="fileinput-current-img" style="width:100%; height:100%; object-fit:contain; background-color: #f8f9fa;">`
+                    );
+
+                    currentImg.attr('src', photoUrl).removeClass('d-none');
                     placeholder.addClass('d-none');
                     if (deleteBtn.length) deleteBtn.removeClass('d-none');
                 } else {
+                    previewContainer.data('original-html', '');
                     currentImg.addClass('d-none').attr('src', '');
                     placeholder.removeClass('d-none');
                     if (deleteBtn.length) deleteBtn.addClass('d-none');
@@ -175,7 +182,7 @@
 
         function resetEditForm() {
             window.clearFormErrors('#edit_category_form');
-            $('#reset_photo_edit_btn').click();
+            $('#reset_icon_edit_btn').click();
         }
 
         $('#editCategoryModal').on('hidden.bs.modal', function() {
@@ -184,7 +191,7 @@
 
         window.handleFormSubmit('#edit_category_form', {
             modalToHide: '#editCategoryModal',
-            tableToLoad: '#table_data',
+            tableToLoad: '#responsiveTable',
             successMessage: "{!! __('general.update_success_message') !!}",
             suffix: '_edit',
             resetForm: false,

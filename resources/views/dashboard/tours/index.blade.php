@@ -4,27 +4,7 @@
     {!! $title !!}
 @endsection
 
-@push('css')
-    <style>
-        .table-responsive-custom td:first-child,
-        .table-responsive-custom th:first-child {
-            width: 40px;
-            text-align: center;
-        }
 
-        .details-control {
-            cursor: pointer;
-            color: #1F3BB3;
-            font-size: 20px;
-        }
-
-        @media (min-width: 1200px) {
-            .details-col {
-                display: none;
-            }
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content-wrapper">
@@ -79,8 +59,11 @@
             </div>
         </div>
     </div>
-    @include('dashboard.general.tr-details')
 @endsection
+
+@push('modals')
+    @include('dashboard.general.tr-details')
+@endpush
 
 @push('scripts')
     <script>

@@ -23,6 +23,7 @@ return [
     'enter_phone_code' => 'Enter Phone Code',
     'enter_flag_code' => 'Enter Flag Code',
     'search_for_country' => 'Search for a country...',
+    'search_placeholder' => 'Search by country name...',
     'select_flag' => 'Select Flag',
     'select_flag_code' => 'Select Flag Code',
 
@@ -61,6 +62,7 @@ return [
     'enter_city_name_ar' => 'Enter Arabic City Name',
     'enter_city_name_en' => 'Enter English City Name',
     'no_cities_found' => 'No Cities Found',
+    'city_restricted_deletion' => 'Cannot delete city because it has linked flights, tours, or flight tickets.',
 
     'show_all_users' => 'Show All Users',
 ];

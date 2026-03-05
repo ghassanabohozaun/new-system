@@ -3,8 +3,8 @@
 return [
     'create_new_reservation' => 'إضافة حجز طيران جديد',
     'update_reservation' => 'تعديل حجز الطيران',
-    'reservations' => 'حجوزات الطيران',
-    'show_all_reservations' => 'عرض جميع حجوزات الطيران ',
+    'reservations' => 'الحجوزات',
+    'show_all_reservations' => 'عرض جميع الحجوزات ',
     'select_columns'=>'اختيار الأعمدة',
     'reports'=>'التقارير',
     'columns'=>'الأعمدة',

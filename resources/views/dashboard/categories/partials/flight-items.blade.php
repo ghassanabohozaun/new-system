@@ -1,92 +1,66 @@
 @forelse ($flights as $flight)
-    <div class="col-xl-4 col-md-6 mb-5">
-        <div class="card premium-flight-card border-0 h-100">
-            <!-- Image & Glass Overlays -->
-            <div class="card-img-wrapper position-relative overflow-hidden">
-                @if ($flight->images->isNotEmpty())
-                    <img src="{!! asset('uploads/flights/' . $flight->images->first()->file_name) !!}" class="card-img-top flight-hero-img" alt="{{ $flight->name }}">
-                @else
-                    <div class="no-img-placeholder d-flex align-items-center justify-content-center bg-light">
-                        <i class="mdi mdi-image-off fs-1 text-muted opacity-25"></i>
-                    </div>
-                @endif
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card premium-flight-card h-100">
+            <div class="card-img-wrapper position-relative">
+                @php
+                    $firstImage = $flight->images->first();
+                    $imagePath = $firstImage
+                        ? asset('uploads/flights/' . $firstImage->file_name)
+                        : asset('assets/dashboard/images/ImageNotFound.jpg');
+                @endphp
 
-                <!-- Glass Badge: Status -->
-                <div class="glass-overlay-top p-3 d-flex justify-content-between align-items-start w-100">
-                    <span
-                        class="glass-badge status-badge {{ $flight->status == 1 ? 'status-active' : 'status-inactive' }}">
-                        <span class="status-dot"></span>
-                        {{ $flight->status == 1 ? __('general.enable') : __('general.disabled') }}
-                    </span>
+                <img src="{{ $imagePath }}" class="card-img-top flight-hero-img" alt="{{ $flight->name }}"
+                    style="height: 200px; width: 100%; object-fit: cover;">
 
-                    <div class="action-float-group">
-                        <a href="{{ route('dashboard.flights.edit', $flight->id) }}" class="glass-mini-btn me-2"
-                            title="{{ __('general.edit') }}">
-                            <i class="mdi mdi-pencil-outline"></i>
-                        </a>
-                    </div>
+                <span class="status-badge {{ $flight->status == 1 ? 'status-active' : 'status-inactive' }}">
+                    {{ $flight->status == 1 ? __('general.active') : __('general.disabled') }}
+                </span>
+
+                <div class="item-actions">
+                    <a href="{{ route('dashboard.flights.edit', $flight->id) }}" class="action-btn"
+                        title="{{ __('general.edit') }}">
+                        <i class="mdi mdi-pencil-outline"></i>
+                    </a>
                 </div>
 
-                <!-- Glass Badge: Price (Bottom) -->
                 @php $minPrice = optional($flight->prices)->min('price'); @endphp
                 @if ($minPrice)
-                    <div class="glass-price-tag">
-                        <span class="price-label">{{ __('flights.starting_from') }}</span>
-                        <span class="price-value">{{ number_format($minPrice, 0) }}<small
-                                class="currency">{{ __('flights.usd') }}</small></span>
+                    <div class="price-badge">
+                        {{ number_format($minPrice, 0) }} {{ __('flights.usd') }}
                     </div>
                 @endif
             </div>
 
-            <!-- Content Body -->
-            <div class="card-body px-4 pt-4 pb-3">
-                <div class="d-flex align-items-center mb-2">
-                    <span class="category-pill mb-0">
-                        <i class="mdi mdi-tag-outline me-1"></i> {{ $category->name }}
-                    </span>
+            <div class="card-body p-4">
+                <h5 class="flight-title" title="{{ $flight->name }}">{{ $flight->name }}</h5>
+
+                <div class="location-info d-flex align-items-center">
+                    <i class="mdi mdi-map-marker-outline me-1"></i>
+                    <span>{{ $flight->country->name }} / {{ $flight->city->name }}</span>
                 </div>
 
-                <h5 class="flight-title mb-2 text-truncate-2" title="{{ $flight->name }}">{{ $flight->name }}</h5>
-
-                <div class="location-group d-flex align-items-center mb-3">
-                    <div class="location-icon-wrapper me-2">
-                        <i class="mdi mdi-map-marker-radius"></i>
-                    </div>
-                    <span class="location-text">{{ $flight->country->name }} / {{ $flight->city->name }}</span>
-                </div>
-
-                <p class="flight-excerpt mb-4 line-clamp-2">
-                    {!! strip_tags($flight->details) !!}
-                </p>
-
-                <!-- Footer Stats & Main CTA -->
-                <div class="card-footer-luxury d-flex align-items-center justify-content-between pt-3 border-top">
-                    <div class="meta-item d-flex align-items-center">
-                        <i class="mdi mdi-clock-check-outline me-2 text-primary"></i>
-                        <span class="meta-value fw-bold">{{ $flight->days_num }}</span>
-                        <span class="meta-label ms-1">{{ __('flights.days_num') }}</span>
+                <div class="meta-info">
+                    <div class="days-count">
+                        <i class="mdi mdi-calendar-clock me-1"></i>
+                        {{ $flight->days_num }} {{ __('flights.days_num') }}
                     </div>
 
-                    <a href="{{ route('dashboard.flights.show', $flight->id) }}" class="btn-premium-cta">
-                        <span>{{ __('general.show') }}</span>
-                        <i class="mdi mdi-chevron-right ms-1"></i>
+                    <a href="{{ route('dashboard.flights.show', $flight->id) }}" class="btn-view">
+                        {{ __('general.show') }}
+                        <i class="mdi mdi-arrow-right ms-1"></i>
                     </a>
                 </div>
             </div>
-
-            <!-- Seamless Stretched Link (excluding actions) -->
-            <a href="{{ route('dashboard.flights.show', $flight->id) }}" class="stretched-link"></a>
         </div>
     </div>
 @empty
     <div class="col-12 py-5 text-center">
-        <div class="empty-state-luxury p-5 animate__animated animate__fadeIn">
-            <div class="empty-icon-box mx-auto mb-4">
-                <i class="mdi mdi-airplane-off"></i>
-            </div>
-            <h3 class="fw-bold text-dark">{{ __('flights.no_flights_found') }}</h3>
-            <p class="text-muted fs-5 mb-0">
-                {{ __('categories.no_flights_msg') ?? 'We couldn\'t find any flights for this category yet.' }}</p>
+        <div class="bg-white rounded-4 p-5 shadow-sm border">
+            <i class="mdi mdi-airplane-off fs-1 text-muted opacity-25 mb-3 d-block"></i>
+            <h4 class="fw-bold text-dark">{{ __('flights.no_flights_found') }}</h4>
+            <p class="text-muted mb-0">
+                {{ __('categories.no_flights_msg') ?? 'We couldn\'t find any flights for this category yet.' }}
+            </p>
         </div>
     </div>
 @endforelse

@@ -26,6 +26,12 @@
                                 <li class="breadcrumb-item active" aria-current="page">{!! __('tickets.create_new_ticket') !!}</li>
                             </ol>
                         </nav>
+                        <div class="btn-wrapper">
+                            <a href="{{ route('dashboard.tickets.index') }}"
+                                class="btn btn-outline-dark btn-sm me-0 custom-shadow-sm">
+                                <i class="mdi mdi-arrow-left"></i> {!! __('general.back') !!}
+                            </a>
+                        </div>
                     </div>
                     <!--------------------  End Breadcrumb  ---------------------------->
 
@@ -57,7 +63,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group mb-3 theme-primary">
-                                                    <label class="form-label-premium" for="title_en">{!! __('tickets.title_en') !!}
+                                                    <label class="form-label-premium"
+                                                        for="title_en">{!! __('tickets.title_en') !!}
                                                         <span class="text-danger">*</span></label>
                                                     <div class="input-group-premium">
                                                         <span class="input-group-text"><i

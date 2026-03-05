@@ -61,12 +61,23 @@ class CategoriesController extends Controller
 
     public function destroy(Request $request)
     {
-        $category = $this->categoryService->destroy($request->id);
-        if (!$category) {
-            return response()->json(['status' => false, 'message' => __('messages.error')], 500);
-        }
+        if ($request->ajax()) {
+            try {
+                $status = $this->categoryService->destroy($request->id);
 
-        return response()->json(['status' => true, 'message' => __('messages.success')], 200);
+                if ($status === 'success') {
+                    return response()->json(['status' => true], 200);
+                } elseif ($status === 'restricted') {
+                    return response()->json(['status' => false, 'message' => __('categories.category_restricted_deletion')], 422);
+                } elseif ($status === 'not_found') {
+                    return response()->json(['status' => false, 'message' => __('general.no_record_found')], 404);
+                }
+
+                return response()->json(['status' => false, 'message' => __('messages.error')], 500);
+            } catch (\Exception $e) {
+                return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+            }
+        }
     }
 
     public function changeStatus(Request $request)

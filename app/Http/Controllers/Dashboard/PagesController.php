@@ -21,7 +21,7 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         $title = __('pages.pages');
-        $pages = $this->pageService->getPagesPaginated(10);
+        $pages = $this->pageService->getPagesPaginated($request->all(), 10);
 
         if ($request->ajax()) {
             return view('dashboard.pages.partials._table', compact('pages'))->render();

@@ -5,7 +5,7 @@
                 <th class="details-col"></th>
                 <th class="text-start">#</th>
                 <th class="text-start d-none">{!! __('flights.images') !!}</th>
-                <th class="text-start">{!! __('flights.flight_name') !!}</th>
+                <th class="text-start" style="min-width: 200px;">{!! __('flights.flight_name') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('flights.country_id') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('flights.city_id') !!}</th>
                 <th class="text-start d-none d-xl-table-cell">{!! __('flights.category_id') !!}</th>
@@ -25,7 +25,9 @@
                     <td class="text-start d-none">
                         @include('dashboard.flights.parts.photo', ['flight' => $flight])
                     </td>
-                    <td class="text-start">{!! $flight->getTranslation('name', Lang()) !!}</td>
+                    <td class="text-start"
+                        style="min-width: 200px; max-width: 350px; white-space: normal; word-break: break-word;">
+                        {!! $flight->getTranslation('name', Lang()) !!}</td>
                     <td class="text-start d-none d-xl-table-cell">{!! $flight->country->getTranslation('name', Lang()) ?? '-' !!}</td>
                     <td class="text-start d-none d-xl-table-cell">{!! $flight->city->getTranslation('name', Lang()) ?? '-' !!}</td>
                     <td class="text-start d-none d-xl-table-cell">{!! $flight->category->getTranslation('name', Lang()) ?? '-' !!}</td>
@@ -140,6 +142,6 @@
         </tbody>
     </table>
     <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-        {!! $flights->appends(request()->input())->links() !!}
+        {!! $flights->withQueryString()->links() !!}
     </div>
 </div>

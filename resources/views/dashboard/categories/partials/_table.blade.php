@@ -6,6 +6,7 @@
                 <th class="text-start">#</th>
                 <th class="text-center d-none d-xl-table-cell">{!! __('categories.icon') !!}</th>
                 <th class="text-start">{!! __('categories.name') !!}</th>
+                <th class="text-start d-none d-xl-table-cell">{!! __('categories.flights_count') !!}</th>
                 <th class="text-center d-none d-xl-table-cell">{!! __('categories.parent') !!}</th>
                 <th class="text-center d-none d-xl-table-cell">{!! __('categories.status') !!}</th>
                 <th class="text-center d-none d-xl-table-cell">{!! __('categories.manage_status') !!}</th>
@@ -30,6 +31,14 @@
                         {{ $category->name }}
                         <div class="d-lg-none small text-muted">
                             {{ $category->parentRelation ? $category->parentRelation->name : __('categories.main_category') }}
+                        </div>
+                    </td>
+                    <td class="text-center d-none d-xl-table-cell td-fit td-center-content">
+                        <div class="d-flex justify-content-center align-items-center w-100 h-100">
+                            <div class="badge badge-pill badge-outline-danger"
+                                style="min-width: 35px; border-color: #e0e0e0; color: #666; font-weight: 700;">
+                                {!! $category->flights->count() !!}
+                            </div>
                         </div>
                     </td>
                     <td class="text-center d-none d-xl-table-cell">
@@ -78,6 +87,22 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6 mb-3">
+                                <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
+                                    <label class="small text-muted d-block text-uppercase fw-bold mb-2"
+                                        style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                                        <i
+                                            class="mdi mdi-toggle-switch-outline me-1"></i>{{ __('categories.flights_count') }}
+                                    </label>
+                                    <div>
+                                        <div class="badge badge-pill badge-outline-danger"
+                                            style="min-width: 35px; border-color: #e0e0e0; color: #666; font-weight: 700;">
+                                            {!! $category->flights->count() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
@@ -103,7 +128,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 ">
                                     <div class="p-3 border rounded-3 bg-white h-100 shadow-sm">
                                         <label class="small text-muted d-block text-uppercase fw-bold mb-2"
                                             style="font-size: 0.75rem; letter-spacing: 0.5px;">
@@ -152,5 +177,5 @@
 </div>
 
 <div class="mt-4 pagination-wrapper d-flex justify-content-end">
-    {!! $categories->links() !!}
+    {!! $categories->withQueryString()->links() !!}
 </div>
