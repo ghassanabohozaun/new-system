@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandResource extends BaseResource
+class RoleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,8 @@ class BrandResource extends BaseResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'logo' => $this->getImageUrl($this->logo,'brands'),
-            'status' => $this->status,
+            'name' => $this->role,
+            'permissions' => $this->permissions,
         ];
     }
 }

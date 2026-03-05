@@ -214,4 +214,5 @@ return [
     'discard' => 'تجاهل',
     'save_changes' => 'حفظ التغييرات',
     'back' => 'رجوع',
+    'data_fetch_successfully' => 'تم جلب البيانات بنجاح',
 ];

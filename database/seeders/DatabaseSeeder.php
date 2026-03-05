@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             RoleSeeder::class,
             AdminSeeder::class,
+            UserSeeder::class,
             CountrySeeder::class,
             CitySeeder::class,
             DepartmentSeeder::class,

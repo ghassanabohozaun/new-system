@@ -19,12 +19,6 @@ class AddressService
         return $this->addressRepository->getCountries();
     }
 
-    // get governorates
-    public function getGovernorates($country_id)
-    {
-        return $this->addressRepository->getGovernorates($country_id);
-    }
-
     //get cities
     public function getCities($country_id)
     {

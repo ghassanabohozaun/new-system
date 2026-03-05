@@ -4,6 +4,9 @@ return [
     'update_user' => 'تعديل المستخدم',
     'users' => 'المستخدمين',
     'show_all_users' => 'عرض جميع المستخدمين',
+    'user_not_found' => 'المستخدم غير موجود',
+    'invalid_password' => 'كلمة المرور غير صحيحة',
+    'user_logged_in_successfully' => 'تم تسجيل دخول المستخدم بنجاح',
     'orders_count' => 'عدد الطلبات',
     'no_orders' => 'لا يوجد طلبات',
     'select' => 'اختار',
@@ -38,4 +41,5 @@ return [
 
     'no_users_found' => 'لا يوجد مستخدمين حالياً !',
     'login_success'=>'تم تسجيل الدخول بنجاح',
+    'logout_success' => 'تم تسجيل الخروج بنجاح',
 ];

@@ -4,6 +4,9 @@ return [
     'update_user' => 'Update User',
     'users' => 'Users',
     'show_all_users' => 'Show All Users',
+    'user_not_found' => 'User not found',
+    'invalid_password' => 'Invalid password',
+    'user_logged_in_successfully' => 'User logged in successfully',
     'orders_count' => 'Orders Count',
     'no_orders' => 'No Orders',
     'select' => 'Select',
@@ -36,4 +39,5 @@ return [
 
     'no_users_found' => 'No Users Found !',
     'login_success' => 'Users Login Successfully',
+    'logout_success' => 'Logged out successfully',
 ];

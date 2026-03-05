@@ -19,7 +19,6 @@ class CountryRespurce extends JsonResource
             'name' => $this->name,
             'phone_code' => $this->phone_code,
             'flag_code' => $this->flag_code,
-            'status' => $request->status,
         ];
     }
 }

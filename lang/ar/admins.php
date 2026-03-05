@@ -4,6 +4,10 @@ return [
     'update_admin' => 'تعديل المدير',
     'admins' => 'المديرين',
     'show_all_admins' => 'عرض جميع الصلاحيات',
+    'admin_logged_in_successfully' => 'تم تسجيل دخول المشرف بنجاح',
+    'admin_not_found' => 'المدير غير موجود',
+    'invalid_password' => 'كلمة المرور غير صحيحة',
+
 
     'name' => 'اسم المدير',
     'name_ar' => 'اسم المدير بالعربي',
@@ -29,4 +33,5 @@ return [
     'permissions' => 'الصلاحيات',
     'search_placeholder' => 'البحث بالاسم أو الإيميل...',
     'no_admins_found' => 'لا يوجد مديرين حالياً',
+    'logout_success' => 'تم تسجيل الخروج بنجاح',
 ];

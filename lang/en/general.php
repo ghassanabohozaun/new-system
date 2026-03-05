@@ -216,4 +216,5 @@ return [
     'discard' => 'Discard',
     'save_changes' => 'Save Changes',
     'back' => 'Back',
+    'data_fetch_successfully' => 'Data fetched successfully',
 ];

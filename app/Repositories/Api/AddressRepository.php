@@ -13,13 +13,6 @@ class AddressRepository
         return Country::get();
     }
 
-    // get governorates
-    public function getGovernorates($country_id)
-    {
-        $country = Country::find($country_id);
-        $governorates = $country->governorates()->get();
-        return $governorates;
-    }
 
     //get cities
     public function getCities($country_id)

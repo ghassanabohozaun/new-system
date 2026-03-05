@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Translatable\HasTranslations;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, HasTranslations;
+    use HasFactory, Notifiable, SoftDeletes, HasTranslations, HasApiTokens;
     protected $table = 'admins';
 
     // fillable

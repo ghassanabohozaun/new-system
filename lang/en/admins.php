@@ -4,6 +4,9 @@ return [
     'update_admin' => 'Update Admin',
     'admins' => 'Admins',
     'show_all_admins' => 'Show All Admins',
+    'admin_logged_in_successfully' => 'Admin logged in successfully',
+    'admin_not_found' => 'Admin not found',
+    'invalid_password' => 'Invalid password',
 
     'name' => 'Admin Name',
     'name_ar' => 'Arabic Admin Name',
@@ -29,4 +32,5 @@ return [
     'permissions' => 'Permissions',
     'search_placeholder' => 'Search by name or email...',
     'no_admins_found' => 'No Admins Found',
+    'logout_success' => 'Logged out successfully',
 ];
