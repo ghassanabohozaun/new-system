@@ -19,11 +19,13 @@ class BaseResource extends JsonResource
     //     return parent::toArray($request);
     // }
 
+    // get image url
     public function getImageUrl($path, $disk)
     {
         return $path ? Storage::disk($disk)->url($path) : null;
     }
 
+    // get images url
     public function getImagesUrl($images, $disk)
     {
         return $images
@@ -35,6 +37,8 @@ class BaseResource extends JsonResource
             : null;
     }
 
+
+    // format date
     public function formatDateLocatiazied($data, $local, $format)
     {
         $carbon = Carbon::parse($data);

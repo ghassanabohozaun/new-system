@@ -13,16 +13,25 @@ class GlobalService
         $this->globalRepository = $globalRepository;
     }
 
+    // get settings
+    public function getSettings(){
+        return $this->globalRepository->getSettings();
+    }
+
     // get categories
     public function getCategories($limit = null)
     {
         return $this->globalRepository->getCategories($limit);
     }
 
-
-      // get brands
-    public function getBrands($limit = null){
-        return $this->globalRepository->getBrands();
+    // get sliders
+    public function getSliders($limit = null)
+    {
+        return $this->globalRepository->getSliders($limit);
     }
 
+    // get pages
+    public function getPages() {
+        return $this->globalRepository->getPages();
+    }
 }

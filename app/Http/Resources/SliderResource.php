@@ -3,24 +3,26 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class PageResource extends BaseResource
+class SliderResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'slug' => $this->slug,
             'details' => $this->details,
-            'photo' => $this->photo == null  ? null :  $this->getImageUrl($this->photo , 'pages'),
-            'status' =>  $this->status ? 1 : 0,
+            'url' => $this->url,
+            'details_status' => $this->details_status ? 1 : 0,
+            'button_status' => $this->button_status ? 1 : 0,
+            'status' => $this->status ? 1 : 0,
+            'photo' => $this->getImageUrl($this->photo, 'sliders'),
         ];
     }
 }

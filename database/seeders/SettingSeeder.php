@@ -16,8 +16,8 @@ class SettingSeeder extends Seeder
         $settings = Setting::firstOr(function () {
             return Setting::create([
                 'site_name' => [
-                    'en' => 'PTC',
-                    'ar' => 'PTC',
+                    'en' => 'Spots',
+                    'ar' => 'نقاط',
                 ],
                 'address' => [
                     'en' => '',

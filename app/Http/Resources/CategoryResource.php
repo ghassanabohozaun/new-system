@@ -19,7 +19,7 @@ class CategoryResource extends BaseResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'status' => $this->status,
+            'status' =>  $this->status ? 1 : 0,
             'parent' => $this->parent,
             'icon' => $this->getImageUrl($this->icon, 'categories'),
         ];

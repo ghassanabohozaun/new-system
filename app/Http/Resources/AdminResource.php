@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdminResource extends JsonResource
+class AdminResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,9 @@ class AdminResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'mobile' => $this->mobile,
-            'photo' => $this->photo,
             'role_id' => $this->role->role,
+            'status' =>  $this->status ? 1 : 0,
+            'photo' => $this->getImageUrl($this->photo, 'adminsPhotos'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

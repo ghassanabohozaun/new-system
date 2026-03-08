@@ -38,7 +38,6 @@ class Admin extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-
     public function getCreatedAtAttribute($value)
     {
         if (request()->wantsJson()) {
@@ -64,4 +63,13 @@ class Admin extends Authenticatable
         return false;
     }
 
+    // scopes
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(1);
+    }
+    public function scopeInactive($query)
+    {
+        return $query->whereStatus(0);
+    }
 }

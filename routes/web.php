@@ -15,11 +15,11 @@ Route::group(
 
         ###################################### home  ##################################################################
         /// any
-        // Route::get('', [HomeController::class, 'index'])
-        //     ->where(['any' => '.*'])
-        //     ->name('index');
-        // Route::get('/index', [HomeController::class, 'index'])->name('index');
-        // Route::get('/home', [HomeController::class, 'index'])->name('index');
+        Route::get('', [HomeController::class, 'index'])
+            ->where(['any' => '.*'])
+            ->name('index');
+        Route::get('/index', [HomeController::class, 'index'])->name('index');
+        Route::get('/home', [HomeController::class, 'index'])->name('index');
         ###################################### routes  ##################################################################
     },
 );
