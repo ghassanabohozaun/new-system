@@ -185,7 +185,12 @@
 
 
 
-
+        <li class="nav-item {{ request()->routeIs('dashboard.weather.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.weather.index') }}">
+                <i class="mdi mdi-weather-partly-cloudy menu-icon"></i>
+                <span class="menu-title">{{ __('dashboard.weather') }}</span>
+            </a>
+        </li>
 
 
 

@@ -78,4 +78,5 @@ return [
     'admins_count' => 'عدد المديرين',
     'countries_count' => 'عدد الدول',
     'service' => 'الخدمة',
+    'weather' => 'الطقس',
 ];

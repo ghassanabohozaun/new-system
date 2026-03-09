@@ -33,8 +33,8 @@ class ReservationFactory extends Factory
         $fromCityId = $fromCity ? $fromCity->id : 1;
 
         $toCity = \App\Models\City::where('id', '!=', $fromCityId)->inRandomOrder()->first() ?? $fromCity;
-        $toCountryId = $toCity ? $toCity->country_id : 2;
-        $toCityId = $toCity ? $toCity->id : 2;
+        // $toCountryId = $toCity ? $toCity->country_id : 2;
+        // $toCityId = $toCity ? $toCity->id : 2;
 
         return [
             'flight_id' => Flight::inRandomOrder()->first()?->id,
@@ -48,10 +48,10 @@ class ReservationFactory extends Factory
             'number_of_babies' => random_int(0, 1),
             'nationality' => fake()->randomElement($nationalities),
             'depature_country_id' => $fromCountryId,
-            'from_country_id' => $fromCountryId,
-            'from_city_id' => $fromCityId,
-            'to_country_id' => $toCountryId,
-            'to_city_id' => $toCityId,
+            // 'from_country_id' => $fromCountryId,
+            // 'from_city_id' => $fromCityId,
+            // 'to_country_id' => $toCountryId,
+            // 'to_city_id' => $toCityId,
             'depature_date' => $departure->format('Y-m-d'),
             'return_date' => $departure->copy()->addDays(random_int(5, 15))->format('Y-m-d'),
             'ticket_id' => FlightTicket::inRandomOrder()->first()?->id,

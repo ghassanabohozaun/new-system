@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\CountriesController;
 use App\Http\Controllers\Dashboard\FlightsController;
 use App\Http\Controllers\Dashboard\ReservationsController;
 use App\Http\Controllers\Dashboard\ToursController;
+use App\Http\Controllers\Dashboard\WeatherController;
 use App\Http\Controllers\Dashboard\{AdminsController, CitiesController, DashboardController, DepartmentsController, GovernoratiesController, PagesController, ProfileController, RolesController, SettingsController, SlidersController, TasksController, FlightTicketsController, MailingBoxController, NotificationsController};
 use App\Http\Middleware\CheckLockScreen;
 use Illuminate\Support\Facades\Route;
@@ -173,6 +174,9 @@ Route::group(
                 Route::post('/mailing/destroy/{id?}', [MailingBoxController::class, 'destroy'])->name('mailing.destroy');
                 Route::post('/mailing/status', [MailingBoxController::class, 'changeStatus'])->name('mailing.changeStatus');
             });
+
+            ########################################### weather routes  ####################################################################
+            Route::get('/weather', [WeatherController::class, 'index'])->name('weather.index');
         });
     },
 );

@@ -77,4 +77,5 @@ return [
     'admins_count' => 'Admins Count',
     'countries_count' => 'Countries Count',
     'service' => 'Service',
+    'weather' => 'Weather',
 ];

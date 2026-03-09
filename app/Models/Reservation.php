@@ -15,7 +15,8 @@ class Reservation extends Model
     protected $table = 'reservations';
     protected $fillable = ['flight_id', 'service', 'client_name', 'client_mobile', 'client_email',
     'client_passport_number', 'number_of_adult', 'number_of_children', 'number_of_babies', 'nationality', 'depature_country_id',
-    'depature_date', 'return_date', 'ticket_id', 'from_country_id', 'from_city_id', 'to_country_id', 'to_city_id', 'economy_class_name', 'economy_class_type', 'notes'];
+    'depature_date', 'return_date', 'ticket_id', 'from_country_id', 'from_city_id', 'to_country_id', 'to_city_id', 'economy_class_name',
+    'economy_class_type', 'notes'];
 
 
     protected $hidden  = ['deleted_at','updated_at'];
@@ -85,19 +86,19 @@ class Reservation extends Model
     }
 
     //scopes
-    public function scopeSearch($query, $search_word)
-    {
-        return $query->where(function ($q) use ($search_word) {
-            $q->where('client_name', 'like', "%{$search_word}%")
-              ->orWhere('client_mobile', 'like', "%{$search_word}%")
-              ->orWhere('client_email', 'like', "%{$search_word}%")
-              ->orWhere('client_passport_number', 'like', "%{$search_word}%")
-              ->orWhere('nationality', 'like', "%{$search_word}%")
-              ->orWhereHas('flight', function($q) use ($search_word) {
-                  $q->where('name', 'like', "%{$search_word}%");
-              });
-        });
-    }
+    // public function scopeSearch($query, $search_word)
+    // {
+    //     return $query->where(function ($q) use ($search_word) {
+    //         $q->where('client_name', 'like', "%{$search_word}%")
+    //           ->orWhere('client_mobile', 'like', "%{$search_word}%")
+    //           ->orWhere('client_email', 'like', "%{$search_word}%")
+    //           ->orWhere('client_passport_number', 'like', "%{$search_word}%")
+    //           ->orWhere('nationality', 'like', "%{$search_word}%")
+    //           ->orWhereHas('flight', function($q) use ($search_word) {
+    //               $q->where('name', 'like', "%{$search_word}%");
+    //           });
+    //     });
+    // }
 
     // accessories
     public function getCreatedAtAttribute($value)

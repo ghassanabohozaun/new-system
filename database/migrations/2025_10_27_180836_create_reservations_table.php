@@ -27,18 +27,12 @@ return new class extends Migration {
             $table->date('return_date');
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             $table->foreignId('ticket_id')->nullable()->constrained('flight_tickets')->cascadeOnDelete();
-            $table->integer('from_country_id')->nullable();
-            $table->integer('from_city_id')->nullable();
-            $table->integer('to_country_id')->nullable();
-            $table->integer('to_city_id')->nullable();
+            // $table->integer('from_country_id')->nullable();
+            // $table->integer('from_city_id')->nullable();
+            // $table->integer('to_country_id')->nullable();
+            // $table->integer('to_city_id')->nullable();
             $table->string('economy_class_name');
             $table->enum('economy_class_type', ['direct_flight', 'transit']);
-
-            // $table->foreignId('from_country_id')->nullable()->constrained('countries')->cascadeOnDelete();
-            // $table->foreignId('from_city_id')->nullable()->constrained('cities')->cascadeOnDelete();
-            // $table->foreignId('to_country_id')->nullable()->constrained('countries')->cascadeOnDelete();
-            // $table->foreignId('to_city_id')->nullable()->constrained('cities')->cascadeOnDelete();
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             $table->longText('notes');
             $table->softDeletes();

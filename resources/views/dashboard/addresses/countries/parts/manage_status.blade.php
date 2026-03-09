@@ -1,3 +1,4 @@
+
 <div class="form-check form-switch d-flex justify-content-center align-items-center m-0 p-0">
     <input type="checkbox" class="form-check-input js-status-change cursor-pointer"
         {{ $country->status == 1 ? 'checked' : '' }} data-id="{{ $country->id }}"

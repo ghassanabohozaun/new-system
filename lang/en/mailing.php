@@ -13,4 +13,5 @@ return [
 
     'enter_email' => 'Enter Email',
     'no_mailing_found' => 'No Mailing Records Found',
+    'no_emails_found' => 'No emails found',
 ];

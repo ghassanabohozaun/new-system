@@ -12,7 +12,8 @@ class Flight extends Model
 {
     use SoftDeletes, HasTranslations , HasFactory;
     protected $table = 'flights';
-    protected $fillable = ['name', 'slug', 'details', 'status', 'days_num', 'nights_num', 'views', 'country_id', 'city_id', 'category_id', 'offer_duration_from', 'offer_duration_to'];
+    protected $fillable = ['name', 'slug', 'details', 'status', 'days_num', 'nights_num', 'views', 'country_id',
+     'city_id', 'category_id', 'offer_duration_from', 'offer_duration_to'];
     public array $translatable = ['name', 'slug', 'details'];
 
     // relations
