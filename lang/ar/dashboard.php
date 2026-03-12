@@ -28,6 +28,7 @@ return [
     'users' => 'المستخدمين',
     'addresses' => 'المناطق',
     'settings' => 'الإعدادات ',
+    'about_us' => 'عن نقاط',
     'employees_settings' => 'إعدادات الموظفين',
     'employees' => 'الموظفين',
     'salaries'=>'الرواتب',

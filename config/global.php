@@ -16,6 +16,7 @@ return [
         'categories' => 'global.categories',
         'reservations' => 'global.reservations',
         'flights' => 'global.flights',
-
+        'weather' => 'global.weather',
+        'about_us' => 'global.about_us',
     ],
 ];

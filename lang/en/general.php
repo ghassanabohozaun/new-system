@@ -217,4 +217,7 @@ return [
     'save_changes' => 'Save Changes',
     'back' => 'Back',
     'data_fetch_successfully' => 'Data fetched successfully',
+    'ask_discard_changes' => 'Are you sure?',
+    'discard_warning_text' => 'Unsaved changes will be lost.',
+    'yes_discard' => 'Yes, discard changes',
 ];

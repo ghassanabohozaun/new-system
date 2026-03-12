@@ -29,6 +29,7 @@ return [
     'users' => 'Users',
     'addresses' => 'Addresses',
     'settings' => 'Settings',
+    'about_us' => 'About Us',
     'employees_settings' => 'Employees Settings',
     'employees' => 'Employees',
     'salaries' => 'Salaries',

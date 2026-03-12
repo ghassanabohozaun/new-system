@@ -160,18 +160,30 @@ class DashboardController extends Controller
     // 6. Top Destinations Data
     protected function getTopDestinationsData()
     {
-        return Reservation::whereYear('created_at', now()->year)
-            ->whereNotNull('to_country_id')
-            ->selectRaw('to_country_id, COUNT(*) as count')
-            ->groupBy('to_country_id')
-            ->with('toCountry')
+        $topData = Reservation::whereYear('reservations.created_at', now()->year)
+            ->leftJoin('flights', 'reservations.flight_id', '=', 'flights.id')
+            ->leftJoin('flight_tickets', 'reservations.ticket_id', '=', 'flight_tickets.id')
+            ->selectRaw("
+                CASE 
+                    WHEN reservations.service = 'flight' THEN flights.country_id 
+                    WHEN reservations.service = 'ticket' THEN flight_tickets.to_country_id 
+                    ELSE NULL
+                END as dest_country_id, 
+                COUNT(*) as count
+            ")
+            ->groupBy('dest_country_id')
+            ->havingNotNull('dest_country_id')
             ->orderByDesc('count')
             ->limit(5)
-            ->get()
-            ->mapWithKeys(function ($item) {
-                return [$item->toCountry->name ?? 'N/A' => $item->count];
-            })
-            ->toArray();
+            ->get();
+
+        $countryIds = $topData->pluck('dest_country_id')->filter()->toArray();
+        $countries = \App\Models\Country::whereIn('id', $countryIds)->get()->keyBy('id');
+
+        return $topData->mapWithKeys(function ($item) use ($countries) {
+            $name = $countries[$item->dest_country_id]->name ?? 'N/A';
+            return [$name => $item->count];
+        })->toArray();
     }
 
     // 7. Trip Type Distribution Data

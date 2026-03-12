@@ -130,7 +130,10 @@
             choose_file: "{!! __('general.choose_file') !!}",
             no_file_chosen: "{!! __('general.no_file_chosen') !!}",
             details: "{!! __('general.details') !!}",
-            ok: "{!! __('general.ok_got_it') !!}"
+            ok: "{!! __('general.ok_got_it') !!}",
+            ask_discard_changes: "{!! __('general.ask_discard_changes') !!}",
+            discard_warning_text: "{!! __('general.discard_warning_text') !!}",
+            yes_discard: "{!! __('general.yes_discard') !!}"
         };
     </script>
 

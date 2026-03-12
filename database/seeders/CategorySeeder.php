@@ -14,11 +14,11 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['name' => ['en' => 'Category 1', 'ar' => 'القسم 1 '], 'slug' => ['en' => slug('Category 1'), 'ar' => slug('القسم 1 ')], 'status' => 1, 'parent' => null, 'icon' => ''],
-            ['name' => ['en' => 'Category 2', 'ar' => 'القسم 2 '], 'slug' => ['en' => slug('Category 2'), 'ar' => slug('القسم 2 ')], 'status' => 1, 'parent' => null, 'icon' => ''],
-            ['name' => ['en' => 'Category 3', 'ar' => 'القسم 3 '], 'slug' => ['en' => slug('Category 3'), 'ar' => slug('القسم 3 ')], 'status' => 1, 'parent' => null, 'icon' => ''],
-            ['name' => ['en' => 'Category 4', 'ar' => 'القسم 4 '], 'slug' => ['en' => slug('Category 4'), 'ar' => slug('القسم 4 ')], 'status' => 1, 'parent' => null, 'icon' => ''],
-            ['name' => ['en' => 'Category 5', 'ar' => 'القسم 5 '], 'slug' => ['en' => slug('Category 5'), 'ar' => slug('القسم 5 ')], 'status' => 1, 'parent' => null, 'icon' => ''],
+            ['name' => ['en' => 'domestic tourism', 'ar' => 'السياحة الداخلية'], 'slug' => ['en' => slug('domestic tourism'), 'ar' => slug('السياحة الداخلية')], 'status' => 1, 'parent' => null, 'icon' => ''],
+            ['name' => ['en' => 'foreign tourism', 'ar' => 'السياحة الخارجية'], 'slug' => ['en' => slug('foreign tourism'), 'ar' => slug('السياحة الخارجية')], 'status' => 1, 'parent' => null, 'icon' => ''],
+            ['name' => ['en' => 'Hajj and Umrah', 'ar' => 'الحج والعمرة'], 'slug' => ['en' => slug('Hajj and Umrah'), 'ar' => slug('الحج والعمرة')], 'status' => 1, 'parent' => null, 'icon' => ''],
+            ['name' => ['en' => 'Jeddah Tours', 'ar' => 'جدة تورز'], 'slug' => ['en' => slug('Jeddah Tours'), 'ar' => slug('جدة تورز')], 'status' => 1, 'parent' => null, 'icon' => ''],
+            ['name' => ['en' => 'honeymoon', 'ar' => 'شهر العسل'], 'slug' => ['en' => slug('honeymoon'), 'ar' => slug('شهر العسل')], 'status' => 1, 'parent' => null, 'icon' => ''],
             ];
 
         foreach ($data as $item) {

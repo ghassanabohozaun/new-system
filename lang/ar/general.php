@@ -215,4 +215,7 @@ return [
     'save_changes' => 'حفظ التغييرات',
     'back' => 'رجوع',
     'data_fetch_successfully' => 'تم جلب البيانات بنجاح',
+    'ask_discard_changes' => 'هل أنت متأكد؟',
+    'discard_warning_text' => 'سيتم فقدان التغييرات غير المحفوظة.',
+    'yes_discard' => 'نعم، تجاهل التغييرات',
 ];

@@ -9,17 +9,17 @@
         </li>
 
 
-        @canany(['settings', 'sliders', 'pages'])
+        @canany(['settings', 'sliders', 'pages', 'about_us'])
             <li
-                class="nav-item {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'active' : '' }}">
+                class="nav-item {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*', 'dashboard.about_us.*') ? 'active' : '' }}">
                 <a class="nav-link" data-bs-toggle="collapse" href="#settings-menu"
-                    aria-expanded="{{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'true' : 'false' }}"
+                    aria-expanded="{{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*', 'dashboard.about_us.*') ? 'true' : 'false' }}"
                     aria-controls="settings-menu">
                     <i class="menu-icon mdi mdi-tune-vertical"></i>
                     <span class="menu-title">{!! __('dashboard.settings') !!}</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*') ? 'show' : '' }}"
+                <div class="collapse {{ request()->routeIs('dashboard.settings.*', 'dashboard.sliders.*', 'dashboard.pages.*', 'dashboard.about_us.*') ? 'show' : '' }}"
                     id="settings-menu">
                     <ul class="nav flex-column sub-menu">
                         @can('settings')
@@ -40,7 +40,12 @@
                                     href="{{ route('dashboard.pages.index') }}">{!! __('pages.pages') !!}</a>
                             </li>
                         @endcan
-
+                        @can('about_us')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('dashboard.about_us.*') ? 'active' : '' }}"
+                                    href="{{ route('dashboard.about_us.edit') }}">{!! __('dashboard.about_us') !!}</a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </li>
@@ -184,15 +189,14 @@
         @endcan
 
 
-
-        <li class="nav-item {{ request()->routeIs('dashboard.weather.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.weather.index') }}">
-                <i class="mdi mdi-weather-partly-cloudy menu-icon"></i>
-                <span class="menu-title">{{ __('dashboard.weather') }}</span>
-            </a>
-        </li>
-
-
+        @can('weather')
+            <li class="nav-item {{ request()->routeIs('dashboard.weather.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.weather.index') }}">
+                    <i class="mdi mdi-weather-partly-cloudy menu-icon"></i>
+                    <span class="menu-title">{{ __('dashboard.weather') }}</span>
+                </a>
+            </li>
+        @endcan
 
         {{-- <li class="nav-item nav-category">UI Elements</li>
         <li class="nav-item">

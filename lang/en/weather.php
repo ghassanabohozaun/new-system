@@ -15,4 +15,5 @@ return [
     'searching' => 'Searching...',
     'empty_state_title' => 'Please search for a city to view the weather forecast',
     'empty_state_desc' => 'You can type the city name in Arabic or English (e.g., Riyadh, Gaza, London)',
+    'please_fill_field' => 'Please enter the city name',
 ];

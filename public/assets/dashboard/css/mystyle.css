@@ -4993,3 +4993,96 @@ nav[aria-label="breadcrumb"] {
     margin-left: 0 !important;
     margin-right: 10px !important;
 }
+
+/* 12. NAVBAR DATE PICKER STYLES */
+.navbar-date-picker-premium {
+    border-radius: 8px !important;
+    border: 1px solid #eee !important;
+    background: #fff !important;
+    overflow: hidden !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; /* Bootstrap shadow-sm */
+    height: 36px !important;
+}
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .navbar-date-picker-premium .calendar-icon,
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .navbar-date-picker-premium .input-group-text,
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .navbar-date-picker-premium .input-group-prepend,
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .navbar-date-picker-premium .input-group-addon,
+.rtl .navbar-date-picker-premium .calendar-icon,
+.rtl .navbar-date-picker-premium .input-group-text,
+.rtl .navbar-date-picker-premium .input-group-prepend,
+.rtl .navbar-date-picker-premium .input-group-addon,
+.navbar-date-picker-premium *,
+.navbar-date-picker-premium *::before,
+.navbar-date-picker-premium *::after {
+    border: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-inline-end: none !important;
+    border-inline-start: none !important;
+    border-width: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.navbar-date-picker-premium .input-group-prepend {
+    background: #f8faff !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    border: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    height: 100% !important;
+}
+
+.navbar-date-picker-premium .calendar-icon,
+.navbar-date-picker-premium .input-group-text {
+    color: #4B49AC !important;
+    font-size: 15px !important;
+    border: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-inline-end: none !important;
+    border-inline-start: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+}
+
+.navbar-date-picker-premium .form-control {
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    height: 100% !important;
+    padding: 0 12px !important;
+    cursor: pointer !important;
+    background: #fff !important;
+}
+
+/* 13. SEARCH FORM ALIGNMENT FIX */
+/* LTR (Mag-glass on the right) */
+[dir="ltr"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form i {
+    left: auto !important;
+    right: 0 !important;
+}
+
+[dir="ltr"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form input:focus {
+    padding-right: 30px !important;
+    padding-left: 12px !important;
+}
+
+/* RTL (Mag-glass on the left) */
+[dir="rtl"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form i {
+    right: auto !important;
+    left: 0 !important;
+}
+
+[dir="rtl"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form input:focus {
+    padding-left: 30px !important;
+    padding-right: 12px !important;
+}

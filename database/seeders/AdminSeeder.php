@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
                     'ar' => 'المدير',
                 ],
                 'password' => bcrypt('123456'),
-                'email' => 'admin@admin.com',
+                'email' => 'admin@spots.com',
                 'role_id' => $first_role_id,
                 'photo'=> '',
             ],

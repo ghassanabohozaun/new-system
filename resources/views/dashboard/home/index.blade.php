@@ -9,7 +9,7 @@
                 <div class="home-tab">
                     <!--------------------  Start Breadcrumb  ---------------------------->
 
-                    <div class="d-md-flex align-items-center justify-content-between border-bottom mb-3">
+                    <div class="d-md-flex align-items-center justify-content-between border-bottom mb-1">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
@@ -29,11 +29,7 @@
                     </div>
                     <!--------------------  End Breadcrumb  ---------------------------->
 
-
-
-
-
-                    <div class="d-sm-flex align-items-center justify-content-between border-bottom mb-3">
+                    <div class="d-sm-flex align-items-center justify-content-between border-bottom mb-1">
                         <ul class="nav nav-tabs border-0 custom-home-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active ps-0" id="overview-tab" data-bs-toggle="tab" href="#overview"

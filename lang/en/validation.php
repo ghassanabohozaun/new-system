@@ -315,5 +315,10 @@ return [
         'permissions' => 'Permissions',
         // tasks
         'newTaskTitle' => 'Task Title',
+        'text.ar' => 'Arabic Text',
+        'text.en' => 'English Text',
+        'sort_order' => 'Sort Order',
+        'sort order' => 'Sort Order',
+        'year' => 'Year',
     ],
 ];

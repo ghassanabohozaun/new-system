@@ -57,6 +57,14 @@ Route::group(
             Route::group(['middleware' => 'can:settings'], function () {
                 Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
                 Route::put('/settings/{id?}', [SettingsController::class, 'update'])->name('settings.update');
+
+                // about us routes
+                Route::get('/about-us', [\App\Http\Controllers\Dashboard\AboutUsController::class, 'edit'])->name('about_us.edit');
+                Route::post('/about-us', [\App\Http\Controllers\Dashboard\AboutUsController::class, 'update'])->name('about_us.update');
+
+                // about us timeline routes
+                Route::resource('about-us-timeline', \App\Http\Controllers\Dashboard\AboutUsTimelineController::class)->except(['show']);
+                Route::post('/about-us-timeline/destroy', [\App\Http\Controllers\Dashboard\AboutUsTimelineController::class, 'destroy'])->name('about-us-timeline.destroy');
             });
 
             ########################################### roles routes ######################################################################

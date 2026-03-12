@@ -2694,8 +2694,8 @@ span.flatpickr-day.today.selected:hover {
 
 .noqat-navbar.navbar-scrolled {
   background: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 15px 35px rgba(27, 54, 81, 0.08);
   padding-top: 10px !important;
   padding-bottom: 10px !important;
@@ -3989,7 +3989,7 @@ html[dir="ltr"] .booking-form-area {
 /* 6. Map & Cinematic Effects */
 .map-full-height {
   min-height: 450px;
-  filter: grayscale(0.2) contrast(1.1);
+  filter: contrast(1.05); /* Simplified filter */
   transition: 0.5s;
 }
 
@@ -4100,7 +4100,8 @@ html[dir="ltr"] .booking-form-area {
   position: fixed;
   inset: 0;
   background: rgba(27, 54, 81, 0.85); /* Navy Dimming for more Focus */
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: none;
   align-items: center;
   justify-content: center;

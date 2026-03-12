@@ -26,6 +26,12 @@
                                 <li class="breadcrumb-item active" aria-current="page">{!! __('pages.update_page') !!}</li>
                             </ol>
                         </nav>
+                        <div class="btn-wrapper">
+                            <a href="{{ route('dashboard.pages.index') }}"
+                                class="btn btn-outline-dark btn-sm me-0 custom-shadow-sm">
+                                <i class="mdi mdi-arrow-left"></i> {!! __('general.back') !!}
+                            </a>
+                        </div>
                     </div>
                     <!--------------------  End Breadcrumb  ---------------------------->
 

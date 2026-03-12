@@ -334,5 +334,9 @@ return [
 
         // tasks
         'newTaskTitle' => 'عنوان المهمة',
+        'text.ar' => 'النص بالعربي',
+        'text.en' => 'النص بالانجليزي',
+        'sort_order' => 'ترتيب العرض',
+        'sort order' => 'ترتيب العرض',
     ],
 ];

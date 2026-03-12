@@ -1,5 +1,5 @@
 <!-- begin: staticstics -->
-<div class="row g-4 mb-5">
+<div class="row g-4 mb-2">
 
     {{-- Tickets --}}
     <div class="col-xl-3 col-lg-6">

@@ -51,8 +51,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
             'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
-            'PDF' => Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::class,
-            'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
             //'setLanguage' => SetLangMiddleware::class,
         ]);

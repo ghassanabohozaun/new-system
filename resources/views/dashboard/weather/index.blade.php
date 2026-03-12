@@ -49,7 +49,9 @@
                                         class="weather-search-form">
                                         <input type="text" name="city" value="{{ $city ?? '' }}"
                                             placeholder="{{ __('dashboard.search') }} {!! __('weather.search_city_placeholder') !!}"
-                                            class="weather-search-input" required>
+                                            class="weather-search-input" required autocomplete="off"
+                                            oninvalid="this.setCustomValidity('{!! __('weather.please_fill_field') !!}')"
+                                            oninput="this.setCustomValidity('')">
                                         <button type="submit" class="btn-weather-search">
                                             <i class="mdi mdi-magnify"></i> {!! __('weather.search_button') !!}
                                         </button>

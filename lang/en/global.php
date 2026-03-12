@@ -16,4 +16,6 @@ return [
     'categories' => 'Categories Management',
     'reservations' => 'Reservations Management',
     'flights' => 'Flights Management',
+    'weather' => 'Weather Management',
+    'about_us' => 'About Us Management',
 ];

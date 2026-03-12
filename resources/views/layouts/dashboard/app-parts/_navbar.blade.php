@@ -8,7 +8,9 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="{{ route('dashboard.index') }}">
-                <img id="navbar_brand_logo" src="{!! setting()->logo ? asset('uploads/settings/' . setting()->logo) : asset('assets/dashboard/images/logo.svg') !!}" alt="logo"
+                <img id="navbar_brand_logo" class="rounded" src="{!! setting()->logo
+                    ? asset('uploads/settings/' . setting()->logo)
+                    : asset('assets/dashboard/images/logo-mini.svg') !!}" alt="logo"
                     style="height: 55px; width: auto;">
             </a>
             <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard.index') }}">
@@ -40,11 +42,11 @@
 
             <!-- User Date picker   -->
             <li class="nav-item d-none d-lg-block">
-                <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-                    <span class="input-group-addon input-group-prepend border-right">
+                <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker navbar-date-picker-premium">
+                    <span class="input-group-addon input-group-prepend">
                         <span class="icon-calendar input-group-text calendar-icon"></span>
                     </span>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value="{{ date('m/d/Y') }}">
                 </div>
             </li>
             <!-- End User Date picker   -->
