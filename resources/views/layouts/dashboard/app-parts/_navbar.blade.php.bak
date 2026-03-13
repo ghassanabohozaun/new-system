@@ -54,7 +54,11 @@
 
             <!-- User language   -->
             <li class="nav-item d-none d-lg-block">
-                @livewire('dashboard.global-search')
+                <form class="search-form" action="#">
+                    <i class="icon-search"></i>
+                    <input type="search" class="form-control" placeholder="{{ __('navbar.search_here') }}"
+                        title="{{ __('navbar.search_here') }}">
+                </form>
             </li>
             @php
                 $currentLocale = Lang();

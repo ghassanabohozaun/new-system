@@ -233,13 +233,20 @@
                                     ? "badge-opacity-success"
                                     : "badge-pill-success",
                             );
+                            
+                            // Swap icons if present
+                            let currentIconHtml = iconHtml;
+                            if (currentIconHtml.includes('mdi-close-circle-outline')) {
+                                currentIconHtml = currentIconHtml.replace('mdi-close-circle-outline', 'mdi-check-circle-outline');
+                            }
+
                             const label =
                                 (window.Translations.labels &&
                                     window.Translations.labels.active) ||
                                 window.Translations.labels.enabled ||
                                 "Active";
                             statusBadge.html(
-                                iconHtml + (iconHtml ? " " : "") + label,
+                                currentIconHtml + (currentIconHtml ? " " : "") + label,
                             );
                         } else {
                             statusBadge.addClass(
@@ -247,13 +254,20 @@
                                     ? "badge-opacity-danger"
                                     : "badge-pill-danger",
                             );
+
+                            // Swap icons if present
+                            let currentIconHtml = iconHtml;
+                            if (currentIconHtml.includes('mdi-check-circle-outline')) {
+                                currentIconHtml = currentIconHtml.replace('mdi-check-circle-outline', 'mdi-close-circle-outline');
+                            }
+
                             const label =
                                 (window.Translations.labels &&
                                     window.Translations.labels.inactive) ||
                                 window.Translations.labels.disabled ||
                                 "Inactive";
                             statusBadge.html(
-                                iconHtml + (iconHtml ? " " : "") + label,
+                                currentIconHtml + (currentIconHtml ? " " : "") + label,
                             );
                         }
                     }
@@ -1113,4 +1127,28 @@
             });
         };
     }
+    /**
+     * Premium Navbar Search Functionality
+     * Handles global Ctrl+K shortcut and HUD interaction.
+     */
+    function initPremiumSearch() {
+        const $input = $("#premiumSearchInput");
+
+        // 1. Keyboard Shortcut (Ctrl+K)
+        $(document).on("keydown", function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+                const searchInput = document.getElementById('premiumSearchInput');
+                if (searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            }
+        });
+    }
+
+    // Initialize Premium Search
+    initPremiumSearch();
+
+
 })(jQuery);
+

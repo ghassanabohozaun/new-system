@@ -35,8 +35,7 @@
                     </td>
                     <td class="text-center d-none d-xl-table-cell td-fit td-center-content">
                         <div class="d-flex justify-content-center align-items-center w-100 h-100">
-                            <div class="badge badge-pill badge-outline-danger"
-                                style="min-width: 35px; border-color: #e0e0e0; color: #666; font-weight: 700;">
+                            <div class="badge badge-opacity-primary rounded-pill fw-bold px-3 py-1">
                                 {!! $category->flights->count() !!}
                             </div>
                         </div>
@@ -95,8 +94,7 @@
                                             class="mdi mdi-toggle-switch-outline me-1"></i>{{ __('categories.flights_count') }}
                                     </label>
                                     <div>
-                                        <div class="badge badge-pill badge-outline-danger"
-                                            style="min-width: 35px; border-color: #e0e0e0; color: #666; font-weight: 700;">
+                                        <div class="badge badge-opacity-primary rounded-pill fw-bold px-3 py-1">
                                             {!! $category->flights->count() !!}
                                         </div>
                                     </div>

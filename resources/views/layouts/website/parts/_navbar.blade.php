@@ -58,20 +58,17 @@
 
                 <div class="d-flex flex-column flex-lg-row align-items-center gap-4 mt-4 mt-lg-0">
 
-                    <div class="noqat-lang-pill {{ app()->getLocale() == 'en' ? 'is-english' : '' }}"
-                        id="luxuryLangToggle">
-                        <div class="active-indicator"></div>
-
-                        <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}"
-                            class="lang-item ar-item {{ app()->getLocale() == 'ar' ? 'active' : '' }}">
-                            <img src="{!! asset('assets/website/images/external/external_1.png') !!}">
-                            <span>{{ __('website.arabic') }}</span>
-                        </a>
-
-                        <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}"
-                            class="lang-item en-item {{ app()->getLocale() == 'en' ? 'active' : '' }}">
-                            <img src="{!! asset('assets/website/images/external/external_2.png') !!}">
-                            <span>{{ __('website.english') }}</span>
+                    @php
+                        $currentLocale = app()->getLocale();
+                        $targetLocale = $currentLocale == 'ar' ? 'en' : 'ar';
+                        $targetNative = LaravelLocalization::getSupportedLocales()[$targetLocale]['native'];
+                    @endphp
+                    <div class="magnetic-wrap">
+                        <a href="{{ LaravelLocalization::getLocalizedURL($targetLocale, null, [], true) }}"
+                            class="language-switcher-premium">
+                            <img src="{!! asset('assets/website/images/external/external_' . ($targetLocale == 'ar' ? '1' : '2') . '.png') !!}"
+                                class="flag-img shadow-sm">
+                            <span class="lang-name">{{ $targetNative }}</span>
                         </a>
                     </div>
 

@@ -55,7 +55,8 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
     @push('modals')
         @include('dashboard.addresses.countries.modals.create')

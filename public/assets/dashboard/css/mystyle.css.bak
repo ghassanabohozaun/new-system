@@ -5081,228 +5081,26 @@ nav[aria-label="breadcrumb"] {
     background: #fff !important;
 }
 
-/* 13. PREMIUM SEARCH FORM STYLES */
-.search-form-premium {
-    position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    width: 280px !important;
-}
-
-.search-form-premium .search-input-wrapper {
-    position: relative !important;
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    background: rgba(255, 255, 255, 0.8) !important;
-    border: 1px solid rgba(75, 73, 172, 0.15) !important;
-    border-radius: 50px !important;
-    padding: 0 15px !important;
-    height: 38px !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
-    transition: all 0.4s ease !important;
-    backdrop-filter: blur(5px) !important;
-}
-
-/* LTR Alignment */
-[dir="ltr"] .search-form-premium .icon-search {
-    margin-right: 12px !important;
-    color: #4b49ac !important;
-    font-size: 1.1rem !important;
-}
-
-/* RTL Alignment */
-[dir="rtl"] .search-form-premium .icon-search {
-    margin-left: 12px !important;
-    color: #4b49ac !important;
-    font-size: 1.1rem !important;
-}
-
-.search-form-premium input.form-control {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    height: 100% !important;
-    font-weight: 600 !important;
-    font-size: 0.9rem !important;
-    color: #2d3436 !important;
-    box-shadow: none !important;
-}
-
-.search-form-premium input::placeholder {
-    color: #a0aec0 !important;
-    font-weight: 500 !important;
-}
-
-/* Kbd Shortcut Hint */
-.search-form-premium .kbd-hint {
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    background: rgba(75, 73, 172, 0.08) !important;
-    border: 1px solid rgba(75, 73, 172, 0.1) !important;
-    border-radius: 6px !important;
-    padding: 2px 6px !important;
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
-    color: #4b49ac !important;
-    pointer-events: none !important;
-    transition: all 0.3s ease !important;
-    letter-spacing: 0.5px !important;
-}
-
-[dir="ltr"] .search-form-premium .kbd-hint {
-    right: 12px !important;
-}
-
-[dir="rtl"] .search-form-premium .kbd-hint {
-    left: 12px !important;
-}
-
-/* Hover State */
-.search-form-premium:hover .search-input-wrapper {
-    border-color: rgba(75, 73, 172, 0.4) !important;
-    box-shadow: 0 6px 15px rgba(75, 73, 172, 0.1) !important;
-    background: #fff !important;
-}
-
-.search-form-premium:hover .icon-search {
-    animation: premiumPulseSmall 1.5s infinite !important;
-}
-
-/* Focus State & Expansion */
-.search-form-premium.focused {
-    width: 380px !important;
-}
-
-.search-form-premium.focused .search-input-wrapper {
-    border-color: #4b49ac !important;
-    box-shadow: 0 8px 25px rgba(75, 73, 172, 0.2) !important;
-    background: #fff !important;
-}
-
-.search-form-premium.focused .kbd-hint {
-    opacity: 0 !important;
-    transform: translateY(-50%) scale(0.8) !important;
-}
-
-/* Premium Shine Effect on Focus/Hover */
-.search-form-premium .search-input-wrapper::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -100%;
-    width: 40%;
-    height: 200%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
-    transform: rotate(30deg);
-}
-
-.search-form-premium.focused .search-input-wrapper::before {
-    left: 150%;
-    transition: all 0.8s ease-in-out;
-}
-
-/* 14. SEARCH HUD (RESULTS) */
-.search-hud-container {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
+/* 13. SEARCH FORM ALIGNMENT FIX */
+/* LTR (Mag-glass on the right) */
+[dir="ltr"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form i {
+    left: auto !important;
     right: 0 !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(15px) !important;
-    border-radius: 20px !important;
-    margin-top: 15px !important;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15) !important;
-    border: 1px solid rgba(75, 73, 172, 0.1) !important;
-    overflow: hidden !important;
-    z-index: 1050 !important;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+[dir="ltr"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form input:focus {
+    padding-right: 30px !important;
+    padding-left: 12px !important;
 }
 
-.search-form-premium.focused .search-hud-container.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+/* RTL (Mag-glass on the left) */
+[dir="rtl"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form i {
+    right: auto !important;
+    left: 0 !important;
 }
-
-.search-hud-section {
-    padding: 15px 0 !important;
+[dir="rtl"] .navbar .navbar-menu-wrapper .navbar-nav .nav-item .search-form input:focus {
+    padding-left: 30px !important;
+    padding-right: 12px !important;
 }
-
-.search-hud-section-header {
-    padding: 0 20px 8px !important;
-    font-size: 0.75rem !important;
-    font-weight: 800 !important;
-    color: #4b49ac !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-}
-
-.search-hud-item {
-    padding: 10px 20px !important;
-    display: flex !important;
-    align-items: center !important;
-    text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    color: #2d3436 !important;
-}
-
-.search-hud-item:hover {
-    background: rgba(75, 73, 172, 0.06) !important;
-    transform: translateX(5px) !important;
-}
-
-[dir="rtl"] .search-hud-item:hover {
-    transform: translateX(-5px) !important;
-}
-
-.search-hud-item i {
-    font-size: 1.25rem !important;
-    margin-inline-end: 15px !important;
-    color: #4b49ac !important;
-    opacity: 0.8 !important;
-}
-
-.search-hud-item .item-info {
-    flex-grow: 1 !important;
-}
-
-.search-hud-item .item-name {
-    display: block !important;
-    font-weight: 700 !important;
-    font-size: 0.9rem !important;
-}
-
-.search-hud-item .item-type {
-    display: block !important;
-    font-size: 0.75rem !important;
-    color: #a0aec0 !important;
-    font-weight: 500 !important;
-}
-
-.search-hud-no-results {
-    padding: 30px 20px !important;
-    text-align: center !important;
-    color: #718096 !important;
-}
-
-.search-hud-empty-state {
-    padding: 20px !important;
-    text-align: center !important;
-}
-
-.search-hud-divider {
-    height: 1px !important;
-    background: rgba(0, 0, 0, 0.05) !important;
-    margin: 5px 0 !important;
-}
-
-
 
 /* ===== Advanced Premium Language Switcher ===== */
 .language-switcher-premium {

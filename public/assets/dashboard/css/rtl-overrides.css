@@ -17,8 +17,8 @@
   }
 }
 
-/* Sidebar Nav Item Rounding RTL - Precise Mirror of style.css LTR logic */
-.rtl .sidebar .nav .nav-item .nav-link {
+/* Sidebar Nav Item Rounding RTL - Restrict to top-level only */
+.rtl .sidebar .nav > .nav-item > .nav-link {
   border-radius: 20px 0px 0px 20px !important; /* Default mirrored radius */
   transition: border-radius 0.25s ease-in-out, background 0.25s ease-in-out;
 }
@@ -34,19 +34,25 @@
   border-radius: 20px 0px 0px 0px !important; /* Flatten bottom to connect with sub-menu */
 }
 
-/* Force rounding back whenever it is collapsed or expanded is false */
-.rtl .sidebar .nav .nav-item > .nav-link.collapsed,
-.rtl .sidebar .nav .nav-item > .nav-link[aria-expanded="false"],
-.rtl .sidebar .nav .nav-item.active > .nav-link.collapsed {
+/* Force rounding back whenever it is collapsed or expanded is false - Restrict to top-level */
+.rtl .sidebar .nav > .nav-item > .nav-link.collapsed,
+.rtl .sidebar .nav > .nav-item > .nav-link[aria-expanded="false"],
+.rtl .sidebar .nav > .nav-item.active > .nav-link.collapsed {
   border-radius: 20px 0px 0px 20px !important;
 }
 
 /* Sub-menu RTL Symmetry & Indentation Fix */
 .rtl .sidebar .nav.sub-menu {
-  padding: 0.25rem 2.25rem 0.5rem 0 !important;
-  border-radius: 0px 0px 20px 20px !important;
-  margin-right: 0;
+  padding: 0.25rem 1.25rem 0.5rem 0 !important; /* Reduced to match mystyle.css updates */
+  border-radius: 0px 0px 15px 15px !important;
+  margin-right: -7px !important; /* Visual nudge for RTL alignment (total 7px) */
   background: #fff;
+  box-shadow: none !important;
+}
+
+.rtl .sidebar .nav.sub-menu .nav-item .nav-link {
+  border-radius: 0 !important; /* Remove pill shape from sub-menu items */
+  margin: 0 !important;
 }
 
 .rtl .sidebar .nav.sub-menu .nav-item::before {
@@ -549,9 +555,15 @@
 }
 
 
-/* RTL Mirror for Sidebar Hover Animation */
-.rtl .sidebar .nav .nav-item:hover .nav-link {
+/* RTL Mirror for Sidebar Hover Animation - Restrict to top-level items */
+.rtl .sidebar .nav > .nav-item:hover > .nav-link {
     transform: translateX(-5px) !important;
+}
+
+/* Ensure sub-menu items don't slide out of their container */
+.rtl .sidebar .nav.sub-menu .nav-item:hover .nav-link {
+    transform: none !important;
+    background: rgba(31, 59, 179, 0.08) !important;
 }
 
 /* RTL Active Indicator - Targeted */
@@ -566,4 +578,27 @@
 .rtl .sidebar .nav .nav-item:has(.sub-menu .nav-link.active) > .nav-link {
   border-radius: 20px 0px 0px 0px !important;
 }
+
+/* ============================================================
+   RTL Hover Bridge & Indentation for Collapsed Sidebar
+   ============================================================ */
+.rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
+.rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
+    right: 70px !important; /* Explicitly anchor to sidebar width */
+    left: auto !important;
+}
+
+.rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse::before,
+.rtl.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing::before {
+    left: auto !important;
+    right: -20px !important; /* Mirror bridge for RTL */
+    width: 70px;
+}
+
+.rtl.sidebar-icon-only .sidebar .nav.sub-menu .nav-item .nav-link {
+    text-align: right !important;
+    padding-right: 25px !important;
+    padding-left: 10px !important;
+}
+
 
