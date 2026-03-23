@@ -28,7 +28,7 @@ class WeatherService
             $response = Http::get("{$this->baseUrl}/forecast.json", [
                 'key' => $this->apiKey,
                 'q' => $city,
-                'days' => 7, // نجلب الداتا لاسبوع
+                'days' => 3, // التوقعات لـ 3 أيام كحد أقصى في النسخة المجانية
                 'lang' => $locale, // طلب اللغة بناءً على لغة لوحة التحكم
                 'aqi' => 'no',
             ]);
